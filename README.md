@@ -1,13 +1,11 @@
 # Progweb-II-EducaDin-Frontend-
-Repositório para versionamento e gerenciamento do frontend da aplicação EducaDin para o projeto de Progweb 2
+>Repositório para versionamento e gerenciamento do frontend da aplicação EducaDin para o projeto de Progweb 2
 
 ## Descrição do Projeto EducaDin
-
 >O EducaDin é uma aplicação de gestão financeira pessoal que foi desenvolvida para atender às necessidades
 especificas de usuários que enfrentam desafios recorrentes em controlar suas finanças e melhorar a sua educação financeira.
 
 ## Problematização
-
 >O usuário final manifestou a necessidade de um software de gestão financeira pessoal devido a desafios recorrentes
 em controlar suas finanças e ajudá-lo a melhorar sua educação  financeira. A falta de educação financeira, combinada
 com um histórico de gastos superiores aos rendimentos, tem levado a um ciclo de endividamento. Apesar de já ter
@@ -18,7 +16,6 @@ aplicações não atendessem plenamente às suas necessidades. O usuário busca 
 e controle, permitindo a personalização das finanças de forma que reflita sua realidade e objetivos.
 
 ## Solução Proposta
-
 >Para solucionar os problemas identificados, será desenvolvido uma aplicação de gestão financeira pessoal, gratuita e com
 uma interface simples e intuitiva, que atenda especificamente às necessidades do usuário. A aplicação permitirá a
 integração de múltiplos perfis, possibilitando que usuários possam compartilhar suas metas e possam gerenciar suas
@@ -32,46 +29,41 @@ promovendo uma melhor organização e contribuindo para a redução de dívidas.
 ## Arquitetura do Sistema
 
 **Linguagem:** Typescript
-**Frameworks:** Angular 17 e PrimeNG
+**Frameworks:** Angular 17
 
 ## Requisitos
-
 Antes de começar, certifique-se de que você tem as seguintes ferramentas instaladas:
 
-- Node.js (versão 18 ou superior) 
+- Node.js (versão 18 ou superior)
 - npm (versão 9 ou superior) ou yarn (versão 1.22 ou superior)
 - Angular CLI (versão 17 ou superior)
 
 ## Instalação
 
 ### Clonar o repositório do GiHub
-
 Clone esse repositório executando os comandos no seu console:
 
 git clone https://github.com/ProgwebII-E-Construcao-De-Software/Progweb-II-EducaDin-Frontend.git
 
 ### Navegue até o diretório do Projeto
-
 cd Progweb-II-EducaDin-Frontend
 
 ### Instalar Dependências
 ```bash
 npm install
 ```
-### Executar Aplicação
 
+### Executar Aplicação
 ```bash
 npm start
 ```
 
 ### Build para produção
-
 ```bash
 npm run build
 ```
 
 ## Contribuindo
-
 Se você deseja contribuir com o projeto, siga estas diretrizes:
 
 1. Faça um Fork do repositório.
