@@ -1,3 +1,22 @@
-<router-outlet></router-outlet>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+</style>
+<div class="main-container">
+  <app-navbar></app-navbar> <!-- Barra lateral -->
 
-Hellow Word
+  <div class="content-container">
+    <div class="header">
+        <app-header></app-header> <!-- Logo e cabeçalho principal -->
+      <a class="header-notification" href="#">
+        <img src="../assets/images/notification.png" alt="Notificação">
+      </a>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet> <!-- Conteúdo da página -->
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <app-footer></app-footer> <!-- Footer -->
+</div>
