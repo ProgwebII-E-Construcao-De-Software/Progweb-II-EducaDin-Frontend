@@ -1,0 +1,30 @@
+.logo-educadin{
+  font-family: "Patua One", serif;
+  font-size: 30px;
+}
+.educa{
+  color:#046F82;
+}
+.din{
+  color: #5FE564;
+}
+.container-header{
+  overflow: hidden;
+  background-color: #fdfdfd;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  //justify-self: center;
+  align-items: center;
+  display: flex;
+  margin-top: 10px;
+}
+.header-noti{
+  width: 30px;
+  height: auto;
+  img{
+    width:100%;
+    height: auto;
+  }
+}
