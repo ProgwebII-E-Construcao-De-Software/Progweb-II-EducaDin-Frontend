@@ -1,6 +1,9 @@
 .logo-educadin {
   font-family: "Patua One", serif;
   font-size: 30px;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }
 
 .educa {
@@ -12,23 +15,27 @@
 }
 
 .container-header {
-  overflow: hidden;
-  background-color: #fdfdfd;
-  position: sticky;
+  background-color: #ffffff;
+  position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  width: 100%; /* Largura fixa */
+  height: 60px; /* Altura fixa */
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  display: flex;
-  margin-top: 10px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
-.header-noti {
-  width: 30px;
-  height: auto;
+.header-notification {
+  width: 130px;
+  height: 90px;
+  margin-left: 30px;
+}
 
-  img {
-    width: 100%;
-    height: auto;
-  }
+.header-notification img {
+  width: 100%;
+  height: 100%;
 }

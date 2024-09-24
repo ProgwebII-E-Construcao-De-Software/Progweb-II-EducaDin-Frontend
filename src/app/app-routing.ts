@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {EarningsTableComponent} from "./components/earnings/earnings-table/earnings-table.component";
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/ganhos', pathMatch: 'full' },
+  { path: '', component:  EarningsTableComponent},
 ];
 
 

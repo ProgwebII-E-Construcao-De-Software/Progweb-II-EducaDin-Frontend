@@ -1,22 +1,20 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
 </style>
+
 <div class="main-container">
-  <app-navbar></app-navbar> <!-- Barra lateral -->
+    <app-header></app-header> <!-- Cabeçalho principal fixo -->
 
-  <div class="content-container">
-    <div class="header">
-        <app-header></app-header> <!-- Logo e cabeçalho principal -->
-      <a class="header-notification" href="#">
-        <img src="../assets/images/notification.png" alt="Notificação">
-      </a>
-    </div>
-    <div class="content">
-      <router-outlet></router-outlet> <!-- Conteúdo da página -->
-    </div>
-  </div>
+    <div class="content-wrapper">
+        <app-navbar></app-navbar> <!-- Barra lateral fixa -->
 
-</div>
-<div class="footer">
-  <app-footer></app-footer> <!-- Footer -->
+        <div class="content-container">
+            <div class="content">
+                <router-outlet></router-outlet> <!-- Conteúdo da página -->
+            </div>
+        </div>
+    </div>
+<!--    <div class="footer">-->
+<!--        <app-footer></app-footer> &lt;!&ndash; Rodapé fixo &ndash;&gt;-->
+<!--    </div>-->
 </div>
