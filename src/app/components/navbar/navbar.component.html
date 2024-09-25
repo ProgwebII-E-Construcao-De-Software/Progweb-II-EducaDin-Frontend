@@ -1,11 +1,12 @@
 <nav class="sidebar">
     <div class="container-fluid">
         <ul class="nav-list">
-            <li><a href="#"><img src="assets/images/home.png" alt="Home"></a></li>
-            <li><a href="#"><img src="assets/images/target.png" alt="Target"></a></li>
-            <li><a href="#"><img src="assets/images/earnings.png" alt="Earnings"></a></li>
-            <li><a href="#"><img src="assets/images/expenses.png" alt="Expenses"></a></li>
-            <li><a href="#"><img src="assets/images/settings.png" alt="Settings"></a></li>
+            <li><a [routerLink]="['/home']"><mat-icon class="home-icon" aria-hidden="false" fontIcon="home"></mat-icon></a></li>
+            <li><a [routerLink]="['/tableGoals']"><img src="assets/images/target.png" alt="Target"></a></li>
+            <li><a [routerLink]="['/tableEarnings']"><img src="assets/images/earnings.png" alt="Earnings"></a></li>
+            <li><a [routerLink]="['/tableExpenses']"><img src="assets/images/expenses.png" alt="Expenses"></a></li>
+            <li><a [routerLink]="['/settings']"><mat-icon class="setting-icon" aria-hidden="false" fontIcon="settings"></mat-icon></a></li>
+
         </ul>
     </div>
 </nav>
