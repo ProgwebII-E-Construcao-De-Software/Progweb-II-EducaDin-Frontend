@@ -10,6 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatTooltip} from "@angular/material/tooltip";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
         MatButtonModule,
         MatIconModule,
         MatDividerModule,
+        MatTooltip,
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -23,7 +23,7 @@ interface Earnings {
 export class EarningsTableComponent {
     displayedColumns: string[] = ['categoria', 'descricao', 'data', 'valor'];
     earnings: Earnings[] = [
-        { categoria: 'Salário', descricao: 'Salário mensal', data: '2024-09-01', valor: 5000 },
-        { categoria: 'Freelance', descricao: 'Projeto de web design', data: '2024-09-05', valor: 1200 }
+        { categoria: 'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
+        { categoria: 'Investimento', descricao: 'Compra de casa', data: '02-09-2024', valor: 1200 }
     ];
 }
