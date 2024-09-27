@@ -1,1 +1,20 @@
-<p>earnings-home works!</p>
+<mat-card class="custom-card">
+    <mat-card-header  class="custom-card-header">
+        <mat-card-title class="custom-title">
+            Meus Ganhos
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions class="custom-actions">
+        <button mat-raised-button class="add-button" [routerLink]="['/']">
+            <mat-icon>add</mat-icon>
+            <span>Adicionar</span>
+        </button>
+        <button mat-raised-button class="remove-button" [routerLink]="['/']">
+            <mat-icon>remove</mat-icon>
+            <span>Remover</span>
+        </button>
+    </mat-card-actions>
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+</mat-card>

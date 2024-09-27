@@ -6,6 +6,10 @@ import {EarningsTableComponent} from "./earnings-table/earnings-table.component"
 import {EarningsHomeComponent} from "./earnings-home/earnings-home.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -17,7 +21,12 @@ import {MatTableModule} from "@angular/material/table";
         CommonModule,
         MatCardModule,
         MatTableModule,
-        RouterModule.forChild(earningsRoutes)
+        MatIconModule,
+        MatButtonModule,
+        RouterModule.forChild(earningsRoutes),
+        MatMenu,
+        MatMenuTrigger,
+        MatCheckbox
     ]
 })
 export class EarningsModule {

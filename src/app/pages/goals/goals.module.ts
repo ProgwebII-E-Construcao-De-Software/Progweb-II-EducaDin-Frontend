@@ -4,6 +4,9 @@ import {RouterModule} from "@angular/router";
 import {goalsRoutes} from "./goals-routing.module";
 import {GoalsHomeComponent} from "./goals-home/goals-home.component";
 import {GoalsTableComponent} from "./goals-table/goals-table.component";
+import {MatButton} from "@angular/material/button";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatIcon} from "@angular/material/icon";
 
 
 @NgModule({
@@ -13,7 +16,14 @@ import {GoalsTableComponent} from "./goals-table/goals-table.component";
     ],
     imports: [
         CommonModule,
-        RouterModule.forChild(goalsRoutes)
+        RouterModule.forChild(goalsRoutes),
+        MatButton,
+        MatCard,
+        MatCardActions,
+        MatCardContent,
+        MatCardHeader,
+        MatCardTitle,
+        MatIcon
     ]
 })
 export class GoalsModule {

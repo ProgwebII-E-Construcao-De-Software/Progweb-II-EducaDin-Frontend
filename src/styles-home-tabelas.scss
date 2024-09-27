@@ -1,0 +1,51 @@
+.custom-card-header {
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #43CAD9;
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-title {
+  color: #333;
+  font-size: 30px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.custom-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.custom-card {
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card {
+  background-color: #fff;
+}
+
+.add-button, .remove-button {
+  color: white;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.add-button {
+  background-color: #81D959;
+}
+
+.remove-button {
+  background-color: #F23030;
+}

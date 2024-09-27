@@ -21,6 +21,7 @@ import {MatCard, MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @NgModule({
     declarations: [
@@ -45,7 +46,7 @@ import {GoalsModule} from "./pages/goals/goals.module";
         MatProgressSpinnerModule,
         EarningsModule,
         ExpensesModule,
-        GoalsModule
+        GoalsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
