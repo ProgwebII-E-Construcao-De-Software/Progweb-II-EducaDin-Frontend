@@ -1,0 +1,74 @@
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 20px;
+  overflow-y: visible;
+  width: 100%;
+  min-height: 100%;
+}
+
+.mat-table-custom {
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+  border-spacing: 15px;
+  padding: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background-color: #F2F2F2;
+  box-sizing: border-box;
+}
+
+.mat-header-cell, .mat-cell {
+  border: 2px solid black;
+  padding: 20px;
+  text-align: center;
+  min-width: 220px;
+}
+
+.mat-header-cell {
+  background-color: #85C8F2 !important;
+  color: black;
+  font-weight: bold;
+}
+
+.mat-cell {
+  background-color: white;
+}
+
+.mat-checkbox {
+  color: black !important;
+}
+
+.mat-icon {
+  color: black !important;
+  font-size: 20px;
+}
+
+button .mat-button {
+  color: black;
+}
+
+button .mat-menu-item {
+  color: #333;
+  font-size: 16px;
+}
+
+button.mat-menu-item:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.mat-header-row, .mat-row {
+  display: table-row;
+  height: 60px;
+  min-width: 100%;
+}
+
+.no-border {
+  border: none;
+}
+
+.mat-row:last-child .mat-cell,
+.mat-header-row:last-child .mat-header-cell {
+  border-bottom: 2px solid black;
+}
