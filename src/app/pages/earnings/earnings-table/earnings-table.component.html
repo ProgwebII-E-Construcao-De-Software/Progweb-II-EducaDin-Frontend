@@ -1,0 +1,58 @@
+<div class="table-responsive">
+<table mat-table [dataSource]="earnings" class="mat-table-custom">
+
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef  class="no-border">
+            <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let element" class="no-border">
+            <mat-checkbox (change)="onCheckboxChange(element)" [checked]="selection.isSelected(element)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell" > Categoria </th>
+        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.categoria}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell" > Descrição </th>
+        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell" > Data </th>
+        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.data}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell" > Valor </th>
+        <td mat-cell *matCellDef="let element" class="mat-cell"> {{element.valor}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
+        <th mat-header-cell *matHeaderCellDef class="no-border" > Ações </th>
+        <td mat-cell *matCellDef="let element" class="no-border">
+            <button mat-button [matMenuTriggerFor]="acoes">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #acoes="matMenu">
+                <button mat-menu-item >
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>Excluir</span>
+                </button>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+</div>

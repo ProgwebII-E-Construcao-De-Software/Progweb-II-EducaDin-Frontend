@@ -1,1 +1,59 @@
-<p>home works!</p>
+<mat-toolbar class="mat-elevation-z8">
+    <div class="container-header">
+        <button
+                mat-icon-button
+                *ngIf="sidenav.mode === 'over'"
+                (click)="sidenav.toggle()"
+        >
+            <mat-icon *ngIf="!sidenav.opened"> menu</mat-icon>
+            <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
+        </button>
+
+        <p class="logo-educadin">
+            <span class="educa">Educa</span><span class="din">Din</span>
+        </p>
+        <div class="header-notification">
+            <button mat-icon-button [routerLink]="['/notifications']" matTooltip="Minhas Notificações">
+                <mat-icon>notifications</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <button mat-button class="menu-button" routerLink="/home" matTooltip="Página Inicial">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/home/goals" matTooltip="Minhas Metas">
+            <img src="assets/images/target.png" alt="Target">
+            <span>Metas</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/home/earnings" matTooltip="Meus Ganhos">
+            <img src="assets/images/earnings.png" alt="Earnings">
+            <span>Ganhos</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/home/expenses" matTooltip="Meus Gastos">
+            <img src="assets/images/expenses.png" alt="Expenses">
+            <span>Gastos</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/home" matTooltip="Minhas Configurações">
+            <mat-icon>settings</mat-icon>
+            <span>Configuração</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button" (click)="sair()" matTooltip="Sair">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+        </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
