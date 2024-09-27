@@ -1,16 +1,22 @@
 <mat-toolbar class="mat-elevation-z8">
+    <div class="container-header">
     <button
             mat-icon-button
             *ngIf="sidenav.mode === 'over'"
             (click)="sidenav.toggle()"
     >
-        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+        <mat-icon *ngIf="!sidenav.opened"> menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/" >
-        <mat-icon> home </mat-icon>
-    </button>
-    Minha Aplicação
+
+        <p class="logo-educadin">
+            <span class="educa">Educa</span><span class="din">Din</span>
+        </p>
+        <div class="header-notification">
+            <mat-icon class="home-icon" aria-hidden="false" fontIcon="notifications"
+                      [routerLink]="['/home']"></mat-icon>
+        </div>
+    </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
