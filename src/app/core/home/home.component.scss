@@ -5,7 +5,7 @@ mat-toolbar {
 
 mat-sidenav {
   margin: 16px;
-  width: 150px;
+  width: 180px;
   border-right: none;
   background: #dcdee0;
   color: white;
@@ -35,23 +35,17 @@ mat-sidenav-container {
   align-items: center;
   justify-content: flex-start;
   font-size: 1rem;
-  color: white !important;
-
+  color: black !important;
   mat-icon {
     margin-right: 8px;
   }
 }
 
-.avatar {
-  margin-top: 16px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.name {
-  margin-top: 8px;
-  font-weight: normal;
+.menu-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: contain;
 }
 
 .designation {
