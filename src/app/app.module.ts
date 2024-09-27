@@ -16,6 +16,11 @@ import {ConfirmationDialog} from "./core/confirmation-dialog/confirmation-dialog
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
+import {EarningsModule} from "./pages/earnings/earnings.module";
+import {MatCard, MatCardModule} from "@angular/material/card";
+import {MatTableModule} from "@angular/material/table";
+import {ExpensesModule} from "./pages/expenses/expenses.module";
+import {GoalsModule} from "./pages/goals/goals.module";
 
 @NgModule({
     declarations: [
@@ -38,6 +43,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatDialogModule,
         MatSnackBarModule,
         MatProgressSpinnerModule,
+        EarningsModule,
+        ExpensesModule,
+        GoalsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

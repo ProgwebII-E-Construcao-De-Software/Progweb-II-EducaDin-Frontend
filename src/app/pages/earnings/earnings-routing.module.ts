@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Routes} from "@angular/router";
+import {EarningsTableComponent} from "./earnings-table/earnings-table.component";
 
 
+export const earningsRoutes: Routes = [
+    {
+        path: "earnings",
+        component: EarningsTableComponent,
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
-})
-export class EarningsRoutingModule { }
+    }
+];

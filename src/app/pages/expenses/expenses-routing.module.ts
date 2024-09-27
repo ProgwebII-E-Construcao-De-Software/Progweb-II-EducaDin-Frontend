@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Routes} from "@angular/router";
+import {ExpensesTableComponent} from "./expenses-table/expenses-table.component";
 
-
-
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
-})
-export class ExpensesRoutingModule { }
+export const expensesRoutes: Routes = [
+    {
+        path: "expenses",
+        component: ExpensesTableComponent,
+    }
+];

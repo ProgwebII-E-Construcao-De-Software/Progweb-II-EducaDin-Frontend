@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
 
 //TODO Apos a implementação do Back-End será apagado
 interface Earnings {
@@ -12,11 +10,6 @@ interface Earnings {
 
 @Component({
     selector: 'app-earnings-table',
-    standalone: true,
-    imports: [
-        MatTableModule,
-        MatCardModule
-    ],
     templateUrl: './earnings-table.component.html',
     styleUrls: ['./earnings-table.component.scss']
 })
