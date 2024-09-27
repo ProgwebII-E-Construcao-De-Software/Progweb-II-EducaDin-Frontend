@@ -11,11 +11,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatTooltip} from "@angular/material/tooltip";
+import {ErrosDialogComponent} from "./core/erros-dialog/erros-dialog.component";
+import {ConfirmationDialog} from "./core/confirmation-dialog/confirmation-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
+        ConfirmationDialog,
+        ErrosDialogComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -28,6 +35,9 @@ import {MatTooltip} from "@angular/material/tooltip";
         MatIconModule,
         MatDividerModule,
         MatTooltip,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
