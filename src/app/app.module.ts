@@ -15,11 +15,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {EarningsModule} from "./pages/earnings/earnings.module";
-import {MatCard, MatCardModule} from "@angular/material/card";
-import {MatTableModule} from "@angular/material/table";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
-import {MatCheckbox} from "@angular/material/checkbox";
 import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
 import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 

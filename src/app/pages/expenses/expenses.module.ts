@@ -7,12 +7,14 @@ import {ExpensesTableComponent} from "./expenses-table/expenses-table.component"
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
+import {ExpensesDialogComponent} from "./expenses-dialog/expenses-dialog.component";
 
 
 @NgModule({
     declarations: [
         ExpensesHomeComponent,
-        ExpensesTableComponent
+        ExpensesTableComponent,
+        ExpensesDialogComponent
     ],
     imports: [
         CommonModule,

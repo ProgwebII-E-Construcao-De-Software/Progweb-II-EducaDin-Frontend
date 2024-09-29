@@ -12,7 +12,7 @@ const routes: Routes = [
         redirectTo: 'home',
     },
     {
-        path:"home",
+        path:"",
         component: HomeComponent,
         children:[
             ...earningsRoutes,
