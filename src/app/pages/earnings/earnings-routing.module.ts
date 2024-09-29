@@ -14,7 +14,7 @@ export const earningsRoutes: Routes = [
                 component:EarningsTableComponent,
             },
             {
-                path:"add",
+                path:"addEarnings",
                 component:EarningsDialogComponent,
             }
         ]

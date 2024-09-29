@@ -23,23 +23,23 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-        <button mat-button class="menu-button" routerLink="/home" matTooltip="Página Inicial">
+        <button mat-button class="menu-button" routerLink="/" matTooltip="Página Inicial">
             <mat-icon>home</mat-icon>
             <span>Home</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/home/goals" matTooltip="Minhas Metas">
+        <button mat-button class="menu-button" routerLink="/goals" matTooltip="Minhas Metas">
             <img src="assets/images/target.png" alt="Target">
             <span>Metas</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/home/earnings" matTooltip="Meus Ganhos">
+        <button mat-button class="menu-button" routerLink="/earnings" matTooltip="Meus Ganhos">
             <img src="assets/images/earnings.png" alt="Earnings">
             <span>Ganhos</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/home/expenses" matTooltip="Meus Gastos">
+        <button mat-button class="menu-button" routerLink="/expenses" matTooltip="Meus Gastos">
             <img src="assets/images/expenses.png" alt="Expenses">
             <span>Gastos</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/home" matTooltip="Minhas Configurações">
+        <button mat-button class="menu-button" routerLink="/" matTooltip="Minhas Configurações">
             <mat-icon>settings</mat-icon>
             <span>Configuração</span>
         </button>
@@ -52,7 +52,7 @@
         </button>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="content mat-elevation-z8">
+        <div class="content">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

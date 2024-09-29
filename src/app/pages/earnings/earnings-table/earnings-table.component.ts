@@ -20,6 +20,10 @@ export class EarningsTableComponent {
         { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
         { categoria: 'Investimento', descricao: 'Compra de casa', data: '02-09-2024', valor: 1200 },
         { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
+        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
+        { categoria: 'Investimento', descricao: 'Compra de casa', data: '02-09-2024', valor: 1200 },
+        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
+        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
     ];
 
     selection = new SelectionModel<Earnings>(true, []);

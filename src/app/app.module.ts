@@ -15,13 +15,15 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {EarningsModule} from "./pages/earnings/earnings.module";
-import {MatCard, MatCardModule} from "@angular/material/card";
-import {MatTableModule} from "@angular/material/table";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
-import {MatCheckbox} from "@angular/material/checkbox";
 import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
 import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
     declarations: [
@@ -47,8 +49,15 @@ import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.com
         EarningsModule,
         ExpensesModule,
         GoalsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
     ],
-    providers: [],
+    providers: [
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

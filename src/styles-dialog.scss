@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2[mat-dialog-title] {
+  text-align: center;
+}
+
+.action-buttons-dialog {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 20px;
+}
+
+.dialog-large-form-field {
+  width: 300px;
+  margin-bottom: 16px;
+}
+
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
