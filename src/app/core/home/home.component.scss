@@ -22,17 +22,13 @@ mat-sidenav {
   background-color: #F2F2F2;
   padding: 16px;
   position: relative;
-  box-sizing: border-box;
 }
 
 mat-sidenav-container {
   height: calc(100vh - 65px);
 }
 
-mat-sidenav-content {
-  overflow-x: auto;
-  overflow-y: auto;
-}
+
 .menu-button {
   width: 100%;
   display: flex;

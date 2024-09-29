@@ -33,6 +33,13 @@
   padding: 20px;
   box-shadow:none;
   border-radius: 0;
+  overflow: hidden;
+}
+
+.custom-content{
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 160px);
 }
 
 mat-card {

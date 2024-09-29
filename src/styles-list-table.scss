@@ -1,13 +1,10 @@
 .table-responsive {
-  overflow-x: auto;
-  max-width: 100%;
-  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  max-height: calc(100vh - 220px);
 }
 
 .mat-table-custom {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
   border-collapse: separate;
   border-spacing: 15px;
   padding: 10px;
@@ -19,7 +16,7 @@
 
 .mat-header-cell, .mat-cell {
   border: 2px solid black;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   min-width: 220px;
 }
@@ -43,9 +40,8 @@
   .mat-table-custom {
     border-spacing: 5px;
   }
-
   .table-responsive {
-    overflow-x: scroll;
+    max-height: calc(100vh - 160px);
   }
 }
 
