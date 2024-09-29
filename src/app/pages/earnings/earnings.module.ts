@@ -10,12 +10,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {EarningsDialogComponent} from "./earnings-dialog/earnings-dialog.component";
 
 
 @NgModule({
     declarations: [
         EarningsHomeComponent,
         EarningsTableComponent,
+        EarningsDialogComponent,
     ],
     imports: [
         CommonModule,
