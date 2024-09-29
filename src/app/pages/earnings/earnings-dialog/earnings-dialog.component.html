@@ -1,23 +1,41 @@
-<h2 mat-dialog-title> Adicionar Ganhos{{data.name}}</h2>
-<mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Categoria</mat-label>
-        <input matInput [(ngModel)]="animal" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="animal" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="animal" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="animal" />
-    </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Fechar</button>
-    <button mat-button>Ok</button>
-</mat-dialog-actions>
+<div class="custom-dialog">
+    <h2 mat-dialog-title> Adicionar Ganhos{{ data.name }}</h2>
+    <mat-dialog-content class="dialog-content">
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Categoria</mat-label>
+            <mat-select [(value)]="categoria">
+                <mat-option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Descrição</mat-label>
+            <input matInput [(ngModel)]="descricao"/>
+        </mat-form-field>
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date"/>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Valor</mat-label>
+            <input matInput [(ngModel)]="value"/>
+        </mat-form-field>
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Se repete</mat-label>
+            <mat-select [(value)]="repete">
+                <mat-option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="dialog-large-form-field">
+            <mat-label>Até</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date"/>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions class="action-buttons-dialog">
+        <button mat-button (click)="onNoClick()">Fechar</button>
+        <button mat-button>Adicionar</button>
+    </mat-dialog-actions>
+</div>

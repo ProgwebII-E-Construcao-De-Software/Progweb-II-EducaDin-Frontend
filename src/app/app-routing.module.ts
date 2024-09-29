@@ -6,11 +6,11 @@ import {expensesRoutes} from "./pages/expenses/expenses-routing.module";
 import {goalsRoutes} from "./pages/goals/goals-routing.module";
 
 const routes: Routes = [
-    {
-        path: '',
-        pathMatch:'full',
-        redirectTo: 'home',
-    },
+    // {
+    //     path: '',
+    //     pathMatch:'full',
+    //     redirectTo: 'home',
+    // },
     {
         path:"",
         component: HomeComponent,

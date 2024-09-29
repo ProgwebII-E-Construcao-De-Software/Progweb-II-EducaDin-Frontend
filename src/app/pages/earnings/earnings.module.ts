@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -40,6 +42,11 @@ import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from
         MatDialogContent,
         MatDialogClose,
         MatDialogTitle,
+        MatSelect,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatOption,
+        MatDatepickerInput,
     ]
 })
 export class EarningsModule {

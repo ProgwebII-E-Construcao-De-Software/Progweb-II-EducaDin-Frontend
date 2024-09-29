@@ -18,7 +18,7 @@ export class EarningsHomeComponent {
     ) {
     }
 
-    openDialog() {
+    openDialogAddEarnings() {
         const dialogRef = this.dialog.open(EarningsDialogComponent, {
             width: '400px',
             data: {id: null}
@@ -26,7 +26,6 @@ export class EarningsHomeComponent {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                // Handle result if necessary, like showing a notification
                 this.snackBar.open('Ganhos', 'Close', {duration: 3000});
             }
         });
