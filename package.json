@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
-    "build": "ng build",
-    "build-docker": "npm run ng -- build -c production",
+    "ng-openapi-gen": "ng-openapi-gen",
+    "start": "npm run ng-openapi-gen && npm run ng -- serve -o",
+    "build": "npm run ng-openapi-gen-server && npm run ng -- build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -38,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-openapi-gen": "^0.52.0",
     "typescript": "~5.4.2"
   }
 }
