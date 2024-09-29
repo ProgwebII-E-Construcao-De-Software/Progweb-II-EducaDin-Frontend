@@ -11,8 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatTooltip} from "@angular/material/tooltip";
-import {ErrosDialogComponent} from "./core/erros-dialog/erros-dialog.component";
-import {ConfirmationDialog} from "./core/confirmation-dialog/confirmation-dialog.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -22,6 +20,8 @@ import {MatTableModule} from "@angular/material/table";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
+import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 
 @NgModule({
     declarations: [
