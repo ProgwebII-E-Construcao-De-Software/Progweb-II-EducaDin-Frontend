@@ -24,6 +24,7 @@ import {
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatRadioButton} from "@angular/material/radio";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {MatRadioButton} from "@angular/material/radio";
         MatRadioButton,
         ReactiveFormsModule,
         MatDialogContainer,
+        MatNativeDateModule,
     ]
 })
 export class EarningsModule {

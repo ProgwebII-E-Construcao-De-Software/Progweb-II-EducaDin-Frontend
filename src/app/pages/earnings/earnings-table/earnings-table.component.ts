@@ -1,66 +1,61 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
-
-//TODO Apos a implementação do Back-End será apagado
-interface Earnings {
-    categoria: string;
-    descricao: string;
-    data: string;
-    valor: number;
-}
+import {IncomeListDto} from "../../../api/models/income-list-dto";
+import {IncomeControllerService} from "../../../api/services/income-controller.service";
 
 @Component({
     selector: 'app-earnings-table',
     templateUrl: './earnings-table.component.html',
     styleUrls: ['./earnings-table.component.scss']
 })
-export class EarningsTableComponent {
-    displayedColumns: string[] = ['select','categoria', 'descricao', 'data', 'valor', 'acao'];
-    earnings: Earnings[] = [
-        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
-        { categoria: 'Investimento', descricao: 'Compra de casa', data: '02-09-2024', valor: 1200 },
-        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
-        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
-        { categoria: 'Investimento', descricao: 'Compra de casa', data: '02-09-2024', valor: 1200 },
-        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
-        { categoria:  'Salário', descricao: 'Salário mensal', data: '01-09-2024', valor: 5000 },
-    ];
+export class EarningsTableComponent implements OnInit{
+    displayedColumns: string[] = ['select','category', 'description', 'incomeDate', 'amount', 'acao'];
+    earningsTableDataSource : MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
+    selection = new SelectionModel<IncomeListDto>(true, []);
+    tipoDeListagem: string = 'Normal';
 
-    selection = new SelectionModel<Earnings>(true, []);
+    constructor(
+        public earningsService: IncomeControllerService,
 
+    ) {
+
+    }
+
+    ngOnInit(): void {
+        this.earningsService.listAll().subscribe(data=>{
+            this.earningsTableDataSource.data = data;
+        })
+    }
 
     isAllSelected() {
         const numSelected = this.selection.selected.length;
-        const numRows = this.earnings.length;
+        const numRows = this.earningsTableDataSource.data.length;
         return numSelected === numRows;
     }
 
 
     selectAll(event: any) {
         if (event.checked) {
-            this.selection.select(...this.earnings);
+            this.selection.select(...this.earningsTableDataSource.data);
         } else {
             this.selection.clear();
         }
     }
 
 
-    onCheckboxChange(element: Earnings) {
+    onCheckboxChange(element: IncomeListDto) {
         this.selection.toggle(element);
     }
 
 
-    tipoDeListagem: string = 'Normal';
-
-
-    editar(element: Earnings): void {
-        console.log(`Editar item: ${element.descricao}`);
+    editar(element: IncomeListDto): void {
+        console.log(`Editar item: ${element.description}`);
 
     }
 
-    excluir(element: Earnings): void {
-        console.log(`Excluir item: ${element.descricao}`);
+    excluir(element: IncomeListDto): void {
+        console.log(`Excluir item: ${element.description}`);
 
     }
 }

@@ -12,7 +12,7 @@ import { RequestBuilder } from '../../request-builder';
 export interface TestModelReflection$Params {
 }
 
-export function testModelReflection(http: HttpClient, rootUrl: string, params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+export function testModelReflection(http: HttpClient, rootUrl: string, params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
   const rb = new RequestBuilder(rootUrl, testModelReflection.PATH, 'get');
   if (params) {
   }
@@ -22,7 +22,7 @@ export function testModelReflection(http: HttpClient, rootUrl: string, params?: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<string>;
+      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
     })
   );
 }
