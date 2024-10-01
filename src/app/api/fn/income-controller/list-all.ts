@@ -8,12 +8,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CategoryDto } from '../../models/category-dto';
+import { IncomeListDto } from '../../models/income-list-dto';
 
 export interface ListAll$Params {
 }
 
-export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
   const rb = new RequestBuilder(rootUrl, listAll.PATH, 'get');
   if (params) {
   }
@@ -23,9 +23,9 @@ export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Para
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<CategoryDto>>;
+      return r as StrictHttpResponse<Array<IncomeListDto>>;
     })
   );
 }
 
-listAll.PATH = '/1.0/categories';
+listAll.PATH = '/1.0/incomes';

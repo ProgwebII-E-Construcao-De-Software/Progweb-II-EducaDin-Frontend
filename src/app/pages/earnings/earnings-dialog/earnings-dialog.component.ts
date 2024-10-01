@@ -1,5 +1,6 @@
 import {Component, Inject, inject, model} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: 'app-earnings-dialog',
@@ -13,6 +14,8 @@ export class EarningsDialogComponent {
     date!: String;
     value!: String;
     repete!: String;
+    categoryControl = new FormControl();
+    newCategoryControl = new FormControl();
 
     constructor(
         public dialogRef: MatDialogRef<EarningsDialogComponent>,
@@ -23,5 +26,20 @@ export class EarningsDialogComponent {
 
     onNoClick(): void {
         this.dialogRef.close();
+    }
+    onCategoryChange(): void {
+
+    }
+
+    addCategory(): void {
+
+    }
+
+    editCategory(): void {
+
+    }
+
+    removeCategory(): void {
+
     }
 }

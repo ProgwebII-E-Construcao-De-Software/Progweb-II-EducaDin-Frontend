@@ -11,12 +11,19 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {EarningsDialogComponent} from "./earnings-dialog/earnings-dialog.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContainer,
+    MatDialogContent,
+    MatDialogTitle
+} from "@angular/material/dialog";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatRadioButton} from "@angular/material/radio";
 
 
 @NgModule({
@@ -47,6 +54,9 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
         MatDatepicker,
         MatOption,
         MatDatepickerInput,
+        MatRadioButton,
+        ReactiveFormsModule,
+        MatDialogContainer,
     ]
 })
 export class EarningsModule {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
+import {MatTableDataSource} from "@angular/material/table";
 
 //TODO Apos a implementação do Back-End será apagado
 interface Earnings {

@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CategoryDto } from '../../models/category-dto';
+import { IncomeDto } from '../../models/income-dto';
 
-export interface GetById$Params {
+export interface Remove$Params {
   id: number;
 }
 
-export function getById(http: HttpClient, rootUrl: string, params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, getById.PATH, 'get');
+export function remove(http: HttpClient, rootUrl: string, params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+  const rb = new RequestBuilder(rootUrl, remove.PATH, 'delete');
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -25,9 +25,9 @@ export function getById(http: HttpClient, rootUrl: string, params: GetById$Param
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
+      return r as StrictHttpResponse<IncomeDto>;
     })
   );
 }
 
-getById.PATH = '/1.0/categories/{id}';
+remove.PATH = '/1.0/incomes/{id}';

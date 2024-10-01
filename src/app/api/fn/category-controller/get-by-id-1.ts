@@ -10,12 +10,12 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface Remove$Params {
+export interface GetById1$Params {
   id: number;
 }
 
-export function remove(http: HttpClient, rootUrl: string, params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, remove.PATH, 'delete');
+export function getById1(http: HttpClient, rootUrl: string, params: GetById1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, getById1.PATH, 'get');
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -30,4 +30,4 @@ export function remove(http: HttpClient, rootUrl: string, params: Remove$Params,
   );
 }
 
-remove.PATH = '/1.0/categories/{id}';
+getById1.PATH = '/1.0/categories/{id}';
