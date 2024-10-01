@@ -21,7 +21,7 @@ export class ExpensesDialogComponent {
     }
 
 
-    onNoClick(): void {
+    closeDialog(): void {
         this.dialogRef.close();
     }
 }

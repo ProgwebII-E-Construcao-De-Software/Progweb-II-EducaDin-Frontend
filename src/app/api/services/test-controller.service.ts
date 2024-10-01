@@ -31,7 +31,7 @@ export class TestControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  testModelReflection$Response(params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  testModelReflection$Response(params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
     return testModelReflection(this.http, this.rootUrl, params, context);
   }
 
@@ -43,9 +43,9 @@ export class TestControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  testModelReflection(params?: TestModelReflection$Params, context?: HttpContext): Observable<string> {
+  testModelReflection(params?: TestModelReflection$Params, context?: HttpContext): Observable<boolean> {
     return this.testModelReflection$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

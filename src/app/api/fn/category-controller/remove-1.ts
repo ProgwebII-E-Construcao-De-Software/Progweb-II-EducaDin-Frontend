@@ -8,13 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { CategoryDto } from '../../models/category-dto';
 
-export interface TestModelReflection$Params {
+export interface Remove1$Params {
+  id: number;
 }
 
-export function testModelReflection(http: HttpClient, rootUrl: string, params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
-  const rb = new RequestBuilder(rootUrl, testModelReflection.PATH, 'get');
+export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, remove1.PATH, 'delete');
   if (params) {
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -22,9 +25,9 @@ export function testModelReflection(http: HttpClient, rootUrl: string, params?: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      return r as StrictHttpResponse<CategoryDto>;
     })
   );
 }
 
-testModelReflection.PATH = '/1.0/test/';
+remove1.PATH = '/1.0/categories/{id}';

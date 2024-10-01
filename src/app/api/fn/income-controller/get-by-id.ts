@@ -8,18 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CategoryDto } from '../../models/category-dto';
+import { IncomeDto } from '../../models/income-dto';
 
-export interface Update$Params {
+export interface GetById$Params {
   id: number;
-      body: CategoryDto
 }
 
-export function update(http: HttpClient, rootUrl: string, params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, update.PATH, 'put');
+export function getById(http: HttpClient, rootUrl: string, params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+  const rb = new RequestBuilder(rootUrl, getById.PATH, 'get');
   if (params) {
     rb.path('id', params.id, {});
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -27,9 +25,9 @@ export function update(http: HttpClient, rootUrl: string, params: Update$Params,
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
+      return r as StrictHttpResponse<IncomeDto>;
     })
   );
 }
 
-update.PATH = '/1.0/categories/{id}';
+getById.PATH = '/1.0/incomes/{id}';

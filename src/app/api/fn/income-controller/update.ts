@@ -8,13 +8,19 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { IncomeDto } from '../../models/income-dto';
+import { IncomeDtoCreateUpdate } from '../../models/income-dto-create-update';
 
-export interface TestModelReflection$Params {
+export interface Update$Params {
+  id: number;
+      body: IncomeDtoCreateUpdate
 }
 
-export function testModelReflection(http: HttpClient, rootUrl: string, params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
-  const rb = new RequestBuilder(rootUrl, testModelReflection.PATH, 'get');
+export function update(http: HttpClient, rootUrl: string, params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+  const rb = new RequestBuilder(rootUrl, update.PATH, 'put');
   if (params) {
+    rb.path('id', params.id, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -22,9 +28,9 @@ export function testModelReflection(http: HttpClient, rootUrl: string, params?: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      return r as StrictHttpResponse<IncomeDto>;
     })
   );
 }
 
-testModelReflection.PATH = '/1.0/test/';
+update.PATH = '/1.0/incomes/{id}';

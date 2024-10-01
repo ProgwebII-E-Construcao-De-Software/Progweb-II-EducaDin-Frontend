@@ -8,13 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { CategoryDto } from '../../models/category-dto';
 
-export interface TestModelReflection$Params {
+export interface Create1$Params {
+      body: CategoryDto
 }
 
-export function testModelReflection(http: HttpClient, rootUrl: string, params?: TestModelReflection$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
-  const rb = new RequestBuilder(rootUrl, testModelReflection.PATH, 'get');
+export function create1(http: HttpClient, rootUrl: string, params: Create1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, create1.PATH, 'post');
   if (params) {
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -22,9 +25,9 @@ export function testModelReflection(http: HttpClient, rootUrl: string, params?: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      return r as StrictHttpResponse<CategoryDto>;
     })
   );
 }
 
-testModelReflection.PATH = '/1.0/test/';
+create1.PATH = '/1.0/categories';

@@ -10,14 +10,12 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface Create$Params {
-      body: CategoryDto
+export interface ListAll1$Params {
 }
 
-export function create(http: HttpClient, rootUrl: string, params: Create$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, create.PATH, 'post');
+export function listAll1(http: HttpClient, rootUrl: string, params?: ListAll1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+  const rb = new RequestBuilder(rootUrl, listAll1.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +23,9 @@ export function create(http: HttpClient, rootUrl: string, params: Create$Params,
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
+      return r as StrictHttpResponse<Array<CategoryDto>>;
     })
   );
 }
 
-create.PATH = '/1.0/categories';
+listAll1.PATH = '/1.0/categories';
