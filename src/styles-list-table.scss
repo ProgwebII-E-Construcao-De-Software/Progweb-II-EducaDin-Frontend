@@ -1,6 +1,7 @@
 .tabela-container {
   max-height: 300px;
   overflow-y: auto;
+  margin-top: 20px;
 }
 
 
@@ -9,18 +10,21 @@
   border-color: #F2F2F2;
   text-decoration-color: #F2F2F2;
   width: 100%;
+  border-collapse: collapse;
 }
 
 .mat-header-cell {
   background: #046F82 !important;
   color: #020100 !important;
   font-size: 14px;
+  border:none;
 }
 
 .mat-cell{
   color: #020100;
   background: #F2F2F2 !important;
   padding-top: 10px;
+  border: none;
 }
 
 td, th {

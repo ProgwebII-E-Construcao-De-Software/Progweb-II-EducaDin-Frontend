@@ -20,7 +20,6 @@ export class EarningsHomeComponent {
 
     openDialogAddEarnings() {
         const dialogRef = this.dialog.open(EarningsDialogComponent, {
-            width: '400px',
             data: {id: null}
         });
 
