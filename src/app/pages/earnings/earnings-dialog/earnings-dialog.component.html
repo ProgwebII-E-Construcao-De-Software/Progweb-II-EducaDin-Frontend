@@ -45,10 +45,10 @@
 
             <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeat')?.value">
                 <mat-label>Até</mat-label>
-                <input matInput [matDatepicker]="leadTimePicker" formControlName="leadTime"/>
-                <mat-datepicker-toggle matSuffix [for]="leadTimePicker"></mat-datepicker-toggle>
-                <mat-datepicker #leadTimePicker></mat-datepicker>
+                <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
             </mat-form-field>
+
+
         </mat-dialog-content>
 
         <mat-dialog-actions class="action-buttons-dialog">

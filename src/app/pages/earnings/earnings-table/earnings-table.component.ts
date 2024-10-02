@@ -10,7 +10,7 @@ import {IncomeControllerService} from "../../../api/services/income-controller.s
     styleUrls: ['./earnings-table.component.scss']
 })
 export class EarningsTableComponent implements OnInit{
-    displayedColumns: string[] = ['select','category', 'description', 'incomeDate', 'amount', 'acao'];
+    displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
     earningsTableDataSource : MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
@@ -24,7 +24,8 @@ export class EarningsTableComponent implements OnInit{
 
     ngOnInit(): void {
         this.earningsService.listAll().subscribe(data=>{
-            this.earningsTableDataSource.data = data;
+            this.earningsTableDataSource = new MatTableDataSource<IncomeListDto>(data);
+            console.log(data);
         })
     }
 

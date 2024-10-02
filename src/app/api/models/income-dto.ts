@@ -10,5 +10,4 @@ export interface IncomeDto {
   incomeDate?: string;
   leadTime?: number;
   name?: string;
-  repeat?: boolean;
 }
