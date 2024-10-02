@@ -21,6 +21,7 @@ import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.com
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MessageModule} from "./architecture/message/message.module";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         MatDialogModule,
         MatSnackBarModule,
         MatProgressSpinnerModule,
+        MessageModule.forRoot(),
         EarningsModule,
         ExpensesModule,
         GoalsModule,

@@ -3,6 +3,13 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
 import {IncomeListDto} from "../../../api/models/income-list-dto";
 import {IncomeControllerService} from "../../../api/services/income-controller.service";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessageService} from "../../../architecture/message/message.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-earnings-table',
@@ -17,6 +24,9 @@ export class EarningsTableComponent implements OnInit {
 
     constructor(
         public earningsService: IncomeControllerService,
+        private dialog: MatDialog,
+        private snackBar: MatSnackBar,
+        private messageService: MessageService
     ) {
 
     }
@@ -25,7 +35,7 @@ export class EarningsTableComponent implements OnInit {
         this.listEarnings();
     }
 
-    listEarnings(){
+    listEarnings() {
         this.earningsService.listAll().subscribe(data => {
             this.earningsTableDataSource.data = data;
             console.log(data);
@@ -48,34 +58,55 @@ export class EarningsTableComponent implements OnInit {
     }
 
 
-    onCheckboxChange(element: IncomeListDto) {
-        this.selection.toggle(element);
+    onCheckboxChange(earnings: IncomeListDto) {
+        this.selection.toggle(earnings);
     }
 
-
-    editEarnings(element: IncomeListDto): void {
-        console.log(`Editar item: ${element.description}`);
-
-    }
-
-    removeEarnings(element: IncomeListDto): void {
-        if (element.id !== undefined) {
-            console.log(`Excluir item: ${element.description}`);
-            this.earningsService.remove({id: element.id})
+    removeEarnings(earnings: IncomeListDto): void {
+        if (earnings.id !== undefined) {
+            console.log(`Excluir item: ${earnings.description}`);
+            this.earningsService.remove({id: earnings.id})
                 .subscribe(
                     retorn => {
                         this.listEarnings();
-                        alert("Excluído com Sucesso!!");
+                        this.messageService.addMsgSuccess(`Ganho: ${retorn.name} Excluído com Sucesso !!`)
                         console.log("Exclusão", retorn);
                     },
                     error => {
-                        alert("Erro ao Excluir!!");
-                        console.log(error);
+                        if (error.status === 404) {
+                            this.messageService.addMsgInf("Ganho listado não existe mais")
+                        } else {
+                            this.messageService.addMsgDanger("Erro ao excluir");
+                            console.log("Erro:", error);
+                        }
                     }
                 );
         } else {
             console.error("Erro: o ID do item é indefinido.");
             alert("Erro ao Excluir: o ID do item é indefinido.");
         }
+    }
+
+    confirmDeletionEarnings(earnings: IncomeListDto) {
+        this.messageService.addConfirmYesNo(`Confirmar a exclusão de: ${earnings.category} (Descrição: ${earnings.description})?`, () => {
+            this.removeEarnings(earnings);
+        });
+        const dialogRef = this.dialog.open(ConfirmationDialog, {
+            data: {
+                titulo: 'Confirmar?',
+                mensagem: `A exclusão de: ${earnings.name} Categoria: ${earnings.category?.name}?`,
+                textoBotoes: {
+                    ok: 'Confirmar',
+                    cancel: 'Cancelar',
+                },
+                dado: earnings
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+            if (confirmed?.resultado) {
+                this.removeEarnings(confirmed.dado);
+            }
+        });
     }
 }
