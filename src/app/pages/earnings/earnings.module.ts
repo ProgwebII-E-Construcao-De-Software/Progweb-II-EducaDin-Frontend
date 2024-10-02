@@ -8,7 +8,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatMenu, MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {EarningsDialogComponent} from "./earnings-dialog/earnings-dialog.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -21,7 +21,7 @@ import {
     MatDialogContent,
     MatDialogTitle
 } from "@angular/material/dialog";
-import {MatOption, MatSelect} from "@angular/material/select";
+import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatRadioButton} from "@angular/material/radio";
 import {MatNativeDateModule} from "@angular/material/core";
@@ -40,7 +40,7 @@ import {MatNativeDateModule} from "@angular/material/core";
         MatIconModule,
         MatButtonModule,
         RouterModule.forChild(earningsRoutes),
-        MatMenu,
+        MatMenuModule,
         MatMenuTrigger,
         MatCheckbox,
         MatFormFieldModule,
@@ -50,7 +50,7 @@ import {MatNativeDateModule} from "@angular/material/core";
         MatDialogContent,
         MatDialogClose,
         MatDialogTitle,
-        MatSelect,
+        MatSelectModule,
         MatDatepickerToggle,
         MatDatepicker,
         MatOption,
