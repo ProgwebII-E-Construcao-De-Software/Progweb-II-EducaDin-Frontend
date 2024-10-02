@@ -24,7 +24,7 @@ export class EarningsTableComponent implements OnInit{
 
     ngOnInit(): void {
         this.earningsService.listAll().subscribe(data=>{
-            this.earningsTableDataSource = new MatTableDataSource<IncomeListDto>(data);
+            this.earningsTableDataSource.data = data;
             console.log(data);
         })
     }
