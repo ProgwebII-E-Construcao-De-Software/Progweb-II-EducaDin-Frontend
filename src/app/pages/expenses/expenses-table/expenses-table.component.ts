@@ -19,6 +19,14 @@ export class ExpensesTableComponent {
     expenses: Expenses[] = [
         { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
         { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
+        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
+        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
+        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
+        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
+        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
+        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
+        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
+        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
     ];
 
     selection = new SelectionModel<Expenses>(true, []);

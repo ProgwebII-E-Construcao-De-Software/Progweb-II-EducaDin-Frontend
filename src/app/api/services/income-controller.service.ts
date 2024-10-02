@@ -34,7 +34,7 @@ export class IncomeControllerService extends BaseService {
   static readonly GetByIdPath = '/1.0/incomes/{id}';
 
   /**
-   * End point para obter dados por id
+   * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `getById()` instead.
@@ -46,7 +46,7 @@ export class IncomeControllerService extends BaseService {
   }
 
   /**
-   * End point para obter dados por id
+   * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `getById$Response()` instead.
@@ -63,7 +63,7 @@ export class IncomeControllerService extends BaseService {
   static readonly UpdatePath = '/1.0/incomes/{id}';
 
   /**
-   * End point para atualização de dados
+   * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `update()` instead.
@@ -75,7 +75,7 @@ export class IncomeControllerService extends BaseService {
   }
 
   /**
-   * End point para atualização de dados
+   * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `update$Response()` instead.
@@ -92,7 +92,7 @@ export class IncomeControllerService extends BaseService {
   static readonly RemovePath = '/1.0/incomes/{id}';
 
   /**
-   * End point para remover dados por id
+   * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `remove()` instead.
@@ -104,7 +104,7 @@ export class IncomeControllerService extends BaseService {
   }
 
   /**
-   * End point para remover dados por id
+   * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `remove$Response()` instead.
@@ -121,7 +121,7 @@ export class IncomeControllerService extends BaseService {
   static readonly ListAllPath = '/1.0/incomes';
 
   /**
-   * lista todos os dados
+   * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `listAll()` instead.
@@ -133,7 +133,7 @@ export class IncomeControllerService extends BaseService {
   }
 
   /**
-   * lista todos os dados
+   * lista todos modelos
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `listAll$Response()` instead.
@@ -150,7 +150,7 @@ export class IncomeControllerService extends BaseService {
   static readonly CreatePath = '/1.0/incomes';
 
   /**
-   * End point para inclusão de dados
+   * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `create()` instead.
@@ -162,7 +162,7 @@ export class IncomeControllerService extends BaseService {
   }
 
   /**
-   * End point para inclusão de dados
+   * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `create$Response()` instead.

@@ -4,6 +4,8 @@
 
 export { Category } from './models/category';
 export { CategoryDto } from './models/category-dto';
+export { FieldResponse } from './models/field-response';
 export { IncomeDto } from './models/income-dto';
 export { IncomeDtoCreateUpdate } from './models/income-dto-create-update';
 export { IncomeListDto } from './models/income-list-dto';
+export { MessageResponse } from './models/message-response';

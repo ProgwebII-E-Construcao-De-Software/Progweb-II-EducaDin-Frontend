@@ -37,7 +37,7 @@ export class CategoryControllerService extends BaseService {
   static readonly GetById1Path = '/1.0/categories/{id}';
 
   /**
-   * End point para obter dados por id
+   * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `getById1()` instead.
@@ -49,7 +49,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /**
-   * End point para obter dados por id
+   * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `getById1$Response()` instead.
@@ -66,7 +66,7 @@ export class CategoryControllerService extends BaseService {
   static readonly Update1Path = '/1.0/categories/{id}';
 
   /**
-   * End point para atualização de dados
+   * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `update1()` instead.
@@ -78,7 +78,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /**
-   * End point para atualização de dados
+   * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `update1$Response()` instead.
@@ -95,7 +95,7 @@ export class CategoryControllerService extends BaseService {
   static readonly Remove1Path = '/1.0/categories/{id}';
 
   /**
-   * End point para remover dados por id
+   * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `remove1()` instead.
@@ -107,7 +107,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /**
-   * End point para remover dados por id
+   * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `remove1$Response()` instead.
@@ -124,7 +124,7 @@ export class CategoryControllerService extends BaseService {
   static readonly ListAll1Path = '/1.0/categories';
 
   /**
-   * lista todos os dados
+   * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `listAll1()` instead.
@@ -136,7 +136,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /**
-   * lista todos os dados
+   * lista todos modelos
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `listAll1$Response()` instead.
@@ -153,7 +153,7 @@ export class CategoryControllerService extends BaseService {
   static readonly Create1Path = '/1.0/categories';
 
   /**
-   * End point para inclusão de dados
+   * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `create1()` instead.
@@ -165,7 +165,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /**
-   * End point para inclusão de dados
+   * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `create1$Response()` instead.

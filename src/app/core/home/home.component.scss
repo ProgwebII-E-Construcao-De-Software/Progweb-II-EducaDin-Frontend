@@ -17,11 +17,13 @@ mat-sidenav {
 .content {
   height: calc(100vh - 130px);
   border-radius: 10px;
-  margin: 16px;
-  margin-left: 32px;
+  margin: 0px;
+  margin-left: 25px;
+  margin-right: 20px;
   background-color: #F2F2F2;
   padding: 16px;
   position: relative;
+  margin-top: 15px;
 }
 
 mat-sidenav-container {

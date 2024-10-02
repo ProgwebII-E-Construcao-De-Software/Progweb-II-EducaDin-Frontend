@@ -34,7 +34,7 @@ export class EarningsDialogComponent {
                 incomeDate: [new Date(), Validators.required],
                 amount: [null, [Validators.required, Validators.min(0)]],
                 repeat: [null, Validators.required],
-                leadTime: [null]
+                leadTime: [0, Validators.min(0)],
             }
         )
     }

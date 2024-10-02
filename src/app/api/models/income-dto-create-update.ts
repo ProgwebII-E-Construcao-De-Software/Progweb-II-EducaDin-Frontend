@@ -9,5 +9,4 @@ export interface IncomeDtoCreateUpdate {
   incomeDate?: string;
   leadTime?: number;
   name?: string;
-  repeat?: boolean;
 }
