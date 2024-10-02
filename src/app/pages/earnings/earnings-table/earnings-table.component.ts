@@ -9,21 +9,24 @@ import {IncomeControllerService} from "../../../api/services/income-controller.s
     templateUrl: './earnings-table.component.html',
     styleUrls: ['./earnings-table.component.scss']
 })
-export class EarningsTableComponent implements OnInit{
+export class EarningsTableComponent implements OnInit {
     displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
-    earningsTableDataSource : MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
+    earningsTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
 
     constructor(
         public earningsService: IncomeControllerService,
-
     ) {
 
     }
 
     ngOnInit(): void {
-        this.earningsService.listAll().subscribe(data=>{
+        this.listEarnings();
+    }
+
+    listEarnings(){
+        this.earningsService.listAll().subscribe(data => {
             this.earningsTableDataSource.data = data;
             console.log(data);
         })
@@ -50,13 +53,29 @@ export class EarningsTableComponent implements OnInit{
     }
 
 
-    editar(element: IncomeListDto): void {
+    editEarnings(element: IncomeListDto): void {
         console.log(`Editar item: ${element.description}`);
 
     }
 
-    excluir(element: IncomeListDto): void {
-        console.log(`Excluir item: ${element.description}`);
-
+    removeEarnings(element: IncomeListDto): void {
+        if (element.id !== undefined) {
+            console.log(`Excluir item: ${element.description}`);
+            this.earningsService.remove({id: element.id})
+                .subscribe(
+                    retorn => {
+                        this.listEarnings();
+                        alert("Excluído com Sucesso!!");
+                        console.log("Exclusão", retorn);
+                    },
+                    error => {
+                        alert("Erro ao Excluir!!");
+                        console.log(error);
+                    }
+                );
+        } else {
+            console.error("Erro: o ID do item é indefinido.");
+            alert("Erro ao Excluir: o ID do item é indefinido.");
+        }
     }
 }

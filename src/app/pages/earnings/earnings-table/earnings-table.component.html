@@ -1,12 +1,13 @@
+<div>
 <div class="tabela-container">
     <table mat-table [dataSource]="earningsTableDataSource" class="tabela">
 
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
+        <ng-container matColumnDef="select" >
+            <th mat-header-cell *matHeaderCellDef  class="mat-header-cell">
                 <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()">
                 </mat-checkbox>
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element"  class="mat-cell">
                 <mat-checkbox (change)="onCheckboxChange(element)" [checked]="selection.isSelected(element)">
                 </mat-checkbox>
             </td>
@@ -33,18 +34,18 @@
         </ng-container>
 
         <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
-            <th mat-header-cell *matHeaderCellDef class="no-border"> Ações</th>
-            <td mat-cell *matCellDef="let element" class="no-border" (mouseover)="element.showActions = true"
+            <th mat-header-cell *matHeaderCellDef  class="mat-header-cell"> Ações</th>
+            <td mat-cell *matCellDef="let element"  class="mat-cell" (mouseover)="element.showActions = true"
                 (mouseout)="element.showActions = false">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item >
                         <mat-icon>edit</mat-icon>
                         <span>Editar</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="removeEarnings(element)">
                         <mat-icon>delete_forever</mat-icon>
                         <span>Excluir</span>
                     </button>
@@ -56,4 +57,5 @@
         <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </table>
+</div>
 </div>

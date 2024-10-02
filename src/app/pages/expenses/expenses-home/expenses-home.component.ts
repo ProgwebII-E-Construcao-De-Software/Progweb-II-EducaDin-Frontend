@@ -19,7 +19,7 @@ export class ExpensesHomeComponent {
 
     openDialogAddExpenses() {
         const dialogRef = this.dialog.open(ExpensesDialogComponent, {
-            width: '400px',
+
             data: {id: null}
         });
 
