@@ -10,6 +10,7 @@ import {
     ConfirmationDialog,
     ConfirmationDialogResult
 } from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {EarningsDialogComponent} from "../earnings-dialog/earnings-dialog.component";
 
 @Component({
     selector: 'app-earnings-table',
@@ -88,12 +89,10 @@ export class EarningsTableComponent implements OnInit {
     }
 
     confirmDeletionEarnings(earnings: IncomeListDto) {
-        this.messageService.addConfirmYesNo(`Confirmar a exclusão de: ${earnings.category} (Descrição: ${earnings.description})?`, () => {
-            this.removeEarnings(earnings);
-        });
+      
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
-                titulo: 'Confirmar?',
+                titulo: 'Confirmar Exclusão?',
                 mensagem: `A exclusão de: ${earnings.name} Categoria: ${earnings.category?.name}?`,
                 textoBotoes: {
                     ok: 'Confirmar',
@@ -108,5 +107,18 @@ export class EarningsTableComponent implements OnInit {
                 this.removeEarnings(confirmed.dado);
             }
         });
+    }
+
+    openDialogEditEarnings(earnings: IncomeListDto){
+            const dialogRef = this.dialog.open(EarningsDialogComponent, {
+                data: {id: earnings.id}
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                this.listEarnings();
+                if (result) {
+                    this.snackBar.open('Ganhos', 'Close', {duration: 3000});
+                }
+            });
     }
 }

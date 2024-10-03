@@ -16,6 +16,10 @@ export const earningsRoutes: Routes = [
             {
                 path:"addEarnings",
                 component:EarningsDialogComponent,
+            },
+            {
+                path:":id",
+                component:EarningsDialogComponent,
             }
         ]
 
