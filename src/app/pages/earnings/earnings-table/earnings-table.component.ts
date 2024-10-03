@@ -22,6 +22,7 @@ export class EarningsTableComponent implements OnInit {
     earningsTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
+    isMenuOpen: boolean = false;
 
     constructor(
         public earningsService: IncomeControllerService,
@@ -89,7 +90,7 @@ export class EarningsTableComponent implements OnInit {
     }
 
     confirmDeletionEarnings(earnings: IncomeListDto) {
-      
+
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
                 titulo: 'Confirmar Exclusão?',
@@ -109,16 +110,18 @@ export class EarningsTableComponent implements OnInit {
         });
     }
 
-    openDialogEditEarnings(earnings: IncomeListDto){
-            const dialogRef = this.dialog.open(EarningsDialogComponent, {
-                data: {id: earnings.id}
-            });
+    openDialogEditEarnings(earnings: IncomeListDto) {
+        console.log('Abrindo diálogo de edição para o ganho:', earnings);
+        const dialogRef = this.dialog.open(EarningsDialogComponent, {
+            data: {id: earnings}
+        });
 
-            dialogRef.afterClosed().subscribe(result => {
-                this.listEarnings();
-                if (result) {
-                    this.snackBar.open('Ganhos', 'Close', {duration: 3000});
-                }
-            });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('Diálogo fechado, resultado:', result);
+            this.listEarnings();
+            if (result) {
+                this.snackBar.open('Ganhos', 'Close', {duration: 3000});
+            }
+        });
     }
 }

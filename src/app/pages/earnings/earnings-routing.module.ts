@@ -8,18 +8,10 @@ export const earningsRoutes: Routes = [
     {
         path: "earnings",
         component: EarningsHomeComponent,
-        children:[
+        children: [
             {
-                path:"",
-                component:EarningsTableComponent,
-            },
-            {
-                path:"addEarnings",
-                component:EarningsDialogComponent,
-            },
-            {
-                path:":id",
-                component:EarningsDialogComponent,
+                path: "",
+                component: EarningsTableComponent,
             }
         ]
 
