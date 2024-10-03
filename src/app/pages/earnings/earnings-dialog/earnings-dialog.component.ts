@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { IncomeControllerService } from "../../../api/services/income-controller.service";
 import {Message, MessageService} from "../../../architecture/message/message.service";
 import { IncomeDto } from "../../../api/models/income-dto";
+import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-earnings-dialog',
@@ -24,6 +26,8 @@ export class EarningsDialogComponent implements OnInit {
         private formBuilder: FormBuilder,
         public earningService: IncomeControllerService,
         private messageService: MessageService,
+        private dialog: MatDialog,
+        private snackBar: MatSnackBar,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
@@ -109,8 +113,26 @@ export class EarningsDialogComponent implements OnInit {
         );
     }
 
-    confirmAction(incomeDto: IncomeDto, acao: string) {
-        this.messageService.addMsgSuccess(`Ação de ${acao} dados: ${incomeDto.name} (ID: ${incomeDto.id}) realizada com sucesso!`);
+    public confirmAction(earnings: IncomeDto, acao: string) {
+        let titulo = '';
+        let mensagem ='';
+        if (acao === this.ACAO_INCLUIR) {
+            titulo = 'Adicionado !!';
+            mensagem = `${earnings.name} foi adicionado na tabela de Ganhos!`;
+        } else if (acao === this.ACAO_EDITAR) {
+            titulo = 'Editado !!';
+            mensagem = `${earnings.name} foi atualizado na tabela de Ganhos!`;
+        }
+        const dialogRef = this.dialog.open(ConfirmationDialog, {
+            data: {
+                titulo: titulo,
+                mensagem: mensagem,
+                textoBotoes: {
+                    ok: 'Confirmar',
+                },
+            },
+        });
+
     }
 
     showError(erro: Message, acao: string) {
