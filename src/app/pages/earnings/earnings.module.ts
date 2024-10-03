@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {AsyncPipe, CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {earningsRoutes} from "./earnings-routing.module";
 import {EarningsTableComponent} from "./earnings-table/earnings-table.component";
@@ -25,6 +25,7 @@ import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatRadioButton} from "@angular/material/radio";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -59,6 +60,8 @@ import {MatNativeDateModule} from "@angular/material/core";
         ReactiveFormsModule,
         MatDialogContainer,
         MatNativeDateModule,
+        MatAutocompleteModule,
+        AsyncPipe,
     ]
 })
 export class EarningsModule {

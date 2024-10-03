@@ -61,8 +61,15 @@ export class EarningsDialogComponent implements OnInit {
         this.earningService.getById({ id }).subscribe(
             retorn => {
                 console.log("retorno", retorn);
-                incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
-                this.formGroup.patchValue(retorn);
+                this.formGroup.patchValue({
+                    name: retorn.name ? retorn.name : null,
+                    categoryName: retorn.categoryName ? retorn.categoryName : null,
+                    description: retorn.description ? retorn.description : null,
+                    incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
+                    amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
+                    // repeat: retorn.repeat ? retorn.repeat : null,
+                    leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
+                });
             }, error => {
                 console.log("erro", error);
                 this.messageService.addMsgWarning(`Erro ao buscar ID: ${id}, mensagem: ${error.message}`);

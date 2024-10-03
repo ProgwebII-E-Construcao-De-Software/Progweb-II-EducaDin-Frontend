@@ -11,6 +11,7 @@ import {
     ConfirmationDialogResult
 } from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {EarningsDialogComponent} from "../earnings-dialog/earnings-dialog.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-earnings-table',
@@ -25,10 +26,11 @@ export class EarningsTableComponent implements OnInit {
     isMenuOpen: boolean = false;
 
     constructor(
+        protected dialog: MatDialog,
+        protected snackBar: MatSnackBar,
+        protected router: ActivatedRoute,
+        protected messageService: MessageService,
         public earningsService: IncomeControllerService,
-        private dialog: MatDialog,
-        private snackBar: MatSnackBar,
-        private messageService: MessageService
     ) {
 
     }
@@ -37,7 +39,7 @@ export class EarningsTableComponent implements OnInit {
         this.listEarnings();
     }
 
-    listEarnings() {
+    public listEarnings() {
         this.earningsService.listAll().subscribe(data => {
             this.earningsTableDataSource.data = data;
             console.log(data);
