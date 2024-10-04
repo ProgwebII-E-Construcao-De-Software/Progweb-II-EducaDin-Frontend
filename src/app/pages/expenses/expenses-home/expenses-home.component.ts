@@ -25,7 +25,7 @@ export class ExpensesHomeComponent {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.snackBar.open('Ganhos', 'Close', {duration: 3000});
+                this.snackBar.open('Gastos', 'Close', {duration: 3000});
             }
         });
     }

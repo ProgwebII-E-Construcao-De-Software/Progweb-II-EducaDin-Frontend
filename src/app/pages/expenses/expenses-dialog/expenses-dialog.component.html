@@ -34,7 +34,7 @@
 
       <mat-form-field class="dialog-large-form-field">
         <mat-label>Data</mat-label>
-        <input matInput formControlName="expenseDate" [matDatepicker]="picker" placeholder="Escolha a data"/>
+        <input matInput formControlName="incomeDate" [matDatepicker]="picker" placeholder="Escolha a data"/>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -47,18 +47,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="dialog-large-form-field">
-        <mat-label>Se repete</mat-label>
-        <mat-select formControlName="repeat">
-          <mat-option [value]="true">Sim</mat-option>
-          <mat-option [value]="false">Não</mat-option>
-        </mat-select>
-        <mat-error *ngIf="handleError('repeat', 'required')">
-          A opção é obrigatória
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeat')?.value">
+      <mat-form-field class="dialog-large-form-field" >
         <mat-label>Até</mat-label>
         <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
       </mat-form-field>
@@ -66,7 +55,7 @@
 
     <mat-dialog-actions class="action-buttons-dialog">
         <button mat-raised-button  class="cancel-button" (click)="closeDialog()">Fechar</button>
-        <button mat-raised-button class="add-button" type="submit">Adicionar</button>
+        <button mat-raised-button class="add-button" type="submit">{{ id ? 'Salvar' : 'Adicionar' }}</button>
     </mat-dialog-actions>
   </div>
 </form>
