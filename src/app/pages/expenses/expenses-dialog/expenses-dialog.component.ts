@@ -65,7 +65,7 @@ export class ExpensesDialogComponent implements OnInit {
           name: retorn.name ? retorn.name : null,
           categoryName: retorn.categoryName ? retorn.categoryName : null,
           description: retorn.description ? retorn.description : null,
-          expenseDate: retorn.expenseDate ? new Date(retorn.expenseDate) : new Date(),
+          expenseDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
           amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
           leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
         });

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
-import {expensesRoutes} from "./expenses-routing.module";
 import {ExpensesHomeComponent} from "./expenses-home/expenses-home.component";
 import {ExpensesTableComponent} from "./expenses-table/expenses-table.component";
 import {
@@ -25,6 +24,7 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatOptionModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
+import {expensesRoutes} from "./expenses-routing.module";
 
 
 @NgModule({

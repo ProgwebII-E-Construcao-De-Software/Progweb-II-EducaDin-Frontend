@@ -13,6 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { create1 } from '../fn/expense-controller/create-1';
 import { Create1$Params } from '../fn/expense-controller/create-1';
+import { deleteItems1 } from '../fn/expense-controller/delete-items-1';
+import { DeleteItems1$Params } from '../fn/expense-controller/delete-items-1';
 import { ExpenseDto } from '../models/expense-dto';
 import { ExpenseListDto } from '../models/expense-list-dto';
 import { getById1 } from '../fn/expense-controller/get-by-id-1';
@@ -172,6 +174,35 @@ export class ExpenseControllerService extends BaseService {
   create1(params: Create1$Params, context?: HttpContext): Observable<ExpenseDto> {
     return this.create1$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
+    );
+  }
+
+  /** Path part for operation `deleteItems1()` */
+  static readonly DeleteItems1Path = '/1.0/expenses/';
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteItems1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems1$Response(params: DeleteItems1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return deleteItems1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteItems1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems1(params: DeleteItems1$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.deleteItems1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
     );
   }
 

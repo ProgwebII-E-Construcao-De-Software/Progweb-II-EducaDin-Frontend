@@ -13,6 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { create } from '../fn/income-controller/create';
 import { Create$Params } from '../fn/income-controller/create';
+import { deleteItems } from '../fn/income-controller/delete-items';
+import { DeleteItems$Params } from '../fn/income-controller/delete-items';
 import { getById } from '../fn/income-controller/get-by-id';
 import { GetById$Params } from '../fn/income-controller/get-by-id';
 import { IncomeDto } from '../models/income-dto';
@@ -172,6 +174,35 @@ export class IncomeControllerService extends BaseService {
   create(params: Create$Params, context?: HttpContext): Observable<IncomeDto> {
     return this.create$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
+    );
+  }
+
+  /** Path part for operation `deleteItems()` */
+  static readonly DeleteItemsPath = '/1.0/incomes/';
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteItems()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems$Response(params: DeleteItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return deleteItems(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteItems$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems(params: DeleteItems$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.deleteItems$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
     );
   }
 

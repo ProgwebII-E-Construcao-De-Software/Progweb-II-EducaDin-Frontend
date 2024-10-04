@@ -14,6 +14,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { CategoryDto } from '../models/category-dto';
 import { create2 } from '../fn/category-controller/create-2';
 import { Create2$Params } from '../fn/category-controller/create-2';
+import { deleteItems2 } from '../fn/category-controller/delete-items-2';
+import { DeleteItems2$Params } from '../fn/category-controller/delete-items-2';
 import { getById2 } from '../fn/category-controller/get-by-id-2';
 import { GetById2$Params } from '../fn/category-controller/get-by-id-2';
 import { getExpenseCategories } from '../fn/category-controller/get-expense-categories';
@@ -232,6 +234,35 @@ export class CategoryControllerService extends BaseService {
    */
   getExpenseCategories(params?: GetExpenseCategories$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
     return this.getExpenseCategories$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `deleteItems2()` */
+  static readonly DeleteItems2Path = '/1.0/categories/';
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteItems2()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems2$Response(params: DeleteItems2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+    return deleteItems2(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Método utilizado para remover varias entidades pelos ids informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteItems2$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  deleteItems2(params: DeleteItems2$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
+    return this.deleteItems2$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body)
     );
   }

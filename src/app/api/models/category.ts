@@ -4,6 +4,6 @@
 
 export interface Category {
   id?: number;
-  expense?: boolean;
+  iexpense?: boolean;
   name?: string;
 }
