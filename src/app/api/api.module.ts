@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { IncomeControllerService } from './services/income-controller.service';
+import { ExpenseControllerService } from './services/expense-controller.service';
 import { CategoryControllerService } from './services/category-controller.service';
 import { TestControllerService } from './services/test-controller.service';
 
@@ -19,6 +20,7 @@ import { TestControllerService } from './services/test-controller.service';
   declarations: [],
   providers: [
     IncomeControllerService,
+    ExpenseControllerService,
     CategoryControllerService,
     TestControllerService,
     ApiConfiguration

@@ -4,6 +4,9 @@
 
 export { Category } from './models/category';
 export { CategoryDto } from './models/category-dto';
+export { ExpenseDto } from './models/expense-dto';
+export { ExpenseDtoCreateUpdate } from './models/expense-dto-create-update';
+export { ExpenseListDto } from './models/expense-list-dto';
 export { FieldResponse } from './models/field-response';
 export { IncomeDto } from './models/income-dto';
 export { IncomeDtoCreateUpdate } from './models/income-dto-create-update';

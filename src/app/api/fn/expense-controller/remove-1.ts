@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CategoryDto } from '../../models/category-dto';
+import { ExpenseDto } from '../../models/expense-dto';
 
-export interface GetById1$Params {
+export interface Remove1$Params {
   id: number;
 }
 
-export function getById1(http: HttpClient, rootUrl: string, params: GetById1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, getById1.PATH, 'get');
+export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+  const rb = new RequestBuilder(rootUrl, remove1.PATH, 'delete');
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -25,9 +25,9 @@ export function getById1(http: HttpClient, rootUrl: string, params: GetById1$Par
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<CategoryDto>;
+      return r as StrictHttpResponse<ExpenseDto>;
     })
   );
 }
 
-getById1.PATH = '/1.0/categories/{id}';
+remove1.PATH = '/1.0/expenses/{id}';

@@ -9,4 +9,5 @@ export interface IncomeDtoCreateUpdate {
   incomeDate?: string;
   leadTime?: number;
   name?: string;
+  repeatable?: 'WEEKLY' | 'MONTHLY' | 'YEARLY' | 'DONT_REPEATS';
 }

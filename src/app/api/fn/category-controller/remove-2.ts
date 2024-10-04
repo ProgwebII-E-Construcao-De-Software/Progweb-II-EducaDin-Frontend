@@ -10,14 +10,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface DeleteItems1$Params {
-      body: Array<number>
+export interface Remove2$Params {
+  id: number;
 }
 
-export function deleteItems1(http: HttpClient, rootUrl: string, params: DeleteItems1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
-  const rb = new RequestBuilder(rootUrl, deleteItems1.PATH, 'delete');
+export function remove2(http: HttpClient, rootUrl: string, params: Remove2$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, remove2.PATH, 'delete');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -25,9 +25,9 @@ export function deleteItems1(http: HttpClient, rootUrl: string, params: DeleteIt
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<CategoryDto>>;
+      return r as StrictHttpResponse<CategoryDto>;
     })
   );
 }
 
-deleteItems1.PATH = '/1.0/categories/';
+remove2.PATH = '/1.0/categories/{id}';

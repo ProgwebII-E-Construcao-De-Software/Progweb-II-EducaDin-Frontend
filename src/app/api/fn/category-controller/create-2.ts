@@ -10,14 +10,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface Remove1$Params {
-  id: number;
+export interface Create2$Params {
+      body: CategoryDto
 }
 
-export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, remove1.PATH, 'delete');
+export function create2(http: HttpClient, rootUrl: string, params: Create2$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, create2.PATH, 'post');
   if (params) {
-    rb.path('id', params.id, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -30,4 +30,4 @@ export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Param
   );
 }
 
-remove1.PATH = '/1.0/categories/{id}';
+create2.PATH = '/1.0/categories';

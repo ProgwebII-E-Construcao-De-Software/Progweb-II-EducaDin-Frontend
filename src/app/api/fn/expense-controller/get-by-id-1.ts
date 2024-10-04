@@ -8,16 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { IncomeListDto } from '../../models/income-list-dto';
+import { ExpenseDto } from '../../models/expense-dto';
 
-export interface DeleteItems$Params {
-      body: Array<number>
+export interface GetById1$Params {
+  id: number;
 }
 
-export function deleteItems(http: HttpClient, rootUrl: string, params: DeleteItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-  const rb = new RequestBuilder(rootUrl, deleteItems.PATH, 'delete');
+export function getById1(http: HttpClient, rootUrl: string, params: GetById1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+  const rb = new RequestBuilder(rootUrl, getById1.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -25,9 +25,9 @@ export function deleteItems(http: HttpClient, rootUrl: string, params: DeleteIte
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<IncomeListDto>>;
+      return r as StrictHttpResponse<ExpenseDto>;
     })
   );
 }
 
-deleteItems.PATH = '/1.0/incomes/';
+getById1.PATH = '/1.0/expenses/{id}';
