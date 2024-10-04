@@ -69,8 +69,8 @@
         </mat-dialog-content>
 
         <mat-dialog-actions class="action-buttons-dialog">
-            <button mat-raised-button (click)="closeDialog()">Cancelar</button>
-            <button mat-raised-button type="submit" >{{ id ? 'Salvar' : 'Adicionar' }}</button>
+            <button mat-raised-button class="cancel-button" (click)="closeDialog()">Cancelar</button>
+            <button mat-raised-button class="add-button" type="submit" >{{ id ? 'Salvar' : 'Adicionar' }}</button>
         </mat-dialog-actions>
     </div>
 </form>

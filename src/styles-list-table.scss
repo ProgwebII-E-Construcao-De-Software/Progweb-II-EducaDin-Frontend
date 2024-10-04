@@ -32,3 +32,17 @@ td, th {
   vertical-align: middle !important;
 }
 
+.custom-checkbox .mat-checkbox-frame {
+  border-color: #020100 !important;
+}
+
+.custom-checkbox.mat-checkbox-checked .mat-checkbox-background {
+  background-color: #FF5733 !important;
+}
+
+.custom-checkbox.mat-checkbox-checked .mat-checkbox-checkmark {
+  color: white !important;
+}
+
+
+

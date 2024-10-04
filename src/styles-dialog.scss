@@ -67,3 +67,22 @@ h2[mat-dialog-title] {
     font-size: 1.2rem;
   }
 }
+
+.cancel-button {
+  background-color: #FF4444 !important;
+  color: white !important;
+}
+
+.add-button {
+  background-color: #4CAF50 !important;
+  color: white !important;
+}
+
+
+.cancel-button:hover {
+  background-color: #E53935 !important;
+}
+
+.add-button:hover {
+  background-color: #388E3C !important;
+}

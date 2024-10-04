@@ -9,7 +9,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenu, MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
-import {MatCheckbox} from "@angular/material/checkbox";
+import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
 import {EarningsDialogComponent} from "./earnings-dialog/earnings-dialog.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
@@ -43,7 +43,6 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         RouterModule.forChild(earningsRoutes),
         MatMenuModule,
         MatMenuTrigger,
-        MatCheckbox,
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
@@ -62,6 +61,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatNativeDateModule,
         MatAutocompleteModule,
         AsyncPipe,
+        MatCheckboxModule,
     ]
 })
 export class EarningsModule {

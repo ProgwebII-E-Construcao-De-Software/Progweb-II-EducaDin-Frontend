@@ -22,6 +22,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/mater
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MessageModule} from "./architecture/message/message.module";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {MessageModule} from "./architecture/message/message.module";
         MatDividerModule,
         MatTooltipModule,
         MatDialogModule,
+        MatCheckboxModule,
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MessageModule.forRoot(),
