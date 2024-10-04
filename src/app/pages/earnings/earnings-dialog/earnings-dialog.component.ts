@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { IncomeControllerService } from "../../../api/services/income-controller.service";
@@ -12,6 +12,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     templateUrl: './earnings-dialog.component.html',
     styleUrls: ['./earnings-dialog.component.scss']
 })
+
+@Injectable({
+    providedIn: 'root',
+})
+
 export class EarningsDialogComponent implements OnInit {
     categoria!: String;
     categorias: string[] = ['Salário', 'Freelance', 'Investimentos'];

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute} from "@angular/router";
@@ -12,16 +12,21 @@ import {IncomeControllerService} from "../../../api/services/income-controller.s
     templateUrl: './earnings-home.component.html',
     styleUrl: './earnings-home.component.scss'
 })
-export class EarningsHomeComponent extends EarningsTableComponent{
+
+@Injectable({
+    providedIn: 'root',
+})
+
+export class EarningsHomeComponent {
 
     constructor(
-        dialog: MatDialog,
-        snackBar: MatSnackBar,
-        router: ActivatedRoute,
-        messageService: MessageService,
-        earningsService: IncomeControllerService,
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar,
+        public router: ActivatedRoute,
+        public messageService: MessageService,
+        public earningsService: IncomeControllerService,
     ) {
-        super(dialog, snackBar, router, messageService, earningsService)
+
     }
 
     openDialogAddEarnings() {
@@ -30,7 +35,6 @@ export class EarningsHomeComponent extends EarningsTableComponent{
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.listEarnings();
             if (result) {
                 this.snackBar.open('Ganhos', 'Close', {duration: 3000});
             }

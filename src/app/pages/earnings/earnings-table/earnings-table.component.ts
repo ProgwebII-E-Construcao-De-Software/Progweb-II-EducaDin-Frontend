@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
 import {IncomeListDto} from "../../../api/models/income-list-dto";
@@ -18,6 +18,11 @@ import {ActivatedRoute} from "@angular/router";
     templateUrl: './earnings-table.component.html',
     styleUrls: ['./earnings-table.component.scss']
 })
+
+@Injectable({
+    providedIn: 'root',
+})
+
 export class EarningsTableComponent implements OnInit {
     displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
     earningsTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
