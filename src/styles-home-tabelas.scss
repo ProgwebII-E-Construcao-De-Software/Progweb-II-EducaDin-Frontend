@@ -2,10 +2,9 @@
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #5FE564;
   padding: 20px;
   box-shadow: none;
-  border-radius: 0;
+  border-radius: 15px;
   margin-bottom: 20px;
   position: relative;
   display: flex;
@@ -32,7 +31,7 @@
   height: 100%;
   padding: 20px;
   box-shadow:none;
-  border-radius: 0;
+  border-radius: 15px;
   overflow: hidden;
 }
 
@@ -46,6 +45,17 @@ mat-card {
   background-color: #F2F2F2;
 }
 
+.earnings-card mat-card-header {
+  background-color: #73CF8D;
+}
+
+.expenses-card mat-card-header {
+  background-color: #FF9393;
+}
+
+.goals-card mat-card-header {
+  background-color: #FFEB85;
+}
 .add-button, .remove-button {
   color: white;
   border-radius: 0;
@@ -54,9 +64,9 @@ mat-card {
 }
 
 .add-button {
-  background-color: #5FE564;
+  background-color: #7ED957;
 }
 
 .remove-button {
-  background-color: #F23030;
+  background-color: #A4243B;
 }
