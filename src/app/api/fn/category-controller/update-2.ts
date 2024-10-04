@@ -10,13 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface Update1$Params {
+export interface Update2$Params {
   id: number;
       body: CategoryDto
 }
 
-export function update1(http: HttpClient, rootUrl: string, params: Update1$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
-  const rb = new RequestBuilder(rootUrl, update1.PATH, 'put');
+export function update2(http: HttpClient, rootUrl: string, params: Update2$Params, context?: HttpContext): Observable<StrictHttpResponse<CategoryDto>> {
+  const rb = new RequestBuilder(rootUrl, update2.PATH, 'put');
   if (params) {
     rb.path('id', params.id, {});
     rb.body(params.body, 'application/json');
@@ -32,4 +32,4 @@ export function update1(http: HttpClient, rootUrl: string, params: Update1$Param
   );
 }
 
-update1.PATH = '/1.0/categories/{id}';
+update2.PATH = '/1.0/categories/{id}';

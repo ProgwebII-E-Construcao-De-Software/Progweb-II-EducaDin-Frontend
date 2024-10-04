@@ -42,23 +42,25 @@
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Valor</mat-label>
                 <input matInput formControlName="amount" type="number" placeholder="0.00"/>
-                <mat-error *ngIf="handleError('name', 'required')">
+                <mat-error *ngIf="handleError('amount', 'required')">
                     O valor é obrigatório
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Se repete</mat-label>
-                <mat-select formControlName="repeat">
-                    <mat-option [value]="true">Sim</mat-option>
-                    <mat-option [value]="false">Não</mat-option>
+                <mat-select formControlName="repeatable">
+                    <mat-option value="WEEKLY">Semanal</mat-option>
+                    <mat-option value="MONTHLY">Mensal</mat-option>
+                    <mat-option value="YEARLY">Anual</mat-option>
+                    <mat-option value="DONT_REPEATS">Não se repete</mat-option>
                 </mat-select>
-                <mat-error *ngIf="handleError('name', 'required')">
+                <mat-error *ngIf="handleError('repeatable', 'required')">
                     A opção é obrigatória
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeat')?.value">
+            <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
                 <mat-label>Até</mat-label>
                 <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
             </mat-form-field>

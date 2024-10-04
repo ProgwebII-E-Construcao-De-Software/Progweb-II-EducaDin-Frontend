@@ -6,6 +6,7 @@ import {Message, MessageService} from "../../../architecture/message/message.ser
 import { IncomeDto } from "../../../api/models/income-dto";
 import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DateAdapter} from "@angular/material/core";
 
 @Component({
     selector: 'app-earnings-dialog',
@@ -33,11 +34,13 @@ export class EarningsDialogComponent implements OnInit {
         private messageService: MessageService,
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
+        private _adapter: DateAdapter<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
         this.id = data.id;
         this.creatForm();
+        this._adapter.setLocale('pt-br');
     }
 
     ngOnInit(): void {
@@ -57,7 +60,7 @@ export class EarningsDialogComponent implements OnInit {
             description: [null, Validators.required],
             incomeDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
-            repeat: [null, Validators.required],
+            repeatable: ['DONT_REPEATS', Validators.required],
             leadTime: [0, Validators.min(0)],
         });
     }
@@ -72,7 +75,7 @@ export class EarningsDialogComponent implements OnInit {
                     description: retorn.description ? retorn.description : null,
                     incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
                     amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
-                    // repeat: retorn.repeat ? retorn.repeat : null,
+                    repeatable: retorn.repeatable ? retorn.repeatable : 'DONT_REPEATS',
                     leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
                 });
             }, error => {

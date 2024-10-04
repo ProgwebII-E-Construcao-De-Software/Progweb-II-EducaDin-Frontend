@@ -10,11 +10,11 @@ import { RequestBuilder } from '../../request-builder';
 
 import { CategoryDto } from '../../models/category-dto';
 
-export interface ListAll1$Params {
+export interface ListAll2$Params {
 }
 
-export function listAll1(http: HttpClient, rootUrl: string, params?: ListAll1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
-  const rb = new RequestBuilder(rootUrl, listAll1.PATH, 'get');
+export function listAll2(http: HttpClient, rootUrl: string, params?: ListAll2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+  const rb = new RequestBuilder(rootUrl, listAll2.PATH, 'get');
   if (params) {
   }
 
@@ -28,4 +28,4 @@ export function listAll1(http: HttpClient, rootUrl: string, params?: ListAll1$Pa
   );
 }
 
-listAll1.PATH = '/1.0/categories';
+listAll2.PATH = '/1.0/categories';
