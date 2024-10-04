@@ -1,9 +1,9 @@
 import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { IncomeControllerService } from "../../../api/services/income-controller.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {IncomeControllerService} from "../../../api/services/income-controller.service";
 import {Message, MessageService} from "../../../architecture/message/message.service";
-import { IncomeDto } from "../../../api/models/income-dto";
+import {IncomeDto} from "../../../api/models/income-dto";
 import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
@@ -20,7 +20,46 @@ import {DateAdapter} from "@angular/material/core";
 
 export class EarningsDialogComponent implements OnInit {
     categoria!: String;
-    categorias: string[] = ['Salário', 'Freelance', 'Investimentos'];
+    categorias: string[] = ['Aulas Particulares',
+        'Aluguel de Imóveis',
+        'Bolsas de Estudo',
+        'Comissões',
+        'Consultoria',
+        'Crowdfunding',
+        'Freelance',
+        'Gestão Financeira Pessoal',
+        'Investimentos',
+        'Investimentos em Criptomoedas',
+        'Lucros de Empresas',
+        'Marketing de Afiliados',
+        'Participação em Lucros',
+        'Prêmios e Sorteios',
+        'Produção de Conteúdo',
+        'Renda de Atividades Criativas',
+        'Renda de Atividades Recreativas',
+        'Renda de Consultorias Online',
+        'Renda de Cursos Online',
+        'Renda de Eventos',
+        'Renda de Fotografia',
+        'Renda de Licenciamento',
+        'Renda de Mídias Sociais',
+        'Renda de Música',
+        'Renda de Podcasts',
+        'Renda de Vídeo',
+        'Renda de Webinars',
+        'Renda Passiva',
+        'Receitas de Mídias Sociais',
+        'Royalties',
+        'Salário',
+        'Serviços de Redação',
+        'Trabalho Autônomo',
+        'Trabalho de Mãe/Pai',
+        'Trabalho Temporário',
+        'Vendas de Produtos',
+        'Venda de Artesanato',
+        'Venda de Livros',
+        'Venda de Produtos Digitais',
+        'Outros Ganhos'];
     formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Ganhos";
     public readonly ACAO_EDITAR = "Editar Ganhos";
@@ -66,7 +105,7 @@ export class EarningsDialogComponent implements OnInit {
     }
 
     private editEarnings(id: number) {
-        this.earningService.getById({ id }).subscribe(
+        this.earningService.getById({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
@@ -102,7 +141,7 @@ export class EarningsDialogComponent implements OnInit {
     private includeEarnings() {
         if (this.formGroup.valid) {
             console.log("Dados:", this.formGroup.value);
-            this.earningService.create({ body: this.formGroup.value }).subscribe(
+            this.earningService.create({body: this.formGroup.value}).subscribe(
                 retorn => {
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
                     this.closeDialog();
@@ -117,7 +156,7 @@ export class EarningsDialogComponent implements OnInit {
     private editingEarnings() {
         const formData: IncomeDto = this.formGroup.value;
         console.log("Dados:", formData);
-        this.earningService.update({ id: this.id, body: formData }).subscribe(
+        this.earningService.update({id: this.id, body: formData}).subscribe(
             retorn => {
                 this.confirmAction(retorn, this.ACAO_EDITAR);
                 this.closeDialog();
@@ -130,7 +169,7 @@ export class EarningsDialogComponent implements OnInit {
 
     public confirmAction(earnings: IncomeDto, acao: string) {
         let titulo = '';
-        let mensagem ='';
+        let mensagem = '';
         if (acao === this.ACAO_INCLUIR) {
             titulo = 'Adicionado !!';
             mensagem = `${earnings.name} foi adicionado na tabela de Ganhos!`;
@@ -147,6 +186,14 @@ export class EarningsDialogComponent implements OnInit {
                 },
             },
         });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.closeDialog();
+                window.location.reload();
+            }
+        });
+
 
     }
 

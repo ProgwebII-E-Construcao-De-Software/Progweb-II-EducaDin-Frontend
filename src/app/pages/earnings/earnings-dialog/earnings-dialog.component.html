@@ -16,11 +16,17 @@
 
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Categoria</mat-label>
-                <mat-select formControlName="categoryName">
-                    <mat-option *ngFor="let category of categorias" [value]="category">{{ category }}</mat-option>
-                </mat-select>
+                <input type="text"
+                       matInput
+                       [matAutocomplete]="auto"
+                       formControlName="categoryName">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let category of categorias" [value]="category">
+                        {{ category }}
+                    </mat-option>
+                </mat-autocomplete>
                 <mat-error *ngIf="handleError('categoryName', 'required')">
-                    A categoria é obrigatório
+                    A categoria é obrigatória
                 </mat-error>
             </mat-form-field>
 
@@ -60,7 +66,8 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
+            <mat-form-field class="dialog-large-form-field"
+                            *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
                 <mat-label>Até</mat-label>
                 <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
             </mat-form-field>
@@ -70,7 +77,7 @@
 
         <mat-dialog-actions class="action-buttons-dialog">
             <button mat-raised-button class="cancel-button" (click)="closeDialog()">Cancelar</button>
-            <button mat-raised-button class="add-button" type="submit" >{{ id ? 'Salvar' : 'Adicionar' }}</button>
+            <button mat-raised-button class="add-button" type="submit">{{ id ? 'Salvar' : 'Adicionar' }}</button>
         </mat-dialog-actions>
     </div>
 </form>
