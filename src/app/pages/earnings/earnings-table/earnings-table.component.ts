@@ -24,7 +24,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 export class EarningsTableComponent implements OnInit {
-    displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
+    displayedColumns: string[] = ['select','name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
     earningsTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';

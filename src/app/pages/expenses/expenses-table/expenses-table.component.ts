@@ -20,12 +20,11 @@ import {ExpenseDto} from "../../../api/models/expense-dto";
   styleUrls: ['./expenses-table.component.scss']
 })
 export class ExpensesTableComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
+  displayedColumns: string[] = ['select','name', 'category', 'description', 'expenseDate', 'amount', 'acao'];
   expensesTableDataSource: MatTableDataSource<ExpenseListDto> = new MatTableDataSource<ExpenseListDto>([]);
   selection = new SelectionModel<ExpenseListDto>(true, []);
   tipoDeListagem: string = 'Normal';
   isMenuOpen: boolean = false;
-  expenses: ExpenseDto[]=[];
 
 
   constructor(

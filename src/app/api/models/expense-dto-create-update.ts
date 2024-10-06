@@ -6,7 +6,8 @@ export interface ExpenseDtoCreateUpdate {
   amount?: number;
   categoryName?: string;
   description?: string;
-  incomeDate?: string;
+  expenseDate?: string;
   leadTime?: number;
   name?: string;
+  repeatable?: 'WEEKLY' | 'MONTHLY' | 'YEARLY' | 'DONT_REPEATS';
 }

@@ -6,6 +6,7 @@ import {Message, MessageService} from "../../../architecture/message/message.ser
 import {ExpenseDto} from "../../../api/models/expense-dto";
 import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DateAdapter} from "@angular/material/core";
 
 @Component({
     selector: 'app-expenses-dialog',
@@ -70,11 +71,13 @@ export class ExpensesDialogComponent implements OnInit {
         private messageService: MessageService,
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
+        private _adapter: DateAdapter<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
         this.id = data.id;
         this.creatForm();
+        this._adapter.setLocale('pt-br');
     }
 
     ngOnInit(): void {
@@ -92,8 +95,9 @@ export class ExpensesDialogComponent implements OnInit {
             name: [null, Validators.required],
             categoryName: [null, Validators.required],
             description: [null, Validators.required],
-            incomeDate: [new Date(), Validators.required],
+            expenseDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
+            repeatable: ['DONT_REPEATS', Validators.required],
             leadTime: [0, Validators.min(0)],
         });
     }
@@ -106,8 +110,9 @@ export class ExpensesDialogComponent implements OnInit {
                     name: retorn.name ? retorn.name : null,
                     categoryName: retorn.categoryName ? retorn.categoryName : null,
                     description: retorn.description ? retorn.description : null,
-                    incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
+                    expenseDate: retorn.expenseDate ? new Date(retorn.expenseDate) : new Date(),
                     amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
+                    repeatable: retorn.repeatable ? retorn.repeatable : 'DONT_REPEATS',
                     leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
                 });
             }, error => {

@@ -40,7 +40,7 @@
 
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Data</mat-label>
-                <input matInput formControlName="incomeDate" [matDatepicker]="picker" placeholder="Escolha a data"/>
+                <input matInput formControlName="expenseDate" [matDatepicker]="picker" placeholder="Escolha a data"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -54,6 +54,20 @@
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
+                <mat-label>Se repete</mat-label>
+                <mat-select formControlName="repeatable">
+                    <mat-option value="WEEKLY">Semanal</mat-option>
+                    <mat-option value="MONTHLY">Mensal</mat-option>
+                    <mat-option value="YEARLY">Anual</mat-option>
+                    <mat-option value="DONT_REPEATS">Não se repete</mat-option>
+                </mat-select>
+                <mat-error *ngIf="handleError('repeatable', 'required')">
+                    A opção é obrigatória
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dialog-large-form-field"
+                            *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
                 <mat-label>Até</mat-label>
                 <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
             </mat-form-field>
