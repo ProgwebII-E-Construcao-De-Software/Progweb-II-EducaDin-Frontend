@@ -13,7 +13,6 @@ import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
-import {EarningsModule} from "./pages/earnings/earnings.module";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
 import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
@@ -23,6 +22,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MessageModule} from "./architecture/message/message.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {IncomesModule} from "./pages/incomes/incomes.module";
 
 
 @NgModule({
@@ -48,7 +48,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MessageModule.forRoot(),
-        EarningsModule,
+        IncomesModule,
         ExpensesModule,
         GoalsModule,
     ],

@@ -1,25 +1,31 @@
-import {Component, Inject, Injectable, OnInit} from '@angular/core';
+import {Component, Inject, Injectable, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IncomeControllerService} from "../../../api/services/income-controller.service";
 import {Message, MessageService} from "../../../architecture/message/message.service";
 import {IncomeDto} from "../../../api/models/income-dto";
-import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
+import {CategoryDto} from "../../../api/models/category-dto";
+import {CategoryControllerService} from "../../../api/services/category-controller.service";
+import {IncomesTableComponent} from "../incomes-table/incomes-table.component";
 
 @Component({
     selector: 'app-earnings-dialog',
-    templateUrl: './earnings-dialog.component.html',
-    styleUrls: ['./earnings-dialog.component.scss']
+    templateUrl: './incomes-dialog.component.html',
+    styleUrls: ['./incomes-dialog.component.scss']
 })
 
 @Injectable({
     providedIn: 'root',
 })
 
-export class EarningsDialogComponent implements OnInit {
-    categoria!: String;
+export class IncomesDialogComponent implements OnInit {
+
     categorias: string[] = ['Aulas Particulares',
         'Aluguel de Imóveis',
         'Bolsas de Estudo',
@@ -65,14 +71,17 @@ export class EarningsDialogComponent implements OnInit {
     public readonly ACAO_EDITAR = "Editar Ganhos";
     acao: string = this.ACAO_INCLUIR;
     id!: number;
+    income!: IncomeDto;
 
     constructor(
-        public dialogRef: MatDialogRef<EarningsDialogComponent>,
+        public dialogRef: MatDialogRef<IncomesDialogComponent>,
         private formBuilder: FormBuilder,
-        public earningService: IncomeControllerService,
+        public incomeService: IncomeControllerService,
+        private categoryService: CategoryControllerService,
         private messageService: MessageService,
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
+        private incomesTable: IncomesTableComponent,
         private _adapter: DateAdapter<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
@@ -83,39 +92,50 @@ export class EarningsDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // this.loadCategorys();
         if (this.id) {
             console.log('ID do ganho a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
-            this.editEarnings(this.id);
-        } else {
+            this.editIncomes(this.id);
+        }  else {
             console.log('Nenhum ID foi passado, modo de criação ativado.');
         }
     }
 
+    // private loadCategorys() {
+    //     this.categoryService.listAll2().subscribe(categories => {
+    //             this.categorias = categories;
+    //         }, error => {
+    //             this.messageService.addMsgWarning(`Erro ao carregar categorias: ${error.message}`);
+    //         }
+    //     )
+    // }
+
     public creatForm() {
         this.formGroup = this.formBuilder.group({
-            name: [null, Validators.required],
-            categoryName: [null, Validators.required],
-            description: [null, Validators.required],
+            name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            categoryName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
             incomeDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
             repeatable: ['DONT_REPEATS', Validators.required],
-            leadTime: [0, Validators.min(0)],
+            leadTime: [0, [Validators.min(0), Validators.max(100)]],
         });
     }
 
-    private editEarnings(id: number) {
-        this.earningService.getById({id}).subscribe(
+    private editIncomes(id: number) {
+        this.incomeService.getById({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
-                    name: retorn.name ? retorn.name : null,
-                    categoryName: retorn.categoryName ? retorn.categoryName : null,
-                    description: retorn.description ? retorn.description : null,
+                    name: retorn.name ?? null,
+                    categoryName: retorn.categoryName ?? null,
+                    description: retorn.description ?? null,
                     incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
-                    amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
-                    repeatable: retorn.repeatable ? retorn.repeatable : 'DONT_REPEATS',
-                    leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
+                    amount: retorn.amount ?? null,
+                    repeatable: retorn.repeatable ?? 'DONT_REPEATS',
+                    leadTime: retorn.leadTime ?? 0
+
                 });
             }, error => {
                 console.log("erro", error);
@@ -124,42 +144,47 @@ export class EarningsDialogComponent implements OnInit {
         );
     }
 
-    public closeDialog(): void {
-        this.dialogRef.close();
+    public closeDialog(reload: boolean = false): void {
+        this.dialogRef.close(reload);
     }
 
     public onSubmit() {
         if (this.formGroup.valid) {
             if (this.id) {
-                this.editingEarnings();
+                this.editingIncomes();
             } else {
-                this.includeEarnings();
+                this.includeIncomes();
             }
         }
     }
 
-    private includeEarnings() {
+    private includeIncomes() {
         if (this.formGroup.valid) {
-            console.log("Dados:", this.formGroup.value);
-            this.earningService.create({body: this.formGroup.value}).subscribe(
+            let incomeDto: IncomeDto = this.formGroup.value;
+            console.log("Dados a serem enviados:", this.formGroup.value);
+            this.incomeService.create({body: incomeDto}).subscribe(
                 retorn => {
+                    console.log("Retorno da criação:", retorn);
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    this.closeDialog();
-                    console.log("Retorno", retorn);
+                    window.location.reload();
+                    this.snackBar.open('Ganhos Adicionado', 'Close', {duration: 4000});
                 }, erro => {
-                    console.log("Erro", erro);
+                    console.log("Erro ao criar o ganho:", erro);
+                    this.messageService.addMsgWarning(`Erro ao criar ganho: ${erro.message}`);
                 }
             );
         }
     }
 
-    private editingEarnings() {
+
+    private editingIncomes() {
         const formData: IncomeDto = this.formGroup.value;
         console.log("Dados:", formData);
-        this.earningService.update({id: this.id, body: formData}).subscribe(
+        this.incomeService.update({id: this.id, body: formData}).subscribe(
             retorn => {
+                console.log("Earnings updated successfully:", retorn);
                 this.confirmAction(retorn, this.ACAO_EDITAR);
-                this.closeDialog();
+                this.snackBar.open('Ganhos Editado', 'Close', {duration: 4000});
             }, erro => {
                 console.log("Erro:", erro.error);
                 this.showError(erro, this.ACAO_EDITAR);
@@ -167,15 +192,15 @@ export class EarningsDialogComponent implements OnInit {
         );
     }
 
-    public confirmAction(earnings: IncomeDto, acao: string) {
+    public confirmAction(incomes: IncomeDto, acao: string) {
         let titulo = '';
         let mensagem = '';
         if (acao === this.ACAO_INCLUIR) {
             titulo = 'Adicionado !!';
-            mensagem = `${earnings.name} foi adicionado na tabela de Ganhos!`;
+            mensagem = `${incomes.name} foi adicionado na tabela de Ganhos!`;
         } else if (acao === this.ACAO_EDITAR) {
             titulo = 'Editado !!';
-            mensagem = `${earnings.name} foi atualizado na tabela de Ganhos!`;
+            mensagem = `${incomes.name} foi atualizado na tabela de Ganhos!`;
         }
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
@@ -184,13 +209,13 @@ export class EarningsDialogComponent implements OnInit {
                 textoBotoes: {
                     ok: 'Confirmar',
                 },
+                dado: incomes
             },
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.closeDialog();
-                window.location.reload();
+        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+            if (confirmed?.resultado) {
+                this.closeDialog(true);
             }
         });
 

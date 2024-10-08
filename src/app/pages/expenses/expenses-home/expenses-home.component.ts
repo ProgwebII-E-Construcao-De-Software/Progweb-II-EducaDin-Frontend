@@ -23,10 +23,10 @@ export class ExpensesHomeComponent {
             data: {id: null}
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.snackBar.open('Gastos', 'Close', {duration: 3000});
-            }
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //     if (result) {
+        //         this.snackBar.open('Gastos', 'Close', {duration: 3000});
+        //     }
+        // });
     }
 }

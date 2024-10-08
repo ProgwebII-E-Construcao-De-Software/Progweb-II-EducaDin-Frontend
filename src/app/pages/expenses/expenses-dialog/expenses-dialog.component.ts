@@ -92,13 +92,13 @@ export class ExpensesDialogComponent implements OnInit {
 
     public creatForm() {
         this.formGroup = this.formBuilder.group({
-            name: [null, Validators.required],
-            categoryName: [null, Validators.required],
-            description: [null, Validators.required],
+            name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            categoryName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            description: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
             expenseDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
             repeatable: ['DONT_REPEATS', Validators.required],
-            leadTime: [0, Validators.min(0)],
+            leadTime: [0, [Validators.min(0), Validators.max(100)]],
         });
     }
 
@@ -107,13 +107,13 @@ export class ExpensesDialogComponent implements OnInit {
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
-                    name: retorn.name ? retorn.name : null,
-                    categoryName: retorn.categoryName ? retorn.categoryName : null,
-                    description: retorn.description ? retorn.description : null,
+                    name: retorn.name ?? null,
+                    categoryName: retorn.categoryName ?? null,
+                    description: retorn.description ?? null,
                     expenseDate: retorn.expenseDate ? new Date(retorn.expenseDate) : new Date(),
-                    amount: retorn.amount !== undefined && retorn.amount !== null ? retorn.amount : null,
-                    repeatable: retorn.repeatable ? retorn.repeatable : 'DONT_REPEATS',
-                    leadTime: retorn.leadTime !== undefined && retorn.leadTime !== null ? retorn.leadTime : 0
+                    amount: retorn.amount ?? null,
+                    repeatable: retorn.repeatable ?? 'DONT_REPEATS',
+                    leadTime: retorn.leadTime ?? 0
                 });
             }, error => {
                 console.log("erro", error);
@@ -122,8 +122,8 @@ export class ExpensesDialogComponent implements OnInit {
         );
     }
 
-    public closeDialog(): void {
-        this.dialogRef.close();
+    public closeDialog(reload: boolean = false): void {
+        this.dialogRef.close(reload);
     }
 
     public onSubmit() {
@@ -142,7 +142,8 @@ export class ExpensesDialogComponent implements OnInit {
             this.expenseService.create1({body: this.formGroup.value}).subscribe(
                 retorn => {
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    this.closeDialog();
+                    window.location.reload();
+                    this.snackBar.open('Gastos Adicionado', 'Close', {duration: 3000});
                     console.log("Retorno", retorn);
                 }, erro => {
                     console.log("Erro", erro);
@@ -157,7 +158,7 @@ export class ExpensesDialogComponent implements OnInit {
         this.expenseService.update1({id: this.id, body: formData}).subscribe(
             retorn => {
                 this.confirmAction(retorn, this.ACAO_EDITAR);
-                this.closeDialog();
+                this.snackBar.open('Gasto Editado', 'Close', {duration: 3000});
             }, erro => {
                 console.log("Erro:", erro.error);
                 this.showError(erro, this.ACAO_EDITAR);
@@ -183,6 +184,11 @@ export class ExpensesDialogComponent implements OnInit {
                     ok: 'Confirmar',
                 },
             },
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.closeDialog(true);
+            }
         });
 
     }

@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./core/home/home.component";
-import {earningsRoutes} from "./pages/earnings/earnings-routing.module";
+
 
 import {goalsRoutes} from "./pages/goals/goals-routing.module";
 import {expensesRoutes} from "./pages/expenses/expenses-routing.module";
+import {incomesRoutes} from "./pages/incomes/incomes-routing.module";
 
 const routes: Routes = [
     // {
@@ -16,7 +17,7 @@ const routes: Routes = [
         path:"",
         component: HomeComponent,
         children:[
-            ...earningsRoutes,
+            ...incomesRoutes,
             ...expensesRoutes,
             ...goalsRoutes,
 

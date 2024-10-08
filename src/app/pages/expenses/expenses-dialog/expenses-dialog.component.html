@@ -8,10 +8,10 @@
         <mat-dialog-content class="dialog-content">
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Nome</mat-label>
-                <input matInput formControlName="name" placeholder="Insira o nome"/>
-                <mat-error *ngIf="handleError('name', 'required')">
-                    O nome é obrigatório
-                </mat-error>
+                <input matInput formControlName="name" type="text" placeholder="Insira o nome"/>
+                <mat-error *ngIf="handleError('name', 'required')">O nome é obrigatório</mat-error>
+                <mat-error *ngIf="handleError('name', 'maxlength')">Limite 100 caracteres</mat-error>
+                <mat-error *ngIf="handleError('name', 'minlength')">Mínimo 3 caracteres</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
@@ -25,17 +25,17 @@
                         {{ category }}
                     </mat-option>
                 </mat-autocomplete>
-                <mat-error *ngIf="handleError('categoryName', 'required')">
-                    A categoria é obrigatória
-                </mat-error>
+                <mat-error *ngIf="handleError('categoryName', 'required')">A categoria é obrigatória</mat-error>
+                <mat-error *ngIf="handleError('categoryName', 'maxlength')">Limite 100 caracteres</mat-error>
+                <mat-error *ngIf="handleError('categoryName', 'minlength')">Mínimo 3 caracteres</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Descrição</mat-label>
                 <input matInput formControlName="description" placeholder="Insira sua descrição"/>
-                <mat-error *ngIf="handleError('description', 'required')">
-                    A descrição é obrigatória
-                </mat-error>
+                <mat-error *ngIf="handleError('description', 'required')">A descrição é obrigatória</mat-error>
+                <mat-error *ngIf="handleError('description', 'maxlength')">Limite 255 caracteres</mat-error>
+                <mat-error *ngIf="handleError('description', 'minlength')">Mínimo 3 caracteres</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
@@ -43,6 +43,7 @@
                 <input matInput formControlName="expenseDate" [matDatepicker]="picker" placeholder="Escolha a data"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="handleError('expenseDate', 'required')">A data é obrigatória</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
