@@ -1,82 +1,129 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
-
-interface Expenses {
-    categoria: string;
-    descricao: string;
-    data: string;
-    valor: number;
-}
+import {MatTableDataSource} from "@angular/material/table";
+import {ExpenseListDto} from "../../../api/models/expense-list-dto";
+import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessageService} from "../../../architecture/message/message.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
+import {ActivatedRoute} from "@angular/router";
+import {ExpenseDto} from "../../../api/models/expense-dto";
 
 @Component({
-  selector: 'app-expenses-table',
-  templateUrl: './expenses-table.component.html',
-  styleUrl: './expenses-table.component.scss'
+    selector: 'app-expenses-table',
+    templateUrl: './expenses-table.component.html',
+    styleUrls: ['./expenses-table.component.scss']
 })
+export class ExpensesTableComponent implements OnInit {
+    displayedColumns: string[] = ['select', 'name', 'category', 'description', 'expenseDate', 'amount', 'acao'];
+    expensesTableDataSource: MatTableDataSource<ExpenseListDto> = new MatTableDataSource<ExpenseListDto>([]);
+    selection = new SelectionModel<ExpenseListDto>(true, []);
+    tipoDeListagem: string = 'Normal';
+    isMenuOpen: boolean = false;
 
-export class ExpensesTableComponent {
-    displayedColumns: string[] = ['select','categoria', 'descricao', 'data', 'valor', 'acao'];
-    expenses: Expenses[] = [
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-        { categoria:  'Despesas', descricao: 'Aluguel', data: '01-09-2024', valor: 1000 },
-        { categoria: 'Despesas', descricao: 'Compra para casa', data: '02-09-2024', valor:500 },
-    ];
 
-    selection = new SelectionModel<Expenses>(true, []);
+    constructor(
+        protected dialog: MatDialog,
+        protected snackBar: MatSnackBar,
+        protected router: ActivatedRoute,
+        protected messageService: MessageService,
+        public expensesService: ExpenseControllerService,
+    ) {
+    }
 
+    ngOnInit(): void {
+        this.listExpenses();
+    }
+
+    public listExpenses() {
+        this.expensesService.listAll1().subscribe(data => {
+            this.expensesTableDataSource.data = data;
+            console.log(data);
+        })
+    }
 
     isAllSelected() {
         const numSelected = this.selection.selected.length;
-        const numRows = this.expenses.length;
+        const numRows = this.expensesTableDataSource.data.length;
         return numSelected === numRows;
     }
 
-
     selectAll(event: any) {
         if (event.checked) {
-            this.selection.select(...this.expenses);
+            this.selection.select(...this.expensesTableDataSource.data);
         } else {
             this.selection.clear();
         }
     }
 
-
-    onCheckboxChange(element: Expenses) {
-        this.selection.toggle(element);
+    onCheckboxChange(expenses: ExpenseListDto) {
+        this.selection.toggle(expenses);
     }
 
-
-    tipoDeListagem: string = 'Normal';
-
-
-    editar(element: Expenses): void {
-        console.log(`Editar item: ${element.descricao}`);
-
+    removeExpenses(expenses: ExpenseListDto): void {
+        if (expenses.id !== undefined) {
+            console.log(`Excluir item: ${expenses.description}`);
+            this.expensesService.remove1({id: expenses.id})
+                .subscribe(
+                    retorn => {
+                        this.listExpenses();
+                        this.messageService.addMsgSuccess(`Despesa: ${retorn.name} Excluída com Sucesso !!`)
+                        console.log("Exclusão", retorn);
+                    },
+                    error => {
+                        if (error.status === 404) {
+                            this.messageService.addMsgInf("Despesa listada não existe mais")
+                        } else {
+                            this.messageService.addMsgDanger("Erro ao excluir");
+                            console.log("Erro:", error);
+                        }
+                    }
+                );
+        } else {
+            console.error("Erro: o ID do item é indefinido.");
+            alert("Erro ao Excluir: o ID do item é indefinido.");
+        }
     }
 
-    excluir(element: Expenses): void {
-        console.log(`Excluir item: ${element.descricao}`);
+    confirmDeletionExpenses(expenses: ExpenseListDto) {
 
+        const dialogRef = this.dialog.open(ConfirmationDialog, {
+            data: {
+                titulo: 'Confirmar Exclusão?',
+                mensagem: `A exclusão de: ${expenses.name} Categoria: ${expenses.category?.name}?`,
+                textoBotoes: {
+                    ok: 'Confirmar',
+                    cancel: 'Cancelar',
+                },
+                dado: expenses
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+            if (confirmed?.resultado) {
+                this.removeExpenses(confirmed.dado);
+                this.snackBar.open('Excluido com Sucesso', 'Close', {duration: 4000});
+            }
+        });
+    }
+
+    openDialogEditExpenses(expenses: ExpenseListDto) {
+        console.log('Abrindo diálogo de edição para a despesa:', expenses);
+        const dialogRef = this.dialog.open(ExpensesDialogComponent, {
+            data: {id: expenses}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('Diálogo fechado, resultado:', result);
+            this.listExpenses();
+            if (result) {
+                this.snackBar.open('Despesas', 'Close', {duration: 3000});
+            }
+        });
     }
 }

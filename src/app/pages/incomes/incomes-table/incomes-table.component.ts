@@ -10,22 +10,22 @@ import {
     ConfirmationDialog,
     ConfirmationDialogResult
 } from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
-import {EarningsDialogComponent} from "../earnings-dialog/earnings-dialog.component";
+import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-earnings-table',
-    templateUrl: './earnings-table.component.html',
-    styleUrls: ['./earnings-table.component.scss']
+    templateUrl: './incomes-table.component.html',
+    styleUrls: ['./incomes-table.component.scss']
 })
 
 @Injectable({
     providedIn: 'root',
 })
 
-export class EarningsTableComponent implements OnInit {
-    displayedColumns: string[] = ['select', 'category', 'description', 'incomeDate', 'amount', 'acao'];
-    earningsTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
+export class IncomesTableComponent implements OnInit {
+    displayedColumns: string[] = ['select','name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
+    incomeTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
     isMenuOpen: boolean = false;
@@ -35,49 +35,49 @@ export class EarningsTableComponent implements OnInit {
         protected snackBar: MatSnackBar,
         protected router: ActivatedRoute,
         protected messageService: MessageService,
-        public earningsService: IncomeControllerService,
+        public incomeService: IncomeControllerService,
     ) {
 
     }
 
     ngOnInit(): void {
-        this.listEarnings();
+        this.listIncomes();
     }
 
-    public listEarnings() {
-        this.earningsService.listAll().subscribe(data => {
-            this.earningsTableDataSource.data = data;
+    public listIncomes() {
+        this.incomeService.listAll().subscribe(data => {
+            this.incomeTableDataSource.data = data;
             console.log(data);
         })
     }
 
     isAllSelected() {
         const numSelected = this.selection.selected.length;
-        const numRows = this.earningsTableDataSource.data.length;
+        const numRows = this.incomeTableDataSource.data.length;
         return numSelected === numRows;
     }
 
 
     selectAll(event: any) {
         if (event.checked) {
-            this.selection.select(...this.earningsTableDataSource.data);
+            this.selection.select(...this.incomeTableDataSource.data);
         } else {
             this.selection.clear();
         }
     }
 
 
-    onCheckboxChange(earnings: IncomeListDto) {
-        this.selection.toggle(earnings);
+    onCheckboxChange(incomes: IncomeListDto) {
+        this.selection.toggle(incomes);
     }
 
-    removeEarnings(earnings: IncomeListDto): void {
-        if (earnings.id !== undefined) {
-            console.log(`Excluir item: ${earnings.description}`);
-            this.earningsService.remove({id: earnings.id})
+    removeIncomes(incomes: IncomeListDto): void {
+        if (incomes.id !== undefined) {
+            console.log(`Excluir item: ${incomes.description}`);
+            this.incomeService.remove({id: incomes.id})
                 .subscribe(
                     retorn => {
-                        this.listEarnings();
+                        this.listIncomes();
                         this.messageService.addMsgSuccess(`Ganho: ${retorn.name} Excluído com Sucesso !!`)
                         console.log("Exclusão", retorn);
                     },
@@ -96,36 +96,37 @@ export class EarningsTableComponent implements OnInit {
         }
     }
 
-    confirmDeletionEarnings(earnings: IncomeListDto) {
+    confirmDeletionIncomes(incomes: IncomeListDto) {
 
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
                 titulo: 'Confirmar Exclusão?',
-                mensagem: `A exclusão de: ${earnings.name} Categoria: ${earnings.category?.name}?`,
+                mensagem: `A exclusão de: ${incomes.name} Categoria: ${incomes.category?.name}?`,
                 textoBotoes: {
                     ok: 'Confirmar',
                     cancel: 'Cancelar',
                 },
-                dado: earnings
+                dado: incomes
             },
         });
 
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
             if (confirmed?.resultado) {
-                this.removeEarnings(confirmed.dado);
+                this.removeIncomes(confirmed.dado);
+                this.snackBar.open('Excluido com Sucesso', 'Close', {duration: 4000});
             }
         });
     }
 
-    openDialogEditEarnings(earnings: IncomeListDto) {
-        console.log('Abrindo diálogo de edição para o ganho:', earnings);
-        const dialogRef = this.dialog.open(EarningsDialogComponent, {
-            data: {id: earnings}
+    openDialogEditIncomes(incomes: IncomeListDto) {
+        console.log('Abrindo diálogo de edição para o ganho:', incomes);
+        const dialogRef = this.dialog.open(IncomesDialogComponent, {
+            data: {id: incomes}
         });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('Diálogo fechado, resultado:', result);
-            this.listEarnings();
+            this.listIncomes();
             if (result) {
                 this.snackBar.open('Ganhos', 'Close', {duration: 3000});
             }

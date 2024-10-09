@@ -8,10 +8,10 @@
         <mat-dialog-content class="dialog-content">
             <mat-form-field class="dialog-large-form-field">
                 <mat-label>Nome</mat-label>
-                <input matInput formControlName="name" placeholder="Insira o nome"/>
-                <mat-error *ngIf="handleError('name', 'required')">
-                    O nome é obrigatório
-                </mat-error>
+                <input matInput formControlName="name" type="text" placeholder="Insira o nome"/>
+                <mat-error *ngIf="handleError('name', 'required')">O nome é obrigatório</mat-error>
+                <mat-error *ngIf="handleError('name', 'maxlength')">Limite 100 caracteres</mat-error>
+                <mat-error *ngIf="handleError('name', 'minlength')">Mínimo 3 caracteres</mat-error>
             </mat-form-field>
 
           <mat-form-field class="dialog-large-form-field">
@@ -32,14 +32,29 @@
               A categoria é obrigatória
             </mat-error>
           </mat-form-field>
+            <mat-form-field class="dialog-large-form-field">
+                <mat-label>Categoria</mat-label>
+                <input type="text"
+                       matInput
+                       [matAutocomplete]="auto"
+                       formControlName="categoryName">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let category of categorias" [value]="category">
+                        {{ category }}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="handleError('categoryName', 'required')">A categoria é obrigatória</mat-error>
+                <mat-error *ngIf="handleError('categoryName', 'maxlength')">Limite 100 caracteres</mat-error>
+                <mat-error *ngIf="handleError('categoryName', 'minlength')">Mínimo 3 caracteres</mat-error>
+            </mat-form-field>
 
 
           <mat-form-field class="dialog-large-form-field">
                 <mat-label>Descrição</mat-label>
                 <input matInput formControlName="description" placeholder="Insira sua descrição"/>
-                <mat-error *ngIf="handleError('description', 'required')">
-                    A descrição é obrigatória
-                </mat-error>
+                <mat-error *ngIf="handleError('description', 'required')">A descrição é obrigatória</mat-error>
+                <mat-error *ngIf="handleError('description', 'maxlength')">Limite 255 caracteres</mat-error>
+                <mat-error *ngIf="handleError('description', 'minlength')">Mínimo 3 caracteres</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
@@ -47,30 +62,29 @@
                 <input matInput formControlName="incomeDate" [matDatepicker]="picker" placeholder="Escolha a Data"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="handleError('incomeDate', 'required')">A Data é obrigatória</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
                 <mat-label></mat-label>
-                <input matInput formControlName="amount" type="number" placeholder="Valor"/>
-                <mat-error *ngIf="handleError('amount', 'required')">
-                    O valor é obrigatório
-                </mat-error>
+                <input matInput formControlName="amount" mask="separator.2" decimalSeparator=","
+                       placeholder="Valor" maxlength="10">
+                <mat-error *ngIf="handleError('amount', 'required')">O valor é obrigatório</mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
-                <mat-label></mat-label>
+                <mat-label>Se repete</mat-label>
                 <mat-select formControlName="repeatable">
                     <mat-option value="WEEKLY">Semanal</mat-option>
                     <mat-option value="MONTHLY">Mensal</mat-option>
                     <mat-option value="YEARLY">Anual</mat-option>
                     <mat-option value="DONT_REPEATS">Não se repete</mat-option>
                 </mat-select>
-                <mat-error *ngIf="handleError('repeatable', 'required')">
-                    A opção é obrigatória
-                </mat-error>
+                <mat-error *ngIf="handleError('repeatable', 'required')">A opção é obrigatória</mat-error>
             </mat-form-field>
 
-            <mat-form-field class="dialog-large-form-field" *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
+            <mat-form-field class="dialog-large-form-field"
+                            *ngIf="formGroup.get('repeatable')?.value !== 'DONT_REPEATS'">
                 <mat-label>Até</mat-label>
                 <input matInput formControlName="leadTime" type="number" placeholder="Digite quantas vezes"/>
             </mat-form-field>
@@ -80,7 +94,7 @@
 
         <mat-dialog-actions class="action-buttons-dialog">
             <button mat-raised-button class="cancel-button" (click)="closeDialog()">Cancelar</button>
-            <button mat-raised-button class="add-button" type="submit" >{{ id ? 'Salvar' : 'Adicionar' }}</button>
+            <button mat-raised-button class="add-button" type="submit">{{ id ? 'Salvar' : 'Adicionar' }}</button>
         </mat-dialog-actions>
     </div>
 </form>

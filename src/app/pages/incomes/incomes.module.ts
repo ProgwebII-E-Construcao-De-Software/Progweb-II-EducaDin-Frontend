@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
-import {earningsRoutes} from "./earnings-routing.module";
-import {EarningsTableComponent} from "./earnings-table/earnings-table.component";
-import {EarningsHomeComponent} from "./earnings-home/earnings-home.component";
+import {incomesRoutes} from "./incomes-routing.module";
+import {IncomesTableComponent} from "./incomes-table/incomes-table.component";
+import {IncomesHomeComponent} from "./incomes-home/incomes-home.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenu, MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
 import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
-import {EarningsDialogComponent} from "./earnings-dialog/earnings-dialog.component";
+import {IncomesDialogComponent} from "./incomes-dialog/incomes-dialog.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -30,9 +30,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
     declarations: [
-        EarningsHomeComponent,
-        EarningsTableComponent,
-        EarningsDialogComponent,
+        IncomesHomeComponent,
+        IncomesTableComponent,
+        IncomesDialogComponent,
     ],
     imports: [
         CommonModule,
@@ -40,7 +40,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatTableModule,
         MatIconModule,
         MatButtonModule,
-        RouterModule.forChild(earningsRoutes),
+        RouterModule.forChild(incomesRoutes),
         MatMenuModule,
         MatMenuTrigger,
         MatFormFieldModule,
@@ -64,5 +64,5 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatCheckboxModule,
     ]
 })
-export class EarningsModule {
+export class IncomesModule {
 }
