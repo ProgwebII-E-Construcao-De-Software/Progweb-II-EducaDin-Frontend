@@ -7,6 +7,8 @@ import { IncomeDto } from "../../../api/models/income-dto";
 import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
+import {CategoryDto} from "../../../api/models/category-dto";
+import {CategoryControllerService} from "../../../api/services/category-controller.service";
 
 @Component({
     selector: 'app-earnings-dialog',
@@ -19,8 +21,8 @@ import {DateAdapter} from "@angular/material/core";
 })
 
 export class EarningsDialogComponent implements OnInit {
-    categoria!: String;
-    categorias: string[] = ['Salário', 'Freelance', 'Investimentos'];
+    //categoria!: String;
+    categorias: CategoryDto[] = [];
     formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Ganhos";
     public readonly ACAO_EDITAR = "Editar Ganhos";
@@ -35,6 +37,7 @@ export class EarningsDialogComponent implements OnInit {
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
         private _adapter: DateAdapter<any>,
+        private categoryService: CategoryControllerService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
@@ -44,6 +47,8 @@ export class EarningsDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.getCategories();
+
         if (this.id) {
             console.log('ID do ganho a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
@@ -65,6 +70,18 @@ export class EarningsDialogComponent implements OnInit {
         });
     }
 
+    private getCategories(){
+      this.categoryService.getIncomeCategories().subscribe(
+        (categories: CategoryDto[]) => {
+          this.categorias = categories;
+          console.log("Categorias carregadas:", this.categorias);
+        }
+        /*(error) => {
+          console.log("Erro ao carregar categorias:", error);
+          this.messageService.addMsgWarning("Erro ao carregar categorias.");
+        }*/
+      );
+    }
     private editEarnings(id: number) {
         this.earningService.getById({ id }).subscribe(
             retorn => {

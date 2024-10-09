@@ -7,8 +7,9 @@ export interface ExpenseListDto {
   amount?: number;
   category?: Category;
   description?: string;
+  expenseDate?: string;
   id?: number;
-  incomeDate?: string;
   leadTime?: number;
   name?: string;
+  repeatable?: 'WEEKLY' | 'MONTHLY' | 'YEARLY' | 'DONT_REPEATS';
 }

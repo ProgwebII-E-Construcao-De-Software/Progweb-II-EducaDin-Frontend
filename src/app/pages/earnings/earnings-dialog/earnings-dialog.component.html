@@ -14,17 +14,27 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="dialog-large-form-field">
-                <mat-label>Categoria</mat-label>
-                <mat-select formControlName="categoryName">
-                    <mat-option *ngFor="let category of categorias" [value]="category">{{ category }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="handleError('categoryName', 'required')">
-                    A categoria é obrigatório
-                </mat-error>
-            </mat-form-field>
+          <mat-form-field class="dialog-large-form-field">
+            <mat-label>Categoria</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="categoryName"
+              [matAutocomplete]="auto">
 
-            <mat-form-field class="dialog-large-form-field">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let category of categorias" [value]="category.name">
+                {{ category.name }}
+              </mat-option>
+            </mat-autocomplete>
+
+            <mat-error *ngIf="handleError('categoryName', 'required')">
+              A categoria é obrigatória
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="dialog-large-form-field">
                 <mat-label>Descrição</mat-label>
                 <input matInput formControlName="description" placeholder="Insira sua descrição"/>
                 <mat-error *ngIf="handleError('description', 'required')">
@@ -40,15 +50,15 @@
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
-                <mat-label>Valor</mat-label>
-                <input matInput formControlName="amount" type="number" placeholder="0.00"/>
+                <mat-label></mat-label>
+                <input matInput formControlName="amount" type="number" placeholder="Valor"/>
                 <mat-error *ngIf="handleError('amount', 'required')">
                     O valor é obrigatório
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field class="dialog-large-form-field">
-                <mat-label>Se repete</mat-label>
+                <mat-label></mat-label>
                 <mat-select formControlName="repeatable">
                     <mat-option value="WEEKLY">Semanal</mat-option>
                     <mat-option value="MONTHLY">Mensal</mat-option>
