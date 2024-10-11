@@ -26,46 +26,7 @@ import {IncomesTableComponent} from "../incomes-table/incomes-table.component";
 
 export class IncomesDialogComponent implements OnInit {
 
-    categorias: string[] = ['Aulas Particulares',
-        'Aluguel de Imóveis',
-        'Bolsas de Estudo',
-        'Comissões',
-        'Consultoria',
-        'Crowdfunding',
-        'Freelance',
-        'Gestão Financeira Pessoal',
-        'Investimentos',
-        'Investimentos em Criptomoedas',
-        'Lucros de Empresas',
-        'Marketing de Afiliados',
-        'Participação em Lucros',
-        'Prêmios e Sorteios',
-        'Produção de Conteúdo',
-        'Renda de Atividades Criativas',
-        'Renda de Atividades Recreativas',
-        'Renda de Consultorias Online',
-        'Renda de Cursos Online',
-        'Renda de Eventos',
-        'Renda de Fotografia',
-        'Renda de Licenciamento',
-        'Renda de Mídias Sociais',
-        'Renda de Música',
-        'Renda de Podcasts',
-        'Renda de Vídeo',
-        'Renda de Webinars',
-        'Renda Passiva',
-        'Receitas de Mídias Sociais',
-        'Royalties',
-        'Salário',
-        'Serviços de Redação',
-        'Trabalho Autônomo',
-        'Trabalho de Mãe/Pai',
-        'Trabalho Temporário',
-        'Vendas de Produtos',
-        'Venda de Artesanato',
-        'Venda de Livros',
-        'Venda de Produtos Digitais',
-        'Outros Ganhos'];
+    categorias: CategoryDto[] = [];
     formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Ganhos";
     public readonly ACAO_EDITAR = "Editar Ganhos";
@@ -92,7 +53,7 @@ export class IncomesDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.loadCategorys();
+        this.getCategories();
         if (this.id) {
             console.log('ID do ganho a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
@@ -122,7 +83,14 @@ export class IncomesDialogComponent implements OnInit {
             leadTime: [0, [Validators.min(0), Validators.max(100)]],
         });
     }
-
+    private getCategories(){
+    this.categoryService.getIncomeCategories().subscribe(
+      (categories: CategoryDto[]) => {
+        this.categorias = categories;
+        console.log("Categorias carregadas:", this.categorias);
+      }
+      );
+    }
     private editIncomes(id: number) {
         this.incomeService.getById({id}).subscribe(
             retorn => {
@@ -218,8 +186,6 @@ export class IncomesDialogComponent implements OnInit {
                 this.closeDialog(true);
             }
         });
-
-
     }
 
     showError(erro: Message, acao: string) {

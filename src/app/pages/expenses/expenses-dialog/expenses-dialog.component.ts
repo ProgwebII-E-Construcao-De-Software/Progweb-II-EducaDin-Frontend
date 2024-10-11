@@ -7,6 +7,8 @@ import {ExpenseDto} from "../../../api/models/expense-dto";
 import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
+import {CategoryDto} from "../../../api/models/category-dto";
+import {CategoryControllerService} from "../../../api/services/category-controller.service";
 
 @Component({
     selector: 'app-expenses-dialog',
@@ -14,50 +16,7 @@ import {DateAdapter} from "@angular/material/core";
     styleUrls: ['./expenses-dialog.component.scss']
 })
 export class ExpensesDialogComponent implements OnInit {
-    categoria!: String;
-    categorias: string[] = ['Acessórios',
-        'Alimentação',
-        'Aluguel',
-        'Animais de Estimação',
-        'Assinaturas de Revistas',
-        'Atividades Recreativas',
-        'Academia',
-        'Combustível',
-        'Compras de Vestuário',
-        'Cursos',
-        'Cinema',
-        'Decoração',
-        'Despesas de Casa',
-        'Despesas Emergenciais',
-        'Despesas com Tecnologia',
-        'Entretenimento',
-        'Equipamentos Eletrônicos',
-        'Eventos',
-        'Exames',
-        'Hobbies',
-        'Hipoteca',
-        'Hospedagem',
-        'Internet',
-        'Impostos',
-        'Lanches',
-        'Livros',
-        'Manutenção de Veículo',
-        'Medicamentos',
-        'Mensalidade Escolar',
-        'Multas',
-        'Móveis',
-        'Presentes',
-        'Roupas de Trabalho',
-        'Restaurantes',
-        'Saúde',
-        'Seguro do Veículo',
-        'Streaming de Música e Vídeo',
-        'Shows',
-        'Turismo',
-        'Tratamentos Estéticos',
-        'Transporte',
-        'Viagens',
-        'Outros Gastos'];
+    categorias: CategoryDto[]=[];
     formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Gastos";
     public readonly ACAO_EDITAR = "Editar Gastos";
@@ -72,6 +31,7 @@ export class ExpensesDialogComponent implements OnInit {
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
         private _adapter: DateAdapter<any>,
+        private categoryService: CategoryControllerService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
@@ -81,6 +41,7 @@ export class ExpensesDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getCategories();
         if (this.id) {
             console.log('ID do gasto a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
@@ -89,7 +50,14 @@ export class ExpensesDialogComponent implements OnInit {
             console.log('Nenhum ID foi passado, modo de criação ativado.');
         }
     }
-
+    private getCategories(){
+    this.categoryService.getIncomeCategories().subscribe(
+      (categories: CategoryDto[]) => {
+        this.categorias = categories;
+        console.log("Categorias carregadas:", this.categorias);
+      }
+    );
+  }
     public creatForm() {
         this.formGroup = this.formBuilder.group({
             name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
