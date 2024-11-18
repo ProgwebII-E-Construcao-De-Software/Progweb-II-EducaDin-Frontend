@@ -1,6 +1,6 @@
-<div class="alert-message" *ngIf="show">
+<div class="alert-message mat-elevation-z8" *ngIf="show">
   <div>
-    <div class="item-message"*ngFor="let item of items" (click)="removeMsg(item)">
+    <div class="item-message" *ngFor="let item of items" (click)="removeMsg(item)">
       <button mat-button class="menu-button">
         <mat-icon>{{item.type}}</mat-icon>
         <span>{{item.msg}}</span>

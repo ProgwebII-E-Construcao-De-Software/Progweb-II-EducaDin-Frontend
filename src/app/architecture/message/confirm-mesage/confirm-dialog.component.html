@@ -1,7 +1,7 @@
 <mat-dialog-content>
-  <h3>
+  <mat-card-title>
     {{item.msg}}
-  </h3>
+  </mat-card-title>
 </mat-dialog-content>
 <mat-dialog-actions align="center" *ngIf="item.isConfirmTypeYesNo()">
   <button
@@ -9,6 +9,7 @@
     (click)="onConfirmNo()"
     mat-dialog-close
     mat-raised-button
+    color="warn"
     tabindex="-1"
   >
     <span>Não</span>
@@ -17,7 +18,6 @@
     title="Sim"
     (click)="onConfirmYesOk()"
     mat-raised-button
-    color="primary"
     tabindex="1"
   >
     <span>Sim</span>

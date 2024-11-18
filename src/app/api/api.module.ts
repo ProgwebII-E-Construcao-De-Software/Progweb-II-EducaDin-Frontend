@@ -7,9 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { IncomeControllerService } from './services/income-controller.service';
+import { GoalControllerService } from './services/goal-controller.service';
 import { ExpenseControllerService } from './services/expense-controller.service';
-import { CategoryControllerService } from './services/category-controller.service';
 import { TestControllerService } from './services/test-controller.service';
+import { CategoryControllerService } from './services/category-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -20,9 +21,10 @@ import { TestControllerService } from './services/test-controller.service';
   declarations: [],
   providers: [
     IncomeControllerService,
+    GoalControllerService,
     ExpenseControllerService,
-    CategoryControllerService,
     TestControllerService,
+    CategoryControllerService,
     ApiConfiguration
   ],
 })
