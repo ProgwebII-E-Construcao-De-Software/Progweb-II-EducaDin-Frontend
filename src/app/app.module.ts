@@ -23,6 +23,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MessageModule} from "./architecture/message/message.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
+import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
 
 
 @NgModule({
@@ -51,6 +52,9 @@ import {IncomesModule} from "./pages/incomes/incomes.module";
         IncomesModule,
         ExpensesModule,
         GoalsModule,
+        AppRoutingModule,
+        SharedMaterialModule,
+
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},

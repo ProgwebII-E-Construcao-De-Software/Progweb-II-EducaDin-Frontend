@@ -49,7 +49,8 @@ export class HomeComponent {
     }
 
     sair() {
-
+       
+        this.router.navigate(['/auth']);
     }
 }
 
