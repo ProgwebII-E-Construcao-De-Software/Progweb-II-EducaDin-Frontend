@@ -48,9 +48,9 @@ export class HomeComponent {
             });
     }
 
-    sair() {
-       
-        this.router.navigate(['/auth']);
-    }
+  close(){
+    this.router.navigate(['/access']);
+  }
+
 }
 
