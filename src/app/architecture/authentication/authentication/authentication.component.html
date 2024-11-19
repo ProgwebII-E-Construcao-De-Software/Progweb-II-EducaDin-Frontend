@@ -1,1 +1,45 @@
-<p>authentication works!</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+</head>
+<body>
+<div class="container">
+  <div class="content" [ngStyle]="{ transform: contentTransform }">
+    <!-- Painel de Login -->
+    <div class="panel login-panel">
+      <h2>Login</h2>
+      <p>Insira suas credenciais para continuar:</p>
+      <mat-form-field>
+        <input matInput type="email" placeholder="Email" [(ngModel)]="email" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Senha" required>
+      </mat-form-field>
+      <button mat-raised-button class="btn" (click)="onLogin()">Entrar</button>
+      <p>Não tem uma conta? <button class="link-btn" (click)="switchToRegister()">Cadastre-se</button></p>
+    </div>
+
+    <!-- Painel de Cadastro -->
+    <div class="panel register-panel">
+      <h2>Criar Conta</h2>
+      <p>Registre-se para começar:</p>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Nome" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="email" placeholder="Email" [(ngModel)]="email" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Senha" required>
+      </mat-form-field>
+      <button mat-raised-button class="btn" (click)="onRegister()">Cadastrar</button>
+      <p>Já tem uma conta? <button class="link-btn" (click)="switchToLogin()">Entrar</button></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
