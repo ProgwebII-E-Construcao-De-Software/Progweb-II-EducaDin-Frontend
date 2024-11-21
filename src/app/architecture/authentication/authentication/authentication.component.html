@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário em Português</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="authentication.component.scss">
 </head>
 <body>
-<div class="container">
-  <div class="content" [ngStyle]="{ transform: contentTransform }">
-    <!-- Painel de Login -->
-    <div class="panel login-panel">
-      <h2>Login</h2>
-      <p>Insira suas credenciais para continuar:</p>
-      <mat-form-field>
-        <input matInput type="email" placeholder="Email" [(ngModel)]="email" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Senha" required>
-      </mat-form-field>
-      <button mat-raised-button class="btn" (click)="onLogin()">Entrar</button>
-      <p>Não tem uma conta? <button class="link-btn" (click)="switchToRegister()">Cadastre-se</button></p>
+<div class="container" id="container">
+    <!-- Metade esquerda para o botão Entrar -->
+    <div class="left-half">
+        <button class="btn" id="toggleForm">Entrar</button>
     </div>
 
-    <!-- Painel de Cadastro -->
-    <div class="panel register-panel">
-      <h2>Criar Conta</h2>
-      <p>Registre-se para começar:</p>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Nome" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="email" placeholder="Email" [(ngModel)]="email" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Senha" required>
-      </mat-form-field>
-      <button mat-raised-button class="btn" (click)="onRegister()">Cadastrar</button>
-      <p>Já tem uma conta? <button class="link-btn" (click)="switchToLogin()">Entrar</button></p>
+    <!-- Metade direita para o formulário (Cadastro ou Login) -->
+    <div class="right-half">
+        <!-- Formulário de Cadastro -->
+        <div class="first-content" id="cadastroForm">
+            <h2 class="title">Criar uma Conta</h2>
+            <form class="form">
+                <div class="label-input">
+                    <span class="icon-modify">👤</span>
+                    <input type="text" placeholder="Nome" required />
+                </div>
+                <div class="label-input">
+                    <span class="icon-modify">✉️</span>
+                    <input type="email" placeholder="Email" required />
+                </div>
+                <div class="label-input">
+                    <span class="icon-modify">🔒</span>
+                    <input type="password" placeholder="Senha" required />
+                </div>
+                <button type="submit" class="btn">Registrar</button>
+            </form>
+        </div>
+
+        <!-- Formulário de Login (inicialmente oculto) -->
+        <div class="second-content" id="loginForm" style="display: none;">
+            <h2 class="title">Bem-vindo de volta!</h2>
+            <form class="form">
+                <div class="label-input">
+                    <span class="icon-modify">✉️</span>
+                    <input type="email" placeholder="Email" required />
+                </div>
+                <div class="label-input">
+                    <span class="icon-modify">🔒</span>
+                    <input type="password" placeholder="Senha" required />
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 </body>
 </html>
