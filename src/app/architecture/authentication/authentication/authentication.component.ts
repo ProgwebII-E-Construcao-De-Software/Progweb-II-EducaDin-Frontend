@@ -14,7 +14,6 @@ export class AuthenticationComponent {
 
         toggleForm?.addEventListener('click', () => {
             container?.classList.toggle('show-login');
-            // Alterna entre mostrar Cadastro e Login
             if (container?.classList.contains('show-login')) {
                 cadastroForm?.setAttribute('style', 'display: none;');
                 loginForm?.setAttribute('style', 'display: block;');

@@ -1,4 +1,4 @@
-/* Estilo global */
+
 body, html {
   margin: 0;
   padding: 0;
@@ -7,11 +7,10 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Centraliza verticalmente */
-  background-color: #f5f5f5; /* Cor de fundo */
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
-/* Container principal */
 .container {
   width: 900px;
   height: 500px;
@@ -24,18 +23,17 @@ body, html {
   flex-direction: row;
 }
 
-/* Metade esquerda para o botão Entrar */
+
 .left-half {
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #007bff;
+  background-color: #abd3b6;
   color: #fff;
   transition: transform 0.6s ease-in-out;
 }
 
-/* Metade direita para o formulário de Cadastro ou Login */
 .right-half {
   width: 50%;
   display: flex;
@@ -45,7 +43,7 @@ body, html {
   transition: transform 0.6s ease-in-out;
 }
 
-/* Formulário */
+
 .form {
   width: 80%;
   margin: 0 auto;
@@ -72,12 +70,12 @@ body, html {
   left: 10px;
   transform: translateY(-50%);
   font-size: 1rem;
-  color: #007bff;
+  color: #abd3b6;
 }
 
 .btn {
   background-color: #fff;
-  color: #007bff;
+  color: #020100;
   border: none;
   padding: 1rem 2rem;
   border-radius: 5px;
@@ -89,14 +87,14 @@ body, html {
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #84cb9f;
 }
 
-/* Transições para mostrar login ou cadastro */
+
 .container.show-login .left-half {
-  transform: translateX(100%); /* Move a metade esquerda (Entrar) para a direita */
+  transform: translateX(100%);
 }
 
 .container.show-login .right-half {
-  transform: translateX(-100%); /* Move a metade direita (Cadastro) para a esquerda */
+  transform: translateX(-100%);
 }
