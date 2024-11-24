@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-authentication',
@@ -6,6 +7,10 @@ import {Component} from '@angular/core';
     styleUrl: './authentication.component.scss'
 })
 export class AuthenticationComponent {
+
+    formGroup!: FormGroup;
+    hide = true;
+
     ngOnInit() {
         const container = document.getElementById('container');
         const toggleForm = document.getElementById('toggleForm');
@@ -24,5 +29,13 @@ export class AuthenticationComponent {
                 toggleForm!.textContent = 'Entrar';
             }
         });
+    }
+
+    onSubmit(){
+
+    }
+
+    openDialog(){
+
     }
 }
