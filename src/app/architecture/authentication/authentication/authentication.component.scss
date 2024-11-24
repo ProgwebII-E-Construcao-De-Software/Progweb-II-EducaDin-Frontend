@@ -94,3 +94,20 @@ mat-form-field{
 .container.show-login .right-half {
   transform: translateX(-100%);
 }
+
+.link_esqueceu-senha {
+  color: black !important;
+  cursor: pointer;
+  font-family: DM Roboto, sans-serif;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link_esqueceu-senha:hover {
+  color: darkgray !important;
+}
+
+.link_esqueceu-senha:active {
+  color: black !important;
+}
+

@@ -1,15 +1,25 @@
-import {Component} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {
+    ForgotpassowordComponent
+} from "../../../pages/forgotpassoword/forgotpassoword.dialog/forgotpassoword.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-authentication',
     templateUrl: './authentication.component.html',
     styleUrl: './authentication.component.scss'
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit {
 
     formGroup!: FormGroup;
     hide = true;
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private dialog: MatDialog
+    ) {
+    }
 
     ngOnInit() {
         const container = document.getElementById('container');
@@ -31,11 +41,22 @@ export class AuthenticationComponent {
         });
     }
 
-    onSubmit(){
+    onSubmit() {
 
     }
 
-    openDialog(){
+    openDialogPassoword() {
+        const dialogRef = this.dialog.open(ForgotpassowordComponent,
+            {
+                data:
+                    {
+                        num: 1
+                    }
+            })
+        dialogRef.afterClosed().subscribe(() => {
+            }
+        )
 
     }
+
 }
