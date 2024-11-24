@@ -25,45 +25,47 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
 import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
 import {AuthenticationModule} from './architecture/authentication/authentication/authentication.module';
+import {ForgotpassowordModule} from "./pages/forgotpassoword/forgotpassoword.module";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ConfirmationDialog,
-    ErrosDialogComponent,
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MessageModule.forRoot(),
-    IncomesModule,
-    ExpensesModule,
-    GoalsModule,
-    AppRoutingModule,
-    SharedMaterialModule,
-    AuthenticationModule
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        ConfirmationDialog,
+        ErrosDialogComponent,
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatTooltipModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MessageModule.forRoot(),
+        IncomesModule,
+        ExpensesModule,
+        GoalsModule,
+        AppRoutingModule,
+        SharedMaterialModule,
+        AuthenticationModule,
+        ForgotpassowordModule
 
-  ],
-  providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-    provideAnimationsAsync(),
-  ],
+    ],
+    providers: [
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+        provideAnimationsAsync(),
+    ],
 
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
