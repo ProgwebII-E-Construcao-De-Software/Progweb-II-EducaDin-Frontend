@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {
-    ForgotpassowordComponent
-} from "../../../pages/forgotpassoword/forgotpassoword.dialog/forgotpassoword.component";
+
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ForgotpassowordComponent} from "../../../core/forgotpassoword/forgotpassoword.dialog/forgotpassoword.component";
 
 @Component({
     selector: 'app-authentication',

@@ -5,6 +5,9 @@ import {goalsRoutes} from "./pages/goals/goals-routing.module";
 import {expensesRoutes} from "./pages/expenses/expenses-routing.module";
 import {incomesRoutes} from "./pages/incomes/incomes-routing.module";
 import {AuthenticationRoutes} from './architecture/authentication/authentication/authentication.routing';
+import {dashboardRoutes} from "./pages/dashboard/dashboard-routing.module";
+import {settingsRoutes} from "./pages/settings/settings-routing.module";
+
 
 const routes: Routes = [
     {
@@ -14,7 +17,8 @@ const routes: Routes = [
             ...incomesRoutes,
             ...expensesRoutes,
             ...goalsRoutes,
-
+            ...dashboardRoutes,
+            ...settingsRoutes
         ]
 
     },
