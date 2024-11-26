@@ -9,15 +9,17 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { GoalDto } from '../../models/goal-dto';
-import { GoalDtoCreate } from '../../models/goal-dto-create';
+import { GoalDtoUpdate } from '../../models/goal-dto-update';
 
-export interface Create1$Params {
-      body: GoalDtoCreate
+export interface Update2$Params {
+  id: number;
+      body: GoalDtoUpdate
 }
 
-export function create1(http: HttpClient, rootUrl: string, params: Create1$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-  const rb = new RequestBuilder(rootUrl, create1.PATH, 'post');
+export function update2(http: HttpClient, rootUrl: string, params: Update2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+  const rb = new RequestBuilder(rootUrl, update2.PATH, 'put');
   if (params) {
+    rb.path('id', params.id, {});
     rb.body(params.body, 'application/json');
   }
 
@@ -31,4 +33,4 @@ export function create1(http: HttpClient, rootUrl: string, params: Create1$Param
   );
 }
 
-create1.PATH = '/1.0/goals';
+update2.PATH = '/1.0/goals/{id}';

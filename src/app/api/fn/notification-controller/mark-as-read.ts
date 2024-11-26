@@ -8,26 +8,25 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { IncomeDto } from '../../models/income-dto';
 
-export interface GetById$Params {
+export interface MarkAsRead$Params {
   id: number;
 }
 
-export function getById(http: HttpClient, rootUrl: string, params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-  const rb = new RequestBuilder(rootUrl, getById.PATH, 'get');
+export function markAsRead(http: HttpClient, rootUrl: string, params: MarkAsRead$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, markAsRead.PATH, 'patch');
   if (params) {
     rb.path('id', params.id, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<IncomeDto>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }
 
-getById.PATH = '/1.0/incomes/{id}';
+markAsRead.PATH = '/1.0/notifications/{id}/read';

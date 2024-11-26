@@ -9,15 +9,18 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { ExpenseDto } from '../../models/expense-dto';
+import { ExpenseDtoCreateUpdate } from '../../models/expense-dto-create-update';
 
-export interface GetById2$Params {
+export interface Update3$Params {
   id: number;
+      body: ExpenseDtoCreateUpdate
 }
 
-export function getById2(http: HttpClient, rootUrl: string, params: GetById2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-  const rb = new RequestBuilder(rootUrl, getById2.PATH, 'get');
+export function update3(http: HttpClient, rootUrl: string, params: Update3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+  const rb = new RequestBuilder(rootUrl, update3.PATH, 'put');
   if (params) {
     rb.path('id', params.id, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -30,4 +33,4 @@ export function getById2(http: HttpClient, rootUrl: string, params: GetById2$Par
   );
 }
 
-getById2.PATH = '/1.0/expenses/{id}';
+update3.PATH = '/1.0/expenses/{id}';

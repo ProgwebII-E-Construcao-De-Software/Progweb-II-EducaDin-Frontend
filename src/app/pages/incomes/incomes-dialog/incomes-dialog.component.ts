@@ -124,7 +124,7 @@ export class IncomesDialogComponent implements OnInit {
     }
 
     private editIncomes(id: number) {
-        this.incomeService.getById({id}).subscribe(
+        this.incomeService.getById1({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
@@ -162,7 +162,7 @@ export class IncomesDialogComponent implements OnInit {
         if (this.formGroup.valid) {
             let incomeDto: IncomeDto = this.formGroup.value;
             console.log("Dados a serem enviados:", this.formGroup.value);
-            this.incomeService.create({body: incomeDto}).subscribe(
+            this.incomeService.create1({body: incomeDto}).subscribe(
                 retorn => {
                     console.log("Retorno da criação:", retorn);
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
@@ -180,7 +180,7 @@ export class IncomesDialogComponent implements OnInit {
     private editingIncomes() {
         const formData: IncomeDto = this.formGroup.value;
         console.log("Dados:", formData);
-        this.incomeService.update({id: this.id, body: formData}).subscribe(
+        this.incomeService.update1({id: this.id, body: formData}).subscribe(
             retorn => {
                 console.log("Earnings updated successfully:", retorn);
                 this.confirmAction(retorn, this.ACAO_EDITAR);

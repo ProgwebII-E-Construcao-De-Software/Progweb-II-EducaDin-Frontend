@@ -8,17 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { IncomeDto } from '../../models/income-dto';
-import { IncomeDtoCreateUpdate } from '../../models/income-dto-create-update';
+import { NotificationPreferenceDto } from '../../models/notification-preference-dto';
 
-export interface Create$Params {
-      body: IncomeDtoCreateUpdate
+export interface ListAll$Params {
 }
 
-export function create(http: HttpClient, rootUrl: string, params: Create$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-  const rb = new RequestBuilder(rootUrl, create.PATH, 'post');
+export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<NotificationPreferenceDto>>> {
+  const rb = new RequestBuilder(rootUrl, listAll.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -26,9 +23,9 @@ export function create(http: HttpClient, rootUrl: string, params: Create$Params,
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<IncomeDto>;
+      return r as StrictHttpResponse<Array<NotificationPreferenceDto>>;
     })
   );
 }
 
-create.PATH = '/1.0/incomes';
+listAll.PATH = '/1.0/notification-preferences';

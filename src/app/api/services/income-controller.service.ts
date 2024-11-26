@@ -11,20 +11,20 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create } from '../fn/income-controller/create';
-import { Create$Params } from '../fn/income-controller/create';
-import { deleteItems } from '../fn/income-controller/delete-items';
-import { DeleteItems$Params } from '../fn/income-controller/delete-items';
-import { getById } from '../fn/income-controller/get-by-id';
-import { GetById$Params } from '../fn/income-controller/get-by-id';
+import { create1 } from '../fn/income-controller/create-1';
+import { Create1$Params } from '../fn/income-controller/create-1';
+import { deleteItems1 } from '../fn/income-controller/delete-items-1';
+import { DeleteItems1$Params } from '../fn/income-controller/delete-items-1';
+import { getById1 } from '../fn/income-controller/get-by-id-1';
+import { GetById1$Params } from '../fn/income-controller/get-by-id-1';
 import { IncomeDto } from '../models/income-dto';
 import { IncomeListDto } from '../models/income-list-dto';
-import { listAll } from '../fn/income-controller/list-all';
-import { ListAll$Params } from '../fn/income-controller/list-all';
-import { remove } from '../fn/income-controller/remove';
-import { Remove$Params } from '../fn/income-controller/remove';
-import { update } from '../fn/income-controller/update';
-import { Update$Params } from '../fn/income-controller/update';
+import { listAll1 } from '../fn/income-controller/list-all-1';
+import { ListAll1$Params } from '../fn/income-controller/list-all-1';
+import { remove1 } from '../fn/income-controller/remove-1';
+import { Remove1$Params } from '../fn/income-controller/remove-1';
+import { update1 } from '../fn/income-controller/update-1';
+import { Update1$Params } from '../fn/income-controller/update-1';
 
 @Injectable({ providedIn: 'root' })
 export class IncomeControllerService extends BaseService {
@@ -32,176 +32,176 @@ export class IncomeControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById()` */
-  static readonly GetByIdPath = '/1.0/incomes/{id}';
+  /** Path part for operation `getById1()` */
+  static readonly GetById1Path = '/1.0/incomes/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById()` instead.
+   * To access only the response body, use `getById1()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById$Response(params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return getById(this.http, this.rootUrl, params, context);
+  getById1$Response(params: GetById1$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return getById1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById$Response()` instead.
+   * To access the full response (for headers, for example), `getById1$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById(params: GetById$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.getById$Response(params, context).pipe(
+  getById1(params: GetById1$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.getById1$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `update()` */
-  static readonly UpdatePath = '/1.0/incomes/{id}';
+  /** Path part for operation `update1()` */
+  static readonly Update1Path = '/1.0/incomes/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update()` instead.
+   * To access only the response body, use `update1()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return update(this.http, this.rootUrl, params, context);
+  update1$Response(params: Update1$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return update1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update$Response()` instead.
+   * To access the full response (for headers, for example), `update1$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update(params: Update$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.update$Response(params, context).pipe(
+  update1(params: Update1$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.update1$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `remove()` */
-  static readonly RemovePath = '/1.0/incomes/{id}';
+  /** Path part for operation `remove1()` */
+  static readonly Remove1Path = '/1.0/incomes/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove()` instead.
+   * To access only the response body, use `remove1()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove$Response(params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return remove(this.http, this.rootUrl, params, context);
+  remove1$Response(params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return remove1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove$Response()` instead.
+   * To access the full response (for headers, for example), `remove1$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove(params: Remove$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.remove$Response(params, context).pipe(
+  remove1(params: Remove1$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.remove1$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll()` */
-  static readonly ListAllPath = '/1.0/incomes';
+  /** Path part for operation `listAll1()` */
+  static readonly ListAll1Path = '/1.0/incomes';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll()` instead.
+   * To access only the response body, use `listAll1()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll$Response(params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-    return listAll(this.http, this.rootUrl, params, context);
+  listAll1$Response(params?: ListAll1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return listAll1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll$Response()` instead.
+   * To access the full response (for headers, for example), `listAll1$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll(params?: ListAll$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
-    return this.listAll$Response(params, context).pipe(
+  listAll1(params?: ListAll1$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.listAll1$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
     );
   }
 
-  /** Path part for operation `create()` */
-  static readonly CreatePath = '/1.0/incomes';
+  /** Path part for operation `create1()` */
+  static readonly Create1Path = '/1.0/incomes';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create()` instead.
+   * To access only the response body, use `create1()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create$Response(params: Create$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return create(this.http, this.rootUrl, params, context);
+  create1$Response(params: Create1$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return create1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create$Response()` instead.
+   * To access the full response (for headers, for example), `create1$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create(params: Create$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.create$Response(params, context).pipe(
+  create1(params: Create1$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.create1$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems()` */
-  static readonly DeleteItemsPath = '/1.0/incomes/';
+  /** Path part for operation `deleteItems1()` */
+  static readonly DeleteItems1Path = '/1.0/incomes/';
 
   /**
    * Método utilizado para remover varias entidades pelos ids informados
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems()` instead.
+   * To access only the response body, use `deleteItems1()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems$Response(params: DeleteItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-    return deleteItems(this.http, this.rootUrl, params, context);
+  deleteItems1$Response(params: DeleteItems1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return deleteItems1(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover varias entidades pelos ids informados
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems$Response()` instead.
+   * To access the full response (for headers, for example), `deleteItems1$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems(params: DeleteItems$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
-    return this.deleteItems$Response(params, context).pipe(
+  deleteItems1(params: DeleteItems1$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.deleteItems1$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
     );
   }

@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ExpenseDto } from '../../models/expense-dto';
+import { NotificationPreferenceDto } from '../../models/notification-preference-dto';
 
-export interface Remove2$Params {
+export interface Remove$Params {
   id: number;
 }
 
-export function remove2(http: HttpClient, rootUrl: string, params: Remove2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-  const rb = new RequestBuilder(rootUrl, remove2.PATH, 'delete');
+export function remove(http: HttpClient, rootUrl: string, params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+  const rb = new RequestBuilder(rootUrl, remove.PATH, 'delete');
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -25,9 +25,9 @@ export function remove2(http: HttpClient, rootUrl: string, params: Remove2$Param
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ExpenseDto>;
+      return r as StrictHttpResponse<NotificationPreferenceDto>;
     })
   );
 }
 
-remove2.PATH = '/1.0/expenses/{id}';
+remove.PATH = '/1.0/notification-preferences/{id}';

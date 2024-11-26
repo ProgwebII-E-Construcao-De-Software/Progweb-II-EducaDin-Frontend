@@ -8,14 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ExpenseListDto } from '../../models/expense-list-dto';
+import { NotificationPreferenceDto } from '../../models/notification-preference-dto';
 
-export interface ListAll2$Params {
+export interface Update$Params {
+  id: number;
+      body: NotificationPreferenceDto
 }
 
-export function listAll2(http: HttpClient, rootUrl: string, params?: ListAll2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-  const rb = new RequestBuilder(rootUrl, listAll2.PATH, 'get');
+export function update(http: HttpClient, rootUrl: string, params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+  const rb = new RequestBuilder(rootUrl, update.PATH, 'put');
   if (params) {
+    rb.path('id', params.id, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -23,9 +27,9 @@ export function listAll2(http: HttpClient, rootUrl: string, params?: ListAll2$Pa
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<ExpenseListDto>>;
+      return r as StrictHttpResponse<NotificationPreferenceDto>;
     })
   );
 }
 
-listAll2.PATH = '/1.0/expenses';
+update.PATH = '/1.0/notification-preferences/{id}';

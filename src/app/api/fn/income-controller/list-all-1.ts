@@ -8,17 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ExpenseDto } from '../../models/expense-dto';
-import { ExpenseDtoCreateUpdate } from '../../models/expense-dto-create-update';
+import { IncomeListDto } from '../../models/income-list-dto';
 
-export interface Create2$Params {
-      body: ExpenseDtoCreateUpdate
+export interface ListAll1$Params {
 }
 
-export function create2(http: HttpClient, rootUrl: string, params: Create2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-  const rb = new RequestBuilder(rootUrl, create2.PATH, 'post');
+export function listAll1(http: HttpClient, rootUrl: string, params?: ListAll1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+  const rb = new RequestBuilder(rootUrl, listAll1.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -26,9 +23,9 @@ export function create2(http: HttpClient, rootUrl: string, params: Create2$Param
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ExpenseDto>;
+      return r as StrictHttpResponse<Array<IncomeListDto>>;
     })
   );
 }
 
-create2.PATH = '/1.0/expenses';
+listAll1.PATH = '/1.0/incomes';

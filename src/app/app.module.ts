@@ -28,6 +28,11 @@ import {AuthenticationModule} from './architecture/authentication/authentication
 import {DashboardModule} from "./pages/dashboard/dashboard.module";
 import {SettingsModule} from "./pages/settings/settings.module";
 import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
+import {NgxEchartsModule} from "ngx-echarts";
+import {Chart} from "chart.js";
 
 
 @NgModule({
@@ -62,6 +67,12 @@ import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.modu
         ForgotpassowordModule,
         DashboardModule,
         SettingsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
+        NgxEchartsModule,
 
     ],
     providers: [

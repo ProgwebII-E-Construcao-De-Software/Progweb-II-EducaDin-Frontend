@@ -11,20 +11,20 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create2 } from '../fn/expense-controller/create-2';
-import { Create2$Params } from '../fn/expense-controller/create-2';
-import { deleteItems2 } from '../fn/expense-controller/delete-items-2';
-import { DeleteItems2$Params } from '../fn/expense-controller/delete-items-2';
+import { create3 } from '../fn/expense-controller/create-3';
+import { Create3$Params } from '../fn/expense-controller/create-3';
+import { deleteItems3 } from '../fn/expense-controller/delete-items-3';
+import { DeleteItems3$Params } from '../fn/expense-controller/delete-items-3';
 import { ExpenseDto } from '../models/expense-dto';
 import { ExpenseListDto } from '../models/expense-list-dto';
-import { getById2 } from '../fn/expense-controller/get-by-id-2';
-import { GetById2$Params } from '../fn/expense-controller/get-by-id-2';
-import { listAll2 } from '../fn/expense-controller/list-all-2';
-import { ListAll2$Params } from '../fn/expense-controller/list-all-2';
-import { remove2 } from '../fn/expense-controller/remove-2';
-import { Remove2$Params } from '../fn/expense-controller/remove-2';
-import { update2 } from '../fn/expense-controller/update-2';
-import { Update2$Params } from '../fn/expense-controller/update-2';
+import { getById3 } from '../fn/expense-controller/get-by-id-3';
+import { GetById3$Params } from '../fn/expense-controller/get-by-id-3';
+import { listAll3 } from '../fn/expense-controller/list-all-3';
+import { ListAll3$Params } from '../fn/expense-controller/list-all-3';
+import { remove3 } from '../fn/expense-controller/remove-3';
+import { Remove3$Params } from '../fn/expense-controller/remove-3';
+import { update3 } from '../fn/expense-controller/update-3';
+import { Update3$Params } from '../fn/expense-controller/update-3';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseControllerService extends BaseService {
@@ -32,176 +32,176 @@ export class ExpenseControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById2()` */
-  static readonly GetById2Path = '/1.0/expenses/{id}';
+  /** Path part for operation `getById3()` */
+  static readonly GetById3Path = '/1.0/expenses/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById2()` instead.
+   * To access only the response body, use `getById3()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById2$Response(params: GetById2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return getById2(this.http, this.rootUrl, params, context);
+  getById3$Response(params: GetById3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return getById3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById2$Response()` instead.
+   * To access the full response (for headers, for example), `getById3$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById2(params: GetById2$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.getById2$Response(params, context).pipe(
+  getById3(params: GetById3$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.getById3$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `update2()` */
-  static readonly Update2Path = '/1.0/expenses/{id}';
+  /** Path part for operation `update3()` */
+  static readonly Update3Path = '/1.0/expenses/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update2()` instead.
+   * To access only the response body, use `update3()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update2$Response(params: Update2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return update2(this.http, this.rootUrl, params, context);
+  update3$Response(params: Update3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return update3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update2$Response()` instead.
+   * To access the full response (for headers, for example), `update3$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update2(params: Update2$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.update2$Response(params, context).pipe(
+  update3(params: Update3$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.update3$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `remove2()` */
-  static readonly Remove2Path = '/1.0/expenses/{id}';
+  /** Path part for operation `remove3()` */
+  static readonly Remove3Path = '/1.0/expenses/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove2()` instead.
+   * To access only the response body, use `remove3()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove2$Response(params: Remove2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return remove2(this.http, this.rootUrl, params, context);
+  remove3$Response(params: Remove3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return remove3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove2$Response()` instead.
+   * To access the full response (for headers, for example), `remove3$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove2(params: Remove2$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.remove2$Response(params, context).pipe(
+  remove3(params: Remove3$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.remove3$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll2()` */
-  static readonly ListAll2Path = '/1.0/expenses';
+  /** Path part for operation `listAll3()` */
+  static readonly ListAll3Path = '/1.0/expenses';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll2()` instead.
+   * To access only the response body, use `listAll3()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll2$Response(params?: ListAll2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-    return listAll2(this.http, this.rootUrl, params, context);
+  listAll3$Response(params?: ListAll3$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return listAll3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll2$Response()` instead.
+   * To access the full response (for headers, for example), `listAll3$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll2(params?: ListAll2$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
-    return this.listAll2$Response(params, context).pipe(
+  listAll3(params?: ListAll3$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.listAll3$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
     );
   }
 
-  /** Path part for operation `create2()` */
-  static readonly Create2Path = '/1.0/expenses';
+  /** Path part for operation `create3()` */
+  static readonly Create3Path = '/1.0/expenses';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create2()` instead.
+   * To access only the response body, use `create3()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create2$Response(params: Create2$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return create2(this.http, this.rootUrl, params, context);
+  create3$Response(params: Create3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return create3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create2$Response()` instead.
+   * To access the full response (for headers, for example), `create3$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create2(params: Create2$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.create2$Response(params, context).pipe(
+  create3(params: Create3$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.create3$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems2()` */
-  static readonly DeleteItems2Path = '/1.0/expenses/';
+  /** Path part for operation `deleteItems3()` */
+  static readonly DeleteItems3Path = '/1.0/expenses/';
 
   /**
    * Método utilizado para remover varias entidades pelos ids informados
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems2()` instead.
+   * To access only the response body, use `deleteItems3()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems2$Response(params: DeleteItems2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-    return deleteItems2(this.http, this.rootUrl, params, context);
+  deleteItems3$Response(params: DeleteItems3$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return deleteItems3(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover varias entidades pelos ids informados
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems2$Response()` instead.
+   * To access the full response (for headers, for example), `deleteItems3$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems2(params: DeleteItems2$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
-    return this.deleteItems2$Response(params, context).pipe(
+  deleteItems3(params: DeleteItems3$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.deleteItems3$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
     );
   }

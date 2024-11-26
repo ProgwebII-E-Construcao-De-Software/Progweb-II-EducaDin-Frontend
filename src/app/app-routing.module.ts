@@ -18,7 +18,8 @@ const routes: Routes = [
             ...expensesRoutes,
             ...goalsRoutes,
             ...dashboardRoutes,
-            ...settingsRoutes
+            ...settingsRoutes,
+            // { path: '', redirectTo: '/', pathMatch: 'full' },
         ]
 
     },

@@ -16,3 +16,5 @@ export { IncomeDto } from './models/income-dto';
 export { IncomeDtoCreateUpdate } from './models/income-dto-create-update';
 export { IncomeListDto } from './models/income-list-dto';
 export { MessageResponse } from './models/message-response';
+export { NotificationDto } from './models/notification-dto';
+export { NotificationPreferenceDto } from './models/notification-preference-dto';

@@ -8,14 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { IncomeListDto } from '../../models/income-list-dto';
+import { IncomeDto } from '../../models/income-dto';
 
-export interface ListAll$Params {
+export interface Remove1$Params {
+  id: number;
 }
 
-export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-  const rb = new RequestBuilder(rootUrl, listAll.PATH, 'get');
+export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+  const rb = new RequestBuilder(rootUrl, remove1.PATH, 'delete');
   if (params) {
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -23,9 +25,9 @@ export function listAll(http: HttpClient, rootUrl: string, params?: ListAll$Para
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<IncomeListDto>>;
+      return r as StrictHttpResponse<IncomeDto>;
     })
   );
 }
 
-listAll.PATH = '/1.0/incomes';
+remove1.PATH = '/1.0/incomes/{id}';

@@ -8,16 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ExpenseListDto } from '../../models/expense-list-dto';
+import { ExpenseDto } from '../../models/expense-dto';
 
-export interface DeleteItems2$Params {
-      body: Array<number>
+export interface Remove3$Params {
+  id: number;
 }
 
-export function deleteItems2(http: HttpClient, rootUrl: string, params: DeleteItems2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-  const rb = new RequestBuilder(rootUrl, deleteItems2.PATH, 'delete');
+export function remove3(http: HttpClient, rootUrl: string, params: Remove3$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+  const rb = new RequestBuilder(rootUrl, remove3.PATH, 'delete');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -25,9 +25,9 @@ export function deleteItems2(http: HttpClient, rootUrl: string, params: DeleteIt
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<ExpenseListDto>>;
+      return r as StrictHttpResponse<ExpenseDto>;
     })
   );
 }
 
-deleteItems2.PATH = '/1.0/expenses/';
+remove3.PATH = '/1.0/expenses/{id}';

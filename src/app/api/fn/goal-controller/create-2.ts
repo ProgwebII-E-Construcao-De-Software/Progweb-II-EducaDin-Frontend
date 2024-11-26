@@ -9,15 +9,16 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { GoalDto } from '../../models/goal-dto';
+import { GoalDtoCreate } from '../../models/goal-dto-create';
 
-export interface Remove1$Params {
-  id: number;
+export interface Create2$Params {
+      body: GoalDtoCreate
 }
 
-export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-  const rb = new RequestBuilder(rootUrl, remove1.PATH, 'delete');
+export function create2(http: HttpClient, rootUrl: string, params: Create2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+  const rb = new RequestBuilder(rootUrl, create2.PATH, 'post');
   if (params) {
-    rb.path('id', params.id, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -30,4 +31,4 @@ export function remove1(http: HttpClient, rootUrl: string, params: Remove1$Param
   );
 }
 
-remove1.PATH = '/1.0/goals/{id}';
+create2.PATH = '/1.0/goals';

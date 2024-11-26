@@ -13,5 +13,6 @@ export const settingsRoutes: Routes = [
                 component: SettingsFormComponent
             }
         ],
+        canActivate: [],
     }
 ]

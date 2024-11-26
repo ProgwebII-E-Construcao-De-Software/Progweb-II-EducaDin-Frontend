@@ -8,29 +8,26 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { GoalDto } from '../../models/goal-dto';
-import { GoalDtoUpdate } from '../../models/goal-dto-update';
+import { NotificationDto } from '../../models/notification-dto';
 
-export interface Update1$Params {
-  id: number;
-      body: GoalDtoUpdate
+export interface CreateNotification$Params {
+      body: NotificationDto
 }
 
-export function update1(http: HttpClient, rootUrl: string, params: Update1$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-  const rb = new RequestBuilder(rootUrl, update1.PATH, 'put');
+export function createNotification(http: HttpClient, rootUrl: string, params: CreateNotification$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationDto>> {
+  const rb = new RequestBuilder(rootUrl, createNotification.PATH, 'post');
   if (params) {
-    rb.path('id', params.id, {});
     rb.body(params.body, 'application/json');
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'blob', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<GoalDto>;
+      return r as StrictHttpResponse<NotificationDto>;
     })
   );
 }
 
-update1.PATH = '/1.0/goals/{id}';
+createNotification.PATH = '/1.0/notifications';
