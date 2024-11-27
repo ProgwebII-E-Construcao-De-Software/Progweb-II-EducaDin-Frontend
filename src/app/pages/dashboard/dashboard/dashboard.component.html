@@ -6,17 +6,21 @@
                 <mat-card-title>Bar</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-
+                <div class="card flex justify-content-center">
+                    <p-chart type="doughnut" [data]="data" [options]="options"/>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
     <div class="col-lg-6 mat-grid-tile">
         <mat-card>
             <mat-card-header>
-                <mat-card-title>Bar Horizontal</mat-card-title>
+                <mat-card-title>Stacked Bar</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-
+                <div class="card">
+                    <p-chart type="bar" [data]="data" [options]="options"/>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
@@ -26,7 +30,9 @@
                 <mat-card-title>Radar</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-
+                <div class="card flex justify-content-center">
+                    <p-chart type="pie" [data]="data" [options]="options" />
+                </div>
             </mat-card-content>
         </mat-card>
     </div>

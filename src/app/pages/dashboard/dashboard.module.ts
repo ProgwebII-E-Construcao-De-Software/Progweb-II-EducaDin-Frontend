@@ -7,15 +7,13 @@ import {MatOptionModule} from "@angular/material/core";
 import { MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgxEchartsModule} from "ngx-echarts";
 import {MatCardModule} from "@angular/material/card";
-import {DashboardBarComponent} from "./dashboard/dashboard-bar.component";
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
     declarations: [
         DashboardComponent,
-        DashboardBarComponent
     ],
     imports: [
         CommonModule,
@@ -26,7 +24,7 @@ import {DashboardBarComponent} from "./dashboard/dashboard-bar.component";
         MatSelectModule,
         MatOptionModule,
         MatCardModule,
-        NgxEchartsModule,
+        ChartModule,
     ]
 })
 export class DashboardModule {
