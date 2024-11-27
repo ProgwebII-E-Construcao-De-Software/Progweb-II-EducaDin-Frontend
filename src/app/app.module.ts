@@ -31,9 +31,7 @@ import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.modu
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
-import {NgxEchartsModule} from "ngx-echarts";
-import {Chart} from "chart.js";
-
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
     declarations: [
@@ -72,7 +70,7 @@ import {Chart} from "chart.js";
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
-        NgxEchartsModule,
+        ChartModule
 
     ],
     providers: [
