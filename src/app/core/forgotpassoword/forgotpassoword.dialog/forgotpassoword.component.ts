@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatDialogRef} from "@angular/material/dialog";
 
@@ -10,6 +10,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class ForgotpassowordComponent implements OnInit {
     formGroup!: FormGroup;
+    emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
     constructor(
         private formBuilder: FormBuilder,
@@ -28,5 +29,6 @@ export class ForgotpassowordComponent implements OnInit {
         void {
         this.dialogRef.close();
     }
+
 
 }

@@ -25,7 +25,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
 import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
 import {AuthenticationModule} from './architecture/authentication/authentication/authentication.module';
-import {DashboardModule} from "./pages/dashboard/dashboard.module";
+import {DashboardModule} from "./pages/dashboard/dashboard-module";
 import {SettingsModule} from "./pages/settings/settings.module";
 import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
