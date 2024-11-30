@@ -1,0 +1,16 @@
+@import "../home-security-user/home-security-user.component";
+mat-card{
+  box-shadow: none;
+}
+
+.fix-col-sm {
+  min-width: 116px;
+  max-width: 116px;
+}
+/* Estilos para quando a tela for menor que 700px */
+@media (max-width: 768px) {
+  .fix-col-sm{
+    min-width: 250px;
+    max-width: 250px;
+  }
+}

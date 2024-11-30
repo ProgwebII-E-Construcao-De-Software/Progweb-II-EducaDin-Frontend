@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-card-title>
+    <div class="form-mat-card-title">
+      <div>
+        Telefones
+      </div>
+      <button mat-button mat-raised-button class="mat-accent" type="button" (click)="openDialogTelefone(dialogTelefone)"
+              *ngIf="!crudAction.isActionView()"
+      >
+        Adicionar Telefone
+      </button>
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+    <div *ngIf="dataSourceTelefones.data.length !== 0">
+      <div class="table-detail">
+        <mat-table [dataSource]="dataSourceTelefones">
+
+          <ng-container matColumnDef="tipoTelefone" class="flex-grow">
+            <mat-header-cell *matHeaderCellDef> Tipo Telefone </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.typeDescription }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ddd">
+            <mat-header-cell *matHeaderCellDef> DDD </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.ddd }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="numeroTelefone">
+            <mat-header-cell *matHeaderCellDef> Número </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.number }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="remover">
+            <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="removePhone(element)" type="button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Dialog -->
+<ng-template #dialogTelefone>
+  <form [formGroup]="phoneForm">
+    <mat-card class="container-column gap-md">
+      <mat-card-title>
+        <span>Adicionar Telefone</span>
+      </mat-card-title>
+      <mat-card-content class="container-column gap-sm">
+        <div class="row center-align gap-sm">
+          <mat-form-field class="flex-2">
+            <mat-select formControlName="type" placeholder="Tipo Telefone" required>
+              <mat-option [value]="undefined">Selecione</mat-option>
+              <mat-option *ngFor="let tipoTelefone of phoneTypeList" [value]="tipoTelefone">
+                {{ tipoTelefone.descricao }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="flex-1">
+            <mat-label>DDD</mat-label>
+            <input matInput formControlName="ddd" placeholder="Informe o DDD" maxlength="2" mask="00">
+          </mat-form-field>
+
+          <mat-form-field class="flex-2">
+            <mat-label>Número</mat-label>
+            <input matInput formControlName="number" placeholder="Informe o Número" maxlength="11"
+                   [mask]="phoneMask" (change)="onTelefoneChange()">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="my-mat-tab-actions">
+        <button type="button" mat-button mat-raised-button (click)="closeDialogs()" class="mat-warn flex-grow-sm" >Cancelar</button>
+        <button type="submit" mat-button mat-raised-button (click)="addPhone()" class="mat-primary flex-grow-sm">Adicionar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-template>

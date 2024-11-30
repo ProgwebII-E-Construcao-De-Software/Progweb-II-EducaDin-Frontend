@@ -1,0 +1,8 @@
+@import '../home-security-user/home-security-user.component';
+mat-card{
+  box-shadow: none;
+}
+mat-card-title{
+  border-bottom: solid 1px;
+  border-color: var(--mat-sidenav-container-text-color);
+}
