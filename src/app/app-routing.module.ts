@@ -12,19 +12,24 @@ import {mainpainelRoutes} from "./pages/mainpainel/mainpainel-routing.module";
 
 const routes: Routes = [
     {
-        path: "home",
+        path: "",
         component: HomeComponent,
         children: [
-            ...authenticationRoutes,
             ...mainpainelRoutes,
             ...incomesRoutes,
             ...expensesRoutes,
             ...goalsRoutes,
             ...dashboardRoutes,
             ...settingsRoutes,
-            { path: '', redirectTo: '/', pathMatch: 'full' },
+            { path: '', redirectTo: '/painel', pathMatch: 'full' },
         ]
 
+    },
+    {
+        path: "access",
+        children: [
+            ...authenticationRoutes
+        ]
     },
 ];
 
