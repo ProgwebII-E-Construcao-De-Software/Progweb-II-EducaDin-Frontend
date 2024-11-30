@@ -8,24 +8,24 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { CategoryDto } from '../../models/category-dto';
+import { GoalListDto } from '../../models/goal-list-dto';
 
-export interface GetExpenseCategories$Params {
+export interface GoalControllerListAll$Params {
 }
 
-export function getExpenseCategories(http: HttpClient, rootUrl: string, params?: GetExpenseCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
-  const rb = new RequestBuilder(rootUrl, getExpenseCategories.PATH, 'get');
+export function goalControllerListAll(http: HttpClient, rootUrl: string, params?: GoalControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
+  const rb = new RequestBuilder(rootUrl, goalControllerListAll.PATH, 'get');
   if (params) {
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: 'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<CategoryDto>>;
+      return r as StrictHttpResponse<Array<GoalListDto>>;
     })
   );
 }
 
-getExpenseCategories.PATH = '/v1/categories/expenses';
+goalControllerListAll.PATH = '/v1/goals';

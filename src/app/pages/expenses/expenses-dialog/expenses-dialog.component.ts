@@ -103,7 +103,7 @@ export class ExpensesDialogComponent implements OnInit {
     }
 
     private editExpense(id: number) {
-        this.expenseService.getById3({id}).subscribe(
+        this.expenseService.expenseControllerGetById({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
@@ -139,7 +139,7 @@ export class ExpensesDialogComponent implements OnInit {
     private includeExpense() {
         if (this.formGroup.valid) {
             console.log("Dados:", this.formGroup.value);
-            this.expenseService.create3({body: this.formGroup.value}).subscribe(
+            this.expenseService.expenseControllerCreate({body: this.formGroup.value}).subscribe(
                 retorn => {
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
                     window.location.reload();
@@ -155,7 +155,7 @@ export class ExpensesDialogComponent implements OnInit {
     private editingExpense() {
         const formData: ExpenseDto = this.formGroup.value;
         console.log("Dados:", formData);
-        this.expenseService.update3({id: this.id, body: formData}).subscribe(
+        this.expenseService.expenseControllerUpdate({id: this.id, body: formData}).subscribe(
             retorn => {
                 this.confirmAction(retorn, this.ACAO_EDITAR);
                 this.snackBar.open('Gasto Editado', 'Close', {duration: 3000});

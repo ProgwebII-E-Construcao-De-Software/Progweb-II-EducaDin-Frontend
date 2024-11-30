@@ -45,7 +45,7 @@ export class IncomesTableComponent implements OnInit {
     }
 
     public listIncomes() {
-        this.incomeService.listAll1().subscribe(data => {
+        this.incomeService.incomeControllerListAll().subscribe(data => {
             this.incomeTableDataSource.data = data;
             console.log(data);
         })
@@ -74,7 +74,7 @@ export class IncomesTableComponent implements OnInit {
     removeIncomes(incomes: IncomeListDto): void {
         if (incomes.id !== undefined) {
             console.log(`Excluir item: ${incomes.description}`);
-            this.incomeService.remove1({id: incomes.id})
+            this.incomeService.incomeControllerRemove({id: incomes.id})
                 .subscribe(
                     retorn => {
                         this.listIncomes();

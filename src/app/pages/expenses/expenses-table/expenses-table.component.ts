@@ -41,7 +41,7 @@ export class ExpensesTableComponent implements OnInit {
     }
 
     public listExpenses() {
-        this.expensesService.listAll3().subscribe(data => {
+        this.expensesService.expenseControllerListAll().subscribe(data => {
             this.expensesTableDataSource.data = data;
             console.log(data);
         })
@@ -68,7 +68,7 @@ export class ExpensesTableComponent implements OnInit {
     removeExpenses(expenses: ExpenseListDto): void {
         if (expenses.id !== undefined) {
             console.log(`Excluir item: ${expenses.description}`);
-            this.expensesService.remove3({id: expenses.id})
+            this.expensesService.expenseControllerRemove({id: expenses.id})
                 .subscribe(
                     retorn => {
                         this.listExpenses();
