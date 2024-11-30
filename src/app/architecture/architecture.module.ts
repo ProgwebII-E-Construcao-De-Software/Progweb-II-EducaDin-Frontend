@@ -56,6 +56,7 @@ const MY_DATE_FORMATS: MatDateFormats  = {
     {provide: HTTP_INTERCEPTORS,              useClass: SecurityInterceptor, multi: true},
     {provide: LOCALE_ID, useValue: 'pt'},
     {provide: MAT_DATE_LOCALE, useValue: 'pt_br'},
+    // {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     {provide: MatPaginatorIntl, useValue: getPtBrPaginatorIntl()}
   ],
