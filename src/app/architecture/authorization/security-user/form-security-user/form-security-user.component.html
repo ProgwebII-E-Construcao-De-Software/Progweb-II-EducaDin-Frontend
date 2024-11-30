@@ -153,7 +153,7 @@
           <a title="Cancelar" (click)="cancelar()" mat-button mat-raised-button class="mat-warn flex-grow-sm" *ngIf="!crudAction.isActionView()">
             <span>Cancelar</span>
           </a>
-          <button type="submit" title="Salvar" mat-button mat-raised-button class="mat-primary flex-grow-sm"
+          <button type="submit" title="Salvar" mat-button mat-button class="mat-primary flex-grow-sm"
                   *ngIf="crudAction.isActionAlter() || crudAction.isActionCreate()">
             <span>Salvar</span>
           </button>

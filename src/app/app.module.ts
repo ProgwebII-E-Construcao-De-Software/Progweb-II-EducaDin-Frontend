@@ -24,7 +24,7 @@ import {MessageModule} from "./architecture/message/message.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
 import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
-import {AuthenticationModule} from './architecture/authentication/authentication/authentication.module';
+import {AuthenticationModule} from './architecture/authentication/authentication.module';
 import {DashboardModule} from "./pages/dashboard/dashboard-module";
 import {SettingsModule} from "./pages/settings/settings.module";
 import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.module";
@@ -32,6 +32,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {ChartModule} from "primeng/chart";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {SecurityInterceptor} from "./architecture/security/security.interceptor";
+import {AppInterceptor} from "./architecture/app.interceptor";
+import {SecurityService} from "./architecture/security/security.service";
+import {config} from "./architecture/security/config";
+import {SecurityModule} from "./architecture/security/security.module";
+import {entityNameToValue} from "@angular/compiler-cli/src/ngtsc/reflection";
+import {MainpainelModule} from "./pages/mainpainel/mainpainel.module";
+import {
+    AuthenticationComponent
+} from "./architecture/authentication/authentication-component/authentication.component";
 
 @NgModule({
     declarations: [
@@ -70,12 +81,27 @@ import {ChartModule} from "primeng/chart";
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
-        ChartModule
+        ChartModule,
+        MainpainelModule
 
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
         provideAnimationsAsync(),
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SecurityInterceptor,
+            multi: true
+        },
+        SecurityService,
+        { provide: config, useValue: config },
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
+
     ],
 
     bootstrap: [AppComponent]

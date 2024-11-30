@@ -4,7 +4,7 @@
       <div class="flex-grow-sm">
         Manutenção de Usuário ( {{crudAction.labelAction}} )
       </div>
-      <button mat-button mat-raised-button color="primary"
+      <button mat-button mat-button color="primary"
               [routerLink]="[baseURL,SecurityUserPaths.RELATIVE_NEW]"
               class="flex-grow-sm"
               *ngIf="crudAction.isActionList() && HAS_PERMISSION_CREATE"

@@ -4,6 +4,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
 import {delay, filter} from "rxjs";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {SecurityService} from "../../architecture/security/security.service";
 
 @UntilDestroy()
 @Component({
@@ -19,6 +20,7 @@ export class HomeComponent {
     constructor(
         private observer: BreakpointObserver,
         private router: Router,
+        protected securityService: SecurityService,
     ) {
     }
 
@@ -48,7 +50,7 @@ export class HomeComponent {
             });
     }
 
-  close(){
+  logout(){
     this.router.navigate(['/access']);
   }
 

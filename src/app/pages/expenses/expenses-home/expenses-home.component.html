@@ -5,11 +5,11 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-actions class="custom-actions">
-        <button mat-raised-button class="add-button" (click)="openDialogAddExpenses()">
+        <button mat-button class="add-button" (click)="openDialogAddExpenses()">
             <mat-icon>add</mat-icon>
             <span>Adicionar</span>
         </button>
-        <button mat-raised-button class="remove-button" [routerLink]="['/']">
+        <button mat-button class="remove-button" [routerLink]="['/']">
             <mat-icon>remove</mat-icon>
             <span>Remover</span>
         </button>

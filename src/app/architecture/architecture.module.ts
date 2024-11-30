@@ -13,7 +13,7 @@ import {MatPaginatorIntl} from "@angular/material/paginator";
 import {getPtBrPaginatorIntl} from "./component/portuguese-mat-paginator-intl";
 import {MomentDatePipe} from "./pipes/moment-date.pipe";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from "@angular/material/core";
-import {AuthenticationModule} from "./authentication/authentication/authentication.module";
+import {AuthenticationModule} from "./authentication/authentication.module";
 
 const MY_DATE_FORMATS: MatDateFormats  = {
   parse: {
