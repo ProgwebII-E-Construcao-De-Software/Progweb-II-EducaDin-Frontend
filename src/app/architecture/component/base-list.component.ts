@@ -9,6 +9,7 @@ import {MatSort} from "@angular/material/sort";
 import {PageDto} from "./page-dto";
 import {Pageable} from "../../api/models/pageable";
 import {catchError, map} from "rxjs/operators";
+import {SearchFieldValue} from "../../api/models/search-field-value";
 
 export type BaseListComponentConfig<MODEL extends GenericDto> = {
   ENTITY_NAME_LABEL: string;
@@ -16,7 +17,8 @@ export type BaseListComponentConfig<MODEL extends GenericDto> = {
   DELETE_ROLE: string,
   METHOD_LIST?: () => Observable<MODEL[]>,
   METHOD_LIST_PAGED?: (params: {page: Pageable}, context?: HttpContext) => Observable<PageDto<MODEL>>,
-  METHOD_REMOVE: (params: { id: number }, context?: HttpContext) => Observable<MODEL>
+  METHOD_REMOVE: (params: { id: number }, context?: HttpContext) => Observable<MODEL>,
+  USE_EXTERNAL_SOURCE?: boolean
 };
 
 @NgModule()
@@ -27,10 +29,10 @@ export abstract class BaseListComponent<MODEL extends GenericDto> extends BaseCo
   public HAS_PERMISSION_UPDATE: boolean;
   public HAS_PERMISSION_DELETE: boolean;
 
-  private _entityNameLabel: string;
-  private _listMethod?: () => Observable<MODEL[]>;
-  private _listMethodPage?:  (params: {page: Pageable}, context?: HttpContext) => Observable<PageDto<MODEL>>;
-  private _removeMethod: (params: { id: number }, context?: HttpContext) => Observable<MODEL>;
+  protected _entityNameLabel: string;
+  protected _listMethod?: () => Observable<MODEL[]>;
+  protected _listMethodPage?:  (params: {page: Pageable}, context?: HttpContext) => Observable<PageDto<MODEL>>;
+  protected _removeMethod: (params: { id: number }, context?: HttpContext) => Observable<MODEL>;
 
   public setListMethodPage(method: (params: {page: Pageable}, context?: HttpContext) => Observable<PageDto<MODEL>>){
     this._listMethodPage = method ;
@@ -43,6 +45,7 @@ export abstract class BaseListComponent<MODEL extends GenericDto> extends BaseCo
 
 
   protected _useBackendPagination: boolean = false;
+  protected _useExternalSource: boolean = false;
   totalRows = 0;
   pageSize = 10;
   currentPage = 0;
@@ -90,8 +93,9 @@ export abstract class BaseListComponent<MODEL extends GenericDto> extends BaseCo
     this._removeMethod = componentConfigs.METHOD_REMOVE;
     this._listMethod = componentConfigs.METHOD_LIST;
     this._listMethodPage = componentConfigs.METHOD_LIST_PAGED;
-    if(this._listMethodPage == undefined && this._listMethod == undefined){
-      throw "Defina nas configurações do componente METHOD_LIST_PAGED ou METHOD_LIST";
+    this._useExternalSource = componentConfigs.USE_EXTERNAL_SOURCE ?? false;
+    if(this._listMethodPage == undefined && this._listMethod == undefined && !this._useExternalSource){
+      throw "Defina nas configurações do componente METHOD_LIST_PAGED ou METHOD_LIST ou USE_EXTERNAL_SOURCE=true";
     }
     if(this._listMethodPage != undefined){
       this._useBackendPagination = true;
@@ -130,6 +134,7 @@ export abstract class BaseListComponent<MODEL extends GenericDto> extends BaseCo
   };
 
   protected getData() {
+    if(this._useExternalSource) { return; };
     this.getModelData().subscribe(data => {
       this.confDataResult(data || [])
     });
@@ -163,7 +168,7 @@ export abstract class BaseListComponent<MODEL extends GenericDto> extends BaseCo
     }
   }
 
-  private initObservablePageGetData() {
+  protected initObservablePageGetData() {
     if(this._listMethodPage != undefined){
       merge(this.paginator.page, this.tableSort.sortChange)
         .pipe(

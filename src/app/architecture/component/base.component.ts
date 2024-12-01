@@ -6,7 +6,7 @@ import {CrudActionService} from "./crud-action.service";
 import {Subscription} from "rxjs";
 import {MessageService} from "../message/message.service";
 import {ErrorService} from "../error.service";
-
+import {SecurityService} from "../security/security.service";
 
 @NgModule()
 export abstract class BaseComponent<MODEL> implements OnInit, OnDestroy {
@@ -40,6 +40,7 @@ export abstract class BaseComponent<MODEL> implements OnInit, OnDestroy {
   protected crudActionService: CrudActionService = inject(CrudActionService);
   protected messageService: MessageService = inject(MessageService);
   protected errorService: ErrorService = inject(ErrorService);
+  protected securityService: SecurityService = inject(SecurityService);
   protected formBuilder: FormBuilder = inject(FormBuilder);
 
   protected constructor(

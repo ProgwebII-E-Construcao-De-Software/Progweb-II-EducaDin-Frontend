@@ -15,8 +15,6 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
-import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
-import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
@@ -32,24 +30,20 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {ChartModule} from "primeng/chart";
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import {SecurityInterceptor} from "./architecture/security/security.interceptor";
-import {AppInterceptor} from "./architecture/app.interceptor";
-import {SecurityService} from "./architecture/security/security.service";
-import {config} from "./architecture/security/config";
 import {SecurityModule} from "./architecture/security/security.module";
-import {entityNameToValue} from "@angular/compiler-cli/src/ngtsc/reflection";
 import {MainpainelModule} from "./pages/mainpainel/mainpainel.module";
-import {
-    AuthenticationComponent
-} from "./architecture/authentication/authentication-component/authentication.component";
+import {ApiModule} from "./api/api.module";
+import {environment} from "./environments/environment";
+import {ConfirmDialog} from "primeng/confirmdialog";
+import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
+import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         ConfirmationDialog,
-        ErrosDialogComponent,
+        ErrosDialogComponent
     ],
     imports: [
         AppRoutingModule,
@@ -82,25 +76,31 @@ import {
         MatSelectModule,
         MatOptionModule,
         ChartModule,
-        MainpainelModule
+        MainpainelModule,
+        SecurityModule.forRoot({
+            nameStorage: environment.nameStorage,
+            loginRouter: '/auth/login'
+        }),
+        ApiModule.forRoot({rootUrl: environment.apiUrl}),
 
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
         provideAnimationsAsync(),
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AppInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: SecurityInterceptor,
-            multi: true
-        },
-        SecurityService,
-        { provide: config, useValue: config },
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: AppInterceptor,
+        //     multi: true
+        // },
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: SecurityInterceptor,
+        //     multi: true
+        // },
+        // SecurityService,
+        // { provide: config, useValue: config },
+        // {provide: LocationStrategy, useClass: HashLocationStrategy},
 
     ],
 

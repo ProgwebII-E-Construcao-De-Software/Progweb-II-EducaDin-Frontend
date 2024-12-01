@@ -4,9 +4,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
 import {Message, MessageService} from "../../../architecture/message/message.service";
 import {ExpenseDto} from "../../../api/models/expense-dto";
-import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
+import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-expenses-dialog',

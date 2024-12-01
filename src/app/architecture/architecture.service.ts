@@ -6,10 +6,9 @@ import {LoaderService} from "./loader/loader.service";
 import {LoaderDialogComponent} from "./loader/loader-dialog/loader-dialog.component";
 import {SecurityService} from "./security/security.service";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "./authentication/authentication.service";
 import {User} from "./security/User";
 import {GenericDialogComponent} from "./message/generic-dialog/generic-dialog.component";
-import {AuthApiService} from "../api/services/auth-api.service";
-import {CredencialDto} from "../api/models/credencial-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,7 @@ export class ArchitectureService {
     private messageService: MessageService,
     private loaderService: LoaderService,
     private securityService: SecurityService,
-    private authenticationService: AuthApiService,
+    private authenticationService: AuthenticationService,
     ) { }
 
   init(): void {
@@ -77,48 +76,40 @@ export class ArchitectureService {
    *
    * @private
    */
-  private configureSecurityActions(): void {
-      this.securityService.onRefresh.subscribe((refreshToken: string) => {
-          this.authenticationService.refresh({ refreshToken }).subscribe({
-              next: (data: CredencialDto[]) => {
-                  if (data && data.length > 0) {
-                      // Obtém o primeiro objeto da lista retornada
-                      const credencial = data[0];
-
-                      const user: User = {
-                          id: credencial.id || 0,
-                          name: credencial.name || '',
-                          login: credencial.login || '',
-                          expiresIn: credencial.expiresIn || 3600,
-                          accessToken: credencial.accessToken || '',
-                          refreshToken: credencial.refreshToken || '',
-                          roles: credencial.roles || []
-                      };
-
-                      // Inicializa o usuário com os dados obtidos
-                      this.securityService.init(user);
-                  } else {
-                      console.warn('Nenhuma credencial válida recebida.');
-                  }
-              },
-              error: (error: any) => {
-                  console.error('Erro ao atualizar o token:', error);
-                  this.messageService.addMsgInf('Erro ao atualizar o token. Por favor, tente novamente.');
-              }
+  private configureSecurityActions() {
+    this.securityService.onRefresh.subscribe((refreshToken: string) => {
+      this.authenticationService.refresh(refreshToken)
+        .subscribe(
+          {
+            next: data => {
+              const user: User = {
+                id: data.id || 0,
+                name: data.name || '',
+                login: data.login || '',
+                expiresIn: data.expiresIn || 3600,
+                accessToken: data.accessToken || '',
+                refreshToken: data.refreshToken || '',
+                roles: data.roles
+              };
+              this.securityService.init(user);
+            },
+            error: error => {
+              console.log(error);
+              this.messageService.addMsgInf(error);
+            }
           });
-      });
+    });
 
-      this.securityService.onForbidden.subscribe(() => {
-          this.messageService.addMsgWarning('Sem acesso.');
-          const loginRoute = this.securityService.securityConfig?.loginRouter || '/login';
-          this.router.navigate([loginRoute]);
-      });
+    this.securityService.onForbidden.subscribe(() => {
+      this.messageService.addMsgWarning("Sem acesso");
+      //this.router.navigate([this.config.loginRouter]);
+      this.router.navigate([this.securityService.securityConfig.loginRouter]);
+    });
 
-      this.securityService.onUnauthorized.subscribe(() => {
-          this.messageService.addMsgWarning('Não autorizado!');
-          this.router.navigate(['/']);
-      });
+    this.securityService.onUnauthorized.subscribe(() => {
+      this.messageService.addMsgWarning("Não autorizado!");
+      this.router.navigate(['/']);
+      //this.securityService.invalidate();
+    });
   }
-
-
 }

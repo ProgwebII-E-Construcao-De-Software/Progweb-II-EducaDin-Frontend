@@ -6,6 +6,7 @@ import {ArchitectureService} from "./architecture.service";
 import {MessageService} from "./message/message.service";
 import {MessageModule} from "./message/message.module";
 import {LoaderModule} from "./loader/loader.module";
+import {AuthenticationModule} from "./authentication/authentication.module";
 import {SecurityInterceptor} from "./security/security.interceptor";
 import {HttpErrorInterceptor} from "./http-error.interceptor";
 import {AuthorizationModule} from "./authorization/authorization.module";
@@ -13,7 +14,7 @@ import {MatPaginatorIntl} from "@angular/material/paginator";
 import {getPtBrPaginatorIntl} from "./component/portuguese-mat-paginator-intl";
 import {MomentDatePipe} from "./pipes/moment-date.pipe";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from "@angular/material/core";
-import {AuthenticationModule} from "./authentication/authentication.module";
+import {MomentDateAdapter} from "@angular/material-moment-adapter";
 
 const MY_DATE_FORMATS: MatDateFormats  = {
   parse: {
@@ -56,7 +57,7 @@ const MY_DATE_FORMATS: MatDateFormats  = {
     {provide: HTTP_INTERCEPTORS,              useClass: SecurityInterceptor, multi: true},
     {provide: LOCALE_ID, useValue: 'pt'},
     {provide: MAT_DATE_LOCALE, useValue: 'pt_br'},
-    // {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     {provide: MatPaginatorIntl, useValue: getPtBrPaginatorIntl()}
   ],

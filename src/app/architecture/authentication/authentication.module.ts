@@ -1,36 +1,35 @@
-import {RouterModule, RouterOutlet} from '@angular/router';
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatCardModule} from "@angular/material/card";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
-import {MatIconModule} from "@angular/material/icon";
-import {AuthenticationComponent} from './authentication-component/authentication.component';
-import {authenticationRoutes} from './authentication.routing';
-import {AuthenticationHomeComponent} from "./authentication-home/authentication-home.component";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+
+import { AuthenticationComponent } from './authentication.component';
+import {AuthenticationService} from "./authentication.service";
+import {SharedMaterialModule} from "../shared-material/shared-material.module";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatCard, MatCardContent} from "@angular/material/card";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInput} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
+import {RouterModule} from "@angular/router";
+import {authenticationRoute} from "./authentication-routing.module";
+import {MessageModule} from "../message/message.module";
 
 
 @NgModule({
-    declarations: [
-        AuthenticationComponent,
-        AuthenticationHomeComponent
-    ],
+  declarations: [
+    AuthenticationComponent
+  ],
     imports: [
-        FormsModule,
         CommonModule,
-        RouterModule,
-        RouterModule.forChild(authenticationRoutes),
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatInputModule,
-        MatCardModule,
-        MatIconModule,
-        RouterOutlet
+        SharedMaterialModule,
+        RouterModule.forChild(authenticationRoute),
+        MessageModule,
     ],
-    providers: []
+  providers: [
+    AuthenticationService
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
-export class AuthenticationModule {
-}
+export class AuthenticationModule { }

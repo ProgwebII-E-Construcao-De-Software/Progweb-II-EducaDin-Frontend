@@ -4,15 +4,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IncomeControllerService} from "../../../api/services/income-controller.service";
 import {Message, MessageService} from "../../../architecture/message/message.service";
 import {IncomeDto} from "../../../api/models/income-dto";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
 import {CategoryDto} from "../../../api/models/category-dto";
 import {CategoryControllerService} from "../../../api/services/category-controller.service";
 import {IncomesTableComponent} from "../incomes-table/incomes-table.component";
+import {ConfirmDialogComponent} from "../../../architecture/message/confirm-mesage/confirm-dialog.component";
+import {ConfirmationDialogResult} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-earnings-dialog',
@@ -202,7 +200,7 @@ export class IncomesDialogComponent implements OnInit {
             titulo = 'Editado !!';
             mensagem = `${incomes.name} foi atualizado na tabela de Ganhos!`;
         }
-        const dialogRef = this.dialog.open(ConfirmationDialog, {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             data: {
                 titulo: titulo,
                 mensagem: mensagem,

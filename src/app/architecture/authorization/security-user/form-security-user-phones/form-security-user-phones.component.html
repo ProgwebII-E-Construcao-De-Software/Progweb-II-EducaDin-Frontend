@@ -4,7 +4,7 @@
       <div>
         Telefones
       </div>
-      <button mat-button mat-button class="mat-accent" type="button" (click)="openDialogTelefone(dialogTelefone)"
+      <button mat-button mat-raised-button class="mat-accent" type="button" (click)="openDialogTelefone(dialogTelefone)"
               *ngIf="!crudAction.isActionView()"
       >
         Adicionar Telefone
@@ -79,8 +79,8 @@
         </div>
       </mat-card-content>
       <mat-card-actions class="my-mat-tab-actions">
-        <button type="button" mat-button mat-button (click)="closeDialogs()" class="mat-warn flex-grow-sm" >Cancelar</button>
-        <button type="submit" mat-button mat-button (click)="addPhone()" class="mat-primary flex-grow-sm">Adicionar</button>
+        <button type="button" mat-button mat-raised-button (click)="closeDialogs()" class="mat-warn flex-grow-sm" >Cancelar</button>
+        <button type="submit" mat-button mat-raised-button (click)="addPhone()" class="mat-primary flex-grow-sm">Adicionar</button>
       </mat-card-actions>
     </mat-card>
   </form>
