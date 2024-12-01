@@ -1,7 +1,15 @@
 <div class="container">
+    <div class="info-container">
+        <h1>Bem-vindo ao EducaDin</h1>
+        <p>
+            No EducaDin, nosso objetivo é transformar a forma como você lida com suas finanças pessoais.
+            Com ferramentas simples e educativas, ajudamos você a controlar seus gastos, planejar metas
+            e aprender sobre educação financeira de forma prática.
+        </p>
+    </div>
     <mat-card>
         <mat-card-title class="logo-educadin">
-            <span class="educa">Educa</span><span class="din">Din</span>
+            <h1><strong class="educa">Educa</strong><strong class="din">Din</strong></h1>
         </mat-card-title>
         <mat-card-content>
             <form
@@ -32,9 +40,15 @@
 
                     </mat-form-field>
 
-                    <button mat-raised-button color="primary" type="submit" title="Entrar">
+                    <button mat-button class="button-login" color="primary" type="submit" title="Entrar">
                         <span>Entrar</span>
                     </button>
+
+                    <a class="forgot-password" href="#">Esqueceu a senha?</a>
+                    <p>
+                        <button mat-button type="button"  class="button-register" title="Criar conta" color="accent" class="create-account">
+                            Criar nova conta
+                        </button>
                 </div>
             </form>
         </mat-card-content>

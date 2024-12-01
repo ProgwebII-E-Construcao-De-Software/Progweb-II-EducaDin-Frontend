@@ -12,13 +12,20 @@
 }
 
 mat-card {
-  width: 300px;
+  width: 500px;
   display: flex;
+  height: 500px;
+  max-width: 90%;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  justify-content: space-between;
 }
-mat-card-title{
-    display: flex;
-    padding: 5px;
-    justify-content: center;
+
+mat-card-title {
+  display: flex;
+  padding: 5px;
+  justify-content: center;
 }
 
 .login-content {
@@ -27,11 +34,47 @@ mat-card-title{
   flex-direction: column;
   place-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
-.icon_size {
-  font-size: 4em;
-  //color: #393068;
-  margin-bottom: 40px;
-  margin-left: -1em;
+.educa {
+  color: #046F82;
+}
+
+.din {
+  color: #5FE564;
+}
+
+.info-container {
+  max-width: 400px;
+  padding: 1rem;
+  text-align: left;
+}
+
+.info-container h1 {
+  color: #84cb9f;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.info-container p {
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.forgot-password {
+  color: black;
+  cursor: pointer;
+  font-family: DM Roboto, sans-serif;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: darkgray;
+}
+
+.forgot-password:active {
+  color: black;
 }

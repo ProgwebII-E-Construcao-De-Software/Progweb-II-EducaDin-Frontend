@@ -21,7 +21,7 @@ const routes: Routes = [
             ...goalsRoutes,
             ...dashboardRoutes,
             ...settingsRoutes,
-            { path: '', redirectTo: '/', pathMatch: 'full' },
+            { path: '', redirectTo: '/painel', pathMatch: 'full' },
         ]
 
     },

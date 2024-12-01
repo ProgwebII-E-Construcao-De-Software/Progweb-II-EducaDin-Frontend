@@ -6,7 +6,7 @@ export const authenticationRoute:  Routes = [
 
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'painel',
     pathMatch: 'full'
   },
   {
