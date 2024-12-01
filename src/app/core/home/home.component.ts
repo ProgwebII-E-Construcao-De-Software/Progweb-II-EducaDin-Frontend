@@ -5,6 +5,11 @@ import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
 import {delay, filter} from "rxjs";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {SecurityService} from "../../architecture/security/security.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @UntilDestroy()
 @Component({
@@ -21,6 +26,7 @@ export class HomeComponent {
         private observer: BreakpointObserver,
         private router: Router,
         protected securityService: SecurityService,
+        private dialog: MatDialog,
     ) {
     }
 
@@ -50,9 +56,26 @@ export class HomeComponent {
             });
     }
 
-  logout(){
-    this.router.navigate(['/access']);
-  }
+    logout() {
+        if (this.dialog && this.router) {
+            const dialogRef = this.dialog.open(ConfirmationDialog, {
+                data: {
+                    titulo: 'DESEJA SAIR DO SISTEMA ?',
+                    textoBotoes: {
+                        ok: 'Sim',
+                        cancel: 'Não'
+                    },
+                },
+            });
+            dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+                if (confirmed?.resultado && this.router && this.securityService?.isValid()) {
+                    this.securityService?.invalidate();
+                    this.router.navigate(['/painel']);
+                }
+            });
+        }
+    }
+
 
 }
 

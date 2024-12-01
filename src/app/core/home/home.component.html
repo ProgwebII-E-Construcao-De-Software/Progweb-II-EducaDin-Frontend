@@ -13,22 +13,33 @@
             <span class="educa">Educa</span><span class="din">Din</span>
         </p>
         <div class="header-notification">
-            <button *ngIf="securityService.isValid()" mat-icon-button [routerLink]="['/notifications']" matTooltip="Minhas Notificações">
+            <button *ngIf="securityService.isValid()" mat-icon-button [routerLink]="['/notifications']"
+                    matTooltip="Minhas Notificações">
                 <mat-icon>notifications</mat-icon>
             </button>
         </div>
+        <button
+                *ngIf="!securityService.isValid()"
+                mat-button
+                [routerLink]="'/auth/login'"
+                class="login-button"
+        >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+        </button>
     </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-        <button mat-button *ngIf="!securityService.isValid()" class="menu-button" routerLink="/painel" matTooltip="Sobre o Educadin">
+        <button mat-button *ngIf="!securityService.isValid()" class="menu-button" routerLink="/painel"
+                matTooltip="Sobre o Educadin">
             <mat-icon>home</mat-icon>
             <span>Home</span>
         </button>
 
-        <button mat-button *ngIf="!securityService.isValid()" mat-button class="menu-button" routerLink="/auth/login"
+        <button mat-button *ngIf="!securityService.isValid()" mat-button class="menu-button" routerLink="/auth/register"
                 matTooltip="Cadastrar no Sistema">
             <mat-icon>person_add</mat-icon>
             <span>Cadastrar</span>

@@ -1,57 +1,69 @@
-<div class="container">
-    <div class="info-container">
-        <h1>Bem-vindo ao EducaDin</h1>
-        <p>
-            No EducaDin, nosso objetivo é transformar a forma como você lida com suas finanças pessoais.
-            Com ferramentas simples e educativas, ajudamos você a controlar seus gastos, planejar metas
-            e aprender sobre educação financeira de forma prática.
-        </p>
-    </div>
-    <mat-card>
-        <mat-card-title class="logo-educadin">
-            <h1><strong class="educa">Educa</strong><strong class="din">Din</strong></h1>
-        </mat-card-title>
-        <mat-card-content>
-            <form
-                    [formGroup]="formGroup"
-                    (ngSubmit)="onSubmit()"
-                    class="form"
-            >
-                <div class="login-content">
-                    <mat-form-field>
-                        <mat-label>Usuário</mat-label>
-                        <input matInput formControlName="login" autocomplete="off"
-                               placeholder="Usuário" maxlength="20">
-                        <mat-error *ngIf="handleError('login', 'required')">
-                            Campo obrigatório!
-                        </mat-error>
-                        <mat-error *ngIf="handleError('login', 'minLength')">
-                            Tamanho mínimo de 3 letras
-                        </mat-error>
+<div class="full-screen">
+    <div class="container">
+        <div class="info-container">
+            <h1>Bem-vindo ao EducaDin</h1>
+            <p>
+                No EducaDin, nosso objetivo é transformar a forma como você lida com suas finanças pessoais.
+                Com ferramentas simples e educativas, ajudamos você a controlar seus gastos, planejar metas
+                e aprender sobre educação financeira de forma prática.
+            </p>
+        </div>
+        <mat-card>
+            <div class="title-login">
+                <mat-card-title class="logo-educadin">
+                    <h1><strong class="educa">Educa</strong><strong class="din">Din</strong></h1>
+                </mat-card-title>
+            </div>
+            <mat-card-content>
+                <form
+                        [formGroup]="formGroup"
+                        (ngSubmit)="onSubmit()"
+                        class="form"
+                >
+                    <div class="login-content">
+                        <mat-form-field>
+                            <mat-label>Usuário</mat-label>
+                            <input matInput formControlName="login" autocomplete="off"
+                                   placeholder="Usuário" maxlength="20">
+                            <mat-error *ngIf="handleError('login', 'required')">
+                                Campo obrigatório!
+                            </mat-error>
+                            <mat-error *ngIf="handleError('login', 'minLength')">
+                                Tamanho mínimo de 3 letras
+                            </mat-error>
 
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Senha</mat-label>
-                        <input matInput formControlName="password" type="password" title="Senha"
-                               placeholder="Senha">
-                        <mat-error *ngIf="handleError('password', 'required')">
-                            Campo obrigatório!
-                        </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Senha</mat-label>
+                            <input matInput formControlName="password" type="password" title="Senha"
+                                   placeholder="Senha">
+                            <mat-error *ngIf="handleError('password', 'required')">
+                                Campo obrigatório!
+                            </mat-error>
 
-                    </mat-form-field>
+                        </mat-form-field>
 
-                    <button mat-button class="button-login" color="primary" type="submit" title="Entrar">
-                        <span>Entrar</span>
-                    </button>
+                        <button  class="button-login" type="submit" title="Entrar">
+                            <span>Entrar</span>
+                        </button>
 
-                    <a class="forgot-password" href="#">Esqueceu a senha?</a>
-                    <p>
-                        <button mat-button type="button"  class="button-register" title="Criar conta" color="accent" class="create-account">
+                        <button type="button" class="button-register" title="Criar conta">
                             Criar nova conta
                         </button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
+
+                        <div class="page">
+                            <a href="#" class="page">Página Inicial</a>
+                        </div>
+
+                        <a class="forgot-password" (click)="openDialogPassoword()">Esqueceu a senha?</a>
+                        <p>
+
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <p>
+        <p>
+    </div>
 </div>
 <alert-message/>

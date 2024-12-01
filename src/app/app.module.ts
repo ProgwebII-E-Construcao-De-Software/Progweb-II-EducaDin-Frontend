@@ -37,6 +37,7 @@ import {environment} from "./environments/environment";
 import {ConfirmDialog} from "primeng/confirmdialog";
 import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
 import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
+import {RegisterModule} from "./core/register/register.module";
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.com
         AppRoutingModule,
         SharedMaterialModule,
         AuthenticationModule,
+        RegisterModule,
         ForgotpassowordModule,
         DashboardModule,
         SettingsModule,

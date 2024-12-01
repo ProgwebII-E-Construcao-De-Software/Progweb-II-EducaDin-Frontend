@@ -8,6 +8,7 @@ import {dashboardRoutes} from "./pages/dashboard/dashboard-routing.module";
 import {settingsRoutes} from "./pages/settings/settings-routing.module";
 import {mainpainelRoutes} from "./pages/mainpainel/mainpainel-routing.module";
 import {authenticationRoute} from "./architecture/authentication/authentication-routing.module";
+import {registerRoutes} from "./core/register/register-routing.module";
 
 
 const routes: Routes = [
@@ -21,14 +22,15 @@ const routes: Routes = [
             ...goalsRoutes,
             ...dashboardRoutes,
             ...settingsRoutes,
-            { path: '', redirectTo: '/painel', pathMatch: 'full' },
+            {path: '', redirectTo: '/painel', pathMatch: 'full'},
         ]
 
     },
     {
         path: "auth",
         children: [
-            ...authenticationRoute
+            ...authenticationRoute,
+            ...registerRoutes
         ]
     },
 ];
