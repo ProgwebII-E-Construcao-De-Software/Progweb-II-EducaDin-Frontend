@@ -17,6 +17,6 @@ export const mainpainelRoutes: Routes = [
             }
         ],
         // canActivate: [SecurityGuard],
-        // data: {security: {roles: ['']}}
+        // data: {security: {roles: ['ROLE_INCOME_REMOVEALL']}}
     }
 ];

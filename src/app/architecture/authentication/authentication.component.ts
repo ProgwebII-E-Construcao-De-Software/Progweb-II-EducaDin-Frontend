@@ -16,7 +16,7 @@ import {ConfirmationDialog, ConfirmationDialogResult} from "../confirmation-dial
 })
 export class AuthenticationComponent {
     formGroup!: FormGroup;
-    public submitted!: boolean;
+    hide = true;
 
     constructor(
         private securityService: SecurityService,

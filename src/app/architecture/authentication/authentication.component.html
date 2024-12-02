@@ -1,12 +1,8 @@
 <div class="full-screen">
     <div class="container">
         <div class="info-container">
-            <h1>Bem-vindo ao EducaDin</h1>
-            <p>
-                No EducaDin, nosso objetivo é transformar a forma como você lida com suas finanças pessoais.
-                Com ferramentas simples e educativas, ajudamos você a controlar seus gastos, planejar metas
-                e aprender sobre educação financeira de forma prática.
-            </p>
+            <h1>Entre no EducaDin</h1>
+            <p>Já possui uma conta? Faça login e continue sua jornada de educação financeira.</p>
         </div>
         <mat-card>
             <div class="title-login">
@@ -24,9 +20,9 @@
                         <mat-form-field>
                             <mat-label>Usuário</mat-label>
                             <input matInput formControlName="login" autocomplete="off"
-                                   placeholder="Usuário" maxlength="20">
+                                   placeholder="Digite seu usuário" maxlength="20">
                             <mat-error *ngIf="handleError('login', 'required')">
-                                Campo obrigatório!
+                                O usuário é obrigatório!
                             </mat-error>
                             <mat-error *ngIf="handleError('login', 'minLength')">
                                 Tamanho mínimo de 3 letras
@@ -36,18 +32,18 @@
                         <mat-form-field>
                             <mat-label>Senha</mat-label>
                             <input matInput formControlName="password" type="password" title="Senha"
-                                   placeholder="Senha">
-                            <mat-error *ngIf="handleError('password', 'required')">
-                                Campo obrigatório!
-                            </mat-error>
-
+                                   placeholder="Digite sua senha" [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">A Senha é obrigatória</mat-error>
                         </mat-form-field>
 
                         <button  class="button-login" type="submit" title="Entrar">
                             <span>Entrar</span>
                         </button>
 
-                        <button type="button" class="button-register" title="Criar conta">
+                        <button type="button" class="button-register" title="Criar conta"  routerLink="/auth/register">
                             Criar nova conta
                         </button>
 

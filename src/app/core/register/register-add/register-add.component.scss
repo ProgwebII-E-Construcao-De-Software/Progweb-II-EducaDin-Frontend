@@ -1,0 +1,138 @@
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 10%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 450px;
+  display: flex;
+  height: 580px;
+  max-width: 90%;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: -50px;
+}
+
+mat-card-title {
+  display: flex;
+  padding: 5px;
+  padding-top: 15%;
+  justify-content: center;
+}
+
+.register-content {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -50px;
+}
+
+.educa {
+  color: #046F82;
+}
+
+.din {
+  color: #5FE564;
+}
+
+.info-container {
+  max-width: 400px;
+  padding: 1rem;
+  text-align: left;
+}
+
+.info-container h1 {
+  color: #84cb9f;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.info-container p {
+  color: #6c757d;
+  font-size: 2rem;
+  line-height: 1.5;
+
+}
+
+.page {
+  color: black;
+  cursor: pointer;
+  font-family: DM Roboto, sans-serif;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.page:hover {
+  color: rgba(11, 0, 0, 0.38);
+}
+
+.button-login, .button-register{
+  font-family: DM Roboto, sans-serif;
+  font-size: 16px;
+  padding: 0px;
+  text-decoration: none;
+  text-align: center;
+  background: #84cb9f;
+  color: white;
+  width: 150px;
+  height: 30px;
+  display: block;
+  border: none;
+  border-radius: 20px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-login:hover, .button-register:hover{
+  background: #abd3b6;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding-top: 5%;
+  }
+
+  mat-card {
+    width: 90%;
+    height: auto;
+    margin-top: 0;
+  }
+
+  .info-container {
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .info-container p {
+    font-size: 0.9rem;
+  }
+
+  mat-card {
+    padding: 1rem;
+  }
+
+  .register-content {
+    padding-top: 20px;
+  }
+}
+

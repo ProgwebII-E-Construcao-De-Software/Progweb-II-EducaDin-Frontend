@@ -38,7 +38,25 @@ mat-card-title {
   place-content: center;
   align-items: center;
   gap: 1rem;
+  margin-top: -50px;
 }
+
+mat-form-field {
+  width: 100%;
+  max-width: 250px;
+}
+
+mat-form-field input {
+  box-sizing: border-box;
+}
+
+mat-icon-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 
 .educa {
   color: #046F82;
@@ -56,14 +74,15 @@ mat-card-title {
 
 .info-container h1 {
   color: #84cb9f;
-  font-size: 1.8rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
 .info-container p {
   color: #6c757d;
-  font-size: 1rem;
+  font-size: 2rem;
   line-height: 1.5;
+
 }
 
 .forgot-password, .page {
@@ -74,11 +93,11 @@ mat-card-title {
   transition: color 0.3s ease;
 }
 
-.forgot-password:hover , .page{
+.forgot-password:hover , .page:hover {
   color: darkgray;
 }
 
-.forgot-password:active, .page {
+.forgot-password:active, .page:active {
   color: black;
 }
 
@@ -136,5 +155,10 @@ mat-card-title {
 
   .login-content {
     padding-top: 20px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    max-width: 200px;
   }
 }

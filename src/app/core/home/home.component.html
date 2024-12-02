@@ -22,7 +22,7 @@
                 *ngIf="!securityService.isValid()"
                 mat-button
                 [routerLink]="'/auth/login'"
-                class="login-button"
+                class="login-button" matTooltip="Entrar no EducaDin"
         >
             <mat-icon>login</mat-icon>
             <span>Login</span>

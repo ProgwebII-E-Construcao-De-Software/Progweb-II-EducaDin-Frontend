@@ -13,12 +13,14 @@
   font-weight: 700;
   margin-bottom: 10px;
   color: #333;
+  text-align: center;
 }
 
 .header-password p {
   font-size: 14px;
   color: #555;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .form-esqueceu-senha {
@@ -43,16 +45,17 @@
   border-radius: 8px;
 }
 
+
 .button {
   font-family: "DM Roboto", sans-serif;
-  background: #abd3b6 !important;
+  background: #6dd19b !important;
   color: white !important;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .button:hover {
-  background-color: #84cb9f;
+  background-color: #afeccb;
 }
 
 .cancel-button {
