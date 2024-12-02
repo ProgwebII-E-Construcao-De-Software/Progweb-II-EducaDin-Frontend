@@ -4,7 +4,7 @@ import {RegisterAddComponent} from "./register-add/register-add.component";
 import {RouterModule} from "@angular/router";
 import {registerRoutes} from "./register-routing.module";
 import {MatCard, MatCardContent, MatCardModule, MatCardTitle} from "@angular/material/card";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MessageModule} from "../../architecture/message/message.module";
 import {NbSharedModule} from "@nebular/theme/components/shared/shared.module";
@@ -13,6 +13,7 @@ import {PasswordModule} from "primeng/password";
 import {DividerModule} from "primeng/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatIconButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         ReactiveFormsModule,
         MatIconModule,
         FormsModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatIconButton,
+        MatSuffix
     ]
 })
 export class RegisterModule {

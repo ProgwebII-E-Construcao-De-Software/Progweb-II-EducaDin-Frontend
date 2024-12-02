@@ -28,3 +28,4 @@ export { PageIncomeListDto } from './models/page-income-list-dto';
 export { SearchField } from './models/search-field';
 export { SearchFieldValue } from './models/search-field-value';
 export { SortObject } from './models/sort-object';
+export { UserCreateDto } from './models/user-create-dto';

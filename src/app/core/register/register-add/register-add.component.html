@@ -19,44 +19,40 @@
                     <div class="register-content">
                         <mat-form-field>
                             <mat-label>Usuário</mat-label>
-                            <input matInput formControlName="name" autocomplete="off"
-                                   placeholder="Digite seu usuário" maxlength="20">
-                            <mat-error *ngIf="handleError('name', 'required')">
+                            <input matInput formControlName="login" autocomplete="off"
+                                   placeholder="Digite o seu usuário" maxlength="20">
+                            <mat-error *ngIf="handleError('login', 'required')">
                                 Campo obrigatório!
                             </mat-error>
-                            <mat-error *ngIf="handleError('name', 'minLength')">
+                            <mat-error *ngIf="handleError('login', 'minLength')">
                                 Tamanho mínimo de 3 letras
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field class="mat-form-email">
-                            <mat-label>Email</mat-label>
-                            <input type="email" matInput [formControl]="emailFormControl"
-                                   placeholder="Digite seu e-mail">
-                            <mat-error
-                                    *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Por favor insira um endereço de e-mail válido
-                            </mat-error>
-                            <mat-error *ngIf="emailFormControl.hasError('required')">
-                                Email é <strong>obrigatório</strong>
-                            </mat-error>
+                        <mat-form-field>
+                            <mat-label>E-mail</mat-label>
+                            <input matInput formControlName="email" placeholder="Digite seu email" maxlength="100" type="email">
+                            <mat-error *ngIf="handleError('email', 'required')">Campo Obrigatório</mat-error>
+                            <mat-error *ngIf="handleError('email', 'emailInvalido')">E-mail Inválido</mat-error>
+                            <mat-error *ngIf="handleError('email', 'maxlength')">Limite de 100 caracteres</mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Senha</mat-label>
                             <input matInput formControlName="password" type="password" title="Senha"
-                                   [type]="hide ? 'password' : 'text'"
-                                   placeholder="Digite sua senha" >
-                            <mat-error *ngIf="handleError('password', 'required')">Campo obrigatório!</mat-error>
-                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
-                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                   placeholder="Digite sua senha" [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">Senha precisa ter pelo menos 6 caracteres</mat-error>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('senhaInvalidaCaracter')">Senha precisa ter um caracter especial</mat-error>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('senhaInvalidaMaiuscula')">Senha precisa ter uma letra maiúscula</mat-error>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('senhaInvalidaNumeros')">Senha precisa ter pelo menos 3 números</mat-error>
-                            <mat-progress-bar mode="determinate" [value]="passwordStrength"
-                                              [color]="passwordStrengthColor"></mat-progress-bar>
+                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">A Senha é obrigatória</mat-error>
+                        </mat-form-field>
+                        <mat-form-field [ngStyle]="verificarAlinhar() ? getErrorClass('password') : {}">
+                            <mat-label>Confirmar Senha</mat-label>
+                            <input matInput type="password"  placeholder="Confirme a senha" [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formGroup.hasError('passwordMismatch')">
+                                As senhas não conferem.
+                            </mat-error>
                         </mat-form-field>
 
 

@@ -10,6 +10,7 @@ import { IncomeControllerService } from './services/income-controller.service';
 import { GoalControllerService } from './services/goal-controller.service';
 import { AuthApiService } from './services/auth-api.service';
 import { ExpenseControllerService } from './services/expense-controller.service';
+import { UserControllerService } from './services/user-controller.service';
 import { CategoryControllerService } from './services/category-controller.service';
 
 /**
@@ -24,6 +25,7 @@ import { CategoryControllerService } from './services/category-controller.servic
     GoalControllerService,
     AuthApiService,
     ExpenseControllerService,
+    UserControllerService,
     CategoryControllerService,
     ApiConfiguration
   ],

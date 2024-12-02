@@ -4,7 +4,7 @@
 
 
 /**
- * Informações da Redefinição de Senha
+ * Informações de Criação
  */
 export interface AuthUserDto {
 
