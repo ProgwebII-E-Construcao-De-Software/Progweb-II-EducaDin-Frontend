@@ -19,6 +19,15 @@
             <mat-error>E-mail Inválido</mat-error>
         </mat-form-field>
 
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Controle De Notificações</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="numero">
+                <mat-slide-toggle  (change)="controlNotfication($event)">Ligar/Desligar</mat-slide-toggle>
+            </mat-card-content>
+        </mat-card>
+
         <mat-checkbox>
             Deseja alterar a senha ?
         </mat-checkbox>
