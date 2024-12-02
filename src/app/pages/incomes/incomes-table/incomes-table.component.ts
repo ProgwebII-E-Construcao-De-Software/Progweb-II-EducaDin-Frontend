@@ -12,6 +12,8 @@ import {
 } from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
 import {ActivatedRoute} from "@angular/router";
+import {PageEvent} from "@angular/material/paginator";
+import {IncomeDto} from "../../../api/models/income-dto";
 
 @Component({
     selector: 'app-earnings-table',
@@ -28,7 +30,8 @@ export class IncomesTableComponent implements OnInit {
     incomeTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
-    isMenuOpen: boolean = false;
+    qtdRegistros!: number;
+    pageSlice!: IncomeDto[];
 
     constructor(
         protected dialog: MatDialog,
@@ -131,5 +134,16 @@ export class IncomesTableComponent implements OnInit {
                 this.snackBar.open('Ganhos', 'Close', {duration: 3000});
             }
         });
+    }
+
+    onPageChange(event: PageEvent){
+        this.incomeService.incomeControllerListAllPage({page: {page: event.pageIndex, size: event.pageSize, sort:["pessoaCpf"]}}).subscribe(data => {
+            this.incomeTableDataSource.data = data.content || [];
+            this.pageSlice = this.incomeTableDataSource.data;
+        })
+    }
+
+    showResult($event: any[]) {
+        this.incomeTableDataSource.data = $event;
     }
 }

@@ -5,6 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {MessageService} from "../../../architecture/message/message.service";
 import {IncomeControllerService} from "../../../api/services/income-controller.service";
 import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {IncomeListDto} from "../../../api/models/income-list-dto";
 
 @Component({
     selector: 'app-earnings-home',
@@ -18,13 +20,11 @@ import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component
 
 export class IncomesHomeComponent {
 
-
     constructor(
         public dialog: MatDialog,
         public snackBar: MatSnackBar,
         public router: ActivatedRoute,
         public messageService: MessageService,
-        public incomeService: IncomeControllerService,
     ) {
 
     }

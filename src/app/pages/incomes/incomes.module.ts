@@ -26,6 +26,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
 import {MatRadioButton} from "@angular/material/radio";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {SearchModule} from "../../architecture/search-module/search.module";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatAutocompleteModule,
         AsyncPipe,
         MatCheckboxModule,
+        SearchModule,
+        MatPaginatorModule,
     ]
 })
 export class IncomesModule {

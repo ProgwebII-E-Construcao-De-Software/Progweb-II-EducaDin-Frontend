@@ -1,7 +1,9 @@
 <div>
+    <div class="searchFlex">
+        <app-search-component [controller]="incomeService" (onSearchResult)="showResult($event)"/>
+    </div>
 <div class="tabela-container">
     <table mat-table [dataSource]="incomeTableDataSource" class="tabela">
-
         <ng-container matColumnDef="select" >
             <th mat-header-cell *matHeaderCellDef  class="mat-header-cell">
                 <mat-checkbox class="custom-checkbox"  (change)="selectAll($event)" [checked]="isAllSelected()">
@@ -62,5 +64,12 @@
         <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </table>
+    <mat-paginator style="justify-content: center" [length]="this.qtdRegistros"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   (page)="onPageChange($event)"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
 </div>
 </div>

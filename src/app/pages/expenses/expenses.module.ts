@@ -32,6 +32,8 @@ import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
 import {expensesRoutes} from "./expenses-routing.module";
 import {MatRadioButton} from "@angular/material/radio";
+import {MatPaginator} from "@angular/material/paginator";
+import {SearchModule} from "../../architecture/search-module/search.module";
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import {MatRadioButton} from "@angular/material/radio";
         MatNativeDateModule,
         MatAutocompleteModule,
         AsyncPipe,
+        MatPaginator,
+        SearchModule,
     ]
 })
 export class ExpensesModule {

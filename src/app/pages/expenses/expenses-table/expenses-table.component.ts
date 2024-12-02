@@ -13,6 +13,7 @@ import {
 import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
 import {ActivatedRoute} from "@angular/router";
 import {ExpenseDto} from "../../../api/models/expense-dto";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
     selector: 'app-expenses-table',
@@ -25,6 +26,8 @@ export class ExpensesTableComponent implements OnInit {
     selection = new SelectionModel<ExpenseListDto>(true, []);
     tipoDeListagem: string = 'Normal';
     isMenuOpen: boolean = false;
+    pageSlice!: ExpenseDto[];
+    qtdRegistros!: number;
 
 
     constructor(
@@ -125,5 +128,16 @@ export class ExpensesTableComponent implements OnInit {
                 this.snackBar.open('Despesas', 'Close', {duration: 3000});
             }
         });
+    }
+
+    onPageChange(event: PageEvent){
+        this.expensesService.expenseControllerListAllPage({page: {page: event.pageIndex, size: event.pageSize, sort:["pessoaCpf"]}}).subscribe(data => {
+            this.expensesTableDataSource.data = data.content || [];
+            this.pageSlice = this.expensesTableDataSource.data;
+        })
+    }
+
+    showResult($event: any[]) {
+        this.expensesTableDataSource.data = $event;
     }
 }
