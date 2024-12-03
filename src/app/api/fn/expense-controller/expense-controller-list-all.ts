@@ -15,7 +15,6 @@ export interface ExpenseControllerListAll$Params {
 
 export function expenseControllerListAll(http: HttpClient, rootUrl: string, params?: ExpenseControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
   const rb = new RequestBuilder(rootUrl, expenseControllerListAll.PATH, 'get');
-  console.log("entrou aqui ",params)
   if (params) {
   }
 

@@ -9,4 +9,5 @@ export interface GoalListDto {
   goalPercent?: number;
   id?: number;
   name?: string;
+  userId?: number;
 }

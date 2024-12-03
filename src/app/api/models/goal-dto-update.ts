@@ -7,4 +7,5 @@ export interface GoalDtoUpdate {
   amountTotal?: number;
   goalDate?: string;
   name?: string;
+  userId?: number;
 }

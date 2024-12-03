@@ -11,7 +11,7 @@ import {ConfirmationDialog} from "../../architecture/confirmation-dialog/confirm
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
     @ViewChild(MatSidenav)
     sidenav!: MatSidenav;
     admin!:boolean;
@@ -25,21 +25,20 @@ export class HomeComponent implements OnInit {
         private dialog: MatDialog
     ) {}
 
-    ngOnInit(): void {
-        if(this.securityService.credential.accessToken == ""){
-            this.router.navigate(['/auth/login']);
-        }else {
+    // ngOnInit(): void {
+    //     const isLoggedIn = this.securityService.isValid();
+    //     const accessToken = this.securityService.credential.accessToken;
+    //
+    //     if (!accessToken || !isLoggedIn) {
+    //         this.router.navigate(['/painel']);
+    //     } else {
+    //         this.nomeUsuario = this.securityService.credential.userName;
+    //         if (this.router.url === '/') {
+    //             this.router.navigate(['/dashboard']);
+    //         }
+    //     }
+    // }
 
-            if (this.securityService.isValid()) {
-                this.router.navigate(['/dashboard']);
-                this.admin = !this.securityService.hasRoles(['ROLE_ADMIN'])
-                this.nomeUsuario = this.securityService.credential.userName;
-
-            }
-            if (!this.securityService.isValid())
-                this.router.navigate(['/painel']);
-        }
-    }
 
     logout(): void {
         const dialogRef = this.dialog.open(ConfirmationDialog, {

@@ -9,9 +9,12 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { IncomeControllerService } from './services/income-controller.service';
 import { GoalControllerService } from './services/goal-controller.service';
 import { AuthApiService } from './services/auth-api.service';
+import { NotificationPreferenceControllerService } from './services/notification-preference-controller.service';
 import { ExpenseControllerService } from './services/expense-controller.service';
 import { UserControllerService } from './services/user-controller.service';
+import { NotificationControllerService } from './services/notification-controller.service';
 import { CategoryControllerService } from './services/category-controller.service';
+import { TipControllerService } from './services/tip-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -24,9 +27,12 @@ import { CategoryControllerService } from './services/category-controller.servic
     IncomeControllerService,
     GoalControllerService,
     AuthApiService,
+    NotificationPreferenceControllerService,
     ExpenseControllerService,
     UserControllerService,
+    NotificationControllerService,
     CategoryControllerService,
+    TipControllerService,
     ApiConfiguration
   ],
 })
