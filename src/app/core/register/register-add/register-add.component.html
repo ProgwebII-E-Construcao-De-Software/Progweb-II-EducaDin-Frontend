@@ -31,9 +31,12 @@
                         <mat-form-field>
                             <mat-label>E-mail</mat-label>
                             <input matInput formControlName="email" placeholder="Digite seu email" maxlength="100" type="email">
-                            <mat-error *ngIf="handleError('email', 'required')">Campo Obrigatório</mat-error>
-                            <mat-error *ngIf="handleError('email', 'emailInvalido')">E-mail Inválido</mat-error>
-                            <mat-error *ngIf="handleError('email', 'maxlength')">Limite de 100 caracteres</mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Por favor insira um endereço de e-mail válido
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                O Email é obrigatório.
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Senha</mat-label>
@@ -42,7 +45,7 @@
                             <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">A Senha é obrigatória</mat-error>
+                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">A Senha é obrigatória.</mat-error>
                         </mat-form-field>
 
 

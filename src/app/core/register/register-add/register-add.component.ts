@@ -7,6 +7,10 @@ import {UserControllerService} from "../../../api/services/user-controller.servi
 import {DateAdapter} from "@angular/material/core";
 import {UserCreateDto} from "../../../api/models/user-create-dto";
 import {CredencialDto} from "../../../api/models/credencial-dto";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-regsiter-add',
@@ -22,12 +26,14 @@ export class RegisterAddComponent implements OnInit {
     submitFormulario!: boolean;
     codigo!: number;
     user!: UserCreateDto[];
+    emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
     constructor(
         private formBuilder: FormBuilder,
         private _adapter: DateAdapter<any>,
         private userService: UserControllerService,
         private router: Router,
+        private dialog: MatDialog,
     ) {
         this._adapter.setLocale('pt-br');
     }
@@ -53,56 +59,6 @@ export class RegisterAddComponent implements OnInit {
 
     }
 
-    validatePasswordMatch(control: AbstractControl): ValidationErrors | null {
-        const password = control.get('password')?.value;
-        const confirmPassword = control.get('confirmarSenha')?.value;
-
-        if (password !== confirmPassword) {
-            return { passwordMismatch: true };
-        }
-        return null;
-    }
-
-
-    verificarAlinhar() {
-        if (this.flexDivAlinhar == "column") {
-            return true;
-        }
-        return false;
-    }
-
-    onPasswordInput(password: string) {
-        const strength = this.calculatePasswordStrength(password);
-        this.passwordStrength = strength.value;
-        this.passwordStrengthColor = strength.color;
-    }
-
-    getErrorClass(controlName: string): { [key: string]: any } | null {
-        const control = this.formGroup.get(controlName);
-        if (this.codigo == null) {
-            if (this.submitFormulario && control && control.errors) {
-                const qdErros = Object.keys(control.errors).length;
-
-                return {
-                    'margin-top': 17 * qdErros + 'px'
-                };
-            }
-
-            if (!this.submitFormulario && control && control.errors && control.touched) {
-                const qdErros = Object.keys(control.errors).length;
-
-                return {
-                    'margin-top': 17 * qdErros + 'px'
-                };
-            }
-            this.submitFormulario = false;
-            return {};
-        } else {
-            return {
-                'margin-top': 17 * 1 + 'px'
-            };
-        }
-    }
 
     registerUser() {
         const user: UserCreateDto = this.formGroup.value;
@@ -110,6 +66,7 @@ export class RegisterAddComponent implements OnInit {
             this.userService.create({body: user}).subscribe(
                 response => {
                     console.log("Retorno Registro", response);
+                    this.mostrarMensagem('O Usuário do EducaDin foi cadastrado com sucesso !!', 'success', 5000);
                     this.router.navigate(['/auth/login']);
                 },
                 error => {
@@ -119,23 +76,29 @@ export class RegisterAddComponent implements OnInit {
         }
     }
 
-    private calculatePasswordStrength(password: string) {
-        let score = 0;
+    mostrarMensagem(mensagem: string, tipo: 'success' | 'error', duracao?: number): void {
+        const dialogRef = this.dialog.open(ConfirmationDialog, {
+            data: {
+                titulo: tipo === 'success' ? 'Sucesso' : 'Erro',
+                mensagem: mensagem,
+                textoBotoes: {
+                    ok: 'OK',
+                },
+            },
+            disableClose: true
+        });
 
-        if (password.length >= 6) score++;
-        if (/[A-Z]/.test(password)) score++;
-        if (/\d/.test(password)) score++;
-        if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
-
-        if (score <= 1) {
-            return {value: 25, color: 'warn'};
-        } else if (score === 2) {
-            return {value: 50, color: 'accent'};
-        } else if (score === 3) {
-            return {value: 75, color: 'primary'};
-        } else {
-            return {value: 100, color: 'primary'};
+        if (tipo === 'success' && duracao) {
+            dialogRef.afterOpened().subscribe(() => {
+                setTimeout(() => {
+                    dialogRef.close();
+                }, duracao);
+            });
         }
+
+        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+
+        });
     }
 
 

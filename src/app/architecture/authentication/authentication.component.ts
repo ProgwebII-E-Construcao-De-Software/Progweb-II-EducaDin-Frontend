@@ -67,8 +67,6 @@ export class AuthenticationComponent {
 
     }
 
-
-
     public handleError = (controlName: string, errorName: string) => {
         return this.formGroup.controls[controlName].hasError(errorName);
     };

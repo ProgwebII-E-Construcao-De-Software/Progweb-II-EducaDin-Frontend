@@ -23,4 +23,7 @@ export class GoalsHomeComponent {
   }
 
 
+    openDialogAddGoal() {
+
+    }
 }
