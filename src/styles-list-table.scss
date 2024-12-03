@@ -1,50 +1,42 @@
-.tabela-container {
-  height: auto;
-  max-height: 300px;
-  overflow-y: auto;
-  margin-top: 20px;
+.example-container {
+  height: 85%;
+  width: 98%;
+  max-width: 100%;
+  overflow: auto;
 }
 
-
-.tabela {
-  background-color: #F2F2F2;
-  border-color: #F2F2F2;
-  text-decoration-color: #F2F2F2;
+table {
   width: 100%;
-  border-collapse: collapse;
 }
 
-
-.mat-header-cell {
-  background: #273E47 !important;
-  color: white !important;
-  font-size: 14px;
-  border:none;
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
 }
 
-.mat-cell{
-  color: #020100;
-  background: #F2F2F2 !important;
-  padding-top: 10px;
-  border: none;
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
 }
 
-td, th {
-  text-align: center !important;
-  vertical-align: middle !important;
+.mat-mdc-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
 }
 
-.custom-checkbox .mat-checkbox-frame {
-  border-color: #020100 !important;
+.mat-mdc-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
 }
 
-.custom-checkbox.mat-checkbox-checked .mat-checkbox-background {
-  background-color: #FF5733 !important;
+.id-column-width {
+  max-width: 52px;
+  width: 52px;
 }
 
-.custom-checkbox.mat-checkbox-checked .mat-checkbox-checkmark {
-  color: white !important;
+.btnEditar{
+  margin-left: 7px;
 }
 
-
-
+.action-column-width {
+  max-width: 128px;
+  width: 128px;
+  text-align: center;
+}
