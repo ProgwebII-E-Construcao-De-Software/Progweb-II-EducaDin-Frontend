@@ -8,8 +8,8 @@ import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {FormSecurityUserPhonesComponent} from './form-security-user-phones/form-security-user-phones.component';
-import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
 import {SharedMaterialModule} from "../../shared-material/shared-material.module";
+import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
 
 
 @NgModule({

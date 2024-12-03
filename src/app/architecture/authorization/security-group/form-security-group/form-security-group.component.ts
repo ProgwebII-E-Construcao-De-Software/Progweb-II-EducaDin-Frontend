@@ -1,17 +1,11 @@
 import {Component, ElementRef, QueryList, ViewChildren} from '@angular/core';
 import {AbstractControl, FormArray, FormGroup, Validators} from "@angular/forms";
-import {SecurityGroupApiService} from "../../../../api/services/security-group-api.service";
-import {SecurityGroupFeatureDto} from "../../../../api/models/security-group-feature-dto";
-import {SecurityGroupDto} from "../../../../api/models/security-group-dto";
 import {BaseComponent} from "../../../component/base.component";
 import {AuthorizationPaths} from "../../authorization-routing.module";
 import {SecurityGroupRoles} from "../security-group-routing.module";
 
-import {SecurityModuleApiService} from "../../../../api/services/security-module-api.service";
-import {SecurityModuleDto} from "../../../../api/models/security-module-dto";
 // @ts-ignore
 import {orderBy} from 'lodash';
-import {SecurityFeatureDto} from "../../../../api/models/security-feature-dto";
 
 @Component({
   selector: 'app-form-security-group',

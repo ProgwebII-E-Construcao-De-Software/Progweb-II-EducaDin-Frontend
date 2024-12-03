@@ -38,6 +38,7 @@ import {ConfirmDialog} from "primeng/confirmdialog";
 import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
 import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 import {RegisterModule} from "./core/register/register.module";
+import {ArchitectureModule} from "./architecture/architecture.module";
 
 @NgModule({
     declarations: [
@@ -79,6 +80,7 @@ import {RegisterModule} from "./core/register/register.module";
         MatOptionModule,
         ChartModule,
         MainpainelModule,
+        ArchitectureModule,
         SecurityModule.forRoot({
             nameStorage: environment.nameStorage,
             loginRouter: '/auth/login'

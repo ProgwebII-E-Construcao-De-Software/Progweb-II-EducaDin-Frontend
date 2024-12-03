@@ -14,7 +14,8 @@ import {ConfirmationDialog} from "../../architecture/confirmation-dialog/confirm
 export class HomeComponent implements OnInit {
     @ViewChild(MatSidenav)
     sidenav!: MatSidenav;
-
+    admin!:boolean;
+    public nomeUsuario: String = "";
     route!: string;
 
     constructor(
@@ -25,14 +26,18 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        if (!this.securityService.isValid()) {
-            this.router.navigate(['/auth/login']); 
-        } else {
-            this.router.events.subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    this.route = event.urlAfterRedirects;
-                }
-            });
+        if(this.securityService.credential.accessToken == ""){
+            this.router.navigate(['/auth/login']);
+        }else {
+
+            if (this.securityService.isValid()) {
+                this.router.navigate(['/dashboard']);
+                this.admin = !this.securityService.hasRoles(['ROLE_ADMIN'])
+                this.nomeUsuario = this.securityService.credential.userName;
+
+            }
+            if (!this.securityService.isValid())
+                this.router.navigate(['/painel']);
         }
     }
 
@@ -46,8 +51,8 @@ export class HomeComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((confirmed) => {
             if (confirmed?.resultado) {
-                this.securityService.invalidate(); // Limpa o estado de autenticação
-                this.router.navigate(['/auth/login']);
+                this.securityService.invalidate();
+                this.router.navigate(['/painel']);
             }
         });
     }

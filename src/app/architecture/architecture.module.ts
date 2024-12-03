@@ -9,12 +9,12 @@ import {LoaderModule} from "./loader/loader.module";
 import {AuthenticationModule} from "./authentication/authentication.module";
 import {SecurityInterceptor} from "./security/security.interceptor";
 import {HttpErrorInterceptor} from "./http-error.interceptor";
-import {AuthorizationModule} from "./authorization/authorization.module";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {getPtBrPaginatorIntl} from "./component/portuguese-mat-paginator-intl";
 import {MomentDatePipe} from "./pipes/moment-date.pipe";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from "@angular/material/core";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
+
 
 const MY_DATE_FORMATS: MatDateFormats  = {
   parse: {
@@ -38,11 +38,9 @@ const MY_DATE_FORMATS: MatDateFormats  = {
     MessageModule,
     LoaderModule,
     AuthenticationModule,
-    AuthorizationModule,
   ],
   exports:[
     MomentDatePipe,
-    AuthorizationModule
   ],
   providers: [
     ArchitectureService,
