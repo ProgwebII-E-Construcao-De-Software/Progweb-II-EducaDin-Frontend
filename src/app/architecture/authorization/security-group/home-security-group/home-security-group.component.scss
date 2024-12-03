@@ -1,0 +1,170 @@
+.container-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.display-flex {
+  display: flex;
+}
+
+/* Estilos para telas maiores (padrão) */
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+/* Estilos para telas maiores (padrão) */
+.row-fix {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.row-table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-align {
+  justify-content: center;
+  align-items: center;
+}
+
+.text-strong {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.row-label-l-sm{
+  display: none;
+}
+
+/* Estilos para quando a tela for menor que 700px */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch; /* Coloca todos os campos um abaixo do outro */
+  }
+
+  .mat-card-actions .row {
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mat-card-actions button, .mat-card-actions a {
+    flex: 1;
+    margin: 5px 0;
+  }
+
+  mat-form-field {
+    width: 100%; /* Faz com que os campos ocupem toda a largura */
+  }
+
+  .mat-table {
+    width: 100%; /* A tabela também deve ajustar à largura */
+  }
+
+  .mat-card-actions, .my-mat-tab-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .flex-grow-sm {
+    flex-grow: 1;
+  }
+
+  .row-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-header{
+    display: none;
+  }
+
+  .row-label-l-sm{
+    display: flex;
+  }
+
+  mat-cell{
+    border-style: none;
+    min-height: 42px;
+  }
+
+  mat-row{
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-top-width: 1px;
+    padding-bottom: 6px;
+  }
+}
+
+
+.start-align {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.gap-sm {
+  gap: 0.7rem;
+}
+
+.gap-md {
+  gap: 1rem;
+}
+
+.gap-lg {
+  gap: 1.5rem;
+}
+
+mat-card-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 0px 10px;
+  height: 50px;
+}
+
+.group-add-btn {
+  margin-top: -24px;
+}
+
+mat-header-row, .mat-header-row {
+  min-height: 34px;
+}
+
+/* Centraliza a coluna remover */
+.center-column {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -7,7 +7,8 @@
     "start": "npm run ng-openapi-gen && npm run ng -- serve -o",
     "build": "npm run ng-openapi-gen-server && npm run ng -- build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-docker": "npm run ng-openapi-gen-docker && npm run ng -- build -c production"
   },
   "private": true,
   "dependencies": {
@@ -23,15 +24,8 @@
     "@angular/router": "^18.2.6",
     "@angular/material-moment-adapter": "^18.2.7",
     "@fortawesome/fontawesome-free": "^6.5.2",
-    "@nebular/eva-icons": "^14.0.2",
-    "@nebular/theme": "^14.0.2",
-    "@ngneat/until-destroy": "^10.0.0-beta.0",
     "chart.js": "^4.4.6",
     "ngx-mask": "^18.0.0",
-    "echarts": "^5.5.1",
-    "ng2-charts": "^6.0.1",
-    "ngx-chartjs": "^0.0.1",
-    "ngx-echarts": "^18.0.0",
     "lodash": "^4.17.21",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.12",

@@ -1,0 +1,32 @@
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--mdc-text-button-label-text-color); /* Ajuste de cor */
+
+  mat-icon {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04); /* Ajuste de hover para suavidade */
+  }
+}
+
+/* Submenu escondido por padrão */
+.submenu {
+  display: none;
+}
+
+/* Submenu exibido quando aberto */
+.submenu-open {
+  display: flex;
+  padding-left: 15px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.submenu-button {
+  color: var(--mdc-text-button-label-text-color); /* Cor para submenus */
+}

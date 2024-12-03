@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
@@ -39,6 +39,7 @@ import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmatio
 import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 import {RegisterModule} from "./core/register/register.module";
 import {ArchitectureModule} from "./architecture/architecture.module";
+import {SecurityInterceptor} from "./architecture/security/security.interceptor";
 
 @NgModule({
     declarations: [
@@ -91,20 +92,11 @@ import {ArchitectureModule} from "./architecture/architecture.module";
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
         provideAnimationsAsync(),
-
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: AppInterceptor,
-        //     multi: true
-        // },
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: SecurityInterceptor,
-        //     multi: true
-        // },
-        // SecurityService,
-        // { provide: config, useValue: config },
-        // {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SecurityInterceptor,
+            multi: true
+        },
 
     ],
 
