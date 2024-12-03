@@ -41,22 +41,14 @@ export class RegisterAddComponent implements OnInit {
             login: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
             email: [null, [Validators.required, Validators.email]],
             password: [null, [Validators.required]],
-            confirmarSenha: [null, [Validators.required]],
-        }, { validators: this.validatePasswordMatch });
+            //     confirmarSenha: [null, [Validators.required]],
+            // }, { validators: this.validatePasswordMatch });
+        });
     }
 
     onSubmit() {
         if (this.formGroup.valid) {
             this.registerUser();
-        } else if (this.codigo) {
-            const controlSenha = this.formGroup.get('senha');
-            if (controlSenha) {
-                controlSenha.setErrors(null);
-            }
-            const controlConfirmSenha = this.formGroup.get('confirmarSenha');
-            if (controlConfirmSenha) {
-                controlConfirmSenha.setErrors(null);
-            }
         }
 
     }
@@ -113,9 +105,9 @@ export class RegisterAddComponent implements OnInit {
     }
 
     registerUser() {
+        const user: UserCreateDto = this.formGroup.value;
         if (this.formGroup.valid) {
-            const { confirmarSenha, ...userData } = this.formGroup.value;
-            this.userService.create(userData).subscribe(
+            this.userService.create({body: user}).subscribe(
                 response => {
                     console.log("Retorno Registro", response);
                     this.router.navigate(['/auth/login']);

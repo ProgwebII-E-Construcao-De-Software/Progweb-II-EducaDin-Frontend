@@ -1,81 +1,54 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatSidenav, MatSidenavContainer} from "@angular/material/sidenav";
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
-import {delay, filter} from "rxjs";
-import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {SecurityService} from "../../architecture/security/security.service";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../architecture/confirmation-dialog/confirmation-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router, NavigationEnd } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { SecurityService } from '../../architecture/security/security.service';
+import { MatDialog } from '@angular/material/dialog';
+import {ConfirmationDialog} from "../../architecture/confirmation-dialog/confirmation-dialog.component";
 
-@UntilDestroy()
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrl: './home.component.scss'
+    styleUrls: ['./home.component.scss'],
 })
-
-export class HomeComponent {
+export class HomeComponent implements OnInit {
     @ViewChild(MatSidenav)
     sidenav!: MatSidenav;
+
+    route!: string;
 
     constructor(
         private observer: BreakpointObserver,
         private router: Router,
         protected securityService: SecurityService,
-        private dialog: MatDialog,
-    ) {
-    }
+        private dialog: MatDialog
+    ) {}
 
-    ngAfterViewInit() {
-        this.observer
-            .observe(['(max-width: 800px)'])
-            .pipe(delay(1), untilDestroyed(this))
-            .subscribe((res) => {
-                if (res.matches) {
-                    this.sidenav.mode = 'over';
-                    this.sidenav.close();
-                } else {
-                    this.sidenav.mode = 'side';
-                    this.sidenav.open();
-                }
-            });
-
-        this.router.events
-            .pipe(
-                untilDestroyed(this),
-                filter((e) => e instanceof NavigationEnd)
-            )
-            .subscribe(() => {
-                if (this.sidenav.mode === 'over') {
-                    this.sidenav.close();
-                }
-            });
-    }
-
-    logout() {
-        if (this.dialog && this.router) {
-            const dialogRef = this.dialog.open(ConfirmationDialog, {
-                data: {
-                    titulo: 'DESEJA SAIR DO SISTEMA ?',
-                    textoBotoes: {
-                        ok: 'Sim',
-                        cancel: 'Não'
-                    },
-                },
-            });
-            dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
-                if (confirmed?.resultado && this.router && this.securityService?.isValid()) {
-                    this.securityService?.invalidate();
-                    this.router.navigate(['/painel']);
+    ngOnInit(): void {
+        if (!this.securityService.isValid()) {
+            this.router.navigate(['/auth/login']); 
+        } else {
+            this.router.events.subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.route = event.urlAfterRedirects;
                 }
             });
         }
     }
 
+    logout(): void {
+        const dialogRef = this.dialog.open(ConfirmationDialog, {
+            data: {
+                titulo: 'DESEJA SAIR DO SISTEMA?',
+                textoBotoes: { ok: 'Sim', cancel: 'Não' },
+            },
+        });
 
+        dialogRef.afterClosed().subscribe((confirmed) => {
+            if (confirmed?.resultado) {
+                this.securityService.invalidate(); // Limpa o estado de autenticação
+                this.router.navigate(['/auth/login']);
+            }
+        });
+    }
 }
-
