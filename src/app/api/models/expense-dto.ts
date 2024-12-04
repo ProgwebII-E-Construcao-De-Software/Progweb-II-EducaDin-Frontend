@@ -11,4 +11,5 @@ export interface ExpenseDto {
   leadTime?: number;
   name?: string;
   repeatable?: 'WEEKLY' | 'MONTHLY' | 'YEARLY' | 'DONT_REPEATS';
+  userId?: number;
 }

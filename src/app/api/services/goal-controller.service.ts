@@ -11,20 +11,28 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create2 } from '../fn/goal-controller/create-2';
-import { Create2$Params } from '../fn/goal-controller/create-2';
-import { deleteItems2 } from '../fn/goal-controller/delete-items-2';
-import { DeleteItems2$Params } from '../fn/goal-controller/delete-items-2';
-import { getById2 } from '../fn/goal-controller/get-by-id-2';
-import { GetById2$Params } from '../fn/goal-controller/get-by-id-2';
+import { goalControllerCreate } from '../fn/goal-controller/goal-controller-create';
+import { GoalControllerCreate$Params } from '../fn/goal-controller/goal-controller-create';
+import { goalControllerGetById } from '../fn/goal-controller/goal-controller-get-by-id';
+import { GoalControllerGetById$Params } from '../fn/goal-controller/goal-controller-get-by-id';
+import { goalControllerListAll } from '../fn/goal-controller/goal-controller-list-all';
+import { GoalControllerListAll$Params } from '../fn/goal-controller/goal-controller-list-all';
+import { goalControllerListAllPage } from '../fn/goal-controller/goal-controller-list-all-page';
+import { GoalControllerListAllPage$Params } from '../fn/goal-controller/goal-controller-list-all-page';
+import { goalControllerRemove } from '../fn/goal-controller/goal-controller-remove';
+import { GoalControllerRemove$Params } from '../fn/goal-controller/goal-controller-remove';
+import { goalControllerSearchFieldsAction } from '../fn/goal-controller/goal-controller-search-fields-action';
+import { GoalControllerSearchFieldsAction$Params } from '../fn/goal-controller/goal-controller-search-fields-action';
+import { goalControllerSearchFieldsActionPage } from '../fn/goal-controller/goal-controller-search-fields-action-page';
+import { GoalControllerSearchFieldsActionPage$Params } from '../fn/goal-controller/goal-controller-search-fields-action-page';
+import { goalControllerSearchFieldsList } from '../fn/goal-controller/goal-controller-search-fields-list';
+import { GoalControllerSearchFieldsList$Params } from '../fn/goal-controller/goal-controller-search-fields-list';
+import { goalControllerUpdate } from '../fn/goal-controller/goal-controller-update';
+import { GoalControllerUpdate$Params } from '../fn/goal-controller/goal-controller-update';
 import { GoalDto } from '../models/goal-dto';
 import { GoalListDto } from '../models/goal-list-dto';
-import { listAll2 } from '../fn/goal-controller/list-all-2';
-import { ListAll2$Params } from '../fn/goal-controller/list-all-2';
-import { remove2 } from '../fn/goal-controller/remove-2';
-import { Remove2$Params } from '../fn/goal-controller/remove-2';
-import { update2 } from '../fn/goal-controller/update-2';
-import { Update2$Params } from '../fn/goal-controller/update-2';
+import { PageGoalListDto } from '../models/page-goal-list-dto';
+import { SearchField } from '../models/search-field';
 
 @Injectable({ providedIn: 'root' })
 export class GoalControllerService extends BaseService {
@@ -32,177 +40,264 @@ export class GoalControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById2()` */
-  static readonly GetById2Path = '/1.0/goals/{id}';
+  /** Path part for operation `goalControllerGetById()` */
+  static readonly GoalControllerGetByIdPath = '/v1/goals/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById2()` instead.
+   * To access only the response body, use `goalControllerGetById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById2$Response(params: GetById2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-    return getById2(this.http, this.rootUrl, params, context);
+  goalControllerGetById$Response(params: GoalControllerGetById$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+    return goalControllerGetById(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerGetById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById2(params: GetById2$Params, context?: HttpContext): Observable<GoalDto> {
-    return this.getById2$Response(params, context).pipe(
+  goalControllerGetById(params: GoalControllerGetById$Params, context?: HttpContext): Observable<GoalDto> {
+    return this.goalControllerGetById$Response(params, context).pipe(
       map((r: StrictHttpResponse<GoalDto>): GoalDto => r.body)
     );
   }
 
-  /** Path part for operation `update2()` */
-  static readonly Update2Path = '/1.0/goals/{id}';
+  /** Path part for operation `goalControllerUpdate()` */
+  static readonly GoalControllerUpdatePath = '/v1/goals/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update2()` instead.
+   * To access only the response body, use `goalControllerUpdate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update2$Response(params: Update2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-    return update2(this.http, this.rootUrl, params, context);
+  goalControllerUpdate$Response(params: GoalControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+    return goalControllerUpdate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerUpdate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update2(params: Update2$Params, context?: HttpContext): Observable<GoalDto> {
-    return this.update2$Response(params, context).pipe(
+  goalControllerUpdate(params: GoalControllerUpdate$Params, context?: HttpContext): Observable<GoalDto> {
+    return this.goalControllerUpdate$Response(params, context).pipe(
       map((r: StrictHttpResponse<GoalDto>): GoalDto => r.body)
     );
   }
 
-  /** Path part for operation `remove2()` */
-  static readonly Remove2Path = '/1.0/goals/{id}';
+  /** Path part for operation `goalControllerRemove()` */
+  static readonly GoalControllerRemovePath = '/v1/goals/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove2()` instead.
+   * To access only the response body, use `goalControllerRemove()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove2$Response(params: Remove2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-    return remove2(this.http, this.rootUrl, params, context);
+  goalControllerRemove$Response(params: GoalControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+    return goalControllerRemove(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerRemove$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove2(params: Remove2$Params, context?: HttpContext): Observable<GoalDto> {
-    return this.remove2$Response(params, context).pipe(
+  goalControllerRemove(params: GoalControllerRemove$Params, context?: HttpContext): Observable<GoalDto> {
+    return this.goalControllerRemove$Response(params, context).pipe(
       map((r: StrictHttpResponse<GoalDto>): GoalDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll2()` */
-  static readonly ListAll2Path = '/1.0/goals';
+  /** Path part for operation `goalControllerListAll()` */
+  static readonly GoalControllerListAllPath = '/v1/goals';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll2()` instead.
+   * To access only the response body, use `goalControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll2$Response(params?: ListAll2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
-    return listAll2(this.http, this.rootUrl, params, context);
+  goalControllerListAll$Response(params?: GoalControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
+    return goalControllerListAll(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll2(params?: ListAll2$Params, context?: HttpContext): Observable<Array<GoalListDto>> {
-    return this.listAll2$Response(params, context).pipe(
+  goalControllerListAll(params?: GoalControllerListAll$Params, context?: HttpContext): Observable<Array<GoalListDto>> {
+    return this.goalControllerListAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<GoalListDto>>): Array<GoalListDto> => r.body)
     );
   }
 
-  /** Path part for operation `create2()` */
-  static readonly Create2Path = '/1.0/goals';
+  /** Path part for operation `goalControllerCreate()` */
+  static readonly GoalControllerCreatePath = '/v1/goals';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create2()` instead.
+   * To access only the response body, use `goalControllerCreate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create2$Response(params: Create2$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
-    return create2(this.http, this.rootUrl, params, context);
+  goalControllerCreate$Response(params: GoalControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<GoalDto>> {
+    return goalControllerCreate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerCreate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create2(params: Create2$Params, context?: HttpContext): Observable<GoalDto> {
-    return this.create2$Response(params, context).pipe(
+  goalControllerCreate(params: GoalControllerCreate$Params, context?: HttpContext): Observable<GoalDto> {
+    return this.goalControllerCreate$Response(params, context).pipe(
       map((r: StrictHttpResponse<GoalDto>): GoalDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems2()` */
-  static readonly DeleteItems2Path = '/1.0/goals/';
+  /** Path part for operation `goalControllerSearchFieldsList()` */
+  static readonly GoalControllerSearchFieldsListPath = '/v1/goals/search-fields';
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems2()` instead.
+   * To access only the response body, use `goalControllerSearchFieldsList()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  deleteItems2$Response(params: DeleteItems2$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
-    return deleteItems2(this.http, this.rootUrl, params, context);
+  goalControllerSearchFieldsList$Response(params?: GoalControllerSearchFieldsList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SearchField>>> {
+    return goalControllerSearchFieldsList(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems2$Response()` instead.
+   * To access the full response (for headers, for example), `goalControllerSearchFieldsList$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerSearchFieldsList(params?: GoalControllerSearchFieldsList$Params, context?: HttpContext): Observable<Array<SearchField>> {
+    return this.goalControllerSearchFieldsList$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<SearchField>>): Array<SearchField> => r.body)
+    );
+  }
+
+  /** Path part for operation `goalControllerSearchFieldsAction()` */
+  static readonly GoalControllerSearchFieldsActionPath = '/v1/goals/search-fields';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems2(params: DeleteItems2$Params, context?: HttpContext): Observable<Array<GoalListDto>> {
-    return this.deleteItems2$Response(params, context).pipe(
+  goalControllerSearchFieldsAction$Response(params: GoalControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
+    return goalControllerSearchFieldsAction(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerSearchFieldsAction$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  goalControllerSearchFieldsAction(params: GoalControllerSearchFieldsAction$Params, context?: HttpContext): Observable<Array<GoalListDto>> {
+    return this.goalControllerSearchFieldsAction$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<GoalListDto>>): Array<GoalListDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `goalControllerSearchFieldsActionPage()` */
+  static readonly GoalControllerSearchFieldsActionPagePath = '/v1/goals/search-fields/page';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerSearchFieldsActionPage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  goalControllerSearchFieldsActionPage$Response(params: GoalControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageGoalListDto>> {
+    return goalControllerSearchFieldsActionPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerSearchFieldsActionPage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  goalControllerSearchFieldsActionPage(params: GoalControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageGoalListDto> {
+    return this.goalControllerSearchFieldsActionPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `goalControllerListAllPage()` */
+  static readonly GoalControllerListAllPagePath = '/v1/goals/page';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerListAllPage()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerListAllPage$Response(params: GoalControllerListAllPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageGoalListDto>> {
+    return goalControllerListAllPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerListAllPage$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerListAllPage(params: GoalControllerListAllPage$Params, context?: HttpContext): Observable<PageGoalListDto> {
+    return this.goalControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
     );
   }
 

@@ -24,7 +24,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /** Path part for operation `getIncomeCategories()` */
-  static readonly GetIncomeCategoriesPath = '/1.0/categories/incomes';
+  static readonly GetIncomeCategoriesPath = '/v1/categories/incomes';
 
   /**
    * End point para listar todas as categorias de receitas
@@ -53,7 +53,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /** Path part for operation `getExpenseCategories()` */
-  static readonly GetExpenseCategoriesPath = '/1.0/categories/expenses';
+  static readonly GetExpenseCategoriesPath = '/v1/categories/expenses';
 
   /**
    * End point para listar todas as categorias de despesas

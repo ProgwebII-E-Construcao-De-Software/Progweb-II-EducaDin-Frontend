@@ -8,4 +8,5 @@ export interface GoalDto {
   goalDate?: string;
   id?: number;
   name?: string;
+  userId?: number;
 }

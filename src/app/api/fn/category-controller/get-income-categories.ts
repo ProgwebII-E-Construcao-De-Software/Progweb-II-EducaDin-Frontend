@@ -28,4 +28,4 @@ export function getIncomeCategories(http: HttpClient, rootUrl: string, params?: 
   );
 }
 
-getIncomeCategories.PATH = '/1.0/categories/incomes';
+getIncomeCategories.PATH = '/v1/categories/incomes';

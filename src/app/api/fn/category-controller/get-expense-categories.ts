@@ -28,4 +28,4 @@ export function getExpenseCategories(http: HttpClient, rootUrl: string, params?:
   );
 }
 
-getExpenseCategories.PATH = '/1.0/categories/expenses';
+getExpenseCategories.PATH = '/v1/categories/expenses';

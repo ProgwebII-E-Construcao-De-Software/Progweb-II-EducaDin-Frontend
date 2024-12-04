@@ -6,7 +6,6 @@ export interface NotificationDto {
   createdAt?: string;
   id?: number;
   message?: string;
-  read?: boolean;
   type?: string;
   userId?: number;
 }

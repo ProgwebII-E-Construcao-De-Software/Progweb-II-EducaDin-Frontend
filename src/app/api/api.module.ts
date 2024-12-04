@@ -6,13 +6,15 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { NotificationPreferenceControllerService } from './services/notification-preference-controller.service';
 import { IncomeControllerService } from './services/income-controller.service';
 import { GoalControllerService } from './services/goal-controller.service';
+import { AuthApiService } from './services/auth-api.service';
+import { NotificationPreferenceControllerService } from './services/notification-preference-controller.service';
 import { ExpenseControllerService } from './services/expense-controller.service';
+import { UserControllerService } from './services/user-controller.service';
 import { NotificationControllerService } from './services/notification-controller.service';
-import { TestControllerService } from './services/test-controller.service';
 import { CategoryControllerService } from './services/category-controller.service';
+import { TipControllerService } from './services/tip-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -22,13 +24,15 @@ import { CategoryControllerService } from './services/category-controller.servic
   exports: [],
   declarations: [],
   providers: [
-    NotificationPreferenceControllerService,
     IncomeControllerService,
     GoalControllerService,
+    AuthApiService,
+    NotificationPreferenceControllerService,
     ExpenseControllerService,
+    UserControllerService,
     NotificationControllerService,
-    TestControllerService,
     CategoryControllerService,
+    TipControllerService,
     ApiConfiguration
   ],
 })

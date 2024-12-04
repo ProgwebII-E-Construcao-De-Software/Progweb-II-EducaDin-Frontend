@@ -6,4 +6,5 @@ export interface GoalDtoCreate {
   amountTotal?: number;
   goalDate?: string;
   name?: string;
+  userId?: number;
 }

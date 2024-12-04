@@ -11,19 +11,27 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create } from '../fn/notification-preference-controller/create';
-import { Create$Params } from '../fn/notification-preference-controller/create';
-import { deleteItems } from '../fn/notification-preference-controller/delete-items';
-import { DeleteItems$Params } from '../fn/notification-preference-controller/delete-items';
-import { getById } from '../fn/notification-preference-controller/get-by-id';
-import { GetById$Params } from '../fn/notification-preference-controller/get-by-id';
-import { listAll } from '../fn/notification-preference-controller/list-all';
-import { ListAll$Params } from '../fn/notification-preference-controller/list-all';
+import { notificationPreferenceControllerCreate } from '../fn/notification-preference-controller/notification-preference-controller-create';
+import { NotificationPreferenceControllerCreate$Params } from '../fn/notification-preference-controller/notification-preference-controller-create';
+import { notificationPreferenceControllerGetById } from '../fn/notification-preference-controller/notification-preference-controller-get-by-id';
+import { NotificationPreferenceControllerGetById$Params } from '../fn/notification-preference-controller/notification-preference-controller-get-by-id';
+import { notificationPreferenceControllerListAll } from '../fn/notification-preference-controller/notification-preference-controller-list-all';
+import { NotificationPreferenceControllerListAll$Params } from '../fn/notification-preference-controller/notification-preference-controller-list-all';
+import { notificationPreferenceControllerListAllPage } from '../fn/notification-preference-controller/notification-preference-controller-list-all-page';
+import { NotificationPreferenceControllerListAllPage$Params } from '../fn/notification-preference-controller/notification-preference-controller-list-all-page';
+import { notificationPreferenceControllerRemove } from '../fn/notification-preference-controller/notification-preference-controller-remove';
+import { NotificationPreferenceControllerRemove$Params } from '../fn/notification-preference-controller/notification-preference-controller-remove';
+import { notificationPreferenceControllerSearchFieldsAction } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-action';
+import { NotificationPreferenceControllerSearchFieldsAction$Params } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-action';
+import { notificationPreferenceControllerSearchFieldsActionPage } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-action-page';
+import { NotificationPreferenceControllerSearchFieldsActionPage$Params } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-action-page';
+import { notificationPreferenceControllerSearchFieldsList } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-list';
+import { NotificationPreferenceControllerSearchFieldsList$Params } from '../fn/notification-preference-controller/notification-preference-controller-search-fields-list';
+import { notificationPreferenceControllerUpdate } from '../fn/notification-preference-controller/notification-preference-controller-update';
+import { NotificationPreferenceControllerUpdate$Params } from '../fn/notification-preference-controller/notification-preference-controller-update';
 import { NotificationPreferenceDto } from '../models/notification-preference-dto';
-import { remove } from '../fn/notification-preference-controller/remove';
-import { Remove$Params } from '../fn/notification-preference-controller/remove';
-import { update } from '../fn/notification-preference-controller/update';
-import { Update$Params } from '../fn/notification-preference-controller/update';
+import { PageNotificationPreferenceDto } from '../models/page-notification-preference-dto';
+import { SearchField } from '../models/search-field';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationPreferenceControllerService extends BaseService {
@@ -31,177 +39,264 @@ export class NotificationPreferenceControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById()` */
-  static readonly GetByIdPath = '/1.0/notification-preferences/{id}';
+  /** Path part for operation `notificationPreferenceControllerGetById()` */
+  static readonly NotificationPreferenceControllerGetByIdPath = '/1.0/notification-preferences/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById()` instead.
+   * To access only the response body, use `notificationPreferenceControllerGetById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById$Response(params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
-    return getById(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerGetById$Response(params: NotificationPreferenceControllerGetById$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+    return notificationPreferenceControllerGetById(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerGetById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById(params: GetById$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
-    return this.getById$Response(params, context).pipe(
+  notificationPreferenceControllerGetById(params: NotificationPreferenceControllerGetById$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
+    return this.notificationPreferenceControllerGetById$Response(params, context).pipe(
       map((r: StrictHttpResponse<NotificationPreferenceDto>): NotificationPreferenceDto => r.body)
     );
   }
 
-  /** Path part for operation `update()` */
-  static readonly UpdatePath = '/1.0/notification-preferences/{id}';
+  /** Path part for operation `notificationPreferenceControllerUpdate()` */
+  static readonly NotificationPreferenceControllerUpdatePath = '/1.0/notification-preferences/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update()` instead.
+   * To access only the response body, use `notificationPreferenceControllerUpdate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
-    return update(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerUpdate$Response(params: NotificationPreferenceControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+    return notificationPreferenceControllerUpdate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerUpdate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update(params: Update$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
-    return this.update$Response(params, context).pipe(
+  notificationPreferenceControllerUpdate(params: NotificationPreferenceControllerUpdate$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
+    return this.notificationPreferenceControllerUpdate$Response(params, context).pipe(
       map((r: StrictHttpResponse<NotificationPreferenceDto>): NotificationPreferenceDto => r.body)
     );
   }
 
-  /** Path part for operation `remove()` */
-  static readonly RemovePath = '/1.0/notification-preferences/{id}';
+  /** Path part for operation `notificationPreferenceControllerRemove()` */
+  static readonly NotificationPreferenceControllerRemovePath = '/1.0/notification-preferences/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove()` instead.
+   * To access only the response body, use `notificationPreferenceControllerRemove()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove$Response(params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
-    return remove(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerRemove$Response(params: NotificationPreferenceControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+    return notificationPreferenceControllerRemove(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerRemove$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove(params: Remove$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
-    return this.remove$Response(params, context).pipe(
+  notificationPreferenceControllerRemove(params: NotificationPreferenceControllerRemove$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
+    return this.notificationPreferenceControllerRemove$Response(params, context).pipe(
       map((r: StrictHttpResponse<NotificationPreferenceDto>): NotificationPreferenceDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll()` */
-  static readonly ListAllPath = '/1.0/notification-preferences';
+  /** Path part for operation `notificationPreferenceControllerListAll()` */
+  static readonly NotificationPreferenceControllerListAllPath = '/1.0/notification-preferences';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll()` instead.
+   * To access only the response body, use `notificationPreferenceControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll$Response(params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<NotificationPreferenceDto>>> {
-    return listAll(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerListAll$Response(params?: NotificationPreferenceControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<NotificationPreferenceDto>>> {
+    return notificationPreferenceControllerListAll(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll(params?: ListAll$Params, context?: HttpContext): Observable<Array<NotificationPreferenceDto>> {
-    return this.listAll$Response(params, context).pipe(
+  notificationPreferenceControllerListAll(params?: NotificationPreferenceControllerListAll$Params, context?: HttpContext): Observable<Array<NotificationPreferenceDto>> {
+    return this.notificationPreferenceControllerListAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<NotificationPreferenceDto>>): Array<NotificationPreferenceDto> => r.body)
     );
   }
 
-  /** Path part for operation `create()` */
-  static readonly CreatePath = '/1.0/notification-preferences';
+  /** Path part for operation `notificationPreferenceControllerCreate()` */
+  static readonly NotificationPreferenceControllerCreatePath = '/1.0/notification-preferences';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create()` instead.
+   * To access only the response body, use `notificationPreferenceControllerCreate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create$Response(params: Create$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
-    return create(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerCreate$Response(params: NotificationPreferenceControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationPreferenceDto>> {
+    return notificationPreferenceControllerCreate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerCreate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create(params: Create$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
-    return this.create$Response(params, context).pipe(
+  notificationPreferenceControllerCreate(params: NotificationPreferenceControllerCreate$Params, context?: HttpContext): Observable<NotificationPreferenceDto> {
+    return this.notificationPreferenceControllerCreate$Response(params, context).pipe(
       map((r: StrictHttpResponse<NotificationPreferenceDto>): NotificationPreferenceDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems()` */
-  static readonly DeleteItemsPath = '/1.0/notification-preferences/';
+  /** Path part for operation `notificationPreferenceControllerSearchFieldsList()` */
+  static readonly NotificationPreferenceControllerSearchFieldsListPath = '/1.0/notification-preferences/search-fields';
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems()` instead.
+   * To access only the response body, use `notificationPreferenceControllerSearchFieldsList()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  deleteItems$Response(params: DeleteItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<NotificationPreferenceDto>>> {
-    return deleteItems(this.http, this.rootUrl, params, context);
+  notificationPreferenceControllerSearchFieldsList$Response(params?: NotificationPreferenceControllerSearchFieldsList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SearchField>>> {
+    return notificationPreferenceControllerSearchFieldsList(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems$Response()` instead.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerSearchFieldsList$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  notificationPreferenceControllerSearchFieldsList(params?: NotificationPreferenceControllerSearchFieldsList$Params, context?: HttpContext): Observable<Array<SearchField>> {
+    return this.notificationPreferenceControllerSearchFieldsList$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<SearchField>>): Array<SearchField> => r.body)
+    );
+  }
+
+  /** Path part for operation `notificationPreferenceControllerSearchFieldsAction()` */
+  static readonly NotificationPreferenceControllerSearchFieldsActionPath = '/1.0/notification-preferences/search-fields';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `notificationPreferenceControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems(params: DeleteItems$Params, context?: HttpContext): Observable<Array<NotificationPreferenceDto>> {
-    return this.deleteItems$Response(params, context).pipe(
+  notificationPreferenceControllerSearchFieldsAction$Response(params: NotificationPreferenceControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<NotificationPreferenceDto>>> {
+    return notificationPreferenceControllerSearchFieldsAction(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerSearchFieldsAction$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  notificationPreferenceControllerSearchFieldsAction(params: NotificationPreferenceControllerSearchFieldsAction$Params, context?: HttpContext): Observable<Array<NotificationPreferenceDto>> {
+    return this.notificationPreferenceControllerSearchFieldsAction$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<NotificationPreferenceDto>>): Array<NotificationPreferenceDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `notificationPreferenceControllerSearchFieldsActionPage()` */
+  static readonly NotificationPreferenceControllerSearchFieldsActionPagePath = '/1.0/notification-preferences/search-fields/page';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `notificationPreferenceControllerSearchFieldsActionPage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  notificationPreferenceControllerSearchFieldsActionPage$Response(params: NotificationPreferenceControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageNotificationPreferenceDto>> {
+    return notificationPreferenceControllerSearchFieldsActionPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerSearchFieldsActionPage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  notificationPreferenceControllerSearchFieldsActionPage(params: NotificationPreferenceControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageNotificationPreferenceDto> {
+    return this.notificationPreferenceControllerSearchFieldsActionPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageNotificationPreferenceDto>): PageNotificationPreferenceDto => r.body)
+    );
+  }
+
+  /** Path part for operation `notificationPreferenceControllerListAllPage()` */
+  static readonly NotificationPreferenceControllerListAllPagePath = '/1.0/notification-preferences/page';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `notificationPreferenceControllerListAllPage()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  notificationPreferenceControllerListAllPage$Response(params: NotificationPreferenceControllerListAllPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageNotificationPreferenceDto>> {
+    return notificationPreferenceControllerListAllPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `notificationPreferenceControllerListAllPage$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  notificationPreferenceControllerListAllPage(params: NotificationPreferenceControllerListAllPage$Params, context?: HttpContext): Observable<PageNotificationPreferenceDto> {
+    return this.notificationPreferenceControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageNotificationPreferenceDto>): PageNotificationPreferenceDto => r.body)
     );
   }
 
