@@ -26,12 +26,14 @@ import {IncomeDto} from "../../../api/models/income-dto";
 })
 
 export class IncomesTableComponent implements OnInit {
-    displayedColumns: string[] = ['select','name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
+    displayedColumns: string[] = ['id','name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
     incomeTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
-    selection = new SelectionModel<IncomeListDto>(true, []);
     tipoDeListagem: string = 'Normal';
     qtdRegistros!: number;
     pageSlice!: IncomeDto[];
+    innerWidth: number = window.innerWidth;
+    flexDivAlinhar: string = 'row';
+    // selection = new SelectionModel<IncomeListDto>(true, []);
 
     constructor(
         protected dialog: MatDialog,
@@ -52,26 +54,6 @@ export class IncomesTableComponent implements OnInit {
             this.incomeTableDataSource.data = data;
             console.log(data);
         })
-    }
-
-    isAllSelected() {
-        const numSelected = this.selection.selected.length;
-        const numRows = this.incomeTableDataSource.data.length;
-        return numSelected === numRows;
-    }
-
-
-    selectAll(event: any) {
-        if (event.checked) {
-            this.selection.select(...this.incomeTableDataSource.data);
-        } else {
-            this.selection.clear();
-        }
-    }
-
-
-    onCheckboxChange(incomes: IncomeListDto) {
-        this.selection.toggle(incomes);
     }
 
     removeIncomes(incomes: IncomeListDto): void {
@@ -136,6 +118,12 @@ export class IncomesTableComponent implements OnInit {
         });
     }
 
+    openDialogAddIncomes() {
+        const dialogRef = this.dialog.open(IncomesDialogComponent, {
+            data: {id: null}
+        });
+    }
+
     onPageChange(event: PageEvent){
         this.incomeService.incomeControllerListAllPage({page: {page: event.pageIndex, size: event.pageSize, sort:["pessoaCpf"]}}).subscribe(data => {
             this.incomeTableDataSource.data = data.content || [];
@@ -146,4 +134,35 @@ export class IncomesTableComponent implements OnInit {
     showResult($event: any[]) {
         this.incomeTableDataSource.data = $event;
     }
+
+    mudarAlinhar() {
+
+        if(this.innerWidth < 1500)
+        {
+            return this.flexDivAlinhar = "column";
+        }
+        return this.flexDivAlinhar = "row";
+
+    }
+
+    // isAllSelected() {
+    //     const numSelected = this.selection.selected.length;
+    //     const numRows = this.incomeTableDataSource.data.length;
+    //     return numSelected === numRows;
+    // }
+    //
+    //
+    // selectAll(event: any) {
+    //     if (event.checked) {
+    //         this.selection.select(...this.incomeTableDataSource.data);
+    //     } else {
+    //         this.selection.clear();
+    //     }
+    // }
+    //
+    //
+    // onCheckboxChange(incomes: IncomeListDto) {
+    //     this.selection.toggle(incomes);
+    // }
+
 }

@@ -142,7 +142,7 @@ export class ExpensesDialogComponent implements OnInit {
             this.expenseService.expenseControllerCreate({body: this.formGroup.value}).subscribe(
                 retorn => {
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    window.location.reload();
+                    // window.location.reload();
                     this.snackBar.open('Gastos Adicionado', 'Close', {duration: 3000});
                     console.log("Retorno", retorn);
                 }, erro => {

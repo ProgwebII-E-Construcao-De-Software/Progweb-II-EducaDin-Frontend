@@ -1,5 +1,4 @@
 <mat-toolbar class="mat-elevation-z8">
-    <div class="container-header">
         <button
                 mat-icon-button
                 *ngIf="sidenav.mode === 'over'"
@@ -26,7 +25,6 @@
             <mat-icon>login</mat-icon>
             <span>Login</span>
         </button>
-    </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -71,7 +69,7 @@
         </ng-template>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="content">
+        <div class="content mat-elevation-z8">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

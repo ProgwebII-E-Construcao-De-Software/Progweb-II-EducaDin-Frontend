@@ -7,10 +7,7 @@ import {MatCard, MatCardContent, MatCardModule, MatCardTitle} from "@angular/mat
 import {MatError, MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MessageModule} from "../../architecture/message/message.module";
-import {NbSharedModule} from "@nebular/theme/components/shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PasswordModule} from "primeng/password";
-import {DividerModule} from "primeng/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatIconButton} from "@angular/material/button";

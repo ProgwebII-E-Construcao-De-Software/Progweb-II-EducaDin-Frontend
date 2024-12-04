@@ -140,4 +140,11 @@ export class ExpensesTableComponent implements OnInit {
     showResult($event: any[]) {
         this.expensesTableDataSource.data = $event;
     }
+
+    openDialogAddExpenses() {
+        const dialogRef = this.dialog.open(ExpensesDialogComponent, {
+
+            data: {id: null}
+        });
+    }
 }

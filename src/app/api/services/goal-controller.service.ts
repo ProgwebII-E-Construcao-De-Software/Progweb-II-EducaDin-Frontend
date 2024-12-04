@@ -15,6 +15,8 @@ import { goalControllerCreate } from '../fn/goal-controller/goal-controller-crea
 import { GoalControllerCreate$Params } from '../fn/goal-controller/goal-controller-create';
 import { goalControllerGetById } from '../fn/goal-controller/goal-controller-get-by-id';
 import { GoalControllerGetById$Params } from '../fn/goal-controller/goal-controller-get-by-id';
+import { goalControllerGetByUserId } from '../fn/goal-controller/goal-controller-get-by-user-id';
+import { GoalControllerGetByUserId$Params } from '../fn/goal-controller/goal-controller-get-by-user-id';
 import { goalControllerListAll } from '../fn/goal-controller/goal-controller-list-all';
 import { GoalControllerListAll$Params } from '../fn/goal-controller/goal-controller-list-all';
 import { goalControllerListAllPage } from '../fn/goal-controller/goal-controller-list-all-page';
@@ -269,6 +271,35 @@ export class GoalControllerService extends BaseService {
   goalControllerSearchFieldsActionPage(params: GoalControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageGoalListDto> {
     return this.goalControllerSearchFieldsActionPage$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `goalControllerGetByUserId()` */
+  static readonly GoalControllerGetByUserIdPath = '/v1/goals/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerGetByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerGetByUserId$Response(params: GoalControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GoalListDto>>> {
+    return goalControllerGetByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerGetByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerGetByUserId(params: GoalControllerGetByUserId$Params, context?: HttpContext): Observable<Array<GoalListDto>> {
+    return this.goalControllerGetByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<GoalListDto>>): Array<GoalListDto> => r.body)
     );
   }
 

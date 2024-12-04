@@ -164,8 +164,8 @@ export class IncomesDialogComponent implements OnInit {
                 retorn => {
                     console.log("Retorno da criação:", retorn);
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    window.location.reload();
-                    this.snackBar.open('Ganhos Adicionado', 'Close', {duration: 4000});
+                    // window.location.reload();
+                    this.snackBar.open('Cadastro Realizado Com Sucesso', 'Close', {duration: 4000});
                 }, erro => {
                     console.log("Erro ao criar o ganho:", erro);
                     this.messageService.addMsgWarning(`Erro ao criar ganho: ${erro.message}`);

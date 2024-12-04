@@ -25,25 +25,11 @@ export class HomeComponent {
         private dialog: MatDialog
     ) {}
 
-    // ngOnInit(): void {
-    //     const isLoggedIn = this.securityService.isValid();
-    //     const accessToken = this.securityService.credential.accessToken;
-    //
-    //     if (!accessToken || !isLoggedIn) {
-    //         this.router.navigate(['/painel']);
-    //     } else {
-    //         this.nomeUsuario = this.securityService.credential.userName;
-    //         if (this.router.url === '/') {
-    //             this.router.navigate(['/dashboard']);
-    //         }
-    //     }
-    // }
-
 
     logout(): void {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
-                titulo: 'DESEJA SAIR DO SISTEMA?',
+                titulo: 'Deseja Sair do Sistema?',
                 textoBotoes: { ok: 'Sim', cancel: 'Não' },
             },
         });

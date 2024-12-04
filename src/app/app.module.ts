@@ -40,6 +40,7 @@ import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.com
 import {RegisterModule} from "./core/register/register.module";
 import {ArchitectureModule} from "./architecture/architecture.module";
 import {SecurityInterceptor} from "./architecture/security/security.interceptor";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
     declarations: [
@@ -81,6 +82,7 @@ import {SecurityInterceptor} from "./architecture/security/security.interceptor"
         MatOptionModule,
         ChartModule,
         MainpainelModule,
+        FlexModule,
         ArchitectureModule,
         SecurityModule.forRoot({
             nameStorage: environment.nameStorage,

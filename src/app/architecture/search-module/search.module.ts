@@ -6,22 +6,24 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {SharedMaterialModule} from "../shared-material/shared-material.module";
+import {FlexModule} from "@angular/flex-layout";
 
 
 
 @NgModule({
   declarations: [SearchComponent],
   exports: [SearchComponent],
-  imports: [
-    CommonModule,
-    SharedMaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-  ]
+    imports: [
+        CommonModule,
+        SharedMaterialModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        FlexModule,
+    ]
 })
 export class SearchModule { }

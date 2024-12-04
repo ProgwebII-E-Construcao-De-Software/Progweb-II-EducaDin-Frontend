@@ -11,6 +11,7 @@ import {
     ConfirmationDialog,
     ConfirmationDialogResult
 } from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-regsiter-add',
@@ -34,6 +35,7 @@ export class RegisterAddComponent implements OnInit {
         private userService: UserControllerService,
         private router: Router,
         private dialog: MatDialog,
+        private snackBar: MatSnackBar,
     ) {
         this._adapter.setLocale('pt-br');
     }
@@ -66,7 +68,7 @@ export class RegisterAddComponent implements OnInit {
             this.userService.create({body: user}).subscribe(
                 response => {
                     console.log("Retorno Registro", response);
-                    this.mostrarMensagem('O Usuário do EducaDin foi cadastrado com sucesso !!', 'success', 5000);
+                    this.snackBar.open('Ganhos Adicionado', 'Close', {duration: 4000});
                     this.router.navigate(['/auth/login']);
                 },
                 error => {
@@ -76,30 +78,30 @@ export class RegisterAddComponent implements OnInit {
         }
     }
 
-    mostrarMensagem(mensagem: string, tipo: 'success' | 'error', duracao?: number): void {
-        const dialogRef = this.dialog.open(ConfirmationDialog, {
-            data: {
-                titulo: tipo === 'success' ? 'Sucesso' : 'Erro',
-                mensagem: mensagem,
-                textoBotoes: {
-                    ok: 'OK',
-                },
-            },
-            disableClose: true
-        });
-
-        if (tipo === 'success' && duracao) {
-            dialogRef.afterOpened().subscribe(() => {
-                setTimeout(() => {
-                    dialogRef.close();
-                }, duracao);
-            });
-        }
-
-        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
-
-        });
-    }
+    // mostrarMensagem(mensagem: string, tipo: 'success' | 'error', duracao?: number): void {
+    //     const dialogRef = this.dialog.open(ConfirmationDialog, {
+    //         data: {
+    //             titulo: tipo === 'success' ? 'Sucesso' : 'Erro',
+    //             mensagem: mensagem,
+    //             textoBotoes: {
+    //                 ok: 'OK',
+    //             },
+    //         },
+    //         disableClose: true
+    //     });
+    //
+    //     if (tipo === 'success' && duracao) {
+    //         dialogRef.afterOpened().subscribe(() => {
+    //             setTimeout(() => {
+    //                 dialogRef.close();
+    //             }, duracao);
+    //         });
+    //     }
+    //
+    //     dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+    //
+    //     });
+    // }
 
 
     public handleError = (controlName: string, errorName: string) => {

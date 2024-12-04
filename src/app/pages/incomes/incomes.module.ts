@@ -28,6 +28,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {SearchModule} from "../../architecture/search-module/search.module";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
         MatCheckboxModule,
         SearchModule,
         MatPaginatorModule,
+        FlexLayoutModule,
     ]
 })
 export class IncomesModule {
