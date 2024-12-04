@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>{{ data.isEdit ? 'Editar Meta' : 'Criar Nova Meta' }}</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="goalForm">
+    <!-- Nome da Meta -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome da Meta</mat-label>
+      <input matInput formControlName="name" placeholder="Digite o nome da meta" />
+      <mat-error *ngIf="goalForm.get('name')?.invalid && goalForm.get('name')?.touched">
+        Nome é obrigatório (mínimo 3 caracteres).
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Valor Total -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Valor Total</mat-label>
+      <input matInput type="number" formControlName="amountTotal" placeholder="Digite o valor total" />
+      <mat-error *ngIf="goalForm.get('amountTotal')?.invalid && goalForm.get('amountTotal')?.touched">
+        O valor total é obrigatório e deve ser maior que 0.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Data para Concluir -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Data para Concluir</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="goalDate" placeholder="Selecione a data" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="goalForm.get('goalDate')?.invalid && goalForm.get('goalDate')?.touched">
+        Data é obrigatória.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="goalForm.invalid">
+    {{ data.isEdit ? 'Salvar Alterações' : 'Criar Meta' }}
+  </button>
+</div>

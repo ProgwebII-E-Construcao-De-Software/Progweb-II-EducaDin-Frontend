@@ -10,12 +10,17 @@ import {MatIcon} from "@angular/material/icon";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTable} from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {GoalsDialogComponent} from "./goals-dialog/goals-dialog.component";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
     declarations: [
         GoalsHomeComponent,
-        GoalsTableComponent
+        GoalsTableComponent,
+        GoalsDialogComponent,
     ],
   imports: [
     CommonModule,
@@ -30,7 +35,14 @@ import {MatCheckbox} from "@angular/material/checkbox";
     MatIconButton,
     MatPaginator,
     MatTable,
-    MatCheckbox
+    MatCheckbox,
+    MatError,
+    MatDatepickerToggle,
+    MatLabel,
+    MatDatepicker,
+    MatFormField,
+    MatDatepickerInput,
+    ReactiveFormsModule
   ]
 })
 export class GoalsModule {
