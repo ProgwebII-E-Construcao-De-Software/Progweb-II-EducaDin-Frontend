@@ -1,10 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { SecurityService } from '../../architecture/security/security.service';
 import { MatDialog } from '@angular/material/dialog';
-import {ConfirmationDialog} from "../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialog} from "../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {SecurityService} from "../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-home',

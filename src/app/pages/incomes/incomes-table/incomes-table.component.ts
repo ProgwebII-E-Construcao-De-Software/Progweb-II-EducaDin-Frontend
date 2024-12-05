@@ -1,28 +1,25 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
+import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {IncomeListDto} from "../../../api/models/income-list-dto";
 import {IncomeControllerService} from "../../../api/services/income-controller.service";
-import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageService} from "../../../architecture/message/message.service";
+import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
+import {ActivatedRoute} from "@angular/router";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {IncomeDto} from "../../../api/models/income-dto";
 import {
     ConfirmationDialog,
     ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
-import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
-import {ActivatedRoute} from "@angular/router";
-import {PageEvent} from "@angular/material/paginator";
-import {IncomeDto} from "../../../api/models/income-dto";
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import _default from "chart.js/dist/core/core.interaction";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
     selector: 'app-earnings-table',
     templateUrl: './incomes-table.component.html',
     styleUrls: ['./incomes-table.component.scss']
-})
-
-@Injectable({
-    providedIn: 'root',
 })
 
 export class IncomesTableComponent implements OnInit {
@@ -34,6 +31,9 @@ export class IncomesTableComponent implements OnInit {
     innerWidth: number = window.innerWidth;
     flexDivAlinhar: string = 'row';
     // selection = new SelectionModel<IncomeListDto>(true, []);
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
     constructor(
         protected dialog: MatDialog,
@@ -49,37 +49,55 @@ export class IncomesTableComponent implements OnInit {
         this.listIncomes();
     }
 
-    public listIncomes() {
-        this.incomeService.incomeControllerListAll().subscribe(data => {
-            this.incomeTableDataSource.data = data;
-            console.log(data);
-        })
+
+    public listIncomes(): void {
+        this.incomeService.incomeControllerListAll()
+            .subscribe({
+                next: (data: IncomeListDto[]) => {
+                    this.incomeTableDataSource.data = data.map(item => ({
+                        ...item,
+                        incomeDate: this.formatDate(item.incomeDate)
+                    }));
+                    console.log('Incomes:', this.incomeTableDataSource.data);
+                },
+                error: (error) => {
+                    console.error('Erro ao carregar os rendimentos:', error);
+                }
+            });
+    }
+
+    private formatDate(date?: string): string {
+        if (!date) return 'Data indisponível';
+        const parsedDate = new Date(date);
+        return parsedDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
     }
 
     removeIncomes(incomes: IncomeListDto): void {
         if (incomes.id !== undefined) {
             console.log(`Excluir item: ${incomes.description}`);
-            this.incomeService.incomeControllerRemove({id: incomes.id})
-                .subscribe(
-                    retorn => {
-                        this.listIncomes();
-                        this.messageService.addMsgSuccess(`Ganho: ${retorn.name} Excluído com Sucesso !!`)
-                        console.log("Exclusão", retorn);
+            this.incomeService.incomeControllerRemove({ id: incomes.id })
+                .subscribe({
+                    next: () => {
+                        this.incomeTableDataSource.data = this.incomeTableDataSource.data.filter(item => item.id !== incomes.id);
+                        this.messageService.addMsgSuccess(`Ganho excluído com sucesso!`);
+                        console.log("Exclusão realizada");
+                        this.listIncomes(); // Busca os dados atualizados no backend
                     },
-                    error => {
+                    error: (error) => {
                         if (error.status === 404) {
-                            this.messageService.addMsgInf("Ganho listado não existe mais")
+                            this.messageService.addMsgInf("O ganho listado não existe mais");
                         } else {
                             this.messageService.addMsgDanger("Erro ao excluir");
-                            console.log("Erro:", error);
+                            console.error("Erro:", error);
                         }
                     }
-                );
+                });
         } else {
             console.error("Erro: o ID do item é indefinido.");
-            alert("Erro ao Excluir: o ID do item é indefinido.");
+            alert("Erro ao excluir: o ID do item é indefinido.");
         }
     }
+
 
     confirmDeletionIncomes(incomes: IncomeListDto) {
 
@@ -164,5 +182,6 @@ export class IncomesTableComponent implements OnInit {
     // onCheckboxChange(incomes: IncomeListDto) {
     //     this.selection.toggle(incomes);
     // }
+
 
 }

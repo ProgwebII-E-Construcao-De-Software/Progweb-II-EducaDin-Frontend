@@ -6,9 +6,6 @@ import {Component, Injectable, ViewChild} from '@angular/core';
     styleUrl: './incomes-home.component.scss'
 })
 
-@Injectable({
-    providedIn: 'root',
-})
 
 export class IncomesHomeComponent {
 }

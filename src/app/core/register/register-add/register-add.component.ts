@@ -1,16 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {SecurityService} from "../../../architecture/security/security.service";
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Router} from "@angular/router";
 import {UserControllerService} from "../../../api/services/user-controller.service";
 import {DateAdapter} from "@angular/material/core";
 import {UserCreateDto} from "../../../api/models/user-create-dto";
-import {CredencialDto} from "../../../api/models/credencial-dto";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -18,7 +12,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     templateUrl: './register-add.component.html',
     styleUrl: './register-add.component.scss'
 })
-export class RegisterAddComponent implements OnInit {
+export class RegisterAddComponent {
     formGroup!: FormGroup;
     hide = true;
     passwordStrength = 0;
@@ -38,9 +32,6 @@ export class RegisterAddComponent implements OnInit {
         private snackBar: MatSnackBar,
     ) {
         this._adapter.setLocale('pt-br');
-    }
-
-    ngOnInit() {
         this.createForm()
     }
 
@@ -68,7 +59,7 @@ export class RegisterAddComponent implements OnInit {
             this.userService.create({body: user}).subscribe(
                 response => {
                     console.log("Retorno Registro", response);
-                    this.snackBar.open('Ganhos Adicionado', 'Close', {duration: 4000});
+                    this.snackBar.open('Usuário Cadastrado', 'Close', {duration: 4000});
                     this.router.navigate(['/auth/login']);
                 },
                 error => {
@@ -77,31 +68,6 @@ export class RegisterAddComponent implements OnInit {
             );
         }
     }
-
-    // mostrarMensagem(mensagem: string, tipo: 'success' | 'error', duracao?: number): void {
-    //     const dialogRef = this.dialog.open(ConfirmationDialog, {
-    //         data: {
-    //             titulo: tipo === 'success' ? 'Sucesso' : 'Erro',
-    //             mensagem: mensagem,
-    //             textoBotoes: {
-    //                 ok: 'OK',
-    //             },
-    //         },
-    //         disableClose: true
-    //     });
-    //
-    //     if (tipo === 'success' && duracao) {
-    //         dialogRef.afterOpened().subscribe(() => {
-    //             setTimeout(() => {
-    //                 dialogRef.close();
-    //             }, duracao);
-    //         });
-    //     }
-    //
-    //     dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
-    //
-    //     });
-    // }
 
 
     public handleError = (controlName: string, errorName: string) => {

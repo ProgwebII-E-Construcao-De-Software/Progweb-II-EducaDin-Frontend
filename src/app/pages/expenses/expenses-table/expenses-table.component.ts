@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
 import {ExpenseListDto} from "../../../api/models/expense-list-dto";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageService} from "../../../architecture/message/message.service";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
 import {ActivatedRoute} from "@angular/router";
 import {ExpenseDto} from "../../../api/models/expense-dto";
-import {PageEvent} from "@angular/material/paginator";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
     selector: 'app-expenses-table',
@@ -28,6 +29,9 @@ export class ExpensesTableComponent implements OnInit {
     isMenuOpen: boolean = false;
     pageSlice!: ExpenseDto[];
     qtdRegistros!: number;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
 
     constructor(

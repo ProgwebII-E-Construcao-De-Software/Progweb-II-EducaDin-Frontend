@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
@@ -9,7 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
+import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -18,11 +18,9 @@ import {GoalsModule} from "./pages/goals/goals.module";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {MessageModule} from "./architecture/message/message.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
-import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
-import {AuthenticationModule} from './architecture/authentication/authentication.module';
+import {AuthenticationModule} from './arquitetura/authentication/authentication.module';
 import {DashboardModule} from "./pages/dashboard/dashboard-module";
 import {SettingsModule} from "./pages/settings/settings.module";
 import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.module";
@@ -30,24 +28,25 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {ChartModule} from "primeng/chart";
-import {SecurityModule} from "./architecture/security/security.module";
 import {MainpainelModule} from "./pages/mainpainel/mainpainel.module";
 import {ApiModule} from "./api/api.module";
-import {environment} from "./environments/environment";
-import {ConfirmDialog} from "primeng/confirmdialog";
-import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
-import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
-import {RegisterModule} from "./core/register/register.module";
-import {ArchitectureModule} from "./architecture/architecture.module";
-import {SecurityInterceptor} from "./architecture/security/security.interceptor";
 import {FlexModule} from "@angular/flex-layout";
+import {ConfirmationDialog} from "./arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {ErrosDialogComponent} from "./arquitetura/erros-dialog/erros-dialog.component";
+import {RegisterModule} from "./core/register/register.module";
+import {SecurityModule} from "./arquitetura/security/security.module";
+import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {MessageModule} from "./arquitetura/message/message.module";
+import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         ConfirmationDialog,
-        ErrosDialogComponent
+        ErrosDialogComponent,
+        LoaderDialogComponent
     ],
     imports: [
         AppRoutingModule,
@@ -69,7 +68,6 @@ import {FlexModule} from "@angular/flex-layout";
         ExpensesModule,
         GoalsModule,
         AppRoutingModule,
-        SharedMaterialModule,
         AuthenticationModule,
         RegisterModule,
         ForgotpassowordModule,
@@ -83,12 +81,12 @@ import {FlexModule} from "@angular/flex-layout";
         ChartModule,
         MainpainelModule,
         FlexModule,
-        ArchitectureModule,
+        MatDialogModule,
+        SecurityModule,
         SecurityModule.forRoot({
-            nameStorage: environment.nameStorage,
+            nameStorage: 'portalSSOSecurityStorage',
             loginRouter: '/auth/login'
         }),
-        ApiModule.forRoot({rootUrl: environment.apiUrl}),
 
     ],
     providers: [
@@ -99,6 +97,12 @@ import {FlexModule} from "@angular/flex-layout";
             useClass: SecurityInterceptor,
             multi: true
         },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SecurityInterceptor,
+            multi: true
+        },
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
 
     ],
 

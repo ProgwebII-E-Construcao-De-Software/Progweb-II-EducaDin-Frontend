@@ -1,5 +1,4 @@
 import {Routes} from "@angular/router";
-import {SecurityGuard} from "../../architecture/security/security.guard";
 import {MainpainelHomeComponent} from "./mainpainel-home/mainpainel-home.component";
 import {MainpainelSystemComponent} from "./mainpainel-system/mainpainel-system.component";
 

@@ -2,11 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
-import {Message, MessageService} from "../../../architecture/message/message.service";
 import {ExpenseDto} from "../../../api/models/expense-dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
-import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialog} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {Message, MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
     selector: 'app-expenses-dialog',
