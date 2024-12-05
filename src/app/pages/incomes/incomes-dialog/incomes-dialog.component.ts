@@ -131,6 +131,7 @@ export class IncomesDialogComponent implements OnInit {
             next: (response) => {
                 this.showConfirmation(response, this.ACAO_INCLUIR);
                 this.snackBar.open('Ganho adicionado com sucesso!', 'Fechar', { duration: 4000 });
+                this.closeDialog(true);
             },
             error: (error) => {
                 this.messageService.addMsgWarning(`Erro ao adicionar ganho: ${error.message}`);
@@ -140,7 +141,7 @@ export class IncomesDialogComponent implements OnInit {
 
     private updateIncome() {
         const updatedIncome: IncomeDto = {
-            id: this.id, // Incluindo explicitamente o ID
+            id: this.id,
             ...this.formGroup.value
         };
 
@@ -148,6 +149,7 @@ export class IncomesDialogComponent implements OnInit {
             next: (response) => {
                 this.showConfirmation(response, this.ACAO_EDITAR);
                 this.snackBar.open('Ganho atualizado com sucesso!', 'Fechar', { duration: 4000 });
+                this.closeDialog(true);
             },
             error: (error) => {
                 this.messageService.addMsgWarning(`Erro ao atualizar ganho: ${error.message}`);
@@ -172,7 +174,7 @@ export class IncomesDialogComponent implements OnInit {
     }
 
     private getUserIdFromSession(): number {
-        return 1; 
+        return 1;
     }
 
     public handleError(controlName: string, errorName: string) {

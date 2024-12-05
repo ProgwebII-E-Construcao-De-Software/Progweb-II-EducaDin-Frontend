@@ -4,17 +4,28 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  background: #F5F7FA;
+  background: #dcdee0;
   color: black;
   text-align: center;
+  width: 200px;
+}
+
+.mat-sidenav :hover {
+  background: #dcdee0;
 }
 
 .content {
   height: calc(100vh - 96px);
   padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 8px;
 }
 
-mat-sidenav-container {
+
+.principal{
   height: 100%;
 }
 
@@ -43,6 +54,12 @@ mat-sidenav-container {
   height: 20px;
   margin-right: 8px;
   object-fit: contain;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .designation {

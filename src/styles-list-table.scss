@@ -1,45 +1,95 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
-/* Estilos gerais */
-.card {
-  margin: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  background-color: #abd3b6;
-  color: #fff;
-  font-size: 18px;
+.mat-card-title {
   font-weight: bold;
-  border-radius: 8px 8px 0 0;
+  color: #046F82;
 }
 
-.card-content {
-  padding: 16px;
+.mat-card {
+  height: 500px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
-.mat-table {
+mat-card-content {
+  flex: 1;
+}
+
+.table {
   width: 100%;
-  overflow-x: auto;
-  background: #fff;
-  border-radius: 8px;
+  overflow: auto;
+}
+
+.searchFlex {
+  margin-bottom: 10px;
+}
+
+.mat-paginator {
+  background-color: #E8F5E9;
+  border-top: 1px solid #A5D6A7;
+  padding: 8px 0;
 }
 
 .mat-header-cell {
   font-weight: bold;
   text-align: left;
+  background-color: #abd3b6 !important;
+  color: #020100;
+  padding: 12px;
 }
+
+
 
 .mat-cell {
   text-align: left;
+  padding: 12px;
+  background-color: #dcdee0;
 }
 
-/* Botões */
+.mat-row:nth-child(even) .mat-cell {
+  background-color: #abd3b6;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.add-button:hover {
+  background-color: #388E3C;
+}
+
+.mat-paginator {
+  background-color: #E8F5E9;
+  border-radius: 8px;
+}
+
+.mat-paginator .mat-paginator-range-label,
+.mat-paginator .mat-icon-button {
+  color: #046F82;
+}
+
+.mat-divider {
+  background-color: #abd3b6;
+}
+
+.custom-card-header {
+  background-color: #abd3b6;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.custom-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #020100 !important;
+}
+
+
 button {
   margin: 0 4px;
   min-width: 36px;

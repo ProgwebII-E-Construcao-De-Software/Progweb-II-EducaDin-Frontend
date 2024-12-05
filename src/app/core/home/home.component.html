@@ -27,7 +27,7 @@
         </button>
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container class="principal">
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
         <ng-container *ngIf="!securityService.isValid(); else loggedIn">
             <button mat-button routerLink="/painel" class="menu-button" matTooltip="Sobre o Educadin">
@@ -68,9 +68,9 @@
             </button>
         </ng-template>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <div class="content mat-elevation-z8">
+    <mat-sidenav-content class="content">
+
             <router-outlet></router-outlet>
-        </div>
+
     </mat-sidenav-content>
 </mat-sidenav-container>

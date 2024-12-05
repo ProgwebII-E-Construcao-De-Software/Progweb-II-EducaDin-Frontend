@@ -23,7 +23,7 @@ import {MatSort} from "@angular/material/sort";
 })
 
 export class IncomesTableComponent implements OnInit {
-    displayedColumns: string[] = ['id','name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
+    displayedColumns: string[] = ['id', 'name', 'category', 'description', 'incomeDate', 'amount', 'acao'];
     incomeTableDataSource: MatTableDataSource<IncomeListDto> = new MatTableDataSource<IncomeListDto>([]);
     tipoDeListagem: string = 'Normal';
     qtdRegistros!: number;
@@ -69,13 +69,13 @@ export class IncomesTableComponent implements OnInit {
     private formatDate(date?: string): string {
         if (!date) return 'Data indisponível';
         const parsedDate = new Date(date);
-        return parsedDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+        return parsedDate.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
     }
 
     removeIncomes(incomes: IncomeListDto): void {
         if (incomes.id !== undefined) {
             console.log(`Excluir item: ${incomes.description}`);
-            this.incomeService.incomeControllerRemove({ id: incomes.id })
+            this.incomeService.incomeControllerRemove({id: incomes.id})
                 .subscribe({
                     next: () => {
                         this.incomeTableDataSource.data = this.incomeTableDataSource.data.filter(item => item.id !== incomes.id);
@@ -140,10 +140,21 @@ export class IncomesTableComponent implements OnInit {
         const dialogRef = this.dialog.open(IncomesDialogComponent, {
             data: {id: null}
         });
+        dialogRef.afterClosed().subscribe((reload) => {
+            if (reload) {
+                this.listIncomes();
+            }
+        });
     }
 
-    onPageChange(event: PageEvent){
-        this.incomeService.incomeControllerListAllPage({page: {page: event.pageIndex, size: event.pageSize, sort:["pessoaCpf"]}}).subscribe(data => {
+    onPageChange(event: PageEvent) {
+        this.incomeService.incomeControllerListAllPage({
+            page: {
+                page: event.pageIndex,
+                size: event.pageSize,
+                sort: ["pessoaCpf"]
+            }
+        }).subscribe(data => {
             this.incomeTableDataSource.data = data.content || [];
             this.pageSlice = this.incomeTableDataSource.data;
         })
@@ -155,8 +166,7 @@ export class IncomesTableComponent implements OnInit {
 
     mudarAlinhar() {
 
-        if(this.innerWidth < 1500)
-        {
+        if (this.innerWidth < 1500) {
             return this.flexDivAlinhar = "column";
         }
         return this.flexDivAlinhar = "row";
