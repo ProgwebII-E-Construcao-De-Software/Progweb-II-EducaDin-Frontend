@@ -74,39 +74,38 @@ export class IncomesTableComponent implements OnInit {
 
     removeIncomes(incomes: IncomeListDto): void {
         if (incomes.id !== undefined) {
-            console.log(`Excluir item: ${incomes.description}`);
-            this.incomeService.incomeControllerRemove({id: incomes.id})
+            console.log(`Excluindo item: ${incomes.description}`);
+            this.incomeService.incomeControllerRemove({ id: incomes.id })
                 .subscribe({
                     next: () => {
                         this.incomeTableDataSource.data = this.incomeTableDataSource.data.filter(item => item.id !== incomes.id);
-                        this.messageService.addMsgSuccess(`Ganho excluído com sucesso!`);
-                        console.log("Exclusão realizada");
-                        this.listIncomes(); // Busca os dados atualizados no backend
+                        this.messageService.addMsgSuccess(`Ganho "${incomes.name}" excluído com sucesso!`);
+                        console.log("Exclusão realizada com sucesso");
                     },
                     error: (error) => {
                         if (error.status === 404) {
-                            this.messageService.addMsgInf("O ganho listado não existe mais");
+                            this.messageService.addMsgInf(`O ganho "${incomes.name}" já foi removido.`);
                         } else {
-                            this.messageService.addMsgDanger("Erro ao excluir");
-                            console.error("Erro:", error);
+                            this.messageService.addMsgDanger("Erro ao excluir o ganho. Tente novamente.");
+                            console.error("Erro ao excluir:", error);
                         }
                     }
                 });
         } else {
             console.error("Erro: o ID do item é indefinido.");
-            alert("Erro ao excluir: o ID do item é indefinido.");
+            this.messageService.addMsgDanger("Erro ao excluir: o ID do item é indefinido.");
         }
     }
 
 
-    confirmDeletionIncomes(incomes: IncomeListDto) {
 
+    confirmDeletionIncomes(incomes: IncomeListDto): void {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
                 titulo: 'Confirmar Exclusão?',
-                mensagem: `A exclusão de: ${incomes.name} Categoria: ${incomes.category?.name}?`,
+                mensagem: `Deseja realmente excluir o ganho "${incomes.name}" da categoria "${incomes.category?.name}"?`,
                 textoBotoes: {
-                    ok: 'Confirmar',
+                    ok: 'Excluir',
                     cancel: 'Cancelar',
                 },
                 dado: incomes
@@ -116,10 +115,10 @@ export class IncomesTableComponent implements OnInit {
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
             if (confirmed?.resultado) {
                 this.removeIncomes(confirmed.dado);
-                this.snackBar.open('Excluido com Sucesso', 'Close', {duration: 4000});
             }
         });
     }
+
 
     openDialogEditIncomes(incomes: IncomeListDto) {
         console.log('Abrindo diálogo de edição para o ganho:', incomes);

@@ -73,7 +73,7 @@ export class IncomesDialogComponent implements OnInit {
         private _adapter: DateAdapter<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        this.id = data?.id || null;
+        this.id = data.id || null;
         this._adapter.setLocale('pt-br');
     }
 
@@ -146,10 +146,16 @@ export class IncomesDialogComponent implements OnInit {
         };
 
         this.incomeService.incomeControllerUpdate({ id: this.id, body: updatedIncome }).subscribe({
-            next: (response) => {
-                this.showConfirmation(response, this.ACAO_EDITAR);
-                this.snackBar.open('Ganho atualizado com sucesso!', 'Fechar', { duration: 4000 });
-                this.closeDialog(true);
+            next: (response: IncomeDto) => {
+                if (response && response.name) {
+                    this.showConfirmation(response, this.ACAO_EDITAR);
+                    this.snackBar.open('Ganho atualizado com sucesso!', 'Fechar', { duration: 4000 });
+                    this.closeDialog(true);
+                } else {
+                    console.warn('Objeto de resposta vazio ou inválido:', response);
+                    this.messageService.addMsgWarning('O ganho foi atualizado, mas o servidor não retornou os dados corretamente.');
+                    this.closeDialog(true);
+                }
             },
             error: (error) => {
                 this.messageService.addMsgWarning(`Erro ao atualizar ganho: ${error.message}`);
@@ -157,7 +163,14 @@ export class IncomesDialogComponent implements OnInit {
         });
     }
 
+
     private showConfirmation(income: IncomeDto, action: string) {
+        if (!income || !income.name) {
+            console.error('Objeto de ganho inválido:', income);
+            this.messageService.addMsgWarning('Erro ao processar a confirmação. Dados do ganho ausentes.');
+            return;
+        }
+
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             data: {
                 titulo: action === this.ACAO_INCLUIR ? 'Adicionado' : 'Editado',
@@ -172,6 +185,7 @@ export class IncomesDialogComponent implements OnInit {
             }
         });
     }
+
 
     private getUserIdFromSession(): number {
         return 1;
