@@ -9,9 +9,7 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { IncomeListDto } from '../../models/income-list-dto';
-import { SearchFieldValue } from '../../models/search-field-value';
 
-<<<<<<<< HEAD:src/app/api/fn/income-controller/income-controller-get-by-user-id.ts
 export interface IncomeControllerGetByUserId$Params {
 
 /**
@@ -22,14 +20,6 @@ export interface IncomeControllerGetByUserId$Params {
 
 export function incomeControllerGetByUserId(http: HttpClient, rootUrl: string, params: IncomeControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
   const rb = new RequestBuilder(rootUrl, incomeControllerGetByUserId.PATH, 'get');
-========
-export interface IncomeControllerSearchFieldsAction$Params {
-      body: Array<SearchFieldValue>
-}
-
-export function incomeControllerSearchFieldsAction(http: HttpClient, rootUrl: string, params: IncomeControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-  const rb = new RequestBuilder(rootUrl, incomeControllerSearchFieldsAction.PATH, 'post');
->>>>>>>> branch-jonathan-final:src/app/api/fn/income-controller/income-controller-search-fields-action.ts
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -44,8 +34,4 @@ export function incomeControllerSearchFieldsAction(http: HttpClient, rootUrl: st
   );
 }
 
-<<<<<<<< HEAD:src/app/api/fn/income-controller/income-controller-get-by-user-id.ts
 incomeControllerGetByUserId.PATH = '/v1/incomes/user/{id}';
-========
-incomeControllerSearchFieldsAction.PATH = '/v1/incomes/search-fields';
->>>>>>>> branch-jonathan-final:src/app/api/fn/income-controller/income-controller-search-fields-action.ts

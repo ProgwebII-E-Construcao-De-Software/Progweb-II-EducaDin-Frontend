@@ -9,9 +9,7 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 import { ExpenseListDto } from '../../models/expense-list-dto';
-import { SearchFieldValue } from '../../models/search-field-value';
 
-<<<<<<<< HEAD:src/app/api/fn/expense-controller/expense-controller-get-by-user-id.ts
 export interface ExpenseControllerGetByUserId$Params {
 
 /**
@@ -22,14 +20,6 @@ export interface ExpenseControllerGetByUserId$Params {
 
 export function expenseControllerGetByUserId(http: HttpClient, rootUrl: string, params: ExpenseControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
   const rb = new RequestBuilder(rootUrl, expenseControllerGetByUserId.PATH, 'get');
-========
-export interface ExpenseControllerSearchFieldsAction$Params {
-      body: Array<SearchFieldValue>
-}
-
-export function expenseControllerSearchFieldsAction(http: HttpClient, rootUrl: string, params: ExpenseControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-  const rb = new RequestBuilder(rootUrl, expenseControllerSearchFieldsAction.PATH, 'post');
->>>>>>>> branch-jonathan-final:src/app/api/fn/expense-controller/expense-controller-search-fields-action.ts
   if (params) {
     rb.path('id', params.id, {});
   }
@@ -44,8 +34,4 @@ export function expenseControllerSearchFieldsAction(http: HttpClient, rootUrl: s
   );
 }
 
-<<<<<<<< HEAD:src/app/api/fn/expense-controller/expense-controller-get-by-user-id.ts
 expenseControllerGetByUserId.PATH = '/1.0/expenses/user/{id}';
-========
-expenseControllerSearchFieldsAction.PATH = '/1.0/expenses/search-fields';
->>>>>>>> branch-jonathan-final:src/app/api/fn/expense-controller/expense-controller-search-fields-action.ts
