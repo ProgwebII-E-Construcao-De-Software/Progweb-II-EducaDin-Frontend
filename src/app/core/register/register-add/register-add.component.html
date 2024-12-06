@@ -40,14 +40,47 @@
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Senha</mat-label>
-                            <input matInput formControlName="password" type="password" title="Senha"
-                                   placeholder="Digite sua senha" [type]="hide ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <input
+                                    matInput
+                                    formControlName="password"
+                                    [type]="hide ? 'password' : 'text'"
+                                    placeholder="Digite sua senha"
+                            />
+                            <button
+                                    mat-icon-button
+                                    matSuffix
+                                    type="button"
+                                    (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide"
+                            >
+                                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
                             </button>
-                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">A Senha é obrigatória.</mat-error>
+                            <mat-error *ngIf="handleError('password', 'required')">A senha é obrigatória.</mat-error>
                         </mat-form-field>
 
+                        <mat-form-field>
+                            <mat-label>Confirmar Senha</mat-label>
+                            <input
+                                    matInput
+                                    formControlName="confirmPassword"
+                                    [type]="hideConfirm ? 'password' : 'text'"
+                                    placeholder="Confirme sua senha"
+                            />
+                            <button
+                                    mat-icon-button
+                                    matSuffix
+                                    type="button"
+                                    (click)="hideConfirm = !hideConfirm"
+                                    [attr.aria-label]="'Hide confirm password'"
+                                    [attr.aria-pressed]="hideConfirm"
+                            >
+                                <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formGroup.hasError('passwordsMismatch') && formGroup.touched">
+                                As senhas não coincidem.
+                            </mat-error>
+                        </mat-form-field>
 
                         <button class="button-login" type="submit" title="Cadastrar">
                             <span>Cadastre-se</span>

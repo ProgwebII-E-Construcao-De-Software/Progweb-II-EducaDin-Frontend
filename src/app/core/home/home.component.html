@@ -38,6 +38,17 @@
                 <mat-icon>person_add</mat-icon>
                 <span>Cadastrar</span>
             </button>
+            <mat-divider></mat-divider>
+            <button
+                    *ngIf="!securityService.isValid()"
+                    mat-button
+                    routerLink="/auth/login"
+                    class="menu-button"
+                    matTooltip="Entrar no EducaDin"
+            >
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+            </button>
         </ng-container>
 
         <ng-template #loggedIn>

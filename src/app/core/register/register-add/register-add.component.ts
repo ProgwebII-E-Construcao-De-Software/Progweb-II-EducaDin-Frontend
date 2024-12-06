@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
-import { Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {UserControllerService} from "../../../api/services/user-controller.service";
 import {DateAdapter} from "@angular/material/core";
 import {UserCreateDto} from "../../../api/models/user-create-dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
     selector: 'app-regsiter-add',
@@ -15,6 +16,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class RegisterAddComponent {
     formGroup!: FormGroup;
     hide = true;
+    hideConfirm = true;
     passwordStrength = 0;
     passwordStrengthColor = 'warn';
     flexDivAlinhar: string = 'row';
@@ -30,6 +32,7 @@ export class RegisterAddComponent {
         private router: Router,
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
+        protected messageService: MessageService,
     ) {
         this._adapter.setLocale('pt-br');
         this.createForm()
@@ -37,13 +40,27 @@ export class RegisterAddComponent {
 
     createForm() {
         this.formGroup = this.formBuilder.group({
-            login: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-            email: [null, [Validators.required, Validators.email]],
-            password: [null, [Validators.required]],
-            //     confirmarSenha: [null, [Validators.required]],
-            // }, { validators: this.validatePasswordMatch });
-        });
+                login: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+                email: [null, [Validators.required, Validators.email]],
+                password: [null, [Validators.required]],
+                confirmPassword: [null, [Validators.required]],
+            },
+            {
+                validators: this.validatePasswordMatch
+
+            });
     }
+
+    validatePasswordMatch(group: FormGroup) {
+        const password = group.get('password')?.value;
+        const confirmPassword = group.get('confirmPassword')?.value;
+        if (!password || !confirmPassword) {
+            return null; 
+        }
+
+        return password === confirmPassword ? null : { passwordsMismatch: true };
+    }
+
 
     onSubmit() {
         if (this.formGroup.valid) {
@@ -54,12 +71,16 @@ export class RegisterAddComponent {
 
 
     registerUser() {
-        const user: UserCreateDto = this.formGroup.value;
+        const user: UserCreateDto = {
+            login: this.formGroup.value.login,
+            email: this.formGroup.value.email,
+            password: this.formGroup.value.password,
+        }
         if (this.formGroup.valid) {
             this.userService.create({body: user}).subscribe(
                 response => {
                     console.log("Retorno Registro", response);
-                    this.snackBar.open('Usuário Cadastrado', 'Close', {duration: 4000});
+                    this.messageService.addMsgSuccess(`Usuário "${user.login}" adicionado com sucesso!`);
                     this.router.navigate(['/auth/login']);
                 },
                 error => {
