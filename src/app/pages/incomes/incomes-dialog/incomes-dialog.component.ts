@@ -142,9 +142,11 @@ export class IncomesDialogComponent implements OnInit {
     private updateIncome() {
         const updatedIncome: IncomeDto = {
             id: this.id,
-            ...this.formGroup.value
+            ...this.formGroup.value,
+            userId: this.getUserIdFromSession(),
+            incomeDate: new Date(this.formGroup.value.incomeDate).toISOString()
         };
-
+        console.log('atualização:', updatedIncome);
         this.incomeService.incomeControllerUpdate({ id: this.id, body: updatedIncome }).subscribe({
             next: (response: IncomeDto) => {
                 if (response && response.name) {

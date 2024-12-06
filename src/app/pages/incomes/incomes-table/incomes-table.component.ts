@@ -120,7 +120,7 @@ export class IncomesTableComponent implements OnInit {
     }
 
 
-    openDialogEditIncomes(incomes: IncomeListDto) {
+    openDialogEditIncomes(incomes: IncomeDto) {
         console.log('Abrindo diálogo de edição para o ganho:', incomes);
         const dialogRef = this.dialog.open(IncomesDialogComponent, {
             data: {id: incomes}
@@ -130,7 +130,7 @@ export class IncomesTableComponent implements OnInit {
             console.log('Diálogo fechado, resultado:', result);
             this.listIncomes();
             if (result) {
-                this.snackBar.open('Ganhos', 'Close', {duration: 3000});
+                this.messageService.addMsgSuccess("Ganhos editados com sucesso!");
             }
         });
     }
@@ -139,9 +139,10 @@ export class IncomesTableComponent implements OnInit {
         const dialogRef = this.dialog.open(IncomesDialogComponent, {
             data: {id: null}
         });
-        dialogRef.afterClosed().subscribe((reload) => {
-            if (reload) {
-                this.listIncomes();
+        dialogRef.afterClosed().subscribe(result =>{
+            this.listIncomes();
+            if(result){
+                this.messageService.addMsgSuccess("Ganhos adicionas com sucesso !")
             }
         });
     }
