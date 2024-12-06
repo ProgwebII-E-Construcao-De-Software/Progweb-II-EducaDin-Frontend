@@ -1,66 +1,96 @@
-<div>
-<div class="tabela-container">
-    <table mat-table [dataSource]="incomeTableDataSource" class="tabela">
+<mat-card >
+    <mat-card-header class="custom-card-header">
+        <mat-card-title class="custom-title">
+            <h2>Meus Ganhos</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions  [fxLayout]="mudarAlinhar()"  fxLayoutAlign="center none">
+        <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-button class="add-button" (click)="openDialogAddIncomes()">
+            <mat-icon>add</mat-icon>
+            <span>Adicionar</span>
+        </button>
+        </div>
+        <div class="searchFlex">
+            <app-search-component [controller]="incomeService" (onSearchResult)="showResult($event)"/>
+        </div>
+    </mat-card-actions>
+    <mat-card-content>
+        <div style="overflow-x:auto">
+            <table mat-table [dataSource]="incomeTableDataSource" class="table">
+<!--                <ng-container matColumnDef="select">-->
+<!--                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">-->
+<!--                        <mat-checkbox class="custom-checkbox" (change)="selectAll($event)" [checked]="isAllSelected()">-->
+<!--                        </mat-checkbox>-->
+<!--                    </th>-->
+<!--                    <td mat-cell *matCellDef="let element" class="mat-cell">-->
+<!--                        <mat-checkbox class="custom-checkbox" (change)="onCheckboxChange(element)"-->
+<!--                                      [checked]="selection.isSelected(element)">-->
+<!--                        </mat-checkbox>-->
+<!--                    </td>-->
+<!--                </ng-container>-->
 
-        <ng-container matColumnDef="select" >
-            <th mat-header-cell *matHeaderCellDef  class="mat-header-cell">
-                <mat-checkbox class="custom-checkbox"  (change)="selectAll($event)" [checked]="isAllSelected()">
-                </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let element"  class="mat-cell">
-                <mat-checkbox class="custom-checkbox"  (change)="onCheckboxChange(element)" [checked]="selection.isSelected(element)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Id</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.id }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome</th>
-            <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.name }}</td>
-        </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.name }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Categoria</th>
-            <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.category.name }}</td>
-        </ng-container>
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Categoria</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.category.name }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Descrição</th>
-            <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.description }}</td>
-        </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Descrição</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.description }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="incomeDate">
-            <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Data</th>
-            <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.incomeDate | date:'dd/MM/yyyy':'pt-BR'}}</td>
-        </ng-container>
+                <ng-container matColumnDef="incomeDate">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Data</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{  element.incomeDate | date:'dd/MM/yyyy' }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="amount">
-            <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Valor</th>
-            <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amount | currency:'BRL':'symbol'}}</td>
-        </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Valor</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amount }}</td>
+                </ng-container>
 
-        <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
-            <th mat-header-cell *matHeaderCellDef  class="mat-header-cell"> Ações</th>
-            <td mat-cell *matCellDef="let element"  class="mat-cell" (mouseover)="element.showActions = true"
-                (mouseout)="element.showActions = false">
-                <button mat-icon-button [matMenuTriggerFor]="menu" >
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="openDialogEditIncomes(element.id)">
-                        <mat-icon>edit</mat-icon>
-                        <span>Editar</span>
-                    </button>
-                    <button mat-menu-item (click)="confirmDeletionIncomes(element)">
-                        <mat-icon>delete_forever</mat-icon>
-                        <span>Excluir</span>
-                    </button>
-                </mat-menu>
-            </td>
-        </ng-container>
+                <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Ações</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell" (mouseover)="element.showActions = true"
+                        (mouseout)="element.showActions = false">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogEditIncomes(element.id)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                            <button mat-menu-item (click)="confirmDeletionIncomes(element)">
+                                <mat-icon>delete_forever</mat-icon>
+                                <span>Excluir</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
 
-        <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    </table>
-</div>
-</div>
+            </table>
+        </div>
+            <mat-paginator style="justify-content: center" [length]="this.qtdRegistros"
+                           [pageSize]="5"
+                           [pageSizeOptions]="[5, 10, 25, 100]"
+                           (page)="onPageChange($event)"
+                           showFirstLastButtons
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
+    </mat-card-content>
+</mat-card>

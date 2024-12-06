@@ -2,11 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
-import {Message, MessageService} from "../../../architecture/message/message.service";
 import {ExpenseDto} from "../../../api/models/expense-dto";
-import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
+import {ConfirmationDialog} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {Message, MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
     selector: 'app-expenses-dialog',
@@ -103,7 +103,7 @@ export class ExpensesDialogComponent implements OnInit {
     }
 
     private editExpense(id: number) {
-        this.expenseService.getById3({id}).subscribe(
+        this.expenseService.expenseControllerGetById({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
@@ -139,10 +139,10 @@ export class ExpensesDialogComponent implements OnInit {
     private includeExpense() {
         if (this.formGroup.valid) {
             console.log("Dados:", this.formGroup.value);
-            this.expenseService.create3({body: this.formGroup.value}).subscribe(
+            this.expenseService.expenseControllerCreate({body: this.formGroup.value}).subscribe(
                 retorn => {
                     this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    window.location.reload();
+                    // window.location.reload();
                     this.snackBar.open('Gastos Adicionado', 'Close', {duration: 3000});
                     console.log("Retorno", retorn);
                 }, erro => {
@@ -155,7 +155,7 @@ export class ExpensesDialogComponent implements OnInit {
     private editingExpense() {
         const formData: ExpenseDto = this.formGroup.value;
         console.log("Dados:", formData);
-        this.expenseService.update3({id: this.id, body: formData}).subscribe(
+        this.expenseService.expenseControllerUpdate({id: this.id, body: formData}).subscribe(
             retorn => {
                 this.confirmAction(retorn, this.ACAO_EDITAR);
                 this.snackBar.open('Gasto Editado', 'Close', {duration: 3000});

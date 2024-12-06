@@ -9,29 +9,36 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatTooltip, MatTooltipModule} from "@angular/material/tooltip";
+import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ExpensesModule} from "./pages/expenses/expenses.module";
 import {GoalsModule} from "./pages/goals/goals.module";
-import {ConfirmationDialog} from "./architecture/confirmation-dialog/confirmation-dialog.component";
-import {ErrosDialogComponent} from "./architecture/erros-dialog/erros-dialog.component";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {MessageModule} from "./architecture/message/message.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesModule} from "./pages/incomes/incomes.module";
-import {SharedMaterialModule} from "./architecture/shared-material/shared-material.module";
-import {AuthenticationModule} from './architecture/authentication/authentication/authentication.module';
-import {DashboardModule} from "./pages/dashboard/dashboard.module";
+import {AuthenticationModule} from './arquitetura/authentication/authentication.module';
+import {DashboardModule} from "./pages/dashboard/dashboard-module";
 import {SettingsModule} from "./pages/settings/settings.module";
 import {ForgotpassowordModule} from "./core/forgotpassoword/forgotpassoword.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {ChartModule} from "primeng/chart";
+import {MainpainelModule} from "./pages/mainpainel/mainpainel.module";
+import {ApiModule} from "./api/api.module";
+import {FlexModule} from "@angular/flex-layout";
+import {ConfirmationDialog} from "./arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {ErrosDialogComponent} from "./arquitetura/erros-dialog/erros-dialog.component";
+import {RegisterModule} from "./core/register/register.module";
+import {SecurityModule} from "./arquitetura/security/security.module";
+import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {MessageModule} from "./arquitetura/message/message.module";
+import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
 
 @NgModule({
     declarations: [
@@ -39,6 +46,7 @@ import {ChartModule} from "primeng/chart";
         HomeComponent,
         ConfirmationDialog,
         ErrosDialogComponent,
+        LoaderDialogComponent
     ],
     imports: [
         AppRoutingModule,
@@ -60,8 +68,8 @@ import {ChartModule} from "primeng/chart";
         ExpensesModule,
         GoalsModule,
         AppRoutingModule,
-        SharedMaterialModule,
         AuthenticationModule,
+        RegisterModule,
         ForgotpassowordModule,
         DashboardModule,
         SettingsModule,
@@ -70,12 +78,32 @@ import {ChartModule} from "primeng/chart";
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
-        ChartModule
+        ChartModule,
+        MainpainelModule,
+        FlexModule,
+        MatDialogModule,
+        SecurityModule,
+        SecurityModule.forRoot({
+            nameStorage: 'portalSSOSecurityStorage',
+            loginRouter: '/auth/login'
+        }),
 
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
         provideAnimationsAsync(),
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SecurityInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SecurityInterceptor,
+            multi: true
+        },
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
+
     ],
 
     bootstrap: [AppComponent]

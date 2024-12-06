@@ -15,6 +15,8 @@ import { expenseControllerCreate } from '../fn/expense-controller/expense-contro
 import { ExpenseControllerCreate$Params } from '../fn/expense-controller/expense-controller-create';
 import { expenseControllerGetById } from '../fn/expense-controller/expense-controller-get-by-id';
 import { ExpenseControllerGetById$Params } from '../fn/expense-controller/expense-controller-get-by-id';
+import { expenseControllerGetByUserId } from '../fn/expense-controller/expense-controller-get-by-user-id';
+import { ExpenseControllerGetByUserId$Params } from '../fn/expense-controller/expense-controller-get-by-user-id';
 import { expenseControllerListAll } from '../fn/expense-controller/expense-controller-list-all';
 import { ExpenseControllerListAll$Params } from '../fn/expense-controller/expense-controller-list-all';
 import { expenseControllerListAllPage } from '../fn/expense-controller/expense-controller-list-all-page';
@@ -269,6 +271,35 @@ export class ExpenseControllerService extends BaseService {
   expenseControllerSearchFieldsActionPage(params: ExpenseControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageExpenseListDto> {
     return this.expenseControllerSearchFieldsActionPage$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerGetByUserId()` */
+  static readonly ExpenseControllerGetByUserIdPath = '/1.0/expenses/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerGetByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerGetByUserId$Response(params: ExpenseControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return expenseControllerGetByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerGetByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerGetByUserId(params: ExpenseControllerGetByUserId$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.expenseControllerGetByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
     );
   }
 

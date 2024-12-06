@@ -15,6 +15,8 @@ import { incomeControllerCreate } from '../fn/income-controller/income-controlle
 import { IncomeControllerCreate$Params } from '../fn/income-controller/income-controller-create';
 import { incomeControllerGetById } from '../fn/income-controller/income-controller-get-by-id';
 import { IncomeControllerGetById$Params } from '../fn/income-controller/income-controller-get-by-id';
+import { incomeControllerGetByUserId } from '../fn/income-controller/income-controller-get-by-user-id';
+import { IncomeControllerGetByUserId$Params } from '../fn/income-controller/income-controller-get-by-user-id';
 import { incomeControllerListAll } from '../fn/income-controller/income-controller-list-all';
 import { IncomeControllerListAll$Params } from '../fn/income-controller/income-controller-list-all';
 import { incomeControllerListAllPage } from '../fn/income-controller/income-controller-list-all-page';
@@ -269,6 +271,35 @@ export class IncomeControllerService extends BaseService {
   incomeControllerSearchFieldsActionPage(params: IncomeControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageIncomeListDto> {
     return this.incomeControllerSearchFieldsActionPage$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerGetByUserId()` */
+  static readonly IncomeControllerGetByUserIdPath = '/v1/incomes/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerGetByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerGetByUserId$Response(params: IncomeControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return incomeControllerGetByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerGetByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerGetByUserId(params: IncomeControllerGetByUserId$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.incomeControllerGetByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
     );
   }
 

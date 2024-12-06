@@ -1,59 +1,87 @@
 <mat-toolbar class="mat-elevation-z8">
-    <div class="container-header">
         <button
                 mat-icon-button
                 *ngIf="sidenav.mode === 'over'"
                 (click)="sidenav.toggle()"
         >
-            <mat-icon *ngIf="!sidenav.opened"> menu</mat-icon>
-            <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
+            <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+            <mat-icon *ngIf="sidenav.opened">close</mat-icon>
         </button>
-
         <p class="logo-educadin">
             <span class="educa">Educa</span><span class="din">Din</span>
         </p>
-        <div class="header-notification">
-            <button mat-icon-button [routerLink]="['/notifications']" matTooltip="Minhas Notificações">
+        <div class="header-notification" *ngIf="securityService.isValid()">
+            <button mat-icon-button routerLink="/notifications" matTooltip="Minhas Notificações">
                 <mat-icon>notifications</mat-icon>
             </button>
         </div>
-    </div>
+        <button
+                *ngIf="!securityService.isValid()"
+                mat-button
+                routerLink="/auth/login"
+                class="login-button"
+                matTooltip="Entrar no EducaDin"
+        >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+        </button>
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container class="principal">
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <ng-container *ngIf="!securityService.isValid(); else loggedIn">
+            <button mat-button routerLink="/painel" class="menu-button" matTooltip="Sobre o Educadin">
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+            </button>
+            <button mat-button routerLink="/auth/register" class="menu-button" matTooltip="Cadastrar no Sistema">
+                <mat-icon>person_add</mat-icon>
+                <span>Cadastrar</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button
+                    *ngIf="!securityService.isValid()"
+                    mat-button
+                    routerLink="/auth/login"
+                    class="menu-button"
+                    matTooltip="Entrar no EducaDin"
+            >
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+            </button>
+        </ng-container>
 
-        <button mat-button class="menu-button" routerLink="/dashboard" matTooltip="Ir para a página inicial">
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
-        </button>
-        <button mat-button class="menu-button" routerLink="/goals" matTooltip="Minhas Metas">
-            <img src="assets/images/target.png" alt="Target">
-            <span>Metas</span>
-        </button>
-        <button mat-button class="menu-button" routerLink="incomes" matTooltip="Meus Ganhos">
-            <img src="assets/images/earnings.png" alt="Earnings">
-            <span>Ganhos</span>
-        </button>
-        <button mat-button class="menu-button" routerLink="/expenses" matTooltip="Meus Gastos">
-            <img src="assets/images/expenses.png" alt="Expenses">
-            <span>Gastos</span>
-        </button>
-        <button mat-button class="menu-button" routerLink="/settings/id" matTooltip="Minhas Configurações">
-            <mat-icon>settings</mat-icon>
-            <span>Configuração</span>
-        </button>
-
-        <mat-divider></mat-divider>
-
-        <button mat-button class="menu-button" (click)="close()" matTooltip="Sair">
-            <mat-icon>logout</mat-icon>
-            <span>Sair</span>
-        </button>
+        <ng-template #loggedIn>
+            <button mat-button routerLink="/dashboard" class="menu-button" matTooltip="Ir para a página inicial">
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+            </button>
+            <button mat-button routerLink="/goals" class="menu-button" matTooltip="Minhas Metas">
+                <img src="assets/images/target.png" alt="Metas">
+                <span>Metas</span>
+            </button>
+            <button mat-button routerLink="/incomes" class="menu-button" matTooltip="Meus Ganhos">
+                <img src="assets/images/earnings.png" alt="Ganhos">
+                <span>Ganhos</span>
+            </button>
+            <button mat-button routerLink="/expenses" class="menu-button" matTooltip="Meus Gastos">
+                <img src="assets/images/expenses.png" alt="Gastos">
+                <span>Gastos</span>
+            </button>
+            <button mat-button routerLink="/settings/id" class="menu-button" matTooltip="Minhas Configurações">
+                <mat-icon>settings</mat-icon>
+                <span>Configuração</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-button class="menu-button" (click)="logout()" matTooltip="Sair">
+                <mat-icon>logout</mat-icon>
+                <span>Sair</span>
+            </button>
+        </ng-template>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <div class="content">
+    <mat-sidenav-content class="content">
+
             <router-outlet></router-outlet>
-        </div>
+
     </mat-sidenav-content>
 </mat-sidenav-container>

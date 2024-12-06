@@ -28,5 +28,9 @@ export class SettingsFormComponent {
 
     }
 
+    controlNotfication(event: any){
+
+    }
+
 
 }

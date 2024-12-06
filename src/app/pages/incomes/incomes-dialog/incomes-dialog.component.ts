@@ -1,31 +1,23 @@
-import {Component, Inject, Injectable, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IncomeControllerService} from "../../../api/services/income-controller.service";
-import {Message, MessageService} from "../../../architecture/message/message.service";
-import {IncomeDto} from "../../../api/models/income-dto";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {DateAdapter} from "@angular/material/core";
-import {CategoryDto} from "../../../api/models/category-dto";
-import {CategoryControllerService} from "../../../api/services/category-controller.service";
-import {IncomesTableComponent} from "../incomes-table/incomes-table.component";
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { IncomeControllerService } from "../../../api/services/income-controller.service";
+import { IncomeDto } from "../../../api/models/income-dto";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { DateAdapter } from "@angular/material/core";
+import { MessageService } from "../../../arquitetura/message/message.service";
+import { ConfirmDialogComponent } from "../../../arquitetura/message/confirm-mesage/confirm-dialog.component";
+import { ConfirmationDialogResult } from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
-    selector: 'app-earnings-dialog',
+    selector: 'app-incomes-dialog',
     templateUrl: './incomes-dialog.component.html',
     styleUrls: ['./incomes-dialog.component.scss']
 })
 
-@Injectable({
-    providedIn: 'root',
-})
-
 export class IncomesDialogComponent implements OnInit {
 
+    formGroup!: FormGroup;
     categorias: string[] = ['Aulas Particulares',
         'Aluguel de Imóveis',
         'Bolsas de Estudo',
@@ -66,55 +58,37 @@ export class IncomesDialogComponent implements OnInit {
         'Venda de Livros',
         'Venda de Produtos Digitais',
         'Outros Ganhos'];
-    formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Ganhos";
     public readonly ACAO_EDITAR = "Editar Ganhos";
     acao: string = this.ACAO_INCLUIR;
     id!: number;
-    income!: IncomeDto;
 
     constructor(
         public dialogRef: MatDialogRef<IncomesDialogComponent>,
         private formBuilder: FormBuilder,
-        public incomeService: IncomeControllerService,
-        private categoryService: CategoryControllerService,
+        private incomeService: IncomeControllerService,
         private messageService: MessageService,
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
-        private incomesTable: IncomesTableComponent,
         private _adapter: DateAdapter<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-        console.log('Dados recebidos no diálogo:', this.data);
-        this.id = data.id;
-        this.creatForm();
+        this.id = data.id || null;
         this._adapter.setLocale('pt-br');
     }
 
     ngOnInit(): void {
-        // this.loadCategorys();
+        this.initializeForm();
         if (this.id) {
-            console.log('ID do ganho a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
-            this.editIncomes(this.id);
-        }  else {
-            console.log('Nenhum ID foi passado, modo de criação ativado.');
+            this.loadIncomeData(this.id);
         }
     }
 
-    // private loadCategorys() {
-    //     this.categoryService.listAll2().subscribe(categories => {
-    //             this.categorias = categories;
-    //         }, error => {
-    //             this.messageService.addMsgWarning(`Erro ao carregar categorias: ${error.message}`);
-    //         }
-    //     )
-    // }
-
-    public creatForm() {
+    private initializeForm() {
         this.formGroup = this.formBuilder.group({
             name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-            categoryName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            categoryName: [null, [Validators.required]],
             description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
             incomeDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
@@ -123,25 +97,18 @@ export class IncomesDialogComponent implements OnInit {
         });
     }
 
-    private editIncomes(id: number) {
-        this.incomeService.getById1({id}).subscribe(
-            retorn => {
-                console.log("retorno", retorn);
+    private loadIncomeData(id: number) {
+        this.incomeService.incomeControllerGetById({ id }).subscribe({
+            next: (income: IncomeDto) => {
                 this.formGroup.patchValue({
-                    name: retorn.name ?? null,
-                    categoryName: retorn.categoryName ?? null,
-                    description: retorn.description ?? null,
-                    incomeDate: retorn.incomeDate ? new Date(retorn.incomeDate) : new Date(),
-                    amount: retorn.amount ?? null,
-                    repeatable: retorn.repeatable ?? 'DONT_REPEATS',
-                    leadTime: retorn.leadTime ?? 0
-
+                    ...income,
+                    incomeDate: income.incomeDate ? new Date(income.incomeDate) : new Date(),
                 });
-            }, error => {
-                console.log("erro", error);
-                this.messageService.addMsgWarning(`Erro ao buscar ID: ${id}, mensagem: ${error.message}`);
+            },
+            error: (error) => {
+                this.messageService.addMsgWarning(`Erro ao buscar ganho: ${error.message}`);
             }
-        );
+        });
     }
 
     public closeDialog(reload: boolean = false): void {
@@ -150,66 +117,71 @@ export class IncomesDialogComponent implements OnInit {
 
     public onSubmit() {
         if (this.formGroup.valid) {
-            if (this.id) {
-                this.editingIncomes();
-            } else {
-                this.includeIncomes();
-            }
+            this.id ? this.updateIncome() : this.createIncome();
         }
     }
 
-    private includeIncomes() {
-        if (this.formGroup.valid) {
-            let incomeDto: IncomeDto = this.formGroup.value;
-            console.log("Dados a serem enviados:", this.formGroup.value);
-            this.incomeService.create1({body: incomeDto}).subscribe(
-                retorn => {
-                    console.log("Retorno da criação:", retorn);
-                    this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    window.location.reload();
-                    this.snackBar.open('Ganhos Adicionado', 'Close', {duration: 4000});
-                }, erro => {
-                    console.log("Erro ao criar o ganho:", erro);
-                    this.messageService.addMsgWarning(`Erro ao criar ganho: ${erro.message}`);
+    private createIncome() {
+        const incomeDto: IncomeDto = {
+            ...this.formGroup.value,
+            userId: this.getUserIdFromSession(),
+        };
+
+        this.incomeService.incomeControllerCreate({ body: incomeDto }).subscribe({
+            next: (response) => {
+                this.showConfirmation(response, this.ACAO_INCLUIR);
+                this.snackBar.open('Ganho adicionado com sucesso!', 'Fechar', { duration: 4000 });
+                this.closeDialog(true);
+            },
+            error: (error) => {
+                this.messageService.addMsgWarning(`Erro ao adicionar ganho: ${error.message}`);
+            }
+        });
+    }
+
+    private updateIncome() {
+        const updatedIncome: IncomeDto = {
+            id: this.id,
+            ...this.formGroup.value
+        };
+
+        this.incomeService.incomeControllerUpdate({ id: this.id, body: updatedIncome }).subscribe({
+            next: (response: IncomeDto) => {
+                if (response && response.name) {
+                    this.showConfirmation(response, this.ACAO_EDITAR);
+                    this.snackBar.open('Ganho atualizado com sucesso!', 'Fechar', { duration: 4000 });
+                    this.closeDialog(true);
+                } else {
+                    console.warn('Objeto de resposta vazio ou inválido:', response);
+                    this.messageService.addMsgWarning('O ganho foi atualizado, mas o servidor não retornou os dados corretamente.');
+                    const fallbackResponse: IncomeDto = {
+                        id: this.id,
+                        ...this.formGroup.value
+                    };
+                    this.showConfirmation(fallbackResponse, this.ACAO_EDITAR);
+                    this.closeDialog(true);
                 }
-            );
-        }
-    }
-
-
-    private editingIncomes() {
-        const formData: IncomeDto = this.formGroup.value;
-        console.log("Dados:", formData);
-        this.incomeService.update1({id: this.id, body: formData}).subscribe(
-            retorn => {
-                console.log("Earnings updated successfully:", retorn);
-                this.confirmAction(retorn, this.ACAO_EDITAR);
-                this.snackBar.open('Ganhos Editado', 'Close', {duration: 4000});
-            }, erro => {
-                console.log("Erro:", erro.error);
-                this.showError(erro, this.ACAO_EDITAR);
+            },
+            error: (error) => {
+                this.messageService.addMsgWarning(`Erro ao atualizar ganho: ${error.message}`);
             }
-        );
+        });
     }
 
-    public confirmAction(incomes: IncomeDto, acao: string) {
-        let titulo = '';
-        let mensagem = '';
-        if (acao === this.ACAO_INCLUIR) {
-            titulo = 'Adicionado !!';
-            mensagem = `${incomes.name} foi adicionado na tabela de Ganhos!`;
-        } else if (acao === this.ACAO_EDITAR) {
-            titulo = 'Editado !!';
-            mensagem = `${incomes.name} foi atualizado na tabela de Ganhos!`;
+
+
+    private showConfirmation(income: IncomeDto, action: string) {
+        if (!income || !income.name) {
+            console.error('Objeto de ganho inválido:', income);
+            this.messageService.addMsgWarning('Erro ao processar a confirmação. Dados do ganho ausentes.');
+            return;
         }
-        const dialogRef = this.dialog.open(ConfirmationDialog, {
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
             data: {
-                titulo: titulo,
-                mensagem: mensagem,
-                textoBotoes: {
-                    ok: 'Confirmar',
-                },
-                dado: incomes
+                titulo: action === this.ACAO_INCLUIR ? 'Adicionado' : 'Editado',
+                mensagem: `${income.name} foi ${action === this.ACAO_INCLUIR ? 'adicionado' : 'atualizado'} com sucesso!`,
+                textoBotoes: { ok: 'Confirmar' },
             },
         });
 
@@ -218,15 +190,14 @@ export class IncomesDialogComponent implements OnInit {
                 this.closeDialog(true);
             }
         });
-
-
     }
 
-    showError(erro: Message, acao: string) {
-        this.messageService.addConfirmOk(`Erro ao ${acao}, Mensagem: ${erro.message}`);
+
+    private getUserIdFromSession(): number {
+        return 1;
     }
 
-    public handleError = (controlName: string, errorName: string) => {
+    public handleError(controlName: string, errorName: string) {
         return this.formGroup.controls[controlName].hasError(errorName);
-    };
+    }
 }

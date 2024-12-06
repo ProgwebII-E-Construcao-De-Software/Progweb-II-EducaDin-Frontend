@@ -18,6 +18,9 @@
   padding: 10px 20px;
   font-weight: bold;
 }
+.searchFlex {
+  width: 100%;
+}
 
 .custom-actions {
   display: flex;
@@ -33,6 +36,7 @@
   box-shadow:none;
   border-radius: 15px;
   overflow: hidden;
+  background-color: #F2F2F2;
 }
 
 .custom-content{

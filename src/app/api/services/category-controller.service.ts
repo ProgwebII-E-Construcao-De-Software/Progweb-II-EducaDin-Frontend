@@ -12,6 +12,8 @@ import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
 import { CategoryDto } from '../models/category-dto';
+import { getByUserId } from '../fn/category-controller/get-by-user-id';
+import { GetByUserId$Params } from '../fn/category-controller/get-by-user-id';
 import { getExpenseCategories } from '../fn/category-controller/get-expense-categories';
 import { GetExpenseCategories$Params } from '../fn/category-controller/get-expense-categories';
 import { getIncomeCategories } from '../fn/category-controller/get-income-categories';
@@ -21,6 +23,35 @@ import { GetIncomeCategories$Params } from '../fn/category-controller/get-income
 export class CategoryControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `getByUserId()` */
+  static readonly GetByUserIdPath = '/v1/categories/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getByUserId$Response(params: GetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+    return getByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getByUserId(params: GetByUserId$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
+    return this.getByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body)
+    );
   }
 
   /** Path part for operation `getIncomeCategories()` */

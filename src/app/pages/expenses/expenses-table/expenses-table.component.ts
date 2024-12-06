@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
 import {ExpenseListDto} from "../../../api/models/expense-list-dto";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageService} from "../../../architecture/message/message.service";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
 import {ActivatedRoute} from "@angular/router";
 import {ExpenseDto} from "../../../api/models/expense-dto";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
     selector: 'app-expenses-table',
@@ -25,6 +27,11 @@ export class ExpensesTableComponent implements OnInit {
     selection = new SelectionModel<ExpenseListDto>(true, []);
     tipoDeListagem: string = 'Normal';
     isMenuOpen: boolean = false;
+    pageSlice!: ExpenseDto[];
+    qtdRegistros!: number;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
 
     constructor(
@@ -41,7 +48,7 @@ export class ExpensesTableComponent implements OnInit {
     }
 
     public listExpenses() {
-        this.expensesService.listAll3().subscribe(data => {
+        this.expensesService.expenseControllerListAll().subscribe(data => {
             this.expensesTableDataSource.data = data;
             console.log(data);
         })
@@ -68,7 +75,7 @@ export class ExpensesTableComponent implements OnInit {
     removeExpenses(expenses: ExpenseListDto): void {
         if (expenses.id !== undefined) {
             console.log(`Excluir item: ${expenses.description}`);
-            this.expensesService.remove3({id: expenses.id})
+            this.expensesService.expenseControllerRemove({id: expenses.id})
                 .subscribe(
                     retorn => {
                         this.listExpenses();
@@ -124,6 +131,24 @@ export class ExpensesTableComponent implements OnInit {
             if (result) {
                 this.snackBar.open('Despesas', 'Close', {duration: 3000});
             }
+        });
+    }
+
+    onPageChange(event: PageEvent){
+        this.expensesService.expenseControllerListAllPage({page: {page: event.pageIndex, size: event.pageSize, sort:["pessoaCpf"]}}).subscribe(data => {
+            this.expensesTableDataSource.data = data.content || [];
+            this.pageSlice = this.expensesTableDataSource.data;
+        })
+    }
+
+    showResult($event: any[]) {
+        this.expensesTableDataSource.data = $event;
+    }
+
+    openDialogAddExpenses() {
+        const dialogRef = this.dialog.open(ExpensesDialogComponent, {
+
+            data: {id: null}
         });
     }
 }
