@@ -3,20 +3,17 @@
         <h2>Recuperar Senha</h2>
         <p>Insira seu e-mail para recuperar o acesso à sua conta.</p>
     </div>
-    <form class="form-esqueceu-senha">
+    <form class="form-esqueceu-senha" fxLayout="column"
+          fxLayoutAlign="space-between center" fxFlex="1 1 auto">
         <mat-form-field class="mat-form-email">
             <mat-label>Email</mat-label>
-            <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex: educaDin@email.com">
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Por favor insira um endereço de e-mail válido
-            </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email é <strong>obrigatório</strong>
-            </mat-error>
+            <input type="email" matInput formControlName="email" placeholder="Ex: educaDin@email.com">
+            <mat-error *ngIf="handleError('email', 'required')">O Email é Obrigatório</mat-error>
+            <mat-error *ngIf="handleError('email', 'email')">E-mail Inválido</mat-error>
         </mat-form-field>
-        <div class="btn-mov">
+        <div class="btn-mov" fxLayout="row" fxLayoutAlign="space-between center">
             <button mat-button class="cancel-button" (click)="close()">Cancelar</button>
-            <button mat-button class="button" >Enviar</button>
+            <button mat-button class="button">Enviar</button>
         </div>
     </form>
 </div>

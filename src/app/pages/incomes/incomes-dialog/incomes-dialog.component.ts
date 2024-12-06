@@ -154,6 +154,11 @@ export class IncomesDialogComponent implements OnInit {
                 } else {
                     console.warn('Objeto de resposta vazio ou inválido:', response);
                     this.messageService.addMsgWarning('O ganho foi atualizado, mas o servidor não retornou os dados corretamente.');
+                    const fallbackResponse: IncomeDto = {
+                        id: this.id,
+                        ...this.formGroup.value
+                    };
+                    this.showConfirmation(fallbackResponse, this.ACAO_EDITAR);
                     this.closeDialog(true);
                 }
             },
@@ -162,6 +167,7 @@ export class IncomesDialogComponent implements OnInit {
             }
         });
     }
+
 
 
     private showConfirmation(income: IncomeDto, action: string) {
