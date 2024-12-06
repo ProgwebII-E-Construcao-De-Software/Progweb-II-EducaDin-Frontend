@@ -17,12 +17,14 @@ import {MatIcon} from "@angular/material/icon";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTable} from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {GoalsDialogComponent} from "./goals-dialog/goals-dialog.component";
 
 
 @NgModule({
     declarations: [
         GoalsHomeComponent,
-        GoalsTableComponent
+        GoalsTableComponent,
+        GoalsDialogComponent,
     ],
     imports: [
         CommonModule,

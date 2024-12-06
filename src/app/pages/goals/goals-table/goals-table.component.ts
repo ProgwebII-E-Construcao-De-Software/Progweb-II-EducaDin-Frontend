@@ -7,12 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { GoalDto } from '../../../api/models/goal-dto';
 import { GoalControllerService } from '../../../api/services/goal-controller.service';
-import { MessageService } from '../../../architecture/message/message.service';
+
+import { GoalsDialogComponent } from '../goals-dialog/goals-dialog.component';
+import {MessageService} from "../../../arquitetura/message/message.service";
 import {
   ConfirmationDialog,
-  ConfirmationDialogResult,
-} from '../../../architecture/confirmation-dialog/confirmation-dialog.component';
-import { GoalsDialogComponent } from '../goals-dialog/goals-dialog.component';
+  ConfirmationDialogResult
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-goals-table',
@@ -48,7 +49,7 @@ export class GoalsTableComponent implements OnInit {
 
   /** Lista todas as metas da API */
   public listGoals() {
-    this.goalService.goalControllerGetAll().subscribe(
+    this.goalService.goalControllerListAll().subscribe(
       (data) => {
         this.goalTableDataSource.data = data;
         console.log('Metas carregadas:', data);
@@ -84,7 +85,7 @@ export class GoalsTableComponent implements OnInit {
   /** Remove uma meta */
   removeGoal(goal: GoalDto): void {
     if (goal.id !== undefined) {
-      this.goalService.goalControllerDelete({ id: goal.id }).subscribe(
+      this.goalService.goalControllerRemove({ id: goal.id }).subscribe(
         (response) => {
           this.listGoals();
           this.messageService.addMsgSuccess(

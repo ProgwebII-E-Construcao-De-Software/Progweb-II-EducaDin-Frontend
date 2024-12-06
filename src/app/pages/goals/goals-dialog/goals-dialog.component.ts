@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GoalControllerService } from "../../../api/services/goal-controller.service";
@@ -20,8 +20,8 @@ export class GoalsDialogComponent {
   ) {
     this.goalForm = this.fb.group({
       name: [data.goal?.name || '', [Validators.required, Validators.minLength(3)]],
-      amountTotal: [data.goal?.amountTotal ?? 0, [Validators.required, Validators.min(1)]],
-      goalDate: [data.goal?.goalDate ?? '', Validators.required]
+      amountTotal: [data.goal?.amountTotal !== undefined ? data.goal.amountTotal : 0, [Validators.required, Validators.min(1)]],
+      goalDate: [data.goal?.goalDate || '', Validators.required]
     });
   }
 
