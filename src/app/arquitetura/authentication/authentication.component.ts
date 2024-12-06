@@ -35,22 +35,38 @@ export class AuthenticationComponent {
 
     public onSubmit(): void {
         if (this.formGroup.valid) {
-            this.authenticationService.login(this.formGroup.value).subscribe((data: CredencialDto) => {
-                const user: User = {
-                    id: data.id || 0,
-                    nome: data.name || '',
-                    login: data.login || '',
-                    expiresIn: data.expiresIn || 3600,
-                    accessToken: data.accessToken || '',
-                    refreshToken: data.refreshToken || '',
-                    roles: data.roles
-                };
+            this.authenticationService.login(this.formGroup.value).subscribe({
+                next: (data: CredencialDto) => {
+                    const user: User = {
+                        id: data.id || 0,
+                        nome: data.name || '',
+                        login: data.login || '',
+                        expiresIn: data.expiresIn || 3600,
+                        accessToken: data.accessToken || '',
+                        refreshToken: data.refreshToken || '',
+                        roles: data.roles
+                    };
 
-                this.securityService.init(user);
-                this.router.navigate(['/dashboard']);
+                    this.securityService.init(user);
+                    this.router.navigate(['/dashboard']);
+                },
+                error: (error) => {
+                    console.error('Erro de login:', error);
+                    if (error.status === 401) {
+                        // Usuário ou senha incorretos
+                        alert('Usuário ou senha incorretos. Verifique suas credenciais.');
+                    } else if (error.status === 404) {
+                        // Usuário não encontrado
+                        alert('Usuário não encontrado. Verifique suas credenciais ou registre-se.');
+                    } else {
+                        // Outros erros
+                        alert('Erro ao tentar fazer login.');
+                    }
+                }
             });
         }
     }
+
 
     openDialogPassoword() {
         const dialogRef = this.dialog.open(ForgotpassowordComponent,

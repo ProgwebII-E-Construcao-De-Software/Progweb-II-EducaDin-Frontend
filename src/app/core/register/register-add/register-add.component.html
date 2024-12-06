@@ -77,7 +77,7 @@
                             >
                                 <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
                             </button>
-                            <mat-error *ngIf="formGroup.hasError('passwordsMismatch') && formGroup.touched">
+                            <mat-error *ngIf="formGroup.hasError('passwordsMismatch')">
                                 As senhas não coincidem.
                             </mat-error>
                         </mat-form-field>

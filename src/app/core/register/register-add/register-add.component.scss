@@ -14,19 +14,19 @@
 mat-card {
   width: 450px;
   display: flex;
-  height: 90vh;
+  height: 85vh;
   max-width: 90%;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   justify-content: space-between;
-  margin-top: -50px;
+  margin-top: -40px;
 }
 
 mat-card-title {
   display: flex;
   padding: 5px;
-  padding-top: 15%;
+  padding-top: 30%;
   justify-content: center;
 }
 

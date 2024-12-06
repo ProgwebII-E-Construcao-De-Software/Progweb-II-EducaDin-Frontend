@@ -85,6 +85,11 @@ export class RegisterAddComponent {
                 },
                 error => {
                     console.error("Erro:", error.error);
+                    if (error.status === 409) {
+                        this.messageService.addMsgDanger("Usuário já cadastrado. Tente outro nome de usuário.");
+                    } else {
+                        this.messageService.addMsgDanger("Ocorreu um erro ao tentar cadastrar o usuário. Tente novamente.");
+                    }
                 }
             );
         }
