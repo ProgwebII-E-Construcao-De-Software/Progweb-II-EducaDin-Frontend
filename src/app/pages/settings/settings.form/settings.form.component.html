@@ -2,10 +2,11 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" fxFlex="1 1 auto">
         <h2>Minha Conta</h2>
 
-        <h3><strong>Nome:</strong> {{user.name}}</h3>
+        <strong>Nome:</strong> {{this.name}}
 
         <div fxLayout="row" fxLayoutAlign="center center">
-            <h3><strong>E-mail:</strong></h3>
+
+            <strong>E-mail: {{this.email}}</strong>
             <mat-form-field class="email-field">
                 <input
                         matInput

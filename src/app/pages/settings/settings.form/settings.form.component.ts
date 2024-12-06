@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserControllerService } from '../../../api/services/user-controller.service';
+import {UserCreateDto} from "../../../api/models/user-create-dto";
 
 @Component({
     selector: 'app-settings-form',
@@ -11,7 +12,10 @@ export class SettingsFormComponent implements OnInit {
     formGroup!: FormGroup;
     hideSenhaAntiga = true;
     hideNovaSenha = true;
-    user: { name: string; email: string } = { name: 'John Doe', email: 'example@example.com' };
+    name!: string;
+    email!: string ;
+    userAtual !: UserCreateDto;
+    campoVisivelEmail = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -35,7 +39,7 @@ export class SettingsFormComponent implements OnInit {
     loadUserData(): void {
         // Simulating user data
         this.formGroup.patchValue({
-            email: this.user.email,
+            email: this.email,
         });
     }
 
@@ -43,11 +47,25 @@ export class SettingsFormComponent implements OnInit {
         const { email, alterarSenha, senha, senhaAntiga } = this.formGroup.value;
         const updateData: any = { email };
 
+        if (!this.campoVisivelEmail) {
+            this.formGroup.patchValue({
+                email: this.userAtual.email
+            });
+        }
+        if (this.campoVisivelEmail){
+            if(this.formGroup.get('email')?.valid){
+               this.update();
+            }
+        }
+
         if (alterarSenha) {
             updateData.senhaAntiga = senhaAntiga;
             updateData.senha = senha;
         }
+    }
 
+    update() {
+        const updateData: any = { email: this.userAtual.email };
         this.userService.update(updateData).subscribe(
             () => {
                 alert('Informações atualizadas com sucesso!');
@@ -58,4 +76,5 @@ export class SettingsFormComponent implements OnInit {
             }
         );
     }
+
 }
