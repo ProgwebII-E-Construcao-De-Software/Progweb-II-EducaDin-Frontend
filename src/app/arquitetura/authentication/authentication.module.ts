@@ -1,8 +1,8 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 
-import { AuthenticationComponent } from './authentication.component';
+import {AuthenticationComponent} from './authentication.component';
 import {AuthenticationService} from "./authentication.service";
 import {RouterModule} from "@angular/router";
 import {authenticationRoute} from "./authentication-routing.module";
@@ -11,20 +11,21 @@ import {SharedMaterialModule} from "../shared-material/shared-material.module";
 
 
 @NgModule({
-  declarations: [
-    AuthenticationComponent
-  ],
+    declarations: [
+        AuthenticationComponent,
+    ],
     imports: [
         CommonModule,
         SharedMaterialModule,
         RouterModule.forChild(authenticationRoute),
         MessageModule,
     ],
-  providers: [
-    AuthenticationService
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+    providers: [
+        AuthenticationService
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ],
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {
+}

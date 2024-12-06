@@ -1,12 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SecurityService} from "../../../arquitetura/security/security.service";
-import {UserControllerService} from "../../../api/services/user-controller.service";
-import {Login} from "../../../api/models/login";
-import {UserCreateDto} from "../../../api/models/user-create-dto";
+import {AuthApiService} from "../../../api/services/auth-api.service";
+import {MessageService} from "../../../arquitetura/message/message.service";
 
 @Component({
     selector: 'app-forgotpassoword',
@@ -15,22 +14,23 @@ import {UserCreateDto} from "../../../api/models/user-create-dto";
 })
 export class ForgotpassowordComponent implements OnInit {
     formGroup!: FormGroup;
-    emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+    innerWidth: number = window.innerWidth;
+    flexDivAlinhar: string = 'row';
 
     constructor(
         private formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<ForgotpassowordComponent>,
-        private userController: UserControllerService,
-        private dialog: MatDialog,
-        private router: Router,
+        private authService: AuthApiService,
         private snackBar: MatSnackBar,
         private securityService: SecurityService,
+        protected messageService: MessageService,
         @Inject(MAT_DIALOG_DATA) data: any
     ) {
     }
 
     ngOnInit() {
         this.createForm();
+        this.innerWidth = window.innerWidth;
     }
 
     private createForm() {
@@ -48,9 +48,31 @@ export class ForgotpassowordComponent implements OnInit {
         }
     }
 
-    public recoverPassoword(email: string){
-
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event): void {
+        this.innerWidth = window.innerWidth;
     }
+
+    mudarAlinhar() {
+        if (innerWidth < 1000) {
+            return this.flexDivAlinhar = "column";
+        }
+        return this.flexDivAlinhar = "row";
+    }
+
+    public recoverPassoword(email: string): void {
+        this.authService.recoverPassword({ email }).subscribe({
+            next: () => {
+                this.messageService.addMsgSuccess('Solicitação de recuperação enviada para o e-mail informado.', 'Fechar');
+                this.dialogRef.close();
+            },
+            error: (err) => {
+                console.error('Erro ao solicitar recuperação de senha:', err);
+                this.messageService.addMsgDanger('Não foi possível enviar a solicitação. Tente novamente mais tarde.', 'Fechar');
+            },
+        });
+    }
+
 
     close()
         :

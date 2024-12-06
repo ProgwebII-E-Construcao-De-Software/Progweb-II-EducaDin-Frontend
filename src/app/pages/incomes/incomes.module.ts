@@ -28,9 +28,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {SearchModule} from "../../arquitetura/search-module/search.module";
 import {LoaderModule} from "../../arquitetura/loader/loader.module";
 import {HttpClientModule} from "@angular/common/http";
+import {SearchModule} from "../../arquitetura/search-module/search.module";
 
 
 @NgModule({

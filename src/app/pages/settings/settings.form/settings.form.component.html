@@ -1,75 +1,93 @@
 <div class="formPadrao" fxLayout="row" fxLayoutAlign="center center">
-
-    <form class="form" fxFlex="1 1 auto">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" fxFlex="1 1 auto">
         <h2>Minha Conta</h2>
 
-        <span><strong>Nome:</strong> {{namePerson}} <br></span>
+        <h3><strong>Nome:</strong> {{user.name}}</h3>
 
-        <div fxLayout="row">
-            <span><strong>E-mail:</strong> {{email}} <br></span>
-            <button type="button" class="icone-edit">
-                <mat-icon style="font-size: 20px;">edit</mat-icon>
-            </button>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <h3><strong>E-mail:</strong></h3>
+            <mat-form-field class="email-field">
+                <input
+                        matInput
+                        formControlName="email"
+                        placeholder="exemplo@exemplo.com"
+                />
+                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+                    E-mail é obrigatório
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+                    E-mail inválido
+                </mat-error>
+            </mat-form-field>
         </div>
 
-        <mat-form-field *ngIf="fieldVisibleEmail">
-            <mat-label>E-mail</mat-label>
-            <input matInput placeholder="exemplo@exemplo.com">
-            <mat-error>Campo Obrigatório</mat-error>
-            <mat-error>E-mail Inválido</mat-error>
-        </mat-form-field>
-
-        <mat-card class="card">
-            <mat-card-header>
-                <mat-card-title>Controle De Notificações</mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="numero">
-                <mat-slide-toggle  (change)="controlNotfication($event)">Ligar/Desligar</mat-slide-toggle>
-            </mat-card-content>
-        </mat-card>
-
-        <mat-checkbox>
-            Deseja alterar a senha ?
+        <mat-checkbox formControlName="alterarSenha" color="primary">
+            Deseja alterar a senha?
         </mat-checkbox>
 
-        <div *ngIf="formGroup.get('alterarSenha')?.value" fxLayoutAlign="space-evenly center">
+        <div
+                *ngIf="formGroup.get('alterarSenha')?.value"
+                fxLayout="column"
+                fxLayoutAlign="center stretch"
+        >
             <mat-form-field>
                 <mat-label>Senha Antiga</mat-label>
-                <input matInput type="password" placeholder="Digite a senha">
-                <button mat-icon-button matSuffix type="button">
-                    <mat-icon>visibility</mat-icon>
+                <input
+                        matInput
+                        [type]="hideSenhaAntiga ? 'password' : 'text'"
+                        formControlName="senhaAntiga"
+                        placeholder="Digite a senha antiga"
+                />
+                <button
+                        mat-icon-button
+                        matSuffix
+                        type="button"
+                        (click)="hideSenhaAntiga = !hideSenhaAntiga"
+                >
+                    <mat-icon>{{
+                            hideSenhaAntiga ? 'visibility_off' : 'visibility'
+                        }}</mat-icon>
                 </button>
-                <mat-error>Senha antiga é obrigatória</mat-error>
-                <mat-error>Senha antiga incorreta</mat-error>
+                <mat-error
+                        *ngIf="formGroup.get('senhaAntiga')?.hasError('required')"
+                >
+                    Senha antiga é obrigatória
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Senha</mat-label>
-                <input matInput type="password" placeholder="Digite a senha">
-                <button mat-icon-button matSuffix type="button">
-                    <mat-icon>visibility</mat-icon>
+                <mat-label>Nova Senha</mat-label>
+                <input
+                        matInput
+                        [type]="hideNovaSenha ? 'password' : 'text'"
+                        formControlName="senha"
+                        placeholder="Digite a nova senha"
+                />
+                <button
+                        mat-icon-button
+                        matSuffix
+                        type="button"
+                        (click)="hideNovaSenha = !hideNovaSenha"
+                >
+                    <mat-icon>{{
+                            hideNovaSenha ? 'visibility_off' : 'visibility'
+                        }}</mat-icon>
                 </button>
-                <mat-error>Senha é obrigatória</mat-error>
-                <mat-error>Senha precisa ter pelo menos 6 caracteres</mat-error>
-                <mat-error>Senha precisa ter um caracter especial</mat-error>
-                <mat-error>Senha precisa ter uma letra maiúscula</mat-error>
-                <mat-error>Senha precisa ter pelo menos 3 números</mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Confirmar Senha</mat-label>
-                <input matInput type="password" placeholder="Confirme a senha">
-                <button mat-icon-button matSuffix type="button">
-                    <mat-icon>visibility</mat-icon>
-                </button>
-                <mat-error>Confirmação de senha é obrigatória</mat-error>
-                <mat-error>As senhas não coincidem</mat-error>
+                <mat-error *ngIf="formGroup.get('senha')?.hasError('required')">
+                    Nova senha é obrigatória
+                </mat-error>
+                <mat-error
+                        *ngIf="formGroup.get('senha')?.hasError('minlength')"
+                >
+                    A senha precisa ter ao menos 6 caracteres
+                </mat-error>
             </mat-form-field>
         </div>
 
-        <div class="divBotoes" fxLayoutAlign="center center">
-            <button mat-button color="primary" type="submit" class="button  botao-cadastro">Confirmar</button>
+        <div fxLayoutAlign="center center">
+            <button mat-raised-button color="primary" type="submit">
+                Confirmar
+            </button>
         </div>
     </form>
-
 </div>

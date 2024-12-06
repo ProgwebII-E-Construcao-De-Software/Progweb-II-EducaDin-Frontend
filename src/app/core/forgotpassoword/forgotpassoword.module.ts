@@ -7,6 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import {FlexModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatInputModule} from "@angular/material/input";
         FormsModule,
         MatInputModule,
         ReactiveFormsModule,
+        FlexModule,
     ]
 })
 export class ForgotpassowordModule {

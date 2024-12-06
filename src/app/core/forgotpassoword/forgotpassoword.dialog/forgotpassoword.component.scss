@@ -1,78 +1,33 @@
+@import '../../../../StyleForms.css';
 
-.container-password {
-  width: 400px;
-  max-width: 95%;
-  padding: 20px;
-  margin: auto;
-  background: #ffffff;
-  text-align: right;
-}
-
-.header-password h2 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #333;
-  text-align: center;
-}
-
-.header-password p {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
-  text-align: justify;
-}
-
-.form-esqueceu-senha {
+.container-passoword {
+  width: 350px;
+  padding-bottom: 20px;
+  margin-top: 12%;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
-  flex-direction: column;
-}
-
-.mat-form-email {
-  width: 100%;
-  margin-bottom: 20px;
+  flex-direction: row;
+  place-content: center;
+  align-items: center;
+  border-radius: 50px 50px;
+  border: red;
+  max-width: 90%;
 }
 
 .btn-mov {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  flex-direction: row;
+  width: 100%;
 }
 
 .btn-mov button {
   font-size: 16px;
   padding: 10px 20px;
-  border-radius: 8px;
-}
-
-
-.button {
-  font-family: "DM Roboto", sans-serif;
-  background: #6dd19b !important;
-  color: white !important;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.button:hover {
-  background-color: #afeccb;
-}
-
-.cancel-button {
-  background-color: #fd7b7b !important;
-  color: white !important;
-  transition: background-color 0.3s;
-}
-
-.cancel-button:hover {
-  background-color: #fc5c5c;
 }
 
 @media (max-width: 768px) {
-  .container-password {
-    width: 300px;
-  }
-
   .btn-mov button {
     font-size: 14px;
     padding: 8px 16px;
@@ -80,12 +35,18 @@
 }
 
 @media (max-width: 480px) {
-  .container-password {
-    width: 250px;
-  }
-
   .btn-mov button {
     font-size: 12px;
     padding: 6px 12px;
   }
+}
+
+.error-snackbar {
+  background-color: #f44336; /* Vermelho para erro */
+  color: #fff;
+}
+
+.success-snackbar {
+  background-color: #4caf50; /* Verde para sucesso */
+  color: #fff;
 }

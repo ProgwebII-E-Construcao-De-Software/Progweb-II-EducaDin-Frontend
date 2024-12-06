@@ -14,6 +14,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {settingsRoutes} from "./settings-routing.module";
 import { MatCardModule} from "@angular/material/card";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
         MatCheckboxModule,
         MatCardModule,
         MatSlideToggleModule,
+        FlexLayoutModule,
     ]
 })
 export class SettingsModule {

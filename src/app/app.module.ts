@@ -70,7 +70,6 @@ import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.c
         AppRoutingModule,
         AuthenticationModule,
         RegisterModule,
-        ForgotpassowordModule,
         DashboardModule,
         SettingsModule,
         FormsModule,
@@ -83,6 +82,7 @@ import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.c
         FlexModule,
         MatDialogModule,
         SecurityModule,
+        ForgotpassowordModule,
         SecurityModule.forRoot({
             nameStorage: 'portalSSOSecurityStorage',
             loginRouter: '/auth/login'
