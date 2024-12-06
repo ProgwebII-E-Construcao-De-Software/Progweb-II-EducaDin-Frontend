@@ -55,10 +55,10 @@ export class ExpensesTableComponent implements OnInit {
                     ...item,
                     expenseDate: this.formatDate(item.expenseDate)
                 }));
-                console.log('Incomes:', this.expensesTableDataSource.data);
+                console.log('Expenses:', this.expensesTableDataSource.data);
             },
             error: (error) => {
-                console.error('Erro ao carregar os rendimentos:', error);
+                console.error('Erro ao carregar os gastos:', error);
             }
         });
     }
@@ -77,14 +77,14 @@ export class ExpensesTableComponent implements OnInit {
                 .subscribe({
                     next: () => {
                         this.expensesTableDataSource.data = this.expensesTableDataSource.data.filter(item => item.id !== expenses.id);
-                        this.messageService.addMsgSuccess(`Ganho "${expenses.name}" excluído com sucesso!`);
+                        this.messageService.addMsgSuccess(`Gastos "${expenses.name}" excluído com sucesso!`);
                         console.log("Exclusão realizada com sucesso");
                     },
                     error: (error) => {
                         if (error.status === 404) {
                             this.messageService.addMsgInf(`O ganho "${expenses.name}" já foi removido.`);
                         } else {
-                            this.messageService.addMsgDanger("Erro ao excluir o ganho. Tente novamente.");
+                            this.messageService.addMsgDanger("Erro ao excluir o gastos. Tente novamente.");
                             console.error("Erro ao excluir:", error);
                         }
                     }
@@ -126,7 +126,7 @@ export class ExpensesTableComponent implements OnInit {
             console.log('Diálogo fechado, resultado:', result);
             this.listExpenses();
             if (result) {
-                this.snackBar.open('Despesas', 'Close', {duration: 3000});
+                this.messageService.addMsgSuccess("Gastos editados com sucesso!");
             }
         });
     }

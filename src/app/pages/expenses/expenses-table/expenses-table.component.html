@@ -4,7 +4,7 @@
             <h2>Meus Gastos</h2>
         </mat-card-title>
     </mat-card-header>
-    <mat-card-actions class="custom-actions">
+    <mat-card-actions class="custom-actions" [fxLayout]="mudarAlinhar()" fxLayoutAlign="center none">
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-button class="add-button" (click)="openDialogAddExpenses()">
                 <mat-icon>add</mat-icon>

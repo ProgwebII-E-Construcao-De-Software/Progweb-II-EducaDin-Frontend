@@ -34,6 +34,7 @@ import {expensesRoutes} from "./expenses-routing.module";
 import {MatRadioButton} from "@angular/material/radio";
 import {MatPaginator} from "@angular/material/paginator";
 import {SearchModule} from "../../arquitetura/search-module/search.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import {SearchModule} from "../../arquitetura/search-module/search.module";
         AsyncPipe,
         MatPaginator,
         SearchModule,
+        FlexLayoutModule,
     ]
 })
 export class ExpensesModule {
