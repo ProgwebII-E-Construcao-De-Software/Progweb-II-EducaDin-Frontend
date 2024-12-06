@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-expenses-home',
@@ -8,11 +6,4 @@ import {ActivatedRoute} from "@angular/router";
     styleUrl: './expenses-home.component.scss'
 })
 export class ExpensesHomeComponent {
-
-    constructor(
-        public dialog: MatDialog,
-        public router: ActivatedRoute,
-    ) {
-    }
-
 }

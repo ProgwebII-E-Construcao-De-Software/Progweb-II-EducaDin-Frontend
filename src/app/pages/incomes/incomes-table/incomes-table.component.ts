@@ -152,7 +152,7 @@ export class IncomesTableComponent implements OnInit {
             page: {
                 page: event.pageIndex,
                 size: event.pageSize,
-                sort: ["pessoaCpf"]
+                sort: ["id"]
             }
         }).subscribe(data => {
             this.incomeTableDataSource.data = data.content || [];
