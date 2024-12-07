@@ -56,7 +56,7 @@ export class GoalsDialogComponent implements OnInit {
             next: (goal: GoalDto) => {
                 this.formGroup.patchValue({
                     ...goal,
-                    incomeDate: goal.goalDate ? new Date(goal.goalDate) : new Date(),
+                    goalDate: goal.goalDate ? new Date(goal.goalDate) : new Date(),
                 });
             },
             error: (error) => {
@@ -98,7 +98,7 @@ export class GoalsDialogComponent implements OnInit {
             id: this.id,
             ...this.formGroup.value,
             userId: this.getUserIdFromSession(),
-            incomeDate: new Date(this.formGroup.value.incomeDate).toISOString()
+            goalDate: new Date(this.formGroup.value.goalDate).toISOString()
         };
         console.log('atualização:', updatedGoal);
         this.goalService.goalControllerUpdate({ id: this.id, body: updatedGoal }).subscribe({

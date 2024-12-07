@@ -54,7 +54,8 @@ export class GoalsTableComponent implements OnInit {
             next: (data: GoalListDto[]) => {
                 this.goalTableDataSource.data = data.map(item => ({
                     ...item,
-                    incomeDate: this.formatDate(item.goalDate)
+                    goalDate: this.formatDate(item.goalDate),
+                    goalPercent: item.goalPercent,
                 }));
                 console.log('Goals:', this.goalTableDataSource.data);
             },
