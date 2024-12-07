@@ -6,5 +6,11 @@ export const goalsRoutes: Routes = [
     {
         path: "goals",
         component: GoalsHomeComponent,
+        children: [
+            {
+                path: "",
+                component: GoalsTableComponent,
+            }
+        ]
     }
 ];

@@ -1,0 +1,110 @@
+.mat-card-title {
+  font-weight: bold;
+  color: #f6e39b;
+}
+
+.mat-card {
+  height: 500px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-content {
+  flex: 1;
+}
+
+.table {
+  width: 100%;
+  overflow: auto;
+}
+
+.searchFlex {
+  margin-bottom: 10px;
+}
+
+.mat-paginator {
+  background-color: #E8F5E9;
+  border-top: 1px solid #f5e29a;
+  padding: 8px 0;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  text-align: left;
+  background-color: #f6e39b !important;
+  color: #020100;
+  padding: 12px;
+}
+
+
+
+.mat-cell {
+  text-align: left;
+  padding: 12px;
+  background-color: #dcdee0;
+}
+
+.mat-row:nth-child(even) .mat-cell {
+  background-color: #f6e39b;
+}
+
+.add-button {
+  background-color: #f3cd57;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.add-button:hover {
+  background-color: #f3c304;
+}
+
+.mat-paginator {
+  background-color: #E8F5E9;
+  border-radius: 8px;
+}
+
+.mat-paginator .mat-paginator-range-label,
+.mat-paginator .mat-icon-button {
+  color: #f5e29a;
+}
+
+.mat-divider {
+  background-color: #f6e39b;
+}
+
+.custom-card-header {
+  background-color: #f6e39b;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.custom-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #020100 !important;
+}
+
+
+button {
+  margin: 0 4px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+}
+
+.add-button {
+  background-color: #60ffb4;
+  color: #fff;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: #fff;
+}

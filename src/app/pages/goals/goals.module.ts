@@ -15,9 +15,18 @@ import {
 } from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTable} from "@angular/material/table";
+import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {GoalsDialogComponent} from "./goals-dialog/goals-dialog.component";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {SearchModule} from "../../arquitetura/search-module/search.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatInput, MatInputModule} from "@angular/material/input";
+import {NgxMaskDirective} from "ngx-mask";
 
 
 @NgModule({
@@ -33,13 +42,26 @@ import {GoalsDialogComponent} from "./goals-dialog/goals-dialog.component";
         MatCardContent,
         MatCardHeader,
         MatCardTitle,
+        MatNativeDateModule,
         MatIcon,
         MatIconButton,
         MatPaginator,
         MatTable,
         MatCheckbox,
         MatCardModule,
-        MatCardActions
+        MatCardActions,
+        FlexLayoutModule,
+        SearchModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
     ]
 })
 export class GoalsModule {

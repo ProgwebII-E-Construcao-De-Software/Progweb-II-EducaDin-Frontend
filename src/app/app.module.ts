@@ -29,7 +29,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {ChartModule} from "primeng/chart";
 import {MainpainelModule} from "./pages/mainpainel/mainpainel.module";
-import {ApiModule} from "./api/api.module";
 import {FlexModule} from "@angular/flex-layout";
 import {ConfirmationDialog} from "./arquitetura/confirmation-dialog/confirmation-dialog.component";
 import {ErrosDialogComponent} from "./arquitetura/erros-dialog/erros-dialog.component";
@@ -66,7 +65,7 @@ import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.c
         MessageModule.forRoot(),
         IncomesModule,
         ExpensesModule,
-        GoalsModule,
+        // GoalsModule,
         AppRoutingModule,
         AuthenticationModule,
         RegisterModule,

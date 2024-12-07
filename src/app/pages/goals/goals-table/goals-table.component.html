@@ -1,38 +1,41 @@
 <mat-card class="custom-card goals-card">
-  <mat-card-header class="custom-card-header">
-    <mat-card-title class="custom-title">
-      Minhas Metas
-    </mat-card-title>
-  </mat-card-header>
+    <mat-card-header class="custom-card-header">
+        <mat-card-title class="custom-title">
+            Minhas Metas
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions [fxLayout]="mudarAlinhar()" fxLayoutAlign="rigth none">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button class="add-button" (click)="openDialogAddIncomes()">
+                <mat-icon>add</mat-icon>
+                <span>Adicionar</span>
+            </button>
+            <button mat-icon-button class="share-button" aria-label="Compartilhar metas">
+                <mat-icon>share</mat-icon>
+            </button>
+        </div>
+        <div class="searchFlex">
+            <app-search-component [controller]="goalService" (onSearchResult)="showResult($event)"/>
+        </div>
+    </mat-card-actions>
+    <mat-card-content>
+        <div style="overflow-x:auto">
+            <table mat-table [dataSource]="goalTableDataSource" class="table">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Id</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.id }}</td>
+                </ng-container>
 
-  <mat-card-actions class="custom-actions">
-    <button mat-raised-button class="add-button" (click)="openDialogAddGoal()">
-      <mat-icon>add</mat-icon>
-      <span>Adicionar</span>
-    </button>
-    <button mat-raised-button class="remove-button" (click)="navigateToRemoveGoal()">
-      <mat-icon>remove</mat-icon>
-      <span>Remover</span>
-    </button>
-  </mat-card-actions>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome </th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.name }}</td>
+                </ng-container>
 
-  <mat-card-content class="custom-content">
-    <div *ngIf="goals?.length > 0; else noGoals">
-      <mat-list>
-        <mat-list-item *ngFor="let goal of goals">
-          <h3 mat-line>{{ goal.name }}</h3>
-          <p mat-line>
-            Meta: {{ goal.amountTotal | currency:'BRL' }} até
-            {{ goal.goalDate | date:'dd/MM/yyyy' }}
-          </p>
-          <button mat-icon-button color="primary" (click)="openDialogEditGoal(goal)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
-    </div>
-    <ng-template #noGoals>
-      <p>Você ainda não possui metas cadastradas.</p>
-    </ng-template>
-  </mat-card-content>
+                <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+    </mat-card-content>
+
 </mat-card>
