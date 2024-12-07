@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  width: 90%;
   padding-right: 15px;
   padding-left: 15px;
   padding-top: 5%;
@@ -14,29 +14,29 @@
 mat-card {
   width: 450px;
   display: flex;
-  height: 85vh;
+  height: calc(100vh - 96px);
   max-width: 90%;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   justify-content: space-between;
-  margin-top: -40px;
+  margin-top: -20px;
 }
 
 mat-card-title {
   display: flex;
   padding: 5px;
-  padding-top: 30%;
+  padding-top: 5%;
   justify-content: center;
 }
 
 .register-content {
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   place-content: center;
   align-items: center;
-  margin-top: -40px;
+  margin-top: -50%;
   gap: 0.5rem;
 }
 
