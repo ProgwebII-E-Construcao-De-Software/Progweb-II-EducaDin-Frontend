@@ -26,12 +26,12 @@ import {GoalListDto} from "../../../api/models/goal-list-dto";
     providedIn: 'root',
 })
 export class GoalsTableComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'name'];
+    displayedColumns: string[] = ['id', 'name', 'goalDate','amountReached','amountTotal', 'acao'];
     goalTableDataSource: MatTableDataSource<GoalListDto> = new MatTableDataSource<GoalListDto>([]);
-    tipoDeListagem: string = 'Normal';
     innerWidth: number = window.innerWidth;
     flexDivAlinhar: string = 'row';
     pageSlice!: GoalDto[];
+    tipoDeListagem: string = 'Normal';
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;

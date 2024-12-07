@@ -5,17 +5,10 @@ import {goalsRoutes} from "./goals-routing.module";
 import {GoalsHomeComponent} from "./goals-home/goals-home.component";
 import {GoalsTableComponent} from "./goals-table/goals-table.component";
 import {MatButton, MatIconButton} from "@angular/material/button";
-import {
-    MatCard,
-    MatCardActions,
-    MatCardContent,
-    MatCardHeader,
-    MatCardModule,
-    MatCardTitle
-} from "@angular/material/card";
+import {MatCardModule} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {GoalsDialogComponent} from "./goals-dialog/goals-dialog.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -23,10 +16,11 @@ import {SearchModule} from "../../arquitetura/search-module/search.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatInput, MatInputModule} from "@angular/material/input";
-import {NgxMaskDirective} from "ngx-mask";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
+import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -39,29 +33,27 @@ import {NgxMaskDirective} from "ngx-mask";
         CommonModule,
         RouterModule.forChild(goalsRoutes),
         MatButton,
-        MatCardContent,
-        MatCardHeader,
-        MatCardTitle,
+        MatTableModule,
+        MatSortModule,
         MatNativeDateModule,
         MatIcon,
         MatIconButton,
-        MatPaginator,
-        MatTable,
+        MatPaginatorModule,
         MatCheckbox,
         MatCardModule,
-        MatCardActions,
+        MatMenuModule,
         FlexLayoutModule,
         SearchModule,
         ReactiveFormsModule,
         MatDialogModule,
         MatFormFieldModule,
-        MatDatepickerInput,
-        MatDatepickerToggle,
-        MatDatepicker,
+        MatDatepickerModule,
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
+        MatMenu,
+        MatMenuItem,
     ]
 })
 export class GoalsModule {
