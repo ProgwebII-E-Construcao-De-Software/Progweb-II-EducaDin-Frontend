@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import {ConfirmationDialog} from "../../arquitetura/confirmation-dialog/confirmation-dialog.component";
 import {SecurityService} from "../../arquitetura/security/security.service";
+import {NotificationsListComponent} from "../../pages/notifications/notifications.list/notifications.list.component";
 
 @Component({
     selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent {
     admin!:boolean;
     public nomeUsuario: String = "";
     route!: string;
+    notificationsCount: number=0;
 
     constructor(
         private observer: BreakpointObserver,
@@ -40,5 +42,12 @@ export class HomeComponent {
                 this.router.navigate(['/painel']);
             }
         });
+    }
+
+    openNotifications(): void {
+      this.dialog.open(NotificationsListComponent, {
+        width: '400px',
+        height: 'auto',
+      })
     }
 }

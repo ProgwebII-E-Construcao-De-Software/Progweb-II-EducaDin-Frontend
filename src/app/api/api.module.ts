@@ -9,6 +9,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { IncomeControllerService } from './services/income-controller.service';
 import { GoalControllerService } from './services/goal-controller.service';
 import { AuthApiService } from './services/auth-api.service';
+import { SettingsControllerService } from './services/settings-controller.service';
 import { NotificationPreferenceControllerService } from './services/notification-preference-controller.service';
 import { ExpenseControllerService } from './services/expense-controller.service';
 import { UserControllerService } from './services/user-controller.service';
@@ -27,6 +28,7 @@ import { TipControllerService } from './services/tip-controller.service';
     IncomeControllerService,
     GoalControllerService,
     AuthApiService,
+    SettingsControllerService,
     NotificationPreferenceControllerService,
     ExpenseControllerService,
     UserControllerService,

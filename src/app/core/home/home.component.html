@@ -11,7 +11,10 @@
             <span class="educa">Educa</span><span class="din">Din</span>
         </p>
         <div class="header-notification" *ngIf="securityService.isValid()">
-            <button mat-icon-button routerLink="/notifications" matTooltip="Minhas Notificações">
+            <button mat-icon-button
+                    [matBadge]="notificationsCount > 0 ? notificationsCount : null"
+                    (click)="openNotifications()"
+                    matTooltip="Minhas Notificações">
                 <mat-icon>notifications</mat-icon>
             </button>
         </div>

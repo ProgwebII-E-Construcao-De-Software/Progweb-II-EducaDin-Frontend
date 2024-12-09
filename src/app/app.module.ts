@@ -38,6 +38,9 @@ import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {MessageModule} from "./arquitetura/message/message.module";
 import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
+import {NotificationsModule} from "./pages/notifications/notifications.module";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatBadge} from "@angular/material/badge";
 
 @NgModule({
     declarations: [
@@ -47,47 +50,50 @@ import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.c
         ErrosDialogComponent,
         LoaderDialogComponent
     ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        MatTooltipModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatSnackBarModule,
-        MatProgressSpinnerModule,
-        MessageModule.forRoot(),
-        IncomesModule,
-        ExpensesModule,
-        // GoalsModule,
-        AppRoutingModule,
-        AuthenticationModule,
-        RegisterModule,
-        DashboardModule,
-        SettingsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatOptionModule,
-        ChartModule,
-        MainpainelModule,
-        FlexModule,
-        MatDialogModule,
-        SecurityModule,
-        ForgotpassowordModule,
-        SecurityModule.forRoot({
-            nameStorage: 'portalSSOSecurityStorage',
-            loginRouter: '/auth/login'
-        }),
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MessageModule.forRoot(),
+    IncomesModule,
+    ExpensesModule,
+    // GoalsModule,
+    AppRoutingModule,
+    AuthenticationModule,
+    RegisterModule,
+    DashboardModule,
+    SettingsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    ChartModule,
+    MainpainelModule,
+    FlexModule,
+    MatDialogModule,
+    NotificationsModule,
+    SecurityModule,
+    MatMenuModule,
+    ForgotpassowordModule,
+    SecurityModule.forRoot({
+      nameStorage: 'portalSSOSecurityStorage',
+      loginRouter: '/auth/login'
+    }),
+    MatBadge,
 
-    ],
+  ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
         provideAnimationsAsync(),
