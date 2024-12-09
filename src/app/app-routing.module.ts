@@ -9,6 +9,7 @@ import {settingsRoutes} from "./pages/settings/settings-routing.module";
 import {mainpainelRoutes} from "./pages/mainpainel/mainpainel-routing.module";
 import {authenticationRoute} from "./arquitetura/authentication/authentication-routing.module";
 import {registerRoutes} from "./core/register/register-routing.module";
+import {notificationsRoutes} from "./pages/notifications/notifications-routing.module";
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
             ...goalsRoutes,
             ...dashboardRoutes,
             ...settingsRoutes,
+            ...notificationsRoutes,
             {path: '', redirectTo: '/painel', pathMatch: 'full'},
         ]
 

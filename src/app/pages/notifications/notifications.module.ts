@@ -5,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import {NotificationListComponent} from "./notifications.list/notifications.list.component";
+import {NotificationsListComponent} from "./notifications.list/notifications.list.component";
 
 @NgModule({
-  declarations: [NotificationListComponent],
+  declarations: [NotificationsListComponent],
   imports: [
     CommonModule,
     NotificationsRoutingModule,
@@ -17,5 +17,6 @@ import {NotificationListComponent} from "./notifications.list/notifications.list
     MatListModule,
     MatButtonModule,
   ],
+  exports: [NotificationsListComponent],
 })
 export class NotificationsModule {}
