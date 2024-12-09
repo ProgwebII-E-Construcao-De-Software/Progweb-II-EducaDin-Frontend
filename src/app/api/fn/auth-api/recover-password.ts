@@ -13,7 +13,7 @@ import { CredencialDto } from '../../models/credencial-dto';
 export interface RecoverPassword$Params {
 
 /**
- * EMail do Usuário
+ * Email do Usuário
  */
   email: string;
 }

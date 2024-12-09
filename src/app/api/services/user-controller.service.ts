@@ -14,8 +14,6 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { create } from '../fn/user-controller/create';
 import { Create$Params } from '../fn/user-controller/create';
 import { CredencialDto } from '../models/credencial-dto';
-import { update } from '../fn/user-controller/update';
-import { Update$Params } from '../fn/user-controller/update';
 
 @Injectable({ providedIn: 'root' })
 export class UserControllerService extends BaseService {
@@ -48,35 +46,6 @@ export class UserControllerService extends BaseService {
    */
   create(params: Create$Params, context?: HttpContext): Observable<CredencialDto> {
     return this.create$Response(params, context).pipe(
-      map((r: StrictHttpResponse<CredencialDto>): CredencialDto => r.body)
-    );
-  }
-
-  /** Path part for operation `update()` */
-  static readonly UpdatePath = '/v1/user/atualizar';
-
-  /**
-   * Permite a atualização de um usuário
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<CredencialDto>> {
-    return update(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Permite a atualização de um usuário
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  update(params: Update$Params, context?: HttpContext): Observable<CredencialDto> {
-    return this.update$Response(params, context).pipe(
       map((r: StrictHttpResponse<CredencialDto>): CredencialDto => r.body)
     );
   }

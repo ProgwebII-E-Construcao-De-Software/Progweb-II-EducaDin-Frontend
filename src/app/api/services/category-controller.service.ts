@@ -55,7 +55,7 @@ export class CategoryControllerService extends BaseService {
   }
 
   /** Path part for operation `getIncomeCategories()` */
-  static readonly GetIncomeCategoriesPath = '/v1/categories/incomes';
+  static readonly GetIncomeCategoriesPath = '/v1/categories/incomes/{id}';
 
   /**
    * End point para listar todas as categorias de receitas
@@ -65,7 +65,7 @@ export class CategoryControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getIncomeCategories$Response(params?: GetIncomeCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+  getIncomeCategories$Response(params: GetIncomeCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
     return getIncomeCategories(this.http, this.rootUrl, params, context);
   }
 
@@ -77,14 +77,14 @@ export class CategoryControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getIncomeCategories(params?: GetIncomeCategories$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
+  getIncomeCategories(params: GetIncomeCategories$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
     return this.getIncomeCategories$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body)
     );
   }
 
   /** Path part for operation `getExpenseCategories()` */
-  static readonly GetExpenseCategoriesPath = '/v1/categories/expenses';
+  static readonly GetExpenseCategoriesPath = '/v1/categories/expenses/{id}';
 
   /**
    * End point para listar todas as categorias de despesas
@@ -94,7 +94,7 @@ export class CategoryControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getExpenseCategories$Response(params?: GetExpenseCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+  getExpenseCategories$Response(params: GetExpenseCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
     return getExpenseCategories(this.http, this.rootUrl, params, context);
   }
 
@@ -106,7 +106,7 @@ export class CategoryControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getExpenseCategories(params?: GetExpenseCategories$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
+  getExpenseCategories(params: GetExpenseCategories$Params, context?: HttpContext): Observable<Array<CategoryDto>> {
     return this.getExpenseCategories$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<CategoryDto>>): Array<CategoryDto> => r.body)
     );
