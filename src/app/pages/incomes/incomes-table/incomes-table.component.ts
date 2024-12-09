@@ -46,24 +46,17 @@ export class IncomesTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.innerWidth = window.innerWidth;
         this.listIncomes();
     }
 
 
     public listIncomes(): void {
-        this.incomeService.incomeControllerListAll()
-            .subscribe({
-                next: (data: IncomeListDto[]) => {
-                    this.incomeTableDataSource.data = data.map(item => ({
-                        ...item,
-                        incomeDate: this.formatDate(item.incomeDate)
-                    }));
-                    console.log('Incomes:', this.incomeTableDataSource.data);
-                },
-                error: (error) => {
-                    console.error('Erro ao carregar os rendimentos:', error);
-                }
-            });
+        this.incomeService.incomeControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+            this.incomeTableDataSource.data = data.content  || [];
+            this.pageSlice = this.incomeTableDataSource.data;
+            this.qtdRegistros = data.totalElements || 0;
+        })
     }
 
     private formatDate(date?: string): string {
@@ -172,26 +165,5 @@ export class IncomesTableComponent implements OnInit {
         return this.flexDivAlinhar = "row";
 
     }
-
-    // isAllSelected() {
-    //     const numSelected = this.selection.selected.length;
-    //     const numRows = this.incomeTableDataSource.data.length;
-    //     return numSelected === numRows;
-    // }
-    //
-    //
-    // selectAll(event: any) {
-    //     if (event.checked) {
-    //         this.selection.select(...this.incomeTableDataSource.data);
-    //     } else {
-    //         this.selection.clear();
-    //     }
-    // }
-    //
-    //
-    // onCheckboxChange(incomes: IncomeListDto) {
-    //     this.selection.toggle(incomes);
-    // }
-
 
 }
