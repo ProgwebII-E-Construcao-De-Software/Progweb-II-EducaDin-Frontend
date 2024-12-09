@@ -51,7 +51,7 @@ export class GoalsTableComponent implements OnInit {
     }
 
     public listGoals() {
-        this.goalService.goalControllerListAllPage({page: {page: 0, size: 5, sort:["pessoaCpf"]}}).subscribe(data => {
+        this.goalService.goalControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
             this.goalTableDataSource.data = data.content  || [];
             this.pageSlice = this.goalTableDataSource.data;
             this.qtdRegistros = data.totalElements || 0;

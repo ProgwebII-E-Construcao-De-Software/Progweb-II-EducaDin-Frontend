@@ -50,7 +50,7 @@ export class ExpensesTableComponent implements OnInit {
     }
 
     public listExpenses() {
-        this.expensesService.expenseControllerListAllPage({page: {page: 0, size: 5, sort:["pessoaCpf"]}}).subscribe(data => {
+        this.expensesService.expenseControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
             this.expensesTableDataSource.data = data.content  || [];
             this.pageSlice = this.expensesTableDataSource.data;
             this.qtdRegistros = data.totalElements || 0;
