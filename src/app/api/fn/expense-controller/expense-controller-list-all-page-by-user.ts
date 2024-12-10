@@ -37,4 +37,4 @@ export function expenseControllerListAllPageByUser(http: HttpClient, rootUrl: st
   );
 }
 
-expenseControllerListAllPageByUser.PATH = '/1.0/expenses/page/user/{id}';
+expenseControllerListAllPageByUser.PATH = '/v1/expenses/page/user/{id}';

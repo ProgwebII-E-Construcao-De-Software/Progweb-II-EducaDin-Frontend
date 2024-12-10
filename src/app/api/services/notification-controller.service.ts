@@ -22,7 +22,7 @@ export class NotificationControllerService extends BaseService {
   }
 
   /** Path part for operation `createNotification()` */
-  static readonly CreateNotificationPath = '/1.0/notifications';
+  static readonly CreateNotificationPath = '/v1/notifications';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

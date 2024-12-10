@@ -31,4 +31,4 @@ export function expenseControllerSearchFieldsAction(http: HttpClient, rootUrl: s
   );
 }
 
-expenseControllerSearchFieldsAction.PATH = '/1.0/expenses/search-fields';
+expenseControllerSearchFieldsAction.PATH = '/v1/expenses/search-fields';

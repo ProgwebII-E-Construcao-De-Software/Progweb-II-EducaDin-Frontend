@@ -17,7 +17,6 @@ const routes: Routes = [
     {
         path: "",
         component: HomeComponent,
-        canActivate: [SecurityGuard],
         children: [
             ...mainpainelRoutes,
             ...incomesRoutes,

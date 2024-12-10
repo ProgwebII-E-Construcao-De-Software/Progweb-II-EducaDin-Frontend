@@ -30,4 +30,4 @@ export function expenseControllerRemove(http: HttpClient, rootUrl: string, param
   );
 }
 
-expenseControllerRemove.PATH = '/1.0/expenses/{id}';
+expenseControllerRemove.PATH = '/v1/expenses/{id}';

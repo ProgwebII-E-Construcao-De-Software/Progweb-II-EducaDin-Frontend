@@ -8,6 +8,8 @@ import { DateAdapter } from "@angular/material/core";
 import { MessageService } from "../../../arquitetura/message/message.service";
 import { ConfirmDialogComponent } from "../../../arquitetura/message/confirm-mesage/confirm-dialog.component";
 import { ConfirmationDialogResult } from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {ActivatedRoute} from "@angular/router";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-incomes-dialog',
@@ -69,8 +71,10 @@ export class IncomesDialogComponent implements OnInit {
         private incomeService: IncomeControllerService,
         private messageService: MessageService,
         private dialog: MatDialog,
+        private router: ActivatedRoute,
         private snackBar: MatSnackBar,
         private _adapter: DateAdapter<any>,
+        private securityService: SecurityService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.id = data.id || null;
@@ -126,6 +130,7 @@ export class IncomesDialogComponent implements OnInit {
             ...this.formGroup.value,
             userId: this.getUserIdFromSession(),
         };
+        console.log("o que retorna",incomeDto);
 
         this.incomeService.incomeControllerCreate({ body: incomeDto }).subscribe({
             next: (response) => {
@@ -195,8 +200,11 @@ export class IncomesDialogComponent implements OnInit {
     }
 
 
-    private getUserIdFromSession(): number {
-        return 1;
+    private getUserIdFromSession(){
+        const userId = this.securityService.getUserId();
+        console.log("o que retorna",userId);
+        return userId;
+
     }
 
     public handleError(controlName: string, errorName: string) {

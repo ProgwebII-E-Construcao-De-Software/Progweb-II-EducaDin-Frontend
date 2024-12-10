@@ -30,4 +30,4 @@ export function createNotification(http: HttpClient, rootUrl: string, params: Cr
   );
 }
 
-createNotification.PATH = '/1.0/notifications';
+createNotification.PATH = '/v1/notifications';

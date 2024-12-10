@@ -43,4 +43,4 @@ export function expenseControllerSearchFieldsActionPage_1(http: HttpClient, root
   );
 }
 
-expenseControllerSearchFieldsActionPage_1.PATH = '/1.0/expenses/search-fields/page/user/{id}';
+expenseControllerSearchFieldsActionPage_1.PATH = '/v1/expenses/search-fields/page/user/{id}';

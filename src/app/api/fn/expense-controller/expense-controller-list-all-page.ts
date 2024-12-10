@@ -31,4 +31,4 @@ export function expenseControllerListAllPage(http: HttpClient, rootUrl: string, 
   );
 }
 
-expenseControllerListAllPage.PATH = '/1.0/expenses/page';
+expenseControllerListAllPage.PATH = '/v1/expenses/page';

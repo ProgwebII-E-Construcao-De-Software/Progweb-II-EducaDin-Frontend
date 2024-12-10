@@ -28,4 +28,4 @@ export function notificationPreferenceControllerListAll(http: HttpClient, rootUr
   );
 }
 
-notificationPreferenceControllerListAll.PATH = '/1.0/notification-preferences';
+notificationPreferenceControllerListAll.PATH = '/v1/notification-preferences';

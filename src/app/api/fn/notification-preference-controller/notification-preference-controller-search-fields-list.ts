@@ -28,4 +28,4 @@ export function notificationPreferenceControllerSearchFieldsList(http: HttpClien
   );
 }
 
-notificationPreferenceControllerSearchFieldsList.PATH = '/1.0/notification-preferences/search-fields';
+notificationPreferenceControllerSearchFieldsList.PATH = '/v1/notification-preferences/search-fields';

@@ -31,4 +31,4 @@ export function notificationPreferenceControllerListAllPage(http: HttpClient, ro
   );
 }
 
-notificationPreferenceControllerListAllPage.PATH = '/1.0/notification-preferences/page';
+notificationPreferenceControllerListAllPage.PATH = '/v1/notification-preferences/page';

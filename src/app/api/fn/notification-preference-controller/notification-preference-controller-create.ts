@@ -31,4 +31,4 @@ export function notificationPreferenceControllerCreate(http: HttpClient, rootUrl
   );
 }
 
-notificationPreferenceControllerCreate.PATH = '/1.0/notification-preferences';
+notificationPreferenceControllerCreate.PATH = '/v1/notification-preferences';

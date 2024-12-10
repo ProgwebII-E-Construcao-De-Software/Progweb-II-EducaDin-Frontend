@@ -34,4 +34,4 @@ export function expenseControllerGetByUserId(http: HttpClient, rootUrl: string, 
   );
 }
 
-expenseControllerGetByUserId.PATH = '/1.0/expenses/user/{id}';
+expenseControllerGetByUserId.PATH = '/v1/expenses/user/{id}';

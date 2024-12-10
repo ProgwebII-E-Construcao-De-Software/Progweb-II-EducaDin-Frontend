@@ -16,6 +16,7 @@ import {
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {GoalListDto} from "../../../api/models/goal-list-dto";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-goals-table',
@@ -33,6 +34,7 @@ export class GoalsTableComponent implements OnInit {
     pageSlice!: GoalDto[];
     tipoDeListagem: string = 'Normal';
     qtdRegistros!: number;
+    userId!: number;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -42,16 +44,22 @@ export class GoalsTableComponent implements OnInit {
         protected snackBar: MatSnackBar,
         protected router: ActivatedRoute,
         protected messageService: MessageService,
+        private securityService: SecurityService,
         public goalService: GoalControllerService,
     ) {
     }
 
     ngOnInit(): void {
+        this.userId = this.securityService.getUserId();
+        if (!this.userId) {
+            console.error("Erro: userId não encontrado no SecurityService");
+            return;
+        }
         this.listGoals();
     }
 
     public listGoals() {
-        this.goalService.goalControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+        this.goalService.goalControllerListAllPageByUser({id: this.userId, page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
             this.goalTableDataSource.data = data.content  || [];
             this.pageSlice = this.goalTableDataSource.data;
             this.qtdRegistros = data.totalElements || 0;
@@ -137,7 +145,8 @@ export class GoalsTableComponent implements OnInit {
     }
 
     onPageChange(event: PageEvent) {
-        this.goalService.goalControllerListAllPage({
+        this.goalService.goalControllerListAllPageByUser({
+            id: this.userId,
             page: {
                 page: event.pageIndex,
                 size: event.pageSize,

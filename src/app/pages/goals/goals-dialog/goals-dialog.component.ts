@@ -7,6 +7,7 @@ import {DateAdapter} from "@angular/material/core";
 import {MessageService} from "../../../arquitetura/message/message.service";
 import {ConfirmDialogComponent} from "../../../arquitetura/message/confirm-mesage/confirm-dialog.component";
 import {ConfirmationDialogResult} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-goals-dialog',
@@ -28,6 +29,7 @@ export class GoalsDialogComponent implements OnInit {
         private _adapter: DateAdapter<any>,
         protected messageService: MessageService,
         private dialog: MatDialog,
+        private securityService: SecurityService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         this.id = data.id || null;
@@ -109,7 +111,6 @@ export class GoalsDialogComponent implements OnInit {
                     this.closeDialog(true);
                 } else {
                     console.warn('Objeto de resposta vazio ou inválido:', response);
-                    this.messageService.addMsgWarning('O ganho foi atualizado, mas o servidor não retornou os dados corretamente.');
                     const fallbackResponse: GoalDto = {
                         id: this.id,
                         ...this.formGroup.value
@@ -147,7 +148,9 @@ export class GoalsDialogComponent implements OnInit {
     }
 
     private getUserIdFromSession(): number {
-        return 1;
+        const userId = this.securityService.getUserId();
+        console.log("o que retorna",userId);
+        return userId;
     }
 
     public handleError(controlName: string, errorName: string) {

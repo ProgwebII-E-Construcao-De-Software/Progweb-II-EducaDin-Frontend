@@ -22,7 +22,7 @@ export class TipControllerService extends BaseService {
   }
 
   /** Path part for operation `getRandomTipByType()` */
-  static readonly GetRandomTipByTypePath = '/1.0/tips/{type}';
+  static readonly GetRandomTipByTypePath = '/v1/tips/{type}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

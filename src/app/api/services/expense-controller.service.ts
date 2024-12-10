@@ -47,7 +47,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerGetById()` */
-  static readonly ExpenseControllerGetByIdPath = '/1.0/expenses/{id}';
+  static readonly ExpenseControllerGetByIdPath = '/v1/expenses/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
@@ -76,7 +76,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerUpdate()` */
-  static readonly ExpenseControllerUpdatePath = '/1.0/expenses/{id}';
+  static readonly ExpenseControllerUpdatePath = '/v1/expenses/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
@@ -105,7 +105,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerRemove()` */
-  static readonly ExpenseControllerRemovePath = '/1.0/expenses/{id}';
+  static readonly ExpenseControllerRemovePath = '/v1/expenses/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
@@ -134,7 +134,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerListAll()` */
-  static readonly ExpenseControllerListAllPath = '/1.0/expenses';
+  static readonly ExpenseControllerListAllPath = '/v1/expenses';
 
   /**
    * lista todos modelos
@@ -163,7 +163,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerCreate()` */
-  static readonly ExpenseControllerCreatePath = '/1.0/expenses';
+  static readonly ExpenseControllerCreatePath = '/v1/expenses';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
@@ -192,7 +192,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerSearchFieldsList()` */
-  static readonly ExpenseControllerSearchFieldsListPath = '/1.0/expenses/search-fields';
+  static readonly ExpenseControllerSearchFieldsListPath = '/v1/expenses/search-fields';
 
   /**
    * Listagem dos campos de busca
@@ -221,7 +221,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerSearchFieldsAction()` */
-  static readonly ExpenseControllerSearchFieldsActionPath = '/1.0/expenses/search-fields';
+  static readonly ExpenseControllerSearchFieldsActionPath = '/v1/expenses/search-fields';
 
   /**
    * Realiza a busca pelos valores dos campos informados
@@ -250,7 +250,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerSearchFieldsActionPage()` */
-  static readonly ExpenseControllerSearchFieldsActionPagePath = '/1.0/expenses/search-fields/page';
+  static readonly ExpenseControllerSearchFieldsActionPagePath = '/v1/expenses/search-fields/page';
 
   /**
    * Realiza a busca pelos valores dos campos informados
@@ -279,7 +279,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerSearchFieldsActionPage_1()` */
-  static readonly ExpenseControllerSearchFieldsActionPage_1Path = '/1.0/expenses/search-fields/page/user/{id}';
+  static readonly ExpenseControllerSearchFieldsActionPage_1Path = '/v1/expenses/search-fields/page/user/{id}';
 
   /**
    * Realiza a busca pelos valores dos campos informados
@@ -308,7 +308,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerGetByUserId()` */
-  static readonly ExpenseControllerGetByUserIdPath = '/1.0/expenses/user/{id}';
+  static readonly ExpenseControllerGetByUserIdPath = '/v1/expenses/user/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id do usuario informado!
@@ -337,7 +337,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerListAllPage()` */
-  static readonly ExpenseControllerListAllPagePath = '/1.0/expenses/page';
+  static readonly ExpenseControllerListAllPagePath = '/v1/expenses/page';
 
   /**
    * lista todos modelos paginada
@@ -366,7 +366,7 @@ export class ExpenseControllerService extends BaseService {
   }
 
   /** Path part for operation `expenseControllerListAllPageByUser()` */
-  static readonly ExpenseControllerListAllPageByUserPath = '/1.0/expenses/page/user/{id}';
+  static readonly ExpenseControllerListAllPageByUserPath = '/v1/expenses/page/user/{id}';
 
   /**
    * lista todos modelos paginada

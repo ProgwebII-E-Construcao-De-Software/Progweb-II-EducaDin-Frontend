@@ -28,4 +28,4 @@ export function expenseControllerListAll(http: HttpClient, rootUrl: string, para
   );
 }
 
-expenseControllerListAll.PATH = '/1.0/expenses';
+expenseControllerListAll.PATH = '/v1/expenses';

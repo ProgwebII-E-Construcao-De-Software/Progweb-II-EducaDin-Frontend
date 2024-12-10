@@ -31,4 +31,4 @@ export function expenseControllerCreate(http: HttpClient, rootUrl: string, param
   );
 }
 
-expenseControllerCreate.PATH = '/1.0/expenses';
+expenseControllerCreate.PATH = '/v1/expenses';

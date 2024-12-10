@@ -30,4 +30,4 @@ export function notificationPreferenceControllerRemove(http: HttpClient, rootUrl
   );
 }
 
-notificationPreferenceControllerRemove.PATH = '/1.0/notification-preferences/{id}';
+notificationPreferenceControllerRemove.PATH = '/v1/notification-preferences/{id}';

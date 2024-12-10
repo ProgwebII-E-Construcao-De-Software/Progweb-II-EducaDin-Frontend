@@ -40,7 +40,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerGetById()` */
-  static readonly NotificationPreferenceControllerGetByIdPath = '/1.0/notification-preferences/{id}';
+  static readonly NotificationPreferenceControllerGetByIdPath = '/v1/notification-preferences/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
@@ -69,7 +69,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerUpdate()` */
-  static readonly NotificationPreferenceControllerUpdatePath = '/1.0/notification-preferences/{id}';
+  static readonly NotificationPreferenceControllerUpdatePath = '/v1/notification-preferences/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
@@ -98,7 +98,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerRemove()` */
-  static readonly NotificationPreferenceControllerRemovePath = '/1.0/notification-preferences/{id}';
+  static readonly NotificationPreferenceControllerRemovePath = '/v1/notification-preferences/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
@@ -127,7 +127,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerListAll()` */
-  static readonly NotificationPreferenceControllerListAllPath = '/1.0/notification-preferences';
+  static readonly NotificationPreferenceControllerListAllPath = '/v1/notification-preferences';
 
   /**
    * lista todos modelos
@@ -156,7 +156,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerCreate()` */
-  static readonly NotificationPreferenceControllerCreatePath = '/1.0/notification-preferences';
+  static readonly NotificationPreferenceControllerCreatePath = '/v1/notification-preferences';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
@@ -185,7 +185,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerSearchFieldsList()` */
-  static readonly NotificationPreferenceControllerSearchFieldsListPath = '/1.0/notification-preferences/search-fields';
+  static readonly NotificationPreferenceControllerSearchFieldsListPath = '/v1/notification-preferences/search-fields';
 
   /**
    * Listagem dos campos de busca
@@ -214,7 +214,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerSearchFieldsAction()` */
-  static readonly NotificationPreferenceControllerSearchFieldsActionPath = '/1.0/notification-preferences/search-fields';
+  static readonly NotificationPreferenceControllerSearchFieldsActionPath = '/v1/notification-preferences/search-fields';
 
   /**
    * Realiza a busca pelos valores dos campos informados
@@ -243,7 +243,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerSearchFieldsActionPage()` */
-  static readonly NotificationPreferenceControllerSearchFieldsActionPagePath = '/1.0/notification-preferences/search-fields/page';
+  static readonly NotificationPreferenceControllerSearchFieldsActionPagePath = '/v1/notification-preferences/search-fields/page';
 
   /**
    * Realiza a busca pelos valores dos campos informados
@@ -272,7 +272,7 @@ export class NotificationPreferenceControllerService extends BaseService {
   }
 
   /** Path part for operation `notificationPreferenceControllerListAllPage()` */
-  static readonly NotificationPreferenceControllerListAllPagePath = '/1.0/notification-preferences/page';
+  static readonly NotificationPreferenceControllerListAllPagePath = '/v1/notification-preferences/page';
 
   /**
    * lista todos modelos paginada

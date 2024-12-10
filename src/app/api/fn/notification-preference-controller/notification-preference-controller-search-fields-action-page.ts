@@ -37,4 +37,4 @@ export function notificationPreferenceControllerSearchFieldsActionPage(http: Htt
   );
 }
 
-notificationPreferenceControllerSearchFieldsActionPage.PATH = '/1.0/notification-preferences/search-fields/page';
+notificationPreferenceControllerSearchFieldsActionPage.PATH = '/v1/notification-preferences/search-fields/page';

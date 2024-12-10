@@ -14,6 +14,7 @@ import {
     ConfirmationDialogResult
 } from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
 import {MatSort} from "@angular/material/sort";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-expenses-table',
@@ -30,6 +31,7 @@ export class ExpensesTableComponent implements OnInit {
     qtdRegistros!: number;
     innerWidth: number = window.innerWidth;
     flexDivAlinhar: string = 'row';
+    userId!: number;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -40,17 +42,25 @@ export class ExpensesTableComponent implements OnInit {
         protected snackBar: MatSnackBar,
         protected router: ActivatedRoute,
         protected messageService: MessageService,
+        private securityService: SecurityService,
         public expensesService: ExpenseControllerService,
     ) {
     }
 
     ngOnInit(): void {
         this.innerWidth = window.innerWidth;
+        this.userId = this.securityService.getUserId();
+        if (!this.userId) {
+            console.error("Erro: userId não encontrado no SecurityService");
+            return;
+        }
         this.listExpenses();
     }
 
     public listExpenses() {
-        this.expensesService.expenseControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+        this.expensesService.expenseControllerListAllPageByUser({
+            id: this.userId,
+            page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
             this.expensesTableDataSource.data = data.content  || [];
             this.pageSlice = this.expensesTableDataSource.data;
             this.qtdRegistros = data.totalElements || 0;
@@ -127,7 +137,8 @@ export class ExpensesTableComponent implements OnInit {
     }
 
     onPageChange(event: PageEvent) {
-        this.expensesService.expenseControllerListAllPage({
+        this.expensesService.expenseControllerListAllPageByUser({
+            id: this.userId,
             page: {
                 page: event.pageIndex,
                 size: event.pageSize,

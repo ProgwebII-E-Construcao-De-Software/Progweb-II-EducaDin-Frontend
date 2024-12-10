@@ -34,4 +34,4 @@ export function expenseControllerGetById(http: HttpClient, rootUrl: string, para
   );
 }
 
-expenseControllerGetById.PATH = '/1.0/expenses/{id}';
+expenseControllerGetById.PATH = '/v1/expenses/{id}';

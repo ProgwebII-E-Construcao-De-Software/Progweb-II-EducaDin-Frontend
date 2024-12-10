@@ -33,4 +33,4 @@ export function expenseControllerUpdate(http: HttpClient, rootUrl: string, param
   );
 }
 
-expenseControllerUpdate.PATH = '/1.0/expenses/{id}';
+expenseControllerUpdate.PATH = '/v1/expenses/{id}';

@@ -45,8 +45,8 @@ export class SecurityService {
    */
   public init(user?: User): void {
     console.log('security.service', user);
+      this.setUserId(user);
     this.credential.init(user);
-    this.setUserId(user);
 
     if (user) {
       const expiresIn = (user.expiresIn - 60) * 1000;

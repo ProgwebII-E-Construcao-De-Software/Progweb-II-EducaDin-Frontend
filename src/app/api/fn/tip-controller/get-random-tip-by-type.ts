@@ -32,4 +32,4 @@ export function getRandomTipByType(http: HttpClient, rootUrl: string, params: Ge
   );
 }
 
-getRandomTipByType.PATH = '/1.0/tips/{type}';
+getRandomTipByType.PATH = '/v1/tips/{type}';

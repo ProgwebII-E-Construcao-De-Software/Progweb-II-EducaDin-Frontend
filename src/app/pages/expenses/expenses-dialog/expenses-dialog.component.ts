@@ -11,6 +11,7 @@ import {
 } from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
 import {Message, MessageService} from "../../../arquitetura/message/message.service";
 import {ConfirmDialogComponent} from "../../../arquitetura/message/confirm-mesage/confirm-dialog.component";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-expenses-dialog',
@@ -75,6 +76,7 @@ export class ExpensesDialogComponent implements OnInit {
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
         private _adapter: DateAdapter<any>,
+        private securityService: SecurityService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
@@ -144,7 +146,7 @@ export class ExpensesDialogComponent implements OnInit {
 
         if (this.formGroup.valid) {
             console.log("Dados:", this.formGroup.value);
-            this.expenseService.expenseControllerCreate({body: this.formGroup.value}).subscribe({
+            this.expenseService.expenseControllerCreate({ body: expenseDto }).subscribe({
                 next: (response) => {
                     this.showConfirmation(response, this.ACAO_INCLUIR);
                     this.closeDialog(true);
@@ -213,6 +215,8 @@ export class ExpensesDialogComponent implements OnInit {
     };
 
     private getUserIdFromSession(): number {
-        return 1;
+        const userId = this.securityService.getUserId();
+        console.log("o que retorna",userId);
+        return userId;
     }
 }
