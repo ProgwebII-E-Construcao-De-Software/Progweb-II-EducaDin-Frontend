@@ -1,55 +1,49 @@
-/* tslint:disable:no-redundant-jsdoc callable-types no-shadowed-variable */
-/* tslint:disable:variable-name */
-import { Observable } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { SecurityService } from './security.service';
 import { config, IConfig } from './config';
 
-/**
- * Implementação que garante a segurança das rotas permitindo o acesso apenas se o 'Usuário' estiver autenticado
- * na aplicação e possuir os papéis necessários para o acessar.
- *
- * @author Guiliano Rangel (UEG)
- */
 @Injectable()
 export class SecurityGuard implements CanActivate {
 
-    /**
-     * Construtor da classe.
-     *
-     * @param router
-     * @param securityService
-     * @param config
-     */
     constructor(
-      private router: Router,
-      private securityService: SecurityService,
-      @Inject(config) private config: IConfig) { }
+        private router: Router,
+        private securityService: SecurityService,
+        @Inject(config) private config: IConfig
+    ) {}
 
-    /**
-     * Intercepta a rota e verifica se a mesma poderá ou não ser apresentada.
-     *
-     * @param next
-     * @param state
-     */
-    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        let valid = false;
-        //console.log('canActive');
+    canActivate(
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean> | Promise<boolean> | boolean {
+        // Verifica se o usuário está autenticado
         if (this.securityService.isValid()) {
-            const roles = next.data['security'] ? next.data['security'].roles : [];
+            // Recupera o userId do serviço de segurança
+            const userId = this.securityService.getUserId();
 
-            if (this.securityService.hasRoles(roles)) {
-                valid = true;
+            // Verifica se o userId está presente e é válido
+            if (userId && userId > 0) {
+                const roles = next.data['security'] ? next.data['security'].roles : [];
+
+                // Verifica se o usuário tem os papéis necessários
+                if (this.securityService.hasRoles(roles)) {
+                    return true; // Autorizado
+                } else {
+                    // Acesso negado por papéis inadequados
+                    this.securityService.onForbidden.emit(this.securityService.credential);
+                    this.router.navigate(['/']);
+                }
             } else {
-              this.securityService.onForbidden.emit(this.securityService.credential);
-              this.router.navigate(['/']);
+                // Redireciona para login se o userId não estiver disponível
+                console.error('UserId inválido ou não encontrado!');
+                this.router.navigate([this.config.loginRouter]);
             }
         } else {
+            // Redireciona para login se não autenticado
             this.router.navigate([this.config.loginRouter]);
         }
-        return valid;
+        return false; // Bloqueia o acesso por padrão
     }
-
 }
