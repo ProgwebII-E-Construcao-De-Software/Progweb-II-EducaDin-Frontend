@@ -32,6 +32,7 @@ export class GoalsTableComponent implements OnInit {
     flexDivAlinhar: string = 'row';
     pageSlice!: GoalDto[];
     tipoDeListagem: string = 'Normal';
+    qtdRegistros!: number;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -50,19 +51,11 @@ export class GoalsTableComponent implements OnInit {
     }
 
     public listGoals() {
-        this.goalService.goalControllerListAll().subscribe({
-            next: (data: GoalListDto[]) => {
-                this.goalTableDataSource.data = data.map(item => ({
-                    ...item,
-                    goalDate: this.formatDate(item.goalDate),
-                    goalPercent: item.goalPercent,
-                }));
-                console.log('Goals:', this.goalTableDataSource.data);
-            },
-            error: (error) => {
-                console.error('Erro ao carregar as metas:', error);
-            }
-        });
+        this.goalService.goalControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+            this.goalTableDataSource.data = data.content  || [];
+            this.pageSlice = this.goalTableDataSource.data;
+            this.qtdRegistros = data.totalElements || 0;
+        })
     }
 
     private formatDate(date?: string): string {

@@ -147,11 +147,10 @@ export class ExpensesDialogComponent implements OnInit {
             this.expenseService.expenseControllerCreate({body: this.formGroup.value}).subscribe({
                 next: (response) => {
                     this.showConfirmation(response, this.ACAO_INCLUIR);
-                    this.snackBar.open('Ganho adicionado com sucesso!', 'Fechar', { duration: 4000 });
                     this.closeDialog(true);
                 },
                 error: (error) => {
-                    this.messageService.addMsgWarning(`Erro ao adicionar ganho: ${error.message}`);
+                    this.messageService.addMsgWarning(`Erro ao adicionar gasto: ${error.message}`);
                 }
             });
         }
@@ -189,8 +188,8 @@ export class ExpensesDialogComponent implements OnInit {
 
     private showConfirmation(expense: ExpenseDto, action: string) {
         if (!expense || !expense.name) {
-            console.error('Objeto de ganho inválido:', expense);
-            this.messageService.addMsgWarning('Erro ao processar a confirmação. Dados do ganho ausentes.');
+            console.error('Objeto de gasto inválido:', expense);
+            this.messageService.addMsgWarning('Erro ao processar a confirmação. Dados do gasto ausentes.');
             return;
         }
 

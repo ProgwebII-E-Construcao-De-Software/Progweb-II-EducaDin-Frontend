@@ -54,7 +54,7 @@ export class SettingsFormComponent implements OnInit {
         }
         if (this.campoVisivelEmail){
             if(this.formGroup.get('email')?.valid){
-               this.update();
+               this.create();
             }
         }
 
@@ -64,9 +64,9 @@ export class SettingsFormComponent implements OnInit {
         }
     }
 
-    update() {
+    create() {
         const updateData: any = { email: this.userAtual.email };
-        this.userService.update(updateData).subscribe(
+        this.userService.create(updateData).subscribe(
             () => {
                 alert('Informações atualizadas com sucesso!');
             },

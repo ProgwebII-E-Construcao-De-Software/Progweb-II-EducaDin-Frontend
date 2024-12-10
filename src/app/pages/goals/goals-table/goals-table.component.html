@@ -4,7 +4,7 @@
             Minhas Metas
         </mat-card-title>
     </mat-card-header>
-    <mat-card-actions [fxLayout]="mudarAlinhar()" fxLayoutAlign="rigth none">
+    <mat-card-actions [fxLayout]="mudarAlinhar()" fxLayoutAlign="center none">
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-button class="add-button" (click)="openDialogAddIncomes()">
                 <mat-icon>add</mat-icon>
@@ -65,6 +65,13 @@
                 <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <mat-paginator style="justify-content: center" [length]="this.qtdRegistros"
+                           [pageSize]="5"
+                           [pageSizeOptions]="[5, 10, 25, 100]"
+                           (page)="onPageChange($event)"
+                           showFirstLastButtons
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
         </div>
 
     </mat-card-content>

@@ -45,23 +45,18 @@ export class ExpensesTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.innerWidth = window.innerWidth;
         this.listExpenses();
     }
 
     public listExpenses() {
-        this.expensesService.expenseControllerListAll().subscribe({
-            next: (data: ExpenseListDto[]) => {
-                this.expensesTableDataSource.data = data.map(item => ({
-                    ...item,
-                    expenseDate: this.formatDate(item.expenseDate)
-                }));
-                console.log('Expenses:', this.expensesTableDataSource.data);
-            },
-            error: (error) => {
-                console.error('Erro ao carregar os gastos:', error);
-            }
-        });
+        this.expensesService.expenseControllerListAllPage({page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+            this.expensesTableDataSource.data = data.content  || [];
+            this.pageSlice = this.expensesTableDataSource.data;
+            this.qtdRegistros = data.totalElements || 0;
+        })
     }
+
 
     private formatDate(date?: string): string {
         if (!date) return 'Data indisponível';
