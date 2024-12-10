@@ -2,6 +2,7 @@
     <div class="container-passoword">
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="1 1 auto">
             <h2>Esqueceu sua senha?</h2>
+            <strong>Digite seu e-mail cadastrado para recuperar</strong>
             <mat-form-field>
                 <mat-label>E-mail</mat-label>
                 <input matInput formControlName="email" placeholder="exemplo@exemplo.com">
@@ -10,8 +11,8 @@
             </mat-form-field>
 
             <div class="btn-mov" fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-raised-button color="warn" type="button" class="button botao-cancelar" (click)="close()">Cancelar</button>
-                <button  mat-raised-button type="submit" class="button" >Recuperar</button>
+                <button mat-raised-button color="warn" type="button" class="error-snackbar" (click)="close()">Cancelar</button>
+                <button  mat-raised-button type="submit" class="success-snackbar" >Recuperar</button>
             </div>
 
         </form>
