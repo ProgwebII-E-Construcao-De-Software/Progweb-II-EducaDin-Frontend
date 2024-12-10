@@ -10,12 +10,8 @@ export const mainpainelRoutes: Routes = [
             {
                 path: "",
                 component: MainpainelSystemComponent,
-                //canActivate: [SecurityGuard],
-                //data: {security: {roles: ['ROLE_PRODUTO_INCLUIR', 'ROLE_PRODUTO_ALTERAR']}}
 
             }
         ],
-        // canActivate: [SecurityGuard],
-        // data: {security: {roles: ['ROLE_INCOME_REMOVEALL']}}
     }
 ];
