@@ -5,14 +5,14 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-actions class="custom-actions" [fxLayout]="mudarAlinhar()" fxLayoutAlign="center none">
+        <div class="searchFlex" fxLayout="row" fxLayoutAlign="center center">
+            <app-search-component [controller]="expensesService" (onSearchResult)="showResult($event)"/>
+        </div>
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-button class="add-button" (click)="openDialogAddExpenses()">
                 <mat-icon>add</mat-icon>
                 <span>Adicionar</span>
             </button>
-        </div>
-        <div class="searchFlex">
-            <app-search-component [controller]="expensesService" (onSearchResult)="showResult($event)"/>
         </div>
     </mat-card-actions>
     <mat-card-content>

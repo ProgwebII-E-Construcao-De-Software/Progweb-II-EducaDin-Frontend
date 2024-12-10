@@ -5,17 +5,14 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-actions [fxLayout]="mudarAlinhar()" fxLayoutAlign="center none">
+        <div class="searchFlex" fxLayout="row" fxLayoutAlign="center center">
+            <app-search-component [controller]="goalService" (onSearchResult)="showResult($event)"/>
+        </div>
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-button class="add-button" (click)="openDialogAddIncomes()">
                 <mat-icon>add</mat-icon>
                 <span>Adicionar</span>
             </button>
-            <button mat-icon-button class="share-button" aria-label="Compartilhar metas">
-                <mat-icon>share</mat-icon>
-            </button>
-        </div>
-        <div class="searchFlex">
-            <app-search-component [controller]="goalService" (onSearchResult)="showResult($event)"/>
         </div>
     </mat-card-actions>
     <mat-card-content>
@@ -51,6 +48,9 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon>share</mat-icon>
+                            </button>
                             <button mat-menu-item (click)="openDialogEditGoal(element.id)">
                                 <mat-icon>edit</mat-icon>
                                 <span>Editar</span>
