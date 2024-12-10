@@ -12,7 +12,7 @@ import { NotificationDto } from '../../../api/models/notification-dto';
 export class NotificationsListComponent implements OnInit {
   preferences: NotificationPreferenceDto[] = [];
   notifications: NotificationDto[] = [];
-  isLoading = false;
+  isMenuOpen: boolean = false;
 
   constructor(
     private preferenceService: NotificationPreferenceControllerService,
@@ -23,9 +23,12 @@ export class NotificationsListComponent implements OnInit {
     this.loadPreferences();
   }
 
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   // Carregar preferências de notificações
   loadPreferences(): void {
-    this.isLoading = true;
+
     this.preferenceService.notificationPreferenceControllerListAll().subscribe({
       next: (data) => {
         this.preferences = data.filter(pref => pref.enabled); // Apenas as habilitadas

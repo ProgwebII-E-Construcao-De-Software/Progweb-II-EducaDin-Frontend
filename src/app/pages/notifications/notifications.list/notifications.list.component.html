@@ -1,8 +1,4 @@
-<div *ngIf="isLoading" class="loading">
-  <p>Carregando notificações...</p>
-</div>
-
-<div *ngIf="!isLoading && notifications.length > 0" class="notifications-list">
+<div *ngIf="notifications.length > 0" class="notifications-list">
   <h2>Notificações</h2>
   <mat-list>
     <mat-list-item *ngFor="let notification of notifications">
@@ -10,8 +6,4 @@
       <p>{{ notification.message }}</p>
     </mat-list-item>
   </mat-list>
-</div>
-
-<div *ngIf="!isLoading && notifications.length === 0" class="no-notifications">
-  <p>Nenhuma notificação habilitada para exibição.</p>
 </div>
