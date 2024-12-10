@@ -21,11 +21,15 @@ import { goalControllerListAll } from '../fn/goal-controller/goal-controller-lis
 import { GoalControllerListAll$Params } from '../fn/goal-controller/goal-controller-list-all';
 import { goalControllerListAllPage } from '../fn/goal-controller/goal-controller-list-all-page';
 import { GoalControllerListAllPage$Params } from '../fn/goal-controller/goal-controller-list-all-page';
+import { goalControllerListAllPageByUser } from '../fn/goal-controller/goal-controller-list-all-page-by-user';
+import { GoalControllerListAllPageByUser$Params } from '../fn/goal-controller/goal-controller-list-all-page-by-user';
 import { goalControllerRemove } from '../fn/goal-controller/goal-controller-remove';
 import { GoalControllerRemove$Params } from '../fn/goal-controller/goal-controller-remove';
 import { goalControllerSearchFieldsAction } from '../fn/goal-controller/goal-controller-search-fields-action';
 import { GoalControllerSearchFieldsAction$Params } from '../fn/goal-controller/goal-controller-search-fields-action';
 import { goalControllerSearchFieldsActionPage } from '../fn/goal-controller/goal-controller-search-fields-action-page';
+import { goalControllerSearchFieldsActionPage_1 } from '../fn/goal-controller/goal-controller-search-fields-action-page-1';
+import { GoalControllerSearchFieldsActionPage_1$Params } from '../fn/goal-controller/goal-controller-search-fields-action-page-1';
 import { GoalControllerSearchFieldsActionPage$Params } from '../fn/goal-controller/goal-controller-search-fields-action-page';
 import { goalControllerSearchFieldsList } from '../fn/goal-controller/goal-controller-search-fields-list';
 import { GoalControllerSearchFieldsList$Params } from '../fn/goal-controller/goal-controller-search-fields-list';
@@ -274,6 +278,35 @@ export class GoalControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `goalControllerSearchFieldsActionPage_1()` */
+  static readonly GoalControllerSearchFieldsActionPage_1Path = '/v1/goals/search-fields/page/user/{id}';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerSearchFieldsActionPage_1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  goalControllerSearchFieldsActionPage_1$Response(params: GoalControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageGoalListDto>> {
+    return goalControllerSearchFieldsActionPage_1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerSearchFieldsActionPage_1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  goalControllerSearchFieldsActionPage_1(params: GoalControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<PageGoalListDto> {
+    return this.goalControllerSearchFieldsActionPage_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
+    );
+  }
+
   /** Path part for operation `goalControllerGetByUserId()` */
   static readonly GoalControllerGetByUserIdPath = '/v1/goals/user/{id}';
 
@@ -328,6 +361,35 @@ export class GoalControllerService extends BaseService {
    */
   goalControllerListAllPage(params: GoalControllerListAllPage$Params, context?: HttpContext): Observable<PageGoalListDto> {
     return this.goalControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `goalControllerListAllPageByUser()` */
+  static readonly GoalControllerListAllPageByUserPath = '/v1/goals/page/user/{id}';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `goalControllerListAllPageByUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerListAllPageByUser$Response(params: GoalControllerListAllPageByUser$Params, context?: HttpContext): Observable<StrictHttpResponse<PageGoalListDto>> {
+    return goalControllerListAllPageByUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `goalControllerListAllPageByUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  goalControllerListAllPageByUser(params: GoalControllerListAllPageByUser$Params, context?: HttpContext): Observable<PageGoalListDto> {
+    return this.goalControllerListAllPageByUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageGoalListDto>): PageGoalListDto => r.body)
     );
   }

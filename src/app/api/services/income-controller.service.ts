@@ -21,11 +21,15 @@ import { incomeControllerListAll } from '../fn/income-controller/income-controll
 import { IncomeControllerListAll$Params } from '../fn/income-controller/income-controller-list-all';
 import { incomeControllerListAllPage } from '../fn/income-controller/income-controller-list-all-page';
 import { IncomeControllerListAllPage$Params } from '../fn/income-controller/income-controller-list-all-page';
+import { incomeControllerListAllPageByUser } from '../fn/income-controller/income-controller-list-all-page-by-user';
+import { IncomeControllerListAllPageByUser$Params } from '../fn/income-controller/income-controller-list-all-page-by-user';
 import { incomeControllerRemove } from '../fn/income-controller/income-controller-remove';
 import { IncomeControllerRemove$Params } from '../fn/income-controller/income-controller-remove';
 import { incomeControllerSearchFieldsAction } from '../fn/income-controller/income-controller-search-fields-action';
 import { IncomeControllerSearchFieldsAction$Params } from '../fn/income-controller/income-controller-search-fields-action';
 import { incomeControllerSearchFieldsActionPage } from '../fn/income-controller/income-controller-search-fields-action-page';
+import { incomeControllerSearchFieldsActionPage_1 } from '../fn/income-controller/income-controller-search-fields-action-page-1';
+import { IncomeControllerSearchFieldsActionPage_1$Params } from '../fn/income-controller/income-controller-search-fields-action-page-1';
 import { IncomeControllerSearchFieldsActionPage$Params } from '../fn/income-controller/income-controller-search-fields-action-page';
 import { incomeControllerSearchFieldsList } from '../fn/income-controller/income-controller-search-fields-list';
 import { IncomeControllerSearchFieldsList$Params } from '../fn/income-controller/income-controller-search-fields-list';
@@ -274,6 +278,35 @@ export class IncomeControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `incomeControllerSearchFieldsActionPage_1()` */
+  static readonly IncomeControllerSearchFieldsActionPage_1Path = '/v1/incomes/search-fields/page/user/{id}';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerSearchFieldsActionPage_1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage_1$Response(params: IncomeControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerSearchFieldsActionPage_1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerSearchFieldsActionPage_1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage_1(params: IncomeControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerSearchFieldsActionPage_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
   /** Path part for operation `incomeControllerGetByUserId()` */
   static readonly IncomeControllerGetByUserIdPath = '/v1/incomes/user/{id}';
 
@@ -328,6 +361,35 @@ export class IncomeControllerService extends BaseService {
    */
   incomeControllerListAllPage(params: IncomeControllerListAllPage$Params, context?: HttpContext): Observable<PageIncomeListDto> {
     return this.incomeControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerListAllPageByUser()` */
+  static readonly IncomeControllerListAllPageByUserPath = '/v1/incomes/page/user/{id}';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerListAllPageByUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPageByUser$Response(params: IncomeControllerListAllPageByUser$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerListAllPageByUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerListAllPageByUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPageByUser(params: IncomeControllerListAllPageByUser$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerListAllPageByUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
     );
   }

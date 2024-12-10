@@ -35,7 +35,7 @@ export class NotificationsListComponent implements OnInit {
         this.generateNotifications();
       },
       error: (err) => {
-        this.isLoading = false;
+        // this.isLoading = false;
         console.error('Erro ao carregar preferências:', err);
       }
     });
@@ -56,10 +56,10 @@ export class NotificationsListComponent implements OnInit {
       this.notificationService.createNotification({ body: notification }).subscribe({
         next: (data) => {
           this.notifications.push(data);
-          this.isLoading = false;
+          // this.isLoading = false;
         },
         error: (err) => {
-          this.isLoading = false;
+          // this.isLoading = false;
           console.error('Erro ao criar notificação:', err);
         }
       });

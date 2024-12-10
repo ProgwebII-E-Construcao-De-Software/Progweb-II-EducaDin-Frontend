@@ -23,7 +23,6 @@ const routes: Routes = [
             ...goalsRoutes,
             ...dashboardRoutes,
             ...settingsRoutes,
-            ...notificationsRoutes,
             {path: '', redirectTo: '/painel', pathMatch: 'full'},
         ]
 
