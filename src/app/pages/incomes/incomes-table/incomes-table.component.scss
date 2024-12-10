@@ -1,3 +1,5 @@
+@import '../../../../StyleForms.css';
+
 .mat-card-title {
   font-weight: bold;
   color: #046F82;
@@ -8,6 +10,10 @@
   max-height: 500px;
   display: flex;
   flex-direction: column;
+}
+
+.searchFlex {
+  width: 100%;
 }
 
 mat-card-content {
@@ -50,9 +56,22 @@ mat-card-content {
 }
 
 .add-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border-radius: 4px;
+  font-family: DM Roboto, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-align:center;
+  background: #6dd19b !important;
+  color: #ffffff !important;
+  width:180px!important;
+  height:40px!important;
+  position: relative;
+  border-radius: 10px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  alignment-baseline: center;
+  margin: 5px;
+  border:1px solid #60ffb4;
+
 }
 
 .add-button:hover {

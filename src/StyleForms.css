@@ -1,103 +1,17 @@
-/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
-
-h1{
-  text-align: center;
-  font-size: 25px;
-}
-
-h2{
-  user-select:none;
-  text-align: center;
-}
-
-.formPadrao {
-    border: 3px solid #afeccb;
-    border-radius: 5px;
-    background-color: #F5F7FA;
-    padding: 2%;
-    width: 100%;
-    margin: 2% auto;
-}
-
 .form {
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin:  auto;
   padding: 20px;
 }
 
-.formMov {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    max-height: 80vh;
-    border-radius: 20px;
-}
-
-.formMov h1{
-    margin-bottom: 20px;
-}
-
-.formMov mat card{
-    background-color: #F5F7FA;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 95%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    max-width: 900px;
-    border-radius: 10px;
-    border: 3px solid #abd3b6;
-    box-sizing: border-box;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
-}
-
-
-/*RESPONSIVIDADE FORMULARIO*/
-@media (min-width: 1500px) {
-  .formPadrao {
-    width: 92%;
-    padding: 6%;
-  }
-}
-
-@media (min-width: 1200px) {
-    .formPadrao {
-        width: 94%;
-        padding: 5%;
-    }
-}
-
-@media (min-width: 900px) {
-  .formPadrao {
-    width: 96%;
-    padding: 4%;
-  }
-}
-
-@media (min-width: 700px) {
-  .formPadrao {
-    width: 98%;
-    padding: 3%;
-  }
-}
 
 .button{
   font-family: DM Roboto, sans-serif;
   font-size: 14px;
   text-decoration: none;
   text-align:center;
-  background: #84cb9f !important;
-  color: white !important;
+  background: #dcdee0 !important;
+  color: #020100 !important;
   width:100px !important;
   height:50px !important;
   position: relative;
@@ -106,7 +20,7 @@ h2{
   display: inline-flex;
   alignment-baseline: center;
   margin: 5px;
-  border:1px solid #6dd19b;
+  border:1px solid #ffffff;
 }
 .button:hover {
     background-color: #60ffb4;
@@ -120,58 +34,11 @@ h2{
   }
 }
 
-.botao-cadastro{
-  width:180px!important;
-  height:50px!important;
-}
-
-.botao-limpar{
-  background-color: #FFFFFF !important;
-  color: #404040 !important;
-}
-
-.botao-salvar{
-  background-color: #1CA64C !important;
-  color: white !important;
-}
-
-.botao-cancelar{
-  background-color: #F2293A !important; ;
-  color: white !important;
-}
-
 mat-form-field{
-  width: 100%;
   margin: 5px;
 }
 
-.divBotoes{
-  margin-top: 25px;
-}
-
-.mdc-label{
-  font-size: 16px;
-}
-
-.mdc-form-field{
-  margin-bottom: 25px;
-}
 
 
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333333;
-}
-
-.mat-form-field {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.mat-error {
-    font-size: 14px;
-    color: #FF0000;
-}
 
 

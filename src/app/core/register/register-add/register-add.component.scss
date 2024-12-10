@@ -26,12 +26,12 @@ mat-card {
 mat-card-title {
   display: flex;
   padding: 5px;
-  padding-top: 25%;
+  padding-top: 5%;
   justify-content: center;
 }
 
 .register-content {
-  padding-top: 20px;
+  padding-top: 20%;
   display: flex;
   flex-direction: column;
   place-content: center;
@@ -141,12 +141,25 @@ mat-form-field input {
   }
 
   .register-content {
-    padding-top: 20px;
+    padding-top: 30%;
   }
 
   mat-form-field {
     width: 100%;
     max-width: 200px;
   }
+
+  mat-card-title {
+    padding-top: 3%;
+  }
+
+  .educa {
+    font-size: 50%;
+  }
+
+  .din {
+    font-size: 50%;
+  }
+
 }
 

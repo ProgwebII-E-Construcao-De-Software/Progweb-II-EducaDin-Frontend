@@ -5,7 +5,7 @@
             <p>Crie sua conta para começar a organizar suas finanças de forma simples e eficiente.</p>
         </div>
         <mat-card>
-            <div class="title-register">
+            <div fxLayout="row" fxLayoutAlign="center center" class="title-register">
                 <mat-card-title class="logo-educadin">
                     <h1><strong class="educa">Educa</strong><strong class="din">Din</strong></h1>
                 </mat-card-title>
@@ -16,7 +16,7 @@
                         (ngSubmit)="onSubmit()"
                         class="form"
                 >
-                    <div class="register-content">
+                    <div class="register-content" fxLayout="row" fxLayoutAlign="center center" >
                         <mat-form-field>
                             <mat-label>Usuário</mat-label>
                             <input matInput formControlName="login" autocomplete="off"

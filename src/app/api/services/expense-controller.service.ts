@@ -21,11 +21,15 @@ import { expenseControllerListAll } from '../fn/expense-controller/expense-contr
 import { ExpenseControllerListAll$Params } from '../fn/expense-controller/expense-controller-list-all';
 import { expenseControllerListAllPage } from '../fn/expense-controller/expense-controller-list-all-page';
 import { ExpenseControllerListAllPage$Params } from '../fn/expense-controller/expense-controller-list-all-page';
+import { expenseControllerListAllPageByUser } from '../fn/expense-controller/expense-controller-list-all-page-by-user';
+import { ExpenseControllerListAllPageByUser$Params } from '../fn/expense-controller/expense-controller-list-all-page-by-user';
 import { expenseControllerRemove } from '../fn/expense-controller/expense-controller-remove';
 import { ExpenseControllerRemove$Params } from '../fn/expense-controller/expense-controller-remove';
 import { expenseControllerSearchFieldsAction } from '../fn/expense-controller/expense-controller-search-fields-action';
 import { ExpenseControllerSearchFieldsAction$Params } from '../fn/expense-controller/expense-controller-search-fields-action';
 import { expenseControllerSearchFieldsActionPage } from '../fn/expense-controller/expense-controller-search-fields-action-page';
+import { expenseControllerSearchFieldsActionPage_1 } from '../fn/expense-controller/expense-controller-search-fields-action-page-1';
+import { ExpenseControllerSearchFieldsActionPage_1$Params } from '../fn/expense-controller/expense-controller-search-fields-action-page-1';
 import { ExpenseControllerSearchFieldsActionPage$Params } from '../fn/expense-controller/expense-controller-search-fields-action-page';
 import { expenseControllerSearchFieldsList } from '../fn/expense-controller/expense-controller-search-fields-list';
 import { ExpenseControllerSearchFieldsList$Params } from '../fn/expense-controller/expense-controller-search-fields-list';
@@ -274,6 +278,35 @@ export class ExpenseControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `expenseControllerSearchFieldsActionPage_1()` */
+  static readonly ExpenseControllerSearchFieldsActionPage_1Path = '/1.0/expenses/search-fields/page/user/{id}';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerSearchFieldsActionPage_1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage_1$Response(params: ExpenseControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerSearchFieldsActionPage_1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerSearchFieldsActionPage_1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage_1(params: ExpenseControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerSearchFieldsActionPage_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
   /** Path part for operation `expenseControllerGetByUserId()` */
   static readonly ExpenseControllerGetByUserIdPath = '/1.0/expenses/user/{id}';
 
@@ -328,6 +361,35 @@ export class ExpenseControllerService extends BaseService {
    */
   expenseControllerListAllPage(params: ExpenseControllerListAllPage$Params, context?: HttpContext): Observable<PageExpenseListDto> {
     return this.expenseControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerListAllPageByUser()` */
+  static readonly ExpenseControllerListAllPageByUserPath = '/1.0/expenses/page/user/{id}';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerListAllPageByUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPageByUser$Response(params: ExpenseControllerListAllPageByUser$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerListAllPageByUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerListAllPageByUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPageByUser(params: ExpenseControllerListAllPageByUser$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerListAllPageByUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
     );
   }
