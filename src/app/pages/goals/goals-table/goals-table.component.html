@@ -1,4 +1,4 @@
-<mat-card >
+<mat-card>
     <mat-card-header class="custom-card-header">
         <mat-card-title class="custom-title">
             Minhas Metas
@@ -23,12 +23,18 @@
                     <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.id }}</td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome </th>
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome</th>
                     <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.name }}</td>
                 </ng-container>
                 <ng-container matColumnDef="goalDate">
                     <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Data</th>
-                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{  element.goalDate | date:'dd/MM/yyyy' }}</td>
+                    <td mat-cell *matCellDef="let element"
+                        class="mat-cell"> {{ element.goalDate | date:'dd/MM/yyyy' }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="goalPercent">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Percentual</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.goalPercent }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="amountReached">
@@ -38,7 +44,7 @@
 
                 <ng-container matColumnDef="amountTotal">
                     <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Valor</th>
-                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amountTotal}}</td>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amountTotal }}</td>
                 </ng-container>
                 <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
                     <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Ações</th>
@@ -47,9 +53,10 @@
                         <button mat-icon-button [matMenuTriggerFor]="menu">
                             <mat-icon>more_vert</mat-icon>
                         </button>
-                        <mat-menu #menu="matMenu">
+                        <mat-menu #menu="matMenu" (click)="openDialogSharedGoals()">
                             <button mat-menu-item>
                                 <mat-icon>share</mat-icon>
+                                <span>Compartilhar</span>
                             </button>
                             <button mat-menu-item (click)="openDialogEditGoal(element.id)">
                                 <mat-icon>edit</mat-icon>

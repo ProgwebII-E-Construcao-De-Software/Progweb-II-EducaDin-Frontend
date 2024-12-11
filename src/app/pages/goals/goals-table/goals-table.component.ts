@@ -17,6 +17,8 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {GoalListDto} from "../../../api/models/goal-list-dto";
 import {SecurityService} from "../../../arquitetura/security/security.service";
+import {ForgotpassowordComponent} from "../../../core/forgotpassoword/forgotpassoword.dialog/forgotpassoword.component";
+import {GoalsShareDialogComponent} from "../goals-share-dialog/goals-share-dialog.component";
 
 @Component({
     selector: 'app-goals-table',
@@ -27,7 +29,7 @@ import {SecurityService} from "../../../arquitetura/security/security.service";
     providedIn: 'root',
 })
 export class GoalsTableComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'name', 'goalDate','amountReached','amountTotal', 'acao'];
+    displayedColumns: string[] = ['id', 'name', 'goalDate','goalPercent','amountReached','amountTotal', 'acao'];
     goalTableDataSource: MatTableDataSource<GoalListDto> = new MatTableDataSource<GoalListDto>([]);
     innerWidth: number = window.innerWidth;
     flexDivAlinhar: string = 'row';
@@ -139,9 +141,26 @@ export class GoalsTableComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result =>{
             this.listGoals();
             if(result){
-                this.messageService.addMsgSuccess("Ganhos adicionas com sucesso !")
             }
         });
+    }
+
+    openDialogSharedGoals() {
+        const dialogRef = this.dialog.open(GoalsShareDialogComponent,
+            {
+                data:
+                    {
+                        data: {id: null}
+                    }
+            })
+        dialogRef.afterClosed().subscribe((result) => {
+                this.listGoals();
+                if (result) {
+                    alert('');
+                }
+            }
+        )
+
     }
 
     onPageChange(event: PageEvent) {

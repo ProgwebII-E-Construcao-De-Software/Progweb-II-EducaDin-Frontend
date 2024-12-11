@@ -21,6 +21,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
+import {GoalsShareDialogComponent} from "./goals-share-dialog/goals-share-dialog.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {MatMenu, MatMenuItem, MatMenuModule} from "@angular/material/menu";
         GoalsHomeComponent,
         GoalsTableComponent,
         GoalsDialogComponent,
+        GoalsShareDialogComponent,
     ],
     imports: [
         CommonModule,
