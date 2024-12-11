@@ -1,0 +1,18 @@
+<div >
+    <div class="container">
+        <form class="form" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="1 1 auto">
+            <h2>Quer compartilhar uma meta ?</h2>
+            <strong>Digite o nome do usuário</strong>
+            <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="login" placeholder="Digite o nome do usuário">
+            </mat-form-field>
+
+            <div class="btn-mov" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button color="warn" type="button" class="error-snackbar" (click)="close()">Cancelar</button>
+                <button  mat-raised-button type="submit" class="success-snackbar" >Compartilhar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

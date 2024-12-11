@@ -1,0 +1,102 @@
+<div class="full-screen">
+    <div class="container">
+        <div class="info-container">
+            <h1>Cadastre-se no EducaDin</h1>
+            <p>Crie sua conta para começar a organizar suas finanças de forma simples e eficiente.</p>
+        </div>
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="center center" class="title-register">
+                <mat-card-title class="logo-educadin">
+                    <h1><strong class="educa">Educa</strong><strong class="din">Din</strong></h1>
+                </mat-card-title>
+            </div>
+            <mat-card-content>
+                <form
+                        [formGroup]="formGroup"
+                        (ngSubmit)="onSubmit()"
+                        class="form"
+                >
+                    <div class="register-content" fxLayout="row" fxLayoutAlign="center center" >
+                        <mat-form-field>
+                            <mat-label>Usuário</mat-label>
+                            <input matInput formControlName="login" autocomplete="off"
+                                   placeholder="Digite o seu usuário" maxlength="20">
+                            <mat-error *ngIf="handleError('login', 'required')">
+                                Campo obrigatório!
+                            </mat-error>
+                            <mat-error *ngIf="handleError('login', 'minLength')">
+                                Tamanho mínimo de 3 letras
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>E-mail</mat-label>
+                            <input matInput formControlName="email" placeholder="Digite seu email" maxlength="100" type="email">
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Por favor insira um endereço de e-mail válido
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                O Email é obrigatório.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Senha</mat-label>
+                            <input
+                                    matInput
+                                    formControlName="password"
+                                    [type]="hide ? 'password' : 'text'"
+                                    placeholder="Digite sua senha"
+                            />
+                            <button
+                                    mat-icon-button
+                                    matSuffix
+                                    type="button"
+                                    (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide"
+                            >
+                                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="handleError('password', 'required')">A senha é obrigatória.</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Confirmar Senha</mat-label>
+                            <input
+                                    matInput
+                                    formControlName="confirmPassword"
+                                    [type]="hideConfirm ? 'password' : 'text'"
+                                    placeholder="Confirme sua senha"
+                            />
+                            <button
+                                    mat-icon-button
+                                    matSuffix
+                                    type="button"
+                                    (click)="hideConfirm = !hideConfirm"
+                                    [attr.aria-label]="'Hide confirm password'"
+                                    [attr.aria-pressed]="hideConfirm"
+                            >
+                                <mat-icon>{{ hideConfirm ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formGroup.hasError('passwordsMismatch')">
+                                As senhas não coincidem.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <button class="button-login" type="submit" title="Cadastrar">
+                            <span>Cadastre-se</span>
+                        </button>
+                        <div class="page">
+                            <a href="#" class="page">Página Inicial</a>
+                        </div>
+                        <div class="page">
+                            <a routerLink="/auth/login" class="page">Já tenho uma conta ?</a>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <p>
+        <p>
+    </div>
+</div>
+<alert-message/>

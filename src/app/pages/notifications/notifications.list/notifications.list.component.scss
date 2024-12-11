@@ -1,0 +1,22 @@
+.notifications-container {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.no-notifications {
+  text-align: center;
+  font-size: 16px;
+  color: #999;
+}
+
+.mat-list-item {
+  display: flex;
+  align-items: center;
+}

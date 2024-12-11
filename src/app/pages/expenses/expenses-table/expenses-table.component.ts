@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {ExpenseListDto} from "../../../api/models/expense-list-dto";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageService} from "../../../architecture/message/message.service";
-import {
-    ConfirmationDialog,
-    ConfirmationDialogResult
-} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
 import {ActivatedRoute} from "@angular/router";
 import {ExpenseDto} from "../../../api/models/expense-dto";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {MatSort} from "@angular/material/sort";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-expenses-table',
@@ -20,11 +22,19 @@ import {ExpenseDto} from "../../../api/models/expense-dto";
     styleUrls: ['./expenses-table.component.scss']
 })
 export class ExpensesTableComponent implements OnInit {
-    displayedColumns: string[] = ['select', 'name', 'category', 'description', 'expenseDate', 'amount', 'acao'];
+    displayedColumns: string[] = ['id', 'name', 'category', 'description', 'expenseDate', 'amount', 'acao'];
     expensesTableDataSource: MatTableDataSource<ExpenseListDto> = new MatTableDataSource<ExpenseListDto>([]);
-    selection = new SelectionModel<ExpenseListDto>(true, []);
+    // selection = new SelectionModel<ExpenseListDto>(true, []);
     tipoDeListagem: string = 'Normal';
     isMenuOpen: boolean = false;
+    pageSlice!: ExpenseDto[];
+    qtdRegistros!: number;
+    innerWidth: number = window.innerWidth;
+    flexDivAlinhar: string = 'row';
+    userId!: number;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
 
     constructor(
@@ -32,61 +42,61 @@ export class ExpensesTableComponent implements OnInit {
         protected snackBar: MatSnackBar,
         protected router: ActivatedRoute,
         protected messageService: MessageService,
+        private securityService: SecurityService,
         public expensesService: ExpenseControllerService,
     ) {
     }
 
     ngOnInit(): void {
+        this.innerWidth = window.innerWidth;
+        this.userId = this.securityService.getUserId();
+        if (!this.userId) {
+            console.error("Erro: userId não encontrado no SecurityService");
+            return;
+        }
         this.listExpenses();
     }
 
     public listExpenses() {
-        this.expensesService.listAll1().subscribe(data => {
-            this.expensesTableDataSource.data = data;
-            console.log(data);
+        this.expensesService.expenseControllerListAllPageByUser({
+            id: this.userId,
+            page: {page: 0, size: 5, sort:["id"]}}).subscribe(data => {
+            this.expensesTableDataSource.data = data.content  || [];
+            this.pageSlice = this.expensesTableDataSource.data;
+            this.qtdRegistros = data.totalElements || 0;
         })
     }
 
-    isAllSelected() {
-        const numSelected = this.selection.selected.length;
-        const numRows = this.expensesTableDataSource.data.length;
-        return numSelected === numRows;
+
+    private formatDate(date?: string): string {
+        if (!date) return 'Data indisponível';
+        const parsedDate = new Date(date);
+        return parsedDate.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
     }
 
-    selectAll(event: any) {
-        if (event.checked) {
-            this.selection.select(...this.expensesTableDataSource.data);
-        } else {
-            this.selection.clear();
-        }
-    }
-
-    onCheckboxChange(expenses: ExpenseListDto) {
-        this.selection.toggle(expenses);
-    }
 
     removeExpenses(expenses: ExpenseListDto): void {
         if (expenses.id !== undefined) {
             console.log(`Excluir item: ${expenses.description}`);
-            this.expensesService.remove1({id: expenses.id})
-                .subscribe(
-                    retorn => {
-                        this.listExpenses();
-                        this.messageService.addMsgSuccess(`Despesa: ${retorn.name} Excluída com Sucesso !!`)
-                        console.log("Exclusão", retorn);
+            this.expensesService.expenseControllerRemove({id: expenses.id})
+                .subscribe({
+                    next: () => {
+                        this.expensesTableDataSource.data = this.expensesTableDataSource.data.filter(item => item.id !== expenses.id);
+                        this.messageService.addMsgSuccess(`Gastos "${expenses.name}" excluído com sucesso!`);
+                        console.log("Exclusão realizada com sucesso");
                     },
-                    error => {
+                    error: (error) => {
                         if (error.status === 404) {
-                            this.messageService.addMsgInf("Despesa listada não existe mais")
+                            this.messageService.addMsgInf(`O ganho "${expenses.name}" já foi removido.`);
                         } else {
-                            this.messageService.addMsgDanger("Erro ao excluir");
-                            console.log("Erro:", error);
+                            this.messageService.addMsgDanger("Erro ao excluir o gastos. Tente novamente.");
+                            console.error("Erro ao excluir:", error);
                         }
                     }
-                );
+                });
         } else {
             console.error("Erro: o ID do item é indefinido.");
-            alert("Erro ao Excluir: o ID do item é indefinido.");
+            this.messageService.addMsgDanger("Erro ao excluir: o ID do item é indefinido.");
         }
     }
 
@@ -95,9 +105,9 @@ export class ExpensesTableComponent implements OnInit {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             data: {
                 titulo: 'Confirmar Exclusão?',
-                mensagem: `A exclusão de: ${expenses.name} Categoria: ${expenses.category?.name}?`,
+                mensagem: `Deseja realmente excluir o ganho "${expenses.name}" da categoria "${expenses.category?.name}"?`,
                 textoBotoes: {
-                    ok: 'Confirmar',
+                    ok: 'Excluir',
                     cancel: 'Cancelar',
                 },
                 dado: expenses
@@ -107,7 +117,6 @@ export class ExpensesTableComponent implements OnInit {
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
             if (confirmed?.resultado) {
                 this.removeExpenses(confirmed.dado);
-                this.snackBar.open('Excluido com Sucesso', 'Close', {duration: 4000});
             }
         });
     }
@@ -122,8 +131,49 @@ export class ExpensesTableComponent implements OnInit {
             console.log('Diálogo fechado, resultado:', result);
             this.listExpenses();
             if (result) {
-                this.snackBar.open('Despesas', 'Close', {duration: 3000});
+                this.messageService.addMsgSuccess("Gastos editados com sucesso!");
             }
         });
     }
+
+    onPageChange(event: PageEvent) {
+        this.expensesService.expenseControllerListAllPageByUser({
+            id: this.userId,
+            page: {
+                page: event.pageIndex,
+                size: event.pageSize,
+                sort: ["id"]
+            }
+        }).subscribe(data => {
+            this.expensesTableDataSource.data = data.content || [];
+            this.pageSlice = this.expensesTableDataSource.data;
+        })
+    }
+
+    showResult($event: any[]) {
+        this.expensesTableDataSource.data = $event;
+    }
+
+    openDialogAddExpenses() {
+        const dialogRef = this.dialog.open(ExpensesDialogComponent, {
+
+            data: {id: null}
+        });
+        dialogRef.afterClosed().subscribe(result =>{
+            this.listExpenses();
+            if(result){
+                this.messageService.addMsgSuccess("Gastos adicionas com sucesso !")
+            }
+        });
+    }
+
+    mudarAlinhar() {
+
+        if (this.innerWidth < 1500) {
+            return this.flexDivAlinhar = "column";
+        }
+        return this.flexDivAlinhar = "row";
+
+    }
+
 }

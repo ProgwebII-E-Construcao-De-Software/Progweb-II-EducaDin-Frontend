@@ -1,0 +1,43 @@
+.form {
+  width: 100%;
+  margin:  auto;
+  padding: 20px;
+}
+
+
+.button{
+  font-family: DM Roboto, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-align:center;
+  background: #dcdee0 !important;
+  color: #020100 !important;
+  width:100px !important;
+  height:50px !important;
+  position: relative;
+  border-radius: 10px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  alignment-baseline: center;
+  margin: 5px;
+  border:1px solid #ffffff;
+}
+.button:hover {
+    background-color: #60ffb4;
+}
+
+@media (max-width: 999px) {
+  .button {
+    width:180px!important;
+    height:50px!important;
+    margin-bottom: 40px;
+  }
+}
+
+mat-form-field{
+  margin: 5px;
+}
+
+
+
+

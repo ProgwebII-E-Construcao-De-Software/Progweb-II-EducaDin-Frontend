@@ -1,0 +1,9 @@
+<div *ngIf="notifications.length > 0" class="notifications-list">
+  <h2>Notificações</h2>
+  <mat-list>
+    <mat-list-item *ngFor="let notification of notifications">
+      <mat-icon matListIcon>notification_important</mat-icon>
+      <p>{{ notification.message }}</p>
+    </mat-list-item>
+  </mat-list>
+</div>

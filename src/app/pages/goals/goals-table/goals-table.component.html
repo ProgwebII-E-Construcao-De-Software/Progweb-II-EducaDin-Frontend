@@ -1,1 +1,86 @@
-<p>goals-table works!</p>
+<mat-card>
+    <mat-card-header class="custom-card-header">
+        <mat-card-title class="custom-title">
+            Minhas Metas
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions [fxLayout]="mudarAlinhar()" fxLayoutAlign="center none">
+        <div class="searchFlex" fxLayout="row" fxLayoutAlign="center center">
+            <app-search-component [controller]="goalService" (onSearchResult)="showResult($event)"/>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-button class="add-button" (click)="openDialogAddIncomes()">
+                <mat-icon>add</mat-icon>
+                <span>Adicionar</span>
+            </button>
+        </div>
+    </mat-card-actions>
+    <mat-card-content>
+        <div style="overflow-x:auto">
+            <table mat-table [dataSource]="goalTableDataSource" class="table">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Id</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.id }}</td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Nome</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="goalDate">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Data</th>
+                    <td mat-cell *matCellDef="let element"
+                        class="mat-cell"> {{ element.goalDate | date:'dd/MM/yyyy' }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="goalPercent">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Percentual</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.goalPercent }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amountReached">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Valor</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amountReached }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amountTotal">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Valor</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell"> {{ element.amountTotal }}</td>
+                </ng-container>
+                <ng-container matColumnDef="acao" *ngIf="tipoDeListagem == 'Normal'">
+                    <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Ações</th>
+                    <td mat-cell *matCellDef="let element" class="mat-cell" (mouseover)="element.showActions = true"
+                        (mouseout)="element.showActions = false">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" (click)="openDialogSharedGoals()">
+                            <button mat-menu-item>
+                                <mat-icon>share</mat-icon>
+                                <span>Compartilhar</span>
+                            </button>
+                            <button mat-menu-item (click)="openDialogEditGoal(element.id)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                            <button mat-menu-item (click)="confirmDeletionGoal(element)">
+                                <mat-icon>delete_forever</mat-icon>
+                                <span>Excluir</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+                <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator style="justify-content: center" [length]="this.qtdRegistros"
+                           [pageSize]="5"
+                           [pageSizeOptions]="[5, 10, 25, 100]"
+                           (page)="onPageChange($event)"
+                           showFirstLastButtons
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+
+    </mat-card-content>
+
+</mat-card>

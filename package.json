@@ -7,7 +7,8 @@
     "start": "npm run ng-openapi-gen && npm run ng -- serve -o",
     "build": "npm run ng-openapi-gen-server && npm run ng -- build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-docker": "npm run ng-openapi-gen-docker && npm run ng -- build -c production"
   },
   "private": true,
   "dependencies": {
@@ -16,13 +17,21 @@
     "@angular/common": "^18.2.6",
     "@angular/compiler": "^18.2.6",
     "@angular/core": "^18.2.6",
+    "@angular/flex-layout": "^15.0.0-beta.42",
     "@angular/forms": "^18.2.6",
-    "@angular/material": "^18.2.6",
+    "@angular/material": "^18.2.14",
+    "@angular/material-moment-adapter": "^18.2.7",
     "@angular/platform-browser": "^18.2.6",
     "@angular/platform-browser-dynamic": "^18.2.6",
     "@angular/router": "^18.2.6",
     "@fortawesome/fontawesome-free": "^6.5.2",
-    "@ngneat/until-destroy": "^10.0.0-beta.0",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.6",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "ngx-mask": "^18.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.12",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

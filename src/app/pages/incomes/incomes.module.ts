@@ -8,8 +8,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {MatMenu, MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
-import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
+import {MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {IncomesDialogComponent} from "./incomes-dialog/incomes-dialog.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
@@ -18,7 +18,7 @@ import {
     MatDialogActions,
     MatDialogClose,
     MatDialogContainer,
-    MatDialogContent,
+    MatDialogContent, MatDialogModule,
     MatDialogTitle
 } from "@angular/material/dialog";
 import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
@@ -26,6 +26,11 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
 import {MatRadioButton} from "@angular/material/radio";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {LoaderModule} from "../../arquitetura/loader/loader.module";
+import {HttpClientModule} from "@angular/common/http";
+import {SearchModule} from "../../arquitetura/search-module/search.module";
 
 
 @NgModule({
@@ -46,11 +51,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
-        MatDialogActions,
-        MatDialogContent,
-        MatDialogClose,
-        MatDialogTitle,
         MatSelectModule,
+        MatDialogModule,
         MatDatepickerToggle,
         MatDatepicker,
         MatOption,
@@ -62,6 +64,11 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatAutocompleteModule,
         AsyncPipe,
         MatCheckboxModule,
+        LoaderModule,
+        HttpClientModule,
+        SearchModule,
+        MatPaginatorModule,
+        FlexLayoutModule,
     ]
 })
 export class IncomesModule {

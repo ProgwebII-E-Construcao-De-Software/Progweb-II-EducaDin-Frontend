@@ -4,30 +4,34 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  margin: 16px;
-  width: 190px;
-  border-right: none;
   background: #dcdee0;
-  color: white;
-  border-radius: 10px;
-  padding: 16px;
+  color: black;
   text-align: center;
+  width: 200px;
+}
+
+.mat-sidenav :hover {
+  background: #dcdee0;
 }
 
 .content {
-  height: calc(100vh - 130px);
-  border-radius: 10px;
-  margin: 0px;
-  margin-left: 25px;
-  margin-right: 25px;
-  background-color: #F2F2F2;
+  height: calc(100vh - 96px);
   padding: 16px;
-  position: relative;
-  margin-top: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 8px;
 }
 
-mat-sidenav-container {
-  height: calc(100vh - 100px);
+
+.principal{
+  height: 100%;
+}
+
+.login-button {
+  position: absolute;
+  right: 0;
 }
 
 
@@ -38,10 +42,10 @@ mat-sidenav-container {
   justify-content: flex-start;
   font-size: 1rem;
   color: black !important;
+  font-family: Roboto, sans-serif;
   mat-icon {
     margin-right: 8px;
-    width: 20px;
-    height: 20px;
+    cursor: pointer;
   }
 }
 
@@ -50,6 +54,12 @@ mat-sidenav-container {
   height: 20px;
   margin-right: 8px;
   object-fit: contain;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .designation {
@@ -81,19 +91,22 @@ mat-divider {
   color: #5FE564;
 }
 
-.container-header {
-  background-color: #ffffff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+.active-link {
+  background-color: #B2DFFF;
+}
+
+.menu-button span.texto-cor {
+  color:black;
+}
+
+.menu-button mat-icon.icon-cor{
+  color: black;
+}
+
+@media print {
+  .menu-button {
+    display: none;
+  }
 }
 
 .header-notification img {

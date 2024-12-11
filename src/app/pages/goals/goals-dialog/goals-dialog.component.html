@@ -1,0 +1,47 @@
+<form
+        [formGroup]="formGroup"
+        (ngSubmit)="onSubmit()"
+        class="form"
+>
+    <div class="custom-dialog centered-dialog">
+        <h2 mat-dialog-title>{{ acao }}</h2>
+        <mat-dialog-content class="dialog-content">
+            <mat-form-field class="dialog-large-form-field">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name" type="text" placeholder="Insira o nome"/>
+                <mat-error *ngIf="handleError('name', 'required')">O nome é obrigatório</mat-error>
+                <mat-error *ngIf="handleError('name', 'maxlength')">Limite 200 caracteres</mat-error>
+                <mat-error *ngIf="handleError('name', 'minlength')">Mínimo 3 caracteres</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dialog-large-form-field">
+                <mat-label>Data</mat-label>
+                <input matInput formControlName="goalDate" [matDatepicker]="picker" placeholder="Escolha a Data"/>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="handleError('goalDate', 'required')">A Data é obrigatória</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dialog-large-form-field">
+                <mat-label>Valor Alcançado</mat-label>
+                <input matInput formControlName="amountReached" mask="separator.2" decimalSeparator=","
+                       placeholder="0.00" maxlength="10">
+                <mat-error *ngIf="handleError('amountReached', 'required')">O valor é obrigatório</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="dialog-large-form-field">
+                <mat-label>Valor Total</mat-label>
+                <input matInput formControlName="amountTotal" mask="separator.2" decimalSeparator=","
+                       placeholder="0.00" maxlength="10">
+                <mat-error *ngIf="handleError('amountTotal', 'required')">O valor é obrigatório</mat-error>
+            </mat-form-field>
+
+        </mat-dialog-content>
+
+        <mat-dialog-actions class="action-buttons-dialog">
+            <button mat-button class="cancel-button" (click)="closeDialog()">Cancelar</button>
+            <button mat-button class="add-button" type="submit">{{ id ? 'Salvar' : 'Adicionar' }}</button>
+        </mat-dialog-actions>
+
+    </div>
+</form>

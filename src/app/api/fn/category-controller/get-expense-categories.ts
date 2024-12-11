@@ -11,11 +11,17 @@ import { RequestBuilder } from '../../request-builder';
 import { CategoryDto } from '../../models/category-dto';
 
 export interface GetExpenseCategories$Params {
+
+/**
+ * Id do usuario
+ */
+  id: number;
 }
 
-export function getExpenseCategories(http: HttpClient, rootUrl: string, params?: GetExpenseCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+export function getExpenseCategories(http: HttpClient, rootUrl: string, params: GetExpenseCategories$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<CategoryDto>>> {
   const rb = new RequestBuilder(rootUrl, getExpenseCategories.PATH, 'get');
   if (params) {
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -28,4 +34,4 @@ export function getExpenseCategories(http: HttpClient, rootUrl: string, params?:
   );
 }
 
-getExpenseCategories.PATH = '/1.0/categories/expenses';
+getExpenseCategories.PATH = '/v1/categories/expenses/{id}';

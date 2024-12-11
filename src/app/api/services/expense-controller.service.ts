@@ -11,20 +11,34 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create1 } from '../fn/expense-controller/create-1';
-import { Create1$Params } from '../fn/expense-controller/create-1';
-import { deleteItems1 } from '../fn/expense-controller/delete-items-1';
-import { DeleteItems1$Params } from '../fn/expense-controller/delete-items-1';
+import { expenseControllerCreate } from '../fn/expense-controller/expense-controller-create';
+import { ExpenseControllerCreate$Params } from '../fn/expense-controller/expense-controller-create';
+import { expenseControllerGetById } from '../fn/expense-controller/expense-controller-get-by-id';
+import { ExpenseControllerGetById$Params } from '../fn/expense-controller/expense-controller-get-by-id';
+import { expenseControllerGetByUserId } from '../fn/expense-controller/expense-controller-get-by-user-id';
+import { ExpenseControllerGetByUserId$Params } from '../fn/expense-controller/expense-controller-get-by-user-id';
+import { expenseControllerListAll } from '../fn/expense-controller/expense-controller-list-all';
+import { ExpenseControllerListAll$Params } from '../fn/expense-controller/expense-controller-list-all';
+import { expenseControllerListAllPage } from '../fn/expense-controller/expense-controller-list-all-page';
+import { ExpenseControllerListAllPage$Params } from '../fn/expense-controller/expense-controller-list-all-page';
+import { expenseControllerListAllPageByUser } from '../fn/expense-controller/expense-controller-list-all-page-by-user';
+import { ExpenseControllerListAllPageByUser$Params } from '../fn/expense-controller/expense-controller-list-all-page-by-user';
+import { expenseControllerRemove } from '../fn/expense-controller/expense-controller-remove';
+import { ExpenseControllerRemove$Params } from '../fn/expense-controller/expense-controller-remove';
+import { expenseControllerSearchFieldsAction } from '../fn/expense-controller/expense-controller-search-fields-action';
+import { ExpenseControllerSearchFieldsAction$Params } from '../fn/expense-controller/expense-controller-search-fields-action';
+import { expenseControllerSearchFieldsActionPage } from '../fn/expense-controller/expense-controller-search-fields-action-page';
+import { expenseControllerSearchFieldsActionPage_1 } from '../fn/expense-controller/expense-controller-search-fields-action-page-1';
+import { ExpenseControllerSearchFieldsActionPage_1$Params } from '../fn/expense-controller/expense-controller-search-fields-action-page-1';
+import { ExpenseControllerSearchFieldsActionPage$Params } from '../fn/expense-controller/expense-controller-search-fields-action-page';
+import { expenseControllerSearchFieldsList } from '../fn/expense-controller/expense-controller-search-fields-list';
+import { ExpenseControllerSearchFieldsList$Params } from '../fn/expense-controller/expense-controller-search-fields-list';
+import { expenseControllerUpdate } from '../fn/expense-controller/expense-controller-update';
+import { ExpenseControllerUpdate$Params } from '../fn/expense-controller/expense-controller-update';
 import { ExpenseDto } from '../models/expense-dto';
 import { ExpenseListDto } from '../models/expense-list-dto';
-import { getById1 } from '../fn/expense-controller/get-by-id-1';
-import { GetById1$Params } from '../fn/expense-controller/get-by-id-1';
-import { listAll1 } from '../fn/expense-controller/list-all-1';
-import { ListAll1$Params } from '../fn/expense-controller/list-all-1';
-import { remove1 } from '../fn/expense-controller/remove-1';
-import { Remove1$Params } from '../fn/expense-controller/remove-1';
-import { update1 } from '../fn/expense-controller/update-1';
-import { Update1$Params } from '../fn/expense-controller/update-1';
+import { PageExpenseListDto } from '../models/page-expense-list-dto';
+import { SearchField } from '../models/search-field';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseControllerService extends BaseService {
@@ -32,177 +46,351 @@ export class ExpenseControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById1()` */
-  static readonly GetById1Path = '/1.0/expenses/{id}';
+  /** Path part for operation `expenseControllerGetById()` */
+  static readonly ExpenseControllerGetByIdPath = '/v1/expenses/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById1()` instead.
+   * To access only the response body, use `expenseControllerGetById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById1$Response(params: GetById1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return getById1(this.http, this.rootUrl, params, context);
+  expenseControllerGetById$Response(params: ExpenseControllerGetById$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return expenseControllerGetById(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerGetById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById1(params: GetById1$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.getById1$Response(params, context).pipe(
+  expenseControllerGetById(params: ExpenseControllerGetById$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.expenseControllerGetById$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `update1()` */
-  static readonly Update1Path = '/1.0/expenses/{id}';
+  /** Path part for operation `expenseControllerUpdate()` */
+  static readonly ExpenseControllerUpdatePath = '/v1/expenses/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update1()` instead.
+   * To access only the response body, use `expenseControllerUpdate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update1$Response(params: Update1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return update1(this.http, this.rootUrl, params, context);
+  expenseControllerUpdate$Response(params: ExpenseControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return expenseControllerUpdate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerUpdate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update1(params: Update1$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.update1$Response(params, context).pipe(
+  expenseControllerUpdate(params: ExpenseControllerUpdate$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.expenseControllerUpdate$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `remove1()` */
-  static readonly Remove1Path = '/1.0/expenses/{id}';
+  /** Path part for operation `expenseControllerRemove()` */
+  static readonly ExpenseControllerRemovePath = '/v1/expenses/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove1()` instead.
+   * To access only the response body, use `expenseControllerRemove()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove1$Response(params: Remove1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return remove1(this.http, this.rootUrl, params, context);
+  expenseControllerRemove$Response(params: ExpenseControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return expenseControllerRemove(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerRemove$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove1(params: Remove1$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.remove1$Response(params, context).pipe(
+  expenseControllerRemove(params: ExpenseControllerRemove$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.expenseControllerRemove$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll1()` */
-  static readonly ListAll1Path = '/1.0/expenses';
+  /** Path part for operation `expenseControllerListAll()` */
+  static readonly ExpenseControllerListAllPath = '/v1/expenses';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll1()` instead.
+   * To access only the response body, use `expenseControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll1$Response(params?: ListAll1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-    return listAll1(this.http, this.rootUrl, params, context);
+  expenseControllerListAll$Response(params?: ExpenseControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return expenseControllerListAll(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll1(params?: ListAll1$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
-    return this.listAll1$Response(params, context).pipe(
+  expenseControllerListAll(params?: ExpenseControllerListAll$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.expenseControllerListAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
     );
   }
 
-  /** Path part for operation `create1()` */
-  static readonly Create1Path = '/1.0/expenses';
+  /** Path part for operation `expenseControllerCreate()` */
+  static readonly ExpenseControllerCreatePath = '/v1/expenses';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create1()` instead.
+   * To access only the response body, use `expenseControllerCreate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create1$Response(params: Create1$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
-    return create1(this.http, this.rootUrl, params, context);
+  expenseControllerCreate$Response(params: ExpenseControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<ExpenseDto>> {
+    return expenseControllerCreate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerCreate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create1(params: Create1$Params, context?: HttpContext): Observable<ExpenseDto> {
-    return this.create1$Response(params, context).pipe(
+  expenseControllerCreate(params: ExpenseControllerCreate$Params, context?: HttpContext): Observable<ExpenseDto> {
+    return this.expenseControllerCreate$Response(params, context).pipe(
       map((r: StrictHttpResponse<ExpenseDto>): ExpenseDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems1()` */
-  static readonly DeleteItems1Path = '/1.0/expenses/';
+  /** Path part for operation `expenseControllerSearchFieldsList()` */
+  static readonly ExpenseControllerSearchFieldsListPath = '/v1/expenses/search-fields';
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems1()` instead.
+   * To access only the response body, use `expenseControllerSearchFieldsList()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  deleteItems1$Response(params: DeleteItems1$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
-    return deleteItems1(this.http, this.rootUrl, params, context);
+  expenseControllerSearchFieldsList$Response(params?: ExpenseControllerSearchFieldsList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SearchField>>> {
+    return expenseControllerSearchFieldsList(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems1$Response()` instead.
+   * To access the full response (for headers, for example), `expenseControllerSearchFieldsList$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerSearchFieldsList(params?: ExpenseControllerSearchFieldsList$Params, context?: HttpContext): Observable<Array<SearchField>> {
+    return this.expenseControllerSearchFieldsList$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<SearchField>>): Array<SearchField> => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerSearchFieldsAction()` */
+  static readonly ExpenseControllerSearchFieldsActionPath = '/v1/expenses/search-fields';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems1(params: DeleteItems1$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
-    return this.deleteItems1$Response(params, context).pipe(
+  expenseControllerSearchFieldsAction$Response(params: ExpenseControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return expenseControllerSearchFieldsAction(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerSearchFieldsAction$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsAction(params: ExpenseControllerSearchFieldsAction$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.expenseControllerSearchFieldsAction$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerSearchFieldsActionPage()` */
+  static readonly ExpenseControllerSearchFieldsActionPagePath = '/v1/expenses/search-fields/page';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerSearchFieldsActionPage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage$Response(params: ExpenseControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerSearchFieldsActionPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerSearchFieldsActionPage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage(params: ExpenseControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerSearchFieldsActionPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerSearchFieldsActionPage_1()` */
+  static readonly ExpenseControllerSearchFieldsActionPage_1Path = '/v1/expenses/search-fields/page/user/{id}';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerSearchFieldsActionPage_1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage_1$Response(params: ExpenseControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerSearchFieldsActionPage_1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerSearchFieldsActionPage_1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  expenseControllerSearchFieldsActionPage_1(params: ExpenseControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerSearchFieldsActionPage_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerGetByUserId()` */
+  static readonly ExpenseControllerGetByUserIdPath = '/v1/expenses/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerGetByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerGetByUserId$Response(params: ExpenseControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ExpenseListDto>>> {
+    return expenseControllerGetByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerGetByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerGetByUserId(params: ExpenseControllerGetByUserId$Params, context?: HttpContext): Observable<Array<ExpenseListDto>> {
+    return this.expenseControllerGetByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ExpenseListDto>>): Array<ExpenseListDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerListAllPage()` */
+  static readonly ExpenseControllerListAllPagePath = '/v1/expenses/page';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerListAllPage()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPage$Response(params: ExpenseControllerListAllPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerListAllPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerListAllPage$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPage(params: ExpenseControllerListAllPage$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `expenseControllerListAllPageByUser()` */
+  static readonly ExpenseControllerListAllPageByUserPath = '/v1/expenses/page/user/{id}';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `expenseControllerListAllPageByUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPageByUser$Response(params: ExpenseControllerListAllPageByUser$Params, context?: HttpContext): Observable<StrictHttpResponse<PageExpenseListDto>> {
+    return expenseControllerListAllPageByUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `expenseControllerListAllPageByUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  expenseControllerListAllPageByUser(params: ExpenseControllerListAllPageByUser$Params, context?: HttpContext): Observable<PageExpenseListDto> {
+    return this.expenseControllerListAllPageByUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageExpenseListDto>): PageExpenseListDto => r.body)
     );
   }
 

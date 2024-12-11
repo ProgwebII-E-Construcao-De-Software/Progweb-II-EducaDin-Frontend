@@ -2,13 +2,16 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ExpenseControllerService} from "../../../api/services/expense-controller.service";
-import {Message, MessageService} from "../../../architecture/message/message.service";
 import {ExpenseDto} from "../../../api/models/expense-dto";
-import {ConfirmationDialog} from "../../../architecture/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DateAdapter} from "@angular/material/core";
-import {CategoryDto} from "../../../api/models/category-dto";
-import {CategoryControllerService} from "../../../api/services/category-controller.service";
+import {
+    ConfirmationDialog,
+    ConfirmationDialogResult
+} from "../../../arquitetura/confirmation-dialog/confirmation-dialog.component";
+import {Message, MessageService} from "../../../arquitetura/message/message.service";
+import {ConfirmDialogComponent} from "../../../arquitetura/message/confirm-mesage/confirm-dialog.component";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
     selector: 'app-expenses-dialog',
@@ -16,7 +19,49 @@ import {CategoryControllerService} from "../../../api/services/category-controll
     styleUrls: ['./expenses-dialog.component.scss']
 })
 export class ExpensesDialogComponent implements OnInit {
-    categorias: CategoryDto[]=[];
+    categorias: string[] = ['Acessórios',
+        'Alimentação',
+        'Aluguel',
+        'Animais de Estimação',
+        'Assinaturas de Revistas',
+        'Atividades Recreativas',
+        'Academia',
+        'Combustível',
+        'Compras de Vestuário',
+        'Cursos',
+        'Cinema',
+        'Decoração',
+        'Despesas de Casa',
+        'Despesas Emergenciais',
+        'Despesas com Tecnologia',
+        'Entretenimento',
+        'Equipamentos Eletrônicos',
+        'Eventos',
+        'Exames',
+        'Hobbies',
+        'Hipoteca',
+        'Hospedagem',
+        'Internet',
+        'Impostos',
+        'Lanches',
+        'Livros',
+        'Manutenção de Veículo',
+        'Medicamentos',
+        'Mensalidade Escolar',
+        'Multas',
+        'Móveis',
+        'Presentes',
+        'Roupas de Trabalho',
+        'Restaurantes',
+        'Saúde',
+        'Seguro do Veículo',
+        'Streaming de Música e Vídeo',
+        'Shows',
+        'Turismo',
+        'Tratamentos Estéticos',
+        'Transporte',
+        'Viagens',
+        'Outros Gastos'];
     formGroup!: FormGroup;
     public readonly ACAO_INCLUIR = "Adicionar Gastos";
     public readonly ACAO_EDITAR = "Editar Gastos";
@@ -31,17 +76,17 @@ export class ExpensesDialogComponent implements OnInit {
         private dialog: MatDialog,
         private snackBar: MatSnackBar,
         private _adapter: DateAdapter<any>,
-        private categoryService: CategoryControllerService,
+        private securityService: SecurityService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {
         console.log('Dados recebidos no diálogo:', this.data);
-        this.id = data.id;
+        this.id = data.id || null;
         this.creatForm();
         this._adapter.setLocale('pt-br');
     }
 
     ngOnInit(): void {
-        this.getCategories();
+        this.creatForm();
         if (this.id) {
             console.log('ID do gasto a ser editado:', this.id);
             this.acao = this.ACAO_EDITAR;
@@ -50,19 +95,12 @@ export class ExpensesDialogComponent implements OnInit {
             console.log('Nenhum ID foi passado, modo de criação ativado.');
         }
     }
-    private getCategories(){
-    this.categoryService.getIncomeCategories().subscribe(
-      (categories: CategoryDto[]) => {
-        this.categorias = categories;
-        console.log("Categorias carregadas:", this.categorias);
-      }
-    );
-  }
+
     public creatForm() {
         this.formGroup = this.formBuilder.group({
             name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
             categoryName: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-            description: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
             expenseDate: [new Date(), Validators.required],
             amount: [null, [Validators.required, Validators.min(0)]],
             repeatable: ['DONT_REPEATS', Validators.required],
@@ -71,7 +109,7 @@ export class ExpensesDialogComponent implements OnInit {
     }
 
     private editExpense(id: number) {
-        this.expenseService.getById1({id}).subscribe(
+        this.expenseService.expenseControllerGetById({id}).subscribe(
             retorn => {
                 console.log("retorno", retorn);
                 this.formGroup.patchValue({
@@ -96,76 +134,89 @@ export class ExpensesDialogComponent implements OnInit {
 
     public onSubmit() {
         if (this.formGroup.valid) {
-            if (this.id) {
-                this.editingExpense();
-            } else {
-                this.includeExpense();
-            }
+            this.id ? this.updateExpense() : this.includeExpense();
         }
     }
 
     private includeExpense() {
+        const expenseDto: ExpenseDto = {
+            ...this.formGroup.value,
+            userId: this.getUserIdFromSession(),
+        };
+
         if (this.formGroup.valid) {
             console.log("Dados:", this.formGroup.value);
-            this.expenseService.create1({body: this.formGroup.value}).subscribe(
-                retorn => {
-                    this.confirmAction(retorn, this.ACAO_INCLUIR);
-                    window.location.reload();
-                    this.snackBar.open('Gastos Adicionado', 'Close', {duration: 3000});
-                    console.log("Retorno", retorn);
-                }, erro => {
-                    console.log("Erro", erro);
-                }
-            );
-        }
-    }
-
-    private editingExpense() {
-        const formData: ExpenseDto = this.formGroup.value;
-        console.log("Dados:", formData);
-        this.expenseService.update1({id: this.id, body: formData}).subscribe(
-            retorn => {
-                this.confirmAction(retorn, this.ACAO_EDITAR);
-                this.snackBar.open('Gasto Editado', 'Close', {duration: 3000});
-            }, erro => {
-                console.log("Erro:", erro.error);
-                this.showError(erro, this.ACAO_EDITAR);
-            }
-        );
-    }
-
-    public confirmAction(expense: ExpenseDto, acao: string) {
-        let titulo = '';
-        let mensagem = '';
-        if (acao === this.ACAO_INCLUIR) {
-            titulo = 'Adicionado !!';
-            mensagem = `${expense.name} foi adicionado na tabela de Gastos!`;
-        } else if (acao === this.ACAO_EDITAR) {
-            titulo = 'Editado !!';
-            mensagem = `${expense.name} foi atualizado na tabela de Gastos!`;
-        }
-        const dialogRef = this.dialog.open(ConfirmationDialog, {
-            data: {
-                titulo: titulo,
-                mensagem: mensagem,
-                textoBotoes: {
-                    ok: 'Confirmar',
+            this.expenseService.expenseControllerCreate({ body: expenseDto }).subscribe({
+                next: (response) => {
+                    this.showConfirmation(response, this.ACAO_INCLUIR);
+                    this.closeDialog(true);
                 },
+                error: (error) => {
+                    this.messageService.addMsgWarning(`Erro ao adicionar gasto: ${error.message}`);
+                }
+            });
+        }
+    }
+
+    private updateExpense() {
+        const updatedExpense: ExpenseDto = {
+            id: this.id,
+            ...this.formGroup.value,
+            userId: this.getUserIdFromSession(),
+            expenseDate: new Date(this.formGroup.value.expenseDate).toISOString()
+        };
+        console.log('atualização:', updatedExpense);
+        this.expenseService.expenseControllerUpdate({ id: this.id, body: updatedExpense }).subscribe({
+            next: (response: ExpenseDto) => {
+                if (response && response.name) {
+                    this.showConfirmation(response, this.ACAO_EDITAR);
+                    this.closeDialog(true);
+                } else {
+                    console.warn('Objeto de resposta vazio ou inválido:', response);
+                    this.messageService.addMsgWarning('O gastos foi atualizado, mas o servidor não retornou os dados corretamente.');
+                    const fallbackResponse: ExpenseDto = {
+                        id: this.id,
+                        ...this.formGroup.value
+                    };
+                    this.showConfirmation(fallbackResponse, this.ACAO_EDITAR);
+                    this.closeDialog(true);
+                }
+            },
+            error: (error) => {
+                this.messageService.addMsgWarning(`Erro ao atualizar gastos: ${error.message}`);
+            }
+        });
+    }
+
+    private showConfirmation(expense: ExpenseDto, action: string) {
+        if (!expense || !expense.name) {
+            console.error('Objeto de gasto inválido:', expense);
+            this.messageService.addMsgWarning('Erro ao processar a confirmação. Dados do gasto ausentes.');
+            return;
+        }
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            data: {
+                titulo: action === this.ACAO_INCLUIR ? 'Adicionado' : 'Editado',
+                mensagem: `${expense.name} foi ${action === this.ACAO_INCLUIR ? 'adicionado' : 'atualizado'} com sucesso!`,
+                textoBotoes: { ok: 'Confirmar' },
             },
         });
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
+
+        dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
+            if (confirmed?.resultado) {
                 this.closeDialog(true);
             }
         });
-
-    }
-
-    showError(erro: Message, acao: string) {
-        this.messageService.addConfirmOk(`Erro ao ${acao}, Mensagem: ${erro.message}`);
     }
 
     public handleError = (controlName: string, errorName: string) => {
         return this.formGroup.controls[controlName].hasError(errorName);
     };
+
+    private getUserIdFromSession(): number {
+        const userId = this.securityService.getUserId();
+        console.log("o que retorna",userId);
+        return userId;
+    }
 }

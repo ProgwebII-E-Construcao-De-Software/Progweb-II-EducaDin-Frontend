@@ -11,20 +11,34 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { create } from '../fn/income-controller/create';
-import { Create$Params } from '../fn/income-controller/create';
-import { deleteItems } from '../fn/income-controller/delete-items';
-import { DeleteItems$Params } from '../fn/income-controller/delete-items';
-import { getById } from '../fn/income-controller/get-by-id';
-import { GetById$Params } from '../fn/income-controller/get-by-id';
+import { incomeControllerCreate } from '../fn/income-controller/income-controller-create';
+import { IncomeControllerCreate$Params } from '../fn/income-controller/income-controller-create';
+import { incomeControllerGetById } from '../fn/income-controller/income-controller-get-by-id';
+import { IncomeControllerGetById$Params } from '../fn/income-controller/income-controller-get-by-id';
+import { incomeControllerGetByUserId } from '../fn/income-controller/income-controller-get-by-user-id';
+import { IncomeControllerGetByUserId$Params } from '../fn/income-controller/income-controller-get-by-user-id';
+import { incomeControllerListAll } from '../fn/income-controller/income-controller-list-all';
+import { IncomeControllerListAll$Params } from '../fn/income-controller/income-controller-list-all';
+import { incomeControllerListAllPage } from '../fn/income-controller/income-controller-list-all-page';
+import { IncomeControllerListAllPage$Params } from '../fn/income-controller/income-controller-list-all-page';
+import { incomeControllerListAllPageByUser } from '../fn/income-controller/income-controller-list-all-page-by-user';
+import { IncomeControllerListAllPageByUser$Params } from '../fn/income-controller/income-controller-list-all-page-by-user';
+import { incomeControllerRemove } from '../fn/income-controller/income-controller-remove';
+import { IncomeControllerRemove$Params } from '../fn/income-controller/income-controller-remove';
+import { incomeControllerSearchFieldsAction } from '../fn/income-controller/income-controller-search-fields-action';
+import { IncomeControllerSearchFieldsAction$Params } from '../fn/income-controller/income-controller-search-fields-action';
+import { incomeControllerSearchFieldsActionPage } from '../fn/income-controller/income-controller-search-fields-action-page';
+import { incomeControllerSearchFieldsActionPage_1 } from '../fn/income-controller/income-controller-search-fields-action-page-1';
+import { IncomeControllerSearchFieldsActionPage_1$Params } from '../fn/income-controller/income-controller-search-fields-action-page-1';
+import { IncomeControllerSearchFieldsActionPage$Params } from '../fn/income-controller/income-controller-search-fields-action-page';
+import { incomeControllerSearchFieldsList } from '../fn/income-controller/income-controller-search-fields-list';
+import { IncomeControllerSearchFieldsList$Params } from '../fn/income-controller/income-controller-search-fields-list';
+import { incomeControllerUpdate } from '../fn/income-controller/income-controller-update';
+import { IncomeControllerUpdate$Params } from '../fn/income-controller/income-controller-update';
 import { IncomeDto } from '../models/income-dto';
 import { IncomeListDto } from '../models/income-list-dto';
-import { listAll } from '../fn/income-controller/list-all';
-import { ListAll$Params } from '../fn/income-controller/list-all';
-import { remove } from '../fn/income-controller/remove';
-import { Remove$Params } from '../fn/income-controller/remove';
-import { update } from '../fn/income-controller/update';
-import { Update$Params } from '../fn/income-controller/update';
+import { PageIncomeListDto } from '../models/page-income-list-dto';
+import { SearchField } from '../models/search-field';
 
 @Injectable({ providedIn: 'root' })
 export class IncomeControllerService extends BaseService {
@@ -32,177 +46,351 @@ export class IncomeControllerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `getById()` */
-  static readonly GetByIdPath = '/1.0/incomes/{id}';
+  /** Path part for operation `incomeControllerGetById()` */
+  static readonly IncomeControllerGetByIdPath = '/v1/incomes/{id}';
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getById()` instead.
+   * To access only the response body, use `incomeControllerGetById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById$Response(params: GetById$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return getById(this.http, this.rootUrl, params, context);
+  incomeControllerGetById$Response(params: IncomeControllerGetById$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return incomeControllerGetById(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Obter os dados completos de uma entidiade pelo id informado!
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getById$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerGetById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getById(params: GetById$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.getById$Response(params, context).pipe(
+  incomeControllerGetById(params: IncomeControllerGetById$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.incomeControllerGetById$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `update()` */
-  static readonly UpdatePath = '/1.0/incomes/{id}';
+  /** Path part for operation `incomeControllerUpdate()` */
+  static readonly IncomeControllerUpdatePath = '/v1/incomes/{id}';
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `update()` instead.
+   * To access only the response body, use `incomeControllerUpdate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update$Response(params: Update$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return update(this.http, this.rootUrl, params, context);
+  incomeControllerUpdate$Response(params: IncomeControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return incomeControllerUpdate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para altlerar os dados de uma entidiade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `update$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerUpdate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  update(params: Update$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.update$Response(params, context).pipe(
+  incomeControllerUpdate(params: IncomeControllerUpdate$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.incomeControllerUpdate$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `remove()` */
-  static readonly RemovePath = '/1.0/incomes/{id}';
+  /** Path part for operation `incomeControllerRemove()` */
+  static readonly IncomeControllerRemovePath = '/v1/incomes/{id}';
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `remove()` instead.
+   * To access only the response body, use `incomeControllerRemove()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove$Response(params: Remove$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return remove(this.http, this.rootUrl, params, context);
+  incomeControllerRemove$Response(params: IncomeControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return incomeControllerRemove(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para remover uma entidiade pela id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `remove$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerRemove$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  remove(params: Remove$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.remove$Response(params, context).pipe(
+  incomeControllerRemove(params: IncomeControllerRemove$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.incomeControllerRemove$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `listAll()` */
-  static readonly ListAllPath = '/1.0/incomes';
+  /** Path part for operation `incomeControllerListAll()` */
+  static readonly IncomeControllerListAllPath = '/v1/incomes';
 
   /**
    * lista todos modelos
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAll()` instead.
+   * To access only the response body, use `incomeControllerListAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll$Response(params?: ListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-    return listAll(this.http, this.rootUrl, params, context);
+  incomeControllerListAll$Response(params?: IncomeControllerListAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return incomeControllerListAll(this.http, this.rootUrl, params, context);
   }
 
   /**
    * lista todos modelos
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAll$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerListAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAll(params?: ListAll$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
-    return this.listAll$Response(params, context).pipe(
+  incomeControllerListAll(params?: IncomeControllerListAll$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.incomeControllerListAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
     );
   }
 
-  /** Path part for operation `create()` */
-  static readonly CreatePath = '/1.0/incomes';
+  /** Path part for operation `incomeControllerCreate()` */
+  static readonly IncomeControllerCreatePath = '/v1/incomes';
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `create()` instead.
+   * To access only the response body, use `incomeControllerCreate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create$Response(params: Create$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
-    return create(this.http, this.rootUrl, params, context);
+  incomeControllerCreate$Response(params: IncomeControllerCreate$Params, context?: HttpContext): Observable<StrictHttpResponse<IncomeDto>> {
+    return incomeControllerCreate(this.http, this.rootUrl, params, context);
   }
 
   /**
    * Método utilizado para realizar a inclusão de um entidade
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `create$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerCreate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  create(params: Create$Params, context?: HttpContext): Observable<IncomeDto> {
-    return this.create$Response(params, context).pipe(
+  incomeControllerCreate(params: IncomeControllerCreate$Params, context?: HttpContext): Observable<IncomeDto> {
+    return this.incomeControllerCreate$Response(params, context).pipe(
       map((r: StrictHttpResponse<IncomeDto>): IncomeDto => r.body)
     );
   }
 
-  /** Path part for operation `deleteItems()` */
-  static readonly DeleteItemsPath = '/1.0/incomes/';
+  /** Path part for operation `incomeControllerSearchFieldsList()` */
+  static readonly IncomeControllerSearchFieldsListPath = '/v1/incomes/search-fields';
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteItems()` instead.
+   * To access only the response body, use `incomeControllerSearchFieldsList()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  deleteItems$Response(params: DeleteItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
-    return deleteItems(this.http, this.rootUrl, params, context);
+  incomeControllerSearchFieldsList$Response(params?: IncomeControllerSearchFieldsList$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SearchField>>> {
+    return incomeControllerSearchFieldsList(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Método utilizado para remover varias entidades pelos ids informados
+   * Listagem dos campos de busca
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteItems$Response()` instead.
+   * To access the full response (for headers, for example), `incomeControllerSearchFieldsList$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerSearchFieldsList(params?: IncomeControllerSearchFieldsList$Params, context?: HttpContext): Observable<Array<SearchField>> {
+    return this.incomeControllerSearchFieldsList$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<SearchField>>): Array<SearchField> => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerSearchFieldsAction()` */
+  static readonly IncomeControllerSearchFieldsActionPath = '/v1/incomes/search-fields';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerSearchFieldsAction()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  deleteItems(params: DeleteItems$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
-    return this.deleteItems$Response(params, context).pipe(
+  incomeControllerSearchFieldsAction$Response(params: IncomeControllerSearchFieldsAction$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return incomeControllerSearchFieldsAction(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerSearchFieldsAction$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsAction(params: IncomeControllerSearchFieldsAction$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.incomeControllerSearchFieldsAction$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerSearchFieldsActionPage()` */
+  static readonly IncomeControllerSearchFieldsActionPagePath = '/v1/incomes/search-fields/page';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerSearchFieldsActionPage()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage$Response(params: IncomeControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerSearchFieldsActionPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerSearchFieldsActionPage$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage(params: IncomeControllerSearchFieldsActionPage$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerSearchFieldsActionPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerSearchFieldsActionPage_1()` */
+  static readonly IncomeControllerSearchFieldsActionPage_1Path = '/v1/incomes/search-fields/page/user/{id}';
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerSearchFieldsActionPage_1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage_1$Response(params: IncomeControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerSearchFieldsActionPage_1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Realiza a busca pelos valores dos campos informados
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerSearchFieldsActionPage_1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incomeControllerSearchFieldsActionPage_1(params: IncomeControllerSearchFieldsActionPage_1$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerSearchFieldsActionPage_1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerGetByUserId()` */
+  static readonly IncomeControllerGetByUserIdPath = '/v1/incomes/user/{id}';
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerGetByUserId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerGetByUserId$Response(params: IncomeControllerGetByUserId$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<IncomeListDto>>> {
+    return incomeControllerGetByUserId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Obter os dados completos de uma entidiade pelo id do usuario informado!
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerGetByUserId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerGetByUserId(params: IncomeControllerGetByUserId$Params, context?: HttpContext): Observable<Array<IncomeListDto>> {
+    return this.incomeControllerGetByUserId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<IncomeListDto>>): Array<IncomeListDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerListAllPage()` */
+  static readonly IncomeControllerListAllPagePath = '/v1/incomes/page';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerListAllPage()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPage$Response(params: IncomeControllerListAllPage$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerListAllPage(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerListAllPage$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPage(params: IncomeControllerListAllPage$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerListAllPage$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
+    );
+  }
+
+  /** Path part for operation `incomeControllerListAllPageByUser()` */
+  static readonly IncomeControllerListAllPageByUserPath = '/v1/incomes/page/user/{id}';
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incomeControllerListAllPageByUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPageByUser$Response(params: IncomeControllerListAllPageByUser$Params, context?: HttpContext): Observable<StrictHttpResponse<PageIncomeListDto>> {
+    return incomeControllerListAllPageByUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * lista todos modelos paginada
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incomeControllerListAllPageByUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  incomeControllerListAllPageByUser(params: IncomeControllerListAllPageByUser$Params, context?: HttpContext): Observable<PageIncomeListDto> {
+    return this.incomeControllerListAllPageByUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageIncomeListDto>): PageIncomeListDto => r.body)
     );
   }
 

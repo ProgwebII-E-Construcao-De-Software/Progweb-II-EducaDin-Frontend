@@ -1,0 +1,94 @@
+<div class="formPadrao" fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form" fxFlex="1 1 auto">
+        <h2>Minha Conta</h2>
+
+        <strong>Nome:</strong> {{this.name}}
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+
+            <strong>E-mail: {{this.email}}</strong>
+            <mat-form-field class="email-field">
+                <input
+                        matInput
+                        formControlName="email"
+                        placeholder="exemplo@exemplo.com"
+                />
+                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+                    E-mail é obrigatório
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+                    E-mail inválido
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-checkbox formControlName="alterarSenha" color="primary">
+            Deseja alterar a senha?
+        </mat-checkbox>
+
+        <div
+                *ngIf="formGroup.get('alterarSenha')?.value"
+                fxLayout="column"
+                fxLayoutAlign="center stretch"
+        >
+            <mat-form-field>
+                <mat-label>Senha Antiga</mat-label>
+                <input
+                        matInput
+                        [type]="hideSenhaAntiga ? 'password' : 'text'"
+                        formControlName="senhaAntiga"
+                        placeholder="Digite a senha antiga"
+                />
+                <button
+                        mat-icon-button
+                        matSuffix
+                        type="button"
+                        (click)="hideSenhaAntiga = !hideSenhaAntiga"
+                >
+                    <mat-icon>{{
+                            hideSenhaAntiga ? 'visibility_off' : 'visibility'
+                        }}</mat-icon>
+                </button>
+                <mat-error
+                        *ngIf="formGroup.get('senhaAntiga')?.hasError('required')"
+                >
+                    Senha antiga é obrigatória
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Nova Senha</mat-label>
+                <input
+                        matInput
+                        [type]="hideNovaSenha ? 'password' : 'text'"
+                        formControlName="senha"
+                        placeholder="Digite a nova senha"
+                />
+                <button
+                        mat-icon-button
+                        matSuffix
+                        type="button"
+                        (click)="hideNovaSenha = !hideNovaSenha"
+                >
+                    <mat-icon>{{
+                            hideNovaSenha ? 'visibility_off' : 'visibility'
+                        }}</mat-icon>
+                </button>
+                <mat-error *ngIf="formGroup.get('senha')?.hasError('required')">
+                    Nova senha é obrigatória
+                </mat-error>
+                <mat-error
+                        *ngIf="formGroup.get('senha')?.hasError('minlength')"
+                >
+                    A senha precisa ter ao menos 6 caracteres
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayoutAlign="center center">
+            <button mat-raised-button color="primary" type="submit">
+                Confirmar
+            </button>
+        </div>
+    </form>
+</div>

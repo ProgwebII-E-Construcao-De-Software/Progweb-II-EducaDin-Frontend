@@ -1,0 +1,14 @@
+@import '../../../../StyleForms.css';
+
+.button{
+  width:180px!important;
+  height:40px!important;
+  background-color: #dcdee0 !important;
+}
+
+@media (max-width: 1100px) {
+  .button {
+    width:140px!important;
+    height:50px!important;
+  }
+}
